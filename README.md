@@ -2,8 +2,12 @@
 
 Proyecto de diseño de software con enfoque en el diseño de requerimientos no funcionales y caracteristicas de caldiad de software
 
+## Backlog
+
+- [Backlog](https://github.com/users/Ozia112/projects/11)
+
 ## Trazabilidad
 
-- [Entrega Febrero](/docs/Entregas/entrega%20febrero.md)
-- [Entrega Marzo](/docs/Entregas/entrega%20marzo.md)
-- [Entrega Abril](/docs/Entregas/entrega%20abril.md)
+- [Entrega Febrero](</docs/entregas/entrega febrero.md>)
+- [Entrega Marzo](</docs/entregas/entrega marzo.md>)
+- [Entrega Abril](</docs/entregas/entrega abril.md>)
