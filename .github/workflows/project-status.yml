@@ -121,7 +121,7 @@ jobs:
             // Helpers (Issue resolution)
             // -------------------------
             function parseIssueNumberFromBranch(branch) {
-              // 22-..., docs/22-..., feature/22-..., etc.
+              // 22-... (formato típico al crear rama desde Issue).
               const m = (branch || "").match(/(?:^|\/)(\d+)-/);
               return m ? parseInt(m[1], 10) : null;
             }
