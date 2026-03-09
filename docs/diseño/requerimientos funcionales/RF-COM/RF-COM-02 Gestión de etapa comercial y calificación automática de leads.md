@@ -1,4 +1,6 @@
-#RF-COM-02. Gestión de etapa comercial y calificación automática de leads
+# RF-COM-02 Gestión de etapa comercial y calificación automática de leads
+
+## Descripción
 
 El sistema debe evaluar, clasificar y gestionar automáticamente a las personas interesadas durante su interacción con el agente conversacional y a lo largo del proceso comercial, asignando y manteniendo actualizada la etapa comercial correspondiente conforme a su avance dentro del proceso de captación, seguimiento y conversión.
 
@@ -18,23 +20,25 @@ Cierre Perdido por declinación: decidió no participar.
 Cierre Perdido por falta de respuesta: no respondió tras los intentos definidos de contacto.
 Alumno activo: inscrito y participando en el servicio educativo (fase de postventa y retención).
 
-Historia de usuario
+## Historia de Usuario
+
 Como agente comercial o miembro del equipo de admisiones,quiero que el sistema evalúe automáticamente a las personas interesadas y actualice su etapa comercial durante la interacción con el agente conversacional,para priorizar la atención de los clientes potenciales con mayor probabilidad de inscripción y dar seguimiento adecuado dentro del proceso comercial.
 
-Criterios de aceptación
+## Criterios de Aceptación
+
 Gestión de etapa comercial
 
--Al crear un registro de cliente potencial, el sistema asigna automáticamente la etapa Lead.
--La etapa comercial es visible en la lista de personas interesadas y en la ficha o detalle del cliente potencial.
--El sistema mantiene un historial de cambios de etapa comercial.
--El sistema permite el cambio manual de etapa únicamente a usuarios autorizados, registrando:usuario que realizó el cambio,fecha y hora,etapa anterior y nueva.
--Un cliente potencial solo puede tener una etapa comercial activa a la vez.
--Calificación automática de clientes potenciales
--El agente realiza preguntas estratégicas orientadas a identificar el nivel de interés de la persona interesada.
--El sistema ejecuta la calificación automática del cliente potencial durante la conversación utilizando criterios definidos (interés, presupuesto, disponibilidad y urgencia).
--La clasificación se basa en reglas previamente configuradas en el sistema.
--El sistema asigna automáticamente una categoría de calificación al cliente potencial.
--El cliente potencial recibe un nivel de prioridad (alto, medio o bajo), independiente de la etapa comercial asignada.
--El nivel de calificación queda registrado en la base de datos.
--La calificación automática puede influir en la priorización de atención y en la actualización de la etapa comercial.
--El sistema notifica al equipo humano cuando se identifica un cliente potencial con prioridad alta.
+- Al crear un registro de cliente potencial, el sistema asigna automáticamente la etapa Lead.
+- La etapa comercial es visible en la lista de personas interesadas y en la ficha o detalle del cliente potencial.
+- El sistema mantiene un historial de cambios de etapa comercial.
+- El sistema permite el cambio manual de etapa únicamente a usuarios autorizados, registrando:usuario que realizó el cambio,fecha y hora,etapa anterior y nueva.
+- Un cliente potencial solo puede tener una etapa comercial activa a la vez.
+- Calificación automática de clientes potenciales
+- El agente realiza preguntas estratégicas orientadas a identificar el nivel de interés de la persona interesada.
+- El sistema ejecuta la calificación automática del cliente potencial durante la conversación utilizando criterios definidos (interés, presupuesto, disponibilidad y urgencia).
+- La clasificación se basa en reglas previamente configuradas en el sistema.
+- El sistema asigna automáticamente una categoría de calificación al cliente potencial.
+- El cliente potencial recibe un nivel de prioridad (alto, medio o bajo), independiente de la etapa comercial asignada.
+- El nivel de calificación queda registrado en la base de datos.
+- La calificación automática puede influir en la priorización de atención y en la actualización de la etapa comercial.
+- El sistema notifica al equipo humano cuando se identifica un cliente potencial con prioridad alta.
