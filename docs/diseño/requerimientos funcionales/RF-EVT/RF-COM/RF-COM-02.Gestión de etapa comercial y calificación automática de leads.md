@@ -1,4 +1,4 @@
-*RF-COM-02. Gestión de etapa comercial y calificación automática de leads
+#RF-COM-02. Gestión de etapa comercial y calificación automática de leads
 
 El sistema debe evaluar, clasificar y gestionar automáticamente a las personas interesadas durante su interacción con el agente conversacional y a lo largo del proceso comercial, asignando y manteniendo actualizada la etapa comercial correspondiente conforme a su avance dentro del proceso de captación, seguimiento y conversión.
 
