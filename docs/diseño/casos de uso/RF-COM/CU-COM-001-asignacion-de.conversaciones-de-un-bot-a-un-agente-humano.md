@@ -1,161 +1,135 @@
-# CU-COM-01. Asignación de conversaciones de un bot a un agente humano
+#CU-003 Presentación de eventos disponibles
 
-## Metadatos
+Metadatos
 
-- ID: CU-COM-001
-- Dominio: COM
-- Nombre: Asignación de conversaciones de un canal de comunicación a Bot
-- Estado: Borrador
-- Versión: v0.1
-- Fecha de creación: 2026-03-08
-- Última actualización: 2026-03-08
-- Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-XX
-- PR relacionado: #XX
+-ID: CU-003
 
-## Objetivo
+-Dominio: EVT
 
-Permitir que el sistema automaticamente vincule al canal de comunicación entrante un Bot automatizado, con el fin de garantizar una atención rápida, organizada y escalable a los usuarios.
+-Nombre: Presentación de eventos disponibles
 
-## Alcance
+-Estado: Borrador
 
-Indicar el límite del sistema o subsistema al que aplica este caso de uso.
+-Versión: v0.1
 
-## RF relacionados
+-Fecha de creación: 2026-03-18
 
-- RF-COM-01
-- RF-COM-05
+-Última actualización: 2026-03-18
 
-## Actores
+-Responsable: Pendiente
 
-### Actor principal
+-Issue relacionado: PSD-03
 
-- Lead usuario externo que inicia la conversación.
+-PR relacionado: #XX
 
-### Actores secundarios
+#Objetivo
 
-- Administrador del canal: Usuario con permisos para gestionar conversaciones.
-- Bot automatizado: Sistema que gestiona automáticamente la conversación con el usuario.
-- Agente humano: Usuario que puede tomar control de la conversación cuando el bot lo determine.
+-Mostrar al lead los eventos disponibles de forma clara para que pueda conocer las opciones y tomar una decisión.
 
-## Disparador
+#Alcance
 
-Cuando un Lead decide entrar a una conversación de un evento de su interes desde un anuncio o decide mandar un mensaje directo.
+Aplica al módulo de consulta y visualización de eventos dentro del sistema de gestión de entretenimiento.
 
-## Precondiciones
+#RF relacionados
 
-- El agente humano y el administrador deben estar autenticados en el sistema con su determinado rol (administrador o supervisor).
-- Debe existir al menos una conversación activa en el canal de comunicación.
-- Debe existir al menos un Bot automatizado configurado y disponible en el sistema.
-- El sistema de registro de logs debe estar activo.
+-RF-EVT-01
 
-## Postcondiciones
+-RF-COM-02
 
-- La conversación queda asignada a un agente humano.
-- La interacción con el lead continúa sin interrupciones hasta el cambio de bot a agente humano.
-- Todas las acciones de asignación quedan registradas en los logs del sistema.
+#Actores
+Actor principal
+Lead
 
-### En éxito
+#Actores secundarios
 
-- El lead debe tener una conversación fluida donde se resuelvan sus dudas hasta donde el bot pueda ayudar para cambiar a un agente humano que termine la venta del evento.
+Sistema
 
-### En fallo
+Base de datos
 
-- El bot es incapaz de contestar las preguntas del lead y por esto se cierre la conversación sin contactar a un agente humano.
+Disparador
 
-## Flujo principal
+El lead solicita información sobre eventos disponibles.
 
-1. El sistema debe continuar una conversación automaticamente através de un bot cuando el lead inicie la conversación. [RF-COM-01]
+Precondiciones
 
-2. El Bot automatizado comienza a interactuar con el usuario.
+Existen eventos registrados en el sistema.
 
-3. El bot empieza a describir el evento al lead. [RF-COM-05]
+El sistema tiene acceso a la base de datos de eventos.
 
-4. El bot llega al punto donde no puede continuar la conversación.
+Postcondiciones
+En éxito
 
-5. El sistema mueve la conversación a una cola de espera que puede ver el administrador.
+El lead visualiza la lista de eventos disponibles con su información relevante.
 
-6. El administrador selecciona una conversación en espera.
+En fallo
 
-7. El sistema muestra la opción de asignar la conversación a un agente humano.
+El sistema informa que no hay eventos disponibles o que ocurrió un error.
 
-8. El administrador selecciona el agente humano disponible.
+Flujo principal
 
-9. La conversación pasa a manos del agente humano disponible. [RF-COM-01]
+El lead solicita ver los eventos disponibles.
 
-10. El sistema registra la asignación en el log del sistema.
+El sistema consulta la base de datos de eventos [RF-EVT-01].
 
-## Flujos alternos
+El sistema filtra los eventos disponibles según disponibilidad.
 
-### A1. El lead decide no escalar a un agente humano
+El sistema muestra al lead la lista de eventos con detalles básicos (nombre, fecha, precio, disponibilidad).
 
-1. El Bot detecta que la conversación requiere intervención humana.
+El sistema espera selección o acción del lead.
 
-2. El Bot le notifica al lead que esa pregunta va a necesitar intervención humana y le pregunta si quiere continuar.
+Flujos alternos
+A1. Sin eventos disponibles
 
-3. El lead decide continuar la conversación con el bot.
+No existen eventos disponibles en el sistema.
 
-4. El bot regresa al paso 3.
+El sistema informa al lead que no hay eventos disponibles [RF-EVT-01].
 
-## Flujos de excepción
+Flujos de excepción
+E1. Error de consulta
 
-### E1. No existen agentes humanos disponibles
+Ocurre un error al acceder a la base de datos.
 
-1. El sistena manda un mensaje indicando que no hay agentes humanos disponibles.
+El sistema no puede recuperar la información [RF-EVT-01].
 
-2. La conversación se mantiene en una cola de espera hasta que se desocupen los agentes.
+Se notifica al lead sobre el problema.
 
-3. El sistema registra que envio la notificación a la conversación en logs.
+Reglas de negocio / restricciones
 
-### E2. No esta en funcionamiento el bot
+RN-01: Solo se muestran eventos activos y disponibles.
 
-1. El lead inicia la conversación pero no hay bot que conteste.
+RN-02: La información mostrada debe estar actualizada.
 
-2. El sistema intenta asignar al bot automatizado, si no lo consigue notifica al administrador.
+Restricción: La disponibilidad depende del cupo y fechas del evento.
 
-3. El administrador debe decidir si enviarlo directamente con un agente humano o cerrar la conversación.
+Datos relevantes
+Entradas
 
-### E3. Error en la asignación
+Solicitud del lead
 
-1. Ocurre un fallo al asignar la conversación a un agente humano.
+Parámetros de búsqueda (opcional)
 
-2. El sistema muestra un mensaje de error al administrador.
+Salidas
 
-3. Se registra en los logs el intento fallido de asignación.
+Lista de eventos disponibles
 
-4. La conversación permanece en la cola de espera.
+Detalles de cada evento
 
-## Reglas de negocio / restricciones
+Diagramas relacionados
 
-- RN-XX: Regla aplicable
-- Restricción de tiempo, cupo, privacidad, etc.
+BPMN-EVT-01
 
-## Datos relevantes
+../resources/cu-003-01.png
 
-### Entradas
+Observaciones
 
-- Dato 1
-- Dato 2
+Se puede extender para incluir filtros por tipo de evento o presupuesto.
 
-### Salidas
+Trazabilidad
 
-- Resultado 1
-- Resultado 2
+RF: RF-EVT-01, RF-COM-02
 
-## Diagramas relacionados
+BPMN: BPMN-EVT-01
 
-- BPMN-XXX-001
-- ../resources/cu-xxx-nnn-01.png
+DDR: DDR-01
 
-## Observaciones
-
-- Supuestos
-- Dudas abiertas
-- Notas para revisión
-
-## Trazabilidad
-
-- RF: RF-COM-001, RF-EVT-005
-- BPMN: BPMN-CUPO-001
-- DDR: DDR-01
-- Evidencia académica / entrega: enlace si aplica
+Evidencia académica / entrega: Pendiente
