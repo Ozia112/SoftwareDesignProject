@@ -6,20 +6,21 @@
 - Dominio: COM
 - Nombre: Asignación de conversaciones de un canal de comunicación a Bot
 - Estado: Borrador
-- Versión: v0.1
+- Versión: v0.2
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-03-08
+- Última actualización: 2026-03-19
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-XX
+- Issue relacionado: PSD-08, PSD-13
 - PR relacionado: #XX
 
 ## Objetivo
 
-Permitir que el sistema automaticamente vincule al canal de comunicación entrante un Bot automatizado, con el fin de garantizar una atención rápida, organizada y escalable a los usuarios.
+Permitir que el sistema automáticamente vincule al canal de comunicación entrante un Bot automatizado, con el fin de garantizar una atención rápida, organizada y escalable a los usuarios.
 
 ## Alcance
 
-Indicar el límite del sistema o subsistema al que aplica este caso de uso.
+- Este caso de uso cubre el escenario en que el Lead inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un agente humano cuando el bot no pueda continuar.
+- Incluye cola de espera, selección de agente disponible y registro de logs
 
 ## RF relacionados
 
@@ -40,7 +41,7 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 
 ## Disparador
 
-Cuando un Lead decide entrar a una conversación de un evento de su interes desde un anuncio o decide mandar un mensaje directo.
+Cuando un Lead decide entrar a una conversación de un evento de su interés desde un anuncio o decide mandar un mensaje directo.
 
 ## Precondiciones
 
@@ -52,24 +53,24 @@ Cuando un Lead decide entrar a una conversación de un evento de su interes desd
 ## Postcondiciones
 
 - La conversación queda asignada a un agente humano.
-- La interacción con el lead continúa sin interrupciones hasta el cambio de bot a agente humano.
+- La interacción con el Lead continúa sin interrupciones hasta el cambio de bot a agente humano.
 - Todas las acciones de asignación quedan registradas en los logs del sistema.
 
 ### En éxito
 
-- El lead debe tener una conversación fluida donde se resuelvan sus dudas hasta donde el bot pueda ayudar para cambiar a un agente humano que termine la venta del evento.
+- El Lead debe tener una conversación fluida donde se resuelvan sus dudas hasta donde el bot pueda ayudar para cambiar a un agente humano que termine la venta del evento.
 
 ### En fallo
 
-- El bot es incapaz de contestar las preguntas del lead y por esto se cierre la conversación sin contactar a un agente humano.
+- El bot es incapaz de contestar las preguntas del Lead y por esto se cierra la conversación sin contactar a un agente humano.
 
 ## Flujo principal
 
-1. El sistema debe continuar una conversación automaticamente através de un bot cuando el lead inicie la conversación. [RF-COM-01]
+1. El sistema debe continuar una conversación automáticamente a través de un bot cuando el Lead inicie la conversación. [RF-COM-01]
 
 2. El Bot automatizado comienza a interactuar con el usuario.
 
-3. El bot empieza a describir el evento al lead. [RF-COM-05]
+3. El bot empieza a describir el evento al Lead. [RF-COM-05]
 
 4. El bot llega al punto donde no puede continuar la conversación.
 
@@ -87,13 +88,13 @@ Cuando un Lead decide entrar a una conversación de un evento de su interes desd
 
 ## Flujos alternos
 
-### A1. El lead decide no escalar a un agente humano
+### A1. El Lead decide no escalar a un agente humano
 
 1. El Bot detecta que la conversación requiere intervención humana.
 
-2. El Bot le notifica al lead que esa pregunta va a necesitar intervención humana y le pregunta si quiere continuar.
+2. El Bot le notifica al Lead que esa pregunta va a necesitar intervención humana y le pregunta si quiere continuar.
 
-3. El lead decide continuar la conversación con el bot.
+3. El Lead decide continuar la conversación con el bot.
 
 4. El bot regresa al paso 3.
 
@@ -101,15 +102,15 @@ Cuando un Lead decide entrar a una conversación de un evento de su interes desd
 
 ### E1. No existen agentes humanos disponibles
 
-1. El sistena manda un mensaje indicando que no hay agentes humanos disponibles.
+1. El sistema manda un mensaje indicando que no hay agentes humanos disponibles.
 
 2. La conversación se mantiene en una cola de espera hasta que se desocupen los agentes.
 
-3. El sistema registra que envio la notificación a la conversación en logs.
+3. El sistema registra que envió la notificación a la conversación en logs.
 
-### E2. No esta en funcionamiento el bot
+### E2. No está en funcionamiento el bot
 
-1. El lead inicia la conversación pero no hay bot que conteste.
+1. El Lead inicia la conversación pero no hay bot que conteste.
 
 2. El sistema intenta asignar al bot automatizado, si no lo consigue notifica al administrador.
 
@@ -124,38 +125,3 @@ Cuando un Lead decide entrar a una conversación de un evento de su interes desd
 3. Se registra en los logs el intento fallido de asignación.
 
 4. La conversación permanece en la cola de espera.
-
-## Reglas de negocio / restricciones
-
-- RN-XX: Regla aplicable
-- Restricción de tiempo, cupo, privacidad, etc.
-
-## Datos relevantes
-
-### Entradas
-
-- Dato 1
-- Dato 2
-
-### Salidas
-
-- Resultado 1
-- Resultado 2
-
-## Diagramas relacionados
-
-- BPMN-XXX-001
-- ../resources/cu-xxx-nnn-01.png
-
-## Observaciones
-
-- Supuestos
-- Dudas abiertas
-- Notas para revisión
-
-## Trazabilidad
-
-- RF: RF-COM-001, RF-EVT-005
-- BPMN: BPMN-CUPO-001
-- DDR: DDR-01
-- Evidencia académica / entrega: enlace si aplica
