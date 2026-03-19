@@ -1,5 +1,6 @@
 /docs/prompts
 /scripts
-.github/pull_request_template.md
-.github/workflows/Project Status Automation (Ready - In Review).yml
-.github/workflows/project-status.yml
+*.ps1
+*.yml
+pull_request_template.md
+.vscode
