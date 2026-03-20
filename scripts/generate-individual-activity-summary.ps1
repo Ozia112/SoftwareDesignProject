@@ -9,9 +9,9 @@ param(
 
     [string]$RepoSlug,
 
-    [int[]]$IssueNumbers,
+    [int[]]$IssueNumbers = @(),
 
-    [int[]]$PrNumbers,
+    [int[]]$PrNumbers = @(),
 
     [bool]$AutoDetectLinkedPRs = $true,
 
@@ -20,9 +20,15 @@ param(
 
     [string]$OutputPath,
 
-    [string[]]$Participants,
+    [string[]]$Participants = @(),
 
-    [string]$IdentityMapPath
+    [string]$IdentityMapPath = '',
+
+    [bool]$IncludeAllRefs = $false,
+
+    [string[]]$DeliverablePaths = @(),
+
+    [bool]$IntentAwareLineCount = $false
 )
 
 Set-StrictMode -Version Latest
@@ -81,7 +87,7 @@ function Merge-IdentityMaps {
     return $merged
 }
 
-function Normalize-Identity {
+function Resolve-Identity {
     param(
         [AllowNull()][AllowEmptyString()][string]$Value,
         [Parameter(Mandatory = $true)][hashtable]$IdentityMap
@@ -98,30 +104,526 @@ function Normalize-Identity {
     return $Value
 }
 
+function Resolve-GitPath {
+    param([AllowNull()][string]$Path)
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        return ''
+    }
+
+    $normalized = $Path.Trim().Trim('"')
+
+    if ($normalized -match '=>') {
+        $renameMatch = [regex]::Match($normalized, '^(?<prefix>.*)\{(?<left>[^{}]*)=>(?<right>[^{}]*)\}(?<suffix>.*)$')
+        if ($renameMatch.Success) {
+            $prefix = $renameMatch.Groups['prefix'].Value
+            $right = $renameMatch.Groups['right'].Value
+            $suffix = $renameMatch.Groups['suffix'].Value
+            $normalized = "$prefix$right$suffix"
+        }
+        else {
+            $parts = $normalized -split '=>'
+            $normalized = $parts[-1].Trim()
+        }
+    }
+
+    return $normalized.Trim().Trim('"')
+}
+
+function Get-EffectivePathFilters {
+    param(
+        [string[]]$ManualPaths,
+        [string[]]$IssuePaths
+    )
+
+    $all = New-Object System.Collections.Generic.HashSet[string]
+
+    foreach ($p in @($ManualPaths)) {
+        if (-not [string]::IsNullOrWhiteSpace($p)) {
+            [void]$all.Add(($p.Trim()).Replace('\\', '/'))
+        }
+    }
+
+    foreach ($p in @($IssuePaths)) {
+        if (-not [string]::IsNullOrWhiteSpace($p)) {
+            [void]$all.Add(($p.Trim()).Replace('\\', '/'))
+        }
+    }
+
+    return @($all)
+}
+
+function Normalize-DeliverablePath {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $p = $Path.Trim()
+    if ([string]::IsNullOrWhiteSpace($p)) { return '' }
+
+    $p = $p.Replace('\', '/')
+    $p = $p -replace '\s+', ' '
+    
+    if (-not $p.StartsWith('docs/')) {
+        if ($p.StartsWith('diseño/') -or $p.StartsWith('entregas/') -or $p.StartsWith('meetings/')) {
+            $p = "docs/$p"
+        }
+    }
+    
+    return $p.Trim()
+}
+
+function Find-SimilarPath {
+    param(
+        [Parameter(Mandatory = $true)][string]$InputPath,
+        [Parameter(Mandatory = $true)][string]$RepoRoot
+    )
+
+    $candidates = @()
+    
+    try {
+        $allDocFiles = git -C $RepoRoot ls-files -- 'docs/**/*.md' | ForEach-Object { $_.Replace('\', '/') }
+    } catch {
+        return @()
+    }
+
+    if ($allDocFiles.Count -eq 0) {
+        return @()
+    }
+
+    $input_normalized = $InputPath.ToLowerInvariant()
+    
+    foreach ($f in $allDocFiles) {
+        if ($f.ToLowerInvariant() -eq $input_normalized) {
+            return @($f)
+        }
+    }
+
+    foreach ($f in $allDocFiles) {
+        $f_lower = $f.ToLowerInvariant()
+        
+        if ($input_normalized.EndsWith('/')) {
+            if ($f_lower.StartsWith($input_normalized)) {
+                $candidates += $f
+            }
+        }
+        else {
+            $inputParts = $input_normalized -split '[/\-_ ]' | Where-Object { $_.Length -gt 0 }
+            $fileParts = ($f -split '[/\-_ ]' | Where-Object { $_.Length -gt 0 }) | ForEach-Object { $_.ToLowerInvariant() }
+            
+            $matchCount = 0
+            foreach ($part in $inputParts) {
+                if ($fileParts -contains $part) {
+                    $matchCount += 1
+                }
+            }
+            
+            if ($matchCount -ge [Math]::Ceiling($inputParts.Count / 2)) {
+                $candidates += $f
+            }
+        }
+    }
+
+    return @($candidates | Sort-Object { $_.Length } -Descending | Select-Object -First 5)
+}
+
+function Validate-And-CorrectPaths {
+    param(
+        [string[]]$InputPaths,
+        [Parameter(Mandatory = $true)][string]$RepoRoot
+    )
+
+    $validated = @()
+    $corrected = @()
+    $warnings = @()
+    
+    # Handle null or empty input gracefully
+    if ($null -eq $InputPaths -or $InputPaths.Count -eq 0) {
+        return [pscustomobject]@{
+            ValidatedPaths = @()
+            CorrectedPaths = @()
+            Warnings = @("No manual DeliverablePaths provided. Using paths extracted from issues.")
+        }
+    }
+    
+    foreach ($path in $InputPaths) {
+        if ([string]::IsNullOrWhiteSpace($path)) {
+            continue
+        }
+
+        $normalized = Normalize-DeliverablePath -Path $path
+        if ([string]::IsNullOrWhiteSpace($normalized)) {
+            continue
+        }
+
+        try {
+            $exists = git -C $RepoRoot ls-files -o --cached -- $normalized | Measure-Object | Select-Object -ExpandProperty Count
+            if ($exists -gt 0) {
+                $validated += $normalized
+                continue
+            }
+        } catch {}
+
+        $similar = Find-SimilarPath -InputPath $normalized -RepoRoot $RepoRoot
+        if ($similar.Count -gt 0) {
+            $warnings += "Path '$path' no encontrado exactamente. Posibles matches: $($similar -join ', ')"
+            if ($similar.Count -eq 1) {
+                $validated += $similar[0]
+                $corrected += @{ Original = $path; Corrected = $similar[0] }
+            } else {
+                $validated += $similar[0]
+                $corrected += @{ Original = $path; Corrected = $similar[0]; AlternativesAvailable = $similar[1..($similar.Count-1)] }
+            }
+        } else {
+            $warnings += "Path '$path' no se puede validar ni corregir automáticamente."
+        }
+    }
+
+    return [pscustomobject]@{
+        ValidatedPaths = @($validated | Select-Object -Unique)
+        CorrectedPaths = $corrected
+        Warnings = $warnings
+    }
+}
+
+function Test-PathInFilters {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [string[]]$PathFilters
+    )
+
+    if ($null -eq $PathFilters -or $PathFilters.Count -eq 0) {
+        return $Path.StartsWith('docs/')
+    }
+
+    $normalized = $Path.Replace('\', '/')
+    foreach ($filter in $PathFilters) {
+        $f = $filter.Replace('\', '/')
+        if ($normalized -eq $f) { return $true }
+        if ($f.EndsWith('/')) {
+            if ($normalized.StartsWith($f)) { return $true }
+        }
+    }
+
+    return $false
+}
+
+function Test-MeaningfulDocLine {
+    param([Parameter(Mandatory = $true)][AllowEmptyString()][string]$Line)
+
+    $t = $Line.Trim()
+    if ([string]::IsNullOrWhiteSpace($t)) { return $false }
+
+    if ($t -match '^(#{1,6}\\s*)$') { return $false }
+    if ($t -match '^(```|---|\\*\\*\\*)$') { return $false }
+    if ($t -match '^(?:[-*+]\\s*)$') { return $false }
+    if ($t -match '^\\d+\\.\\s*$') { return $false }
+    if ($t -match '(?i)\\b(?:placeholder|todo|tbd|pendiente|por definir)\\b') { return $false }
+    if ($t -match '(?i)\\b(?:PSD-XX|RN-XX|#XX)\\b') { return $false }
+
+    return $true
+}
+
+function Get-IntentAdjustedChangeForCommitFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$CommitHash,
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    $diffLines = git -C $Root -c core.quotepath=false show --format= --unified=0 $CommitHash -- $Path
+    $count = 0
+
+    foreach ($dl in $diffLines) {
+        if ($dl.StartsWith('+++') -or $dl.StartsWith('---') -or $dl.StartsWith('@@')) {
+            continue
+        }
+
+        if ($dl.StartsWith('+')) {
+            if (Test-MeaningfulDocLine -Line $dl.Substring(1)) {
+                $count += 1
+            }
+            continue
+        }
+
+        if ($dl.StartsWith('-')) {
+            if (Test-MeaningfulDocLine -Line $dl.Substring(1)) {
+                $count += 1
+            }
+            continue
+        }
+    }
+
+    return $count
+}
+
+function Get-DeliverablePathsFromIssueBodies {
+    param([Parameter(Mandatory = $true)]$Issues)
+
+    $paths = New-Object System.Collections.Generic.HashSet[string]
+    foreach ($issue in @($Issues)) {
+        $body = [string]$issue.body
+        if ([string]::IsNullOrWhiteSpace($body)) { continue }
+
+        $codeMatches = [regex]::Matches($body, '`([^`]+)`')
+        foreach ($m in $codeMatches) {
+            $candidate = $m.Groups[1].Value.Trim().Replace('\\', '/')
+            if ($candidate.StartsWith('docs/')) {
+                [void]$paths.Add($candidate)
+            }
+        }
+
+        $textMatches = [regex]::Matches($body, '(?im)\\bdocs/[\\w\\-\\./ ]+\\.md\\b')
+        foreach ($m in $textMatches) {
+            [void]$paths.Add($m.Value.Trim().Replace('\\', '/'))
+        }
+    }
+
+    return @($paths)
+}
+
+function Get-DocumentationArea {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    $p = $Path.Replace('\\', '/')
+
+    if ($p -eq 'docs/pipeline-operativo.md') { return 'Pipeline operativo' }
+    if ($p -like 'docs/*/casos de uso/RF-COM/*') { return 'Casos de uso COM' }
+    if ($p -like 'docs/*/casos de uso/RF-EVT/*') { return 'Casos de uso EVT' }
+    if ($p -like 'docs/*/requerimientos*/*RF-COM/*') { return 'Requerimientos funcionales COM' }
+    if ($p -like 'docs/*/requerimientos*/*RF-EVT/*') { return 'Requerimientos funcionales EVT' }
+    if ($p -like 'docs/*/decisiones/*') { return 'Decisiones de diseño' }
+    if ($p -like 'docs/*/glosario/*') { return 'Glosario' }
+    if ($p -like 'docs/*/modelos de diseño/*') { return 'Modelos de diseño (BPMN)' }
+    if ($p -like 'docs/entregas/semanales/*') { return 'Entregas semanales' }
+    if ($p -like 'docs/entregas/mensuales/*') { return 'Entregas mensuales' }
+    if ($p -like 'docs/meetings/*') { return 'Meetings y minutas' }
+    return 'Otros docs'
+}
+
+function Test-PathIgnored {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$RepoRoot
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        return $false
+    }
+
+    try {
+        $null = git -C $RepoRoot check-ignore -q $Path 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            return $true
+        }
+    } catch {}
+
+    return $false
+}
+
+function Get-DocumentTraceabilityStats {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][datetime]$From,
+        [Parameter(Mandatory = $true)][datetime]$To,
+        [Parameter(Mandatory = $true)][hashtable]$IdentityMap,
+        [Parameter(Mandatory = $true)][bool]$UseAllRefs,
+        [string[]]$PathFilters,
+        [Parameter(Mandatory = $true)][bool]$IntentAware
+    )
+
+    $since = $From.ToString('yyyy-MM-dd HH:mm:ss')
+    $until = $To.ToString('yyyy-MM-dd HH:mm:ss')
+
+    $baseArgs = @('log')
+    if ($UseAllRefs) {
+        $baseArgs += '--all'
+    }
+
+    $pathSpec = if ($null -ne $PathFilters -and $PathFilters.Count -gt 0) { @($PathFilters) } else { @('docs') }
+
+    $numstatArgs = @($baseArgs + @("--since=$since", "--until=$until", '--pretty=format:@@@%an|%ae|%H|%s', '--numstat', '--') + $pathSpec)
+    $nameStatusArgs = @($baseArgs + @("--since=$since", "--until=$until", '--pretty=format:@@@%an|%ae|%H|%s', '--name-status', '--diff-filter=A', '--') + $pathSpec)
+
+    $numstatOutput = git -C $Root -c core.quotepath=false @numstatArgs
+    $nameStatusOutput = git -C $Root -c core.quotepath=false @nameStatusArgs
+
+    $byArea = @{}
+    $byFile = @{}
+    $createdByParticipant = @{}
+
+    $currentName = ''
+    $currentEmail = ''
+    $currentHash = ''
+    $normalized = ''
+
+    foreach ($line in $numstatOutput) {
+        if ($line -like '@@@*') {
+            $parts = $line.Substring(3).Split('|')
+            $currentName = $parts[0]
+            $currentEmail = $parts[1]
+            $currentHash = if ($parts.Length -ge 3) { $parts[2] } else { '' }
+            $normalized = Resolve-Identity -Value $currentName -IdentityMap $IdentityMap
+            if ($normalized -eq $currentName) {
+                $normalized = Resolve-Identity -Value $currentEmail -IdentityMap $IdentityMap
+            }
+            continue
+        }
+
+        if ([string]::IsNullOrWhiteSpace($line)) {
+            continue
+        }
+
+        $cols = $line -split "`t"
+        if ($cols.Length -lt 3) {
+            continue
+        }
+
+        if ($cols[0] -notmatch '^\d+$' -or $cols[1] -notmatch '^\d+$') {
+            continue
+        }
+
+        $path = Resolve-GitPath -Path $cols[2]
+        if (-not (Test-PathInFilters -Path $path -PathFilters $PathFilters)) {
+            continue
+        }
+
+        if (Test-PathIgnored -Path $path -RepoRoot $Root) {
+            continue
+        }
+
+        $changed = [int]$cols[0] + [int]$cols[1]
+        if ($IntentAware -and -not [string]::IsNullOrWhiteSpace($currentHash)) {
+            $changed = Get-IntentAdjustedChangeForCommitFile -Root $Root -CommitHash $currentHash -Path $path
+        }
+
+        if ($changed -le 0) {
+            continue
+        }
+        $area = Get-DocumentationArea -Path $path
+
+        $areaKey = "$normalized|||$area"
+        if (-not $byArea.ContainsKey($areaKey)) {
+            $byArea[$areaKey] = [ordered]@{ Participant = $normalized; Area = $area; Changed = 0 }
+        }
+        $byArea[$areaKey].Changed += $changed
+
+        $fileKey = "$normalized|||$area|||$path"
+        if (-not $byFile.ContainsKey($fileKey)) {
+            $byFile[$fileKey] = [ordered]@{ Participant = $normalized; Area = $area; Path = $path; Changed = 0 }
+        }
+        $byFile[$fileKey].Changed += $changed
+    }
+
+    $normalized = ''
+    foreach ($line in $nameStatusOutput) {
+        if ($line -like '@@@*') {
+            $parts = $line.Substring(3).Split('|')
+            $currentName = $parts[0]
+            $currentEmail = $parts[1]
+            $normalized = Resolve-Identity -Value $currentName -IdentityMap $IdentityMap
+            if ($normalized -eq $currentName) {
+                $normalized = Resolve-Identity -Value $currentEmail -IdentityMap $IdentityMap
+            }
+            if (-not $createdByParticipant.ContainsKey($normalized)) {
+                $createdByParticipant[$normalized] = New-Object System.Collections.Generic.HashSet[string]
+            }
+            continue
+        }
+
+        if ([string]::IsNullOrWhiteSpace($line)) {
+            continue
+        }
+
+        $cols = $line -split "`t"
+        if ($cols.Length -lt 2) {
+            continue
+        }
+
+        if ($cols[0] -ne 'A') {
+            continue
+        }
+
+        $path = Resolve-GitPath -Path $cols[1]
+        if (-not (Test-PathInFilters -Path $path -PathFilters $PathFilters)) {
+            continue
+        }
+
+        [void]$createdByParticipant[$normalized].Add($path)
+    }
+
+    $changedByParticipantPath = @{}
+    foreach ($fileRow in $byFile.Values) {
+        $k = "$($fileRow.Participant)|||$($fileRow.Path)"
+        if (-not $changedByParticipantPath.ContainsKey($k)) {
+            $changedByParticipantPath[$k] = 0
+        }
+        $changedByParticipantPath[$k] += [int]$fileRow.Changed
+    }
+
+    $createdRows = @()
+    $createdRowsWithContent = @()
+    foreach ($participant in $createdByParticipant.Keys) {
+        foreach ($path in $createdByParticipant[$participant]) {
+            $row = [pscustomobject]@{
+                Participant = $participant
+                Area = Get-DocumentationArea -Path $path
+                Path = $path
+                Changed = 0
+            }
+            $k = "$participant|||$path"
+            if ($changedByParticipantPath.ContainsKey($k)) {
+                $row.Changed = [int]$changedByParticipantPath[$k]
+            }
+
+            $createdRows += $row
+            if ($row.Changed -gt 0) {
+                $createdRowsWithContent += $row
+            }
+        }
+    }
+
+    return [pscustomobject]@{
+        ByParticipantArea = @($byArea.Values | Sort-Object Participant, @{ Expression = 'Changed'; Descending = $true })
+        ByParticipantFile = @($byFile.Values | Sort-Object Participant, @{ Expression = 'Changed'; Descending = $true })
+        CreatedFiles = @($createdRows | Sort-Object Participant, Area, Path)
+        CreatedFilesWithContent = @($createdRowsWithContent | Sort-Object Participant, Area, Path)
+    }
+}
+
 function Get-GitDocumentStats {
     param(
         [Parameter(Mandatory = $true)][string]$Root,
         [Parameter(Mandatory = $true)][datetime]$From,
         [Parameter(Mandatory = $true)][datetime]$To,
-        [Parameter(Mandatory = $true)][hashtable]$IdentityMap
+        [Parameter(Mandatory = $true)][hashtable]$IdentityMap,
+        [Parameter(Mandatory = $true)][bool]$UseAllRefs,
+        [string[]]$PathFilters,
+        [Parameter(Mandatory = $true)][bool]$IntentAware
     )
 
     $since = $From.ToString('yyyy-MM-dd HH:mm:ss')
     $until = $To.ToString('yyyy-MM-dd HH:mm:ss')
-    $gitOutput = git -C $Root log --all "--since=$since" "--until=$until" --pretty=format:"@@@%an|%ae|%H|%s" --numstat
+    $gitArgs = @('log')
+    if ($UseAllRefs) {
+        $gitArgs += '--all'
+    }
+    $pathSpec = if ($null -ne $PathFilters -and $PathFilters.Count -gt 0) { @($PathFilters) } else { @('docs') }
+    $gitArgs += @("--since=$since", "--until=$until", '--pretty=format:@@@%an|%ae|%H|%s', '--numstat', '--') + $pathSpec
+    $gitOutput = git -C $Root -c core.quotepath=false @gitArgs
 
     $stats = @{}
     $currentName = ''
     $currentEmail = ''
+    $currentHash = ''
 
     foreach ($line in $gitOutput) {
         if ($line -like '@@@*') {
             $parts = $line.Substring(3).Split('|')
             $currentName = $parts[0]
             $currentEmail = $parts[1]
-            $normalized = Normalize-Identity -Value $currentName -IdentityMap $IdentityMap
+            $currentHash = if ($parts.Length -ge 3) { $parts[2] } else { '' }
+            $normalized = Resolve-Identity -Value $currentName -IdentityMap $IdentityMap
             if ($normalized -eq $currentName) {
-                $normalized = Normalize-Identity -Value $currentEmail -IdentityMap $IdentityMap
+                $normalized = Resolve-Identity -Value $currentEmail -IdentityMap $IdentityMap
             }
             if (-not $stats.ContainsKey($normalized)) {
                 $stats[$normalized] = [ordered]@{ Added = 0; Deleted = 0; Total = 0 }
@@ -142,11 +644,30 @@ function Get-GitDocumentStats {
             continue
         }
 
+        $path = Resolve-GitPath -Path $cols[2]
+        if (-not (Test-PathInFilters -Path $path -PathFilters $PathFilters)) {
+            continue
+        }
+
+        if (Test-PathIgnored -Path $path -RepoRoot $Root) {
+            continue
+        }
+
         $added = [int]$cols[0]
         $deleted = [int]$cols[1]
+        $changed = $added + $deleted
+
+        if ($IntentAware -and -not [string]::IsNullOrWhiteSpace($currentHash)) {
+            $changed = Get-IntentAdjustedChangeForCommitFile -Root $Root -CommitHash $currentHash -Path $path
+        }
+
+        if ($changed -le 0) {
+            continue
+        }
+
         $stats[$normalized].Added += $added
         $stats[$normalized].Deleted += $deleted
-        $stats[$normalized].Total += ($added + $deleted)
+        $stats[$normalized].Total += $changed
     }
 
     return $stats
@@ -178,8 +699,8 @@ function Get-IssueStats {
             continue
         }
 
-        $author = Normalize-Identity -Value $issue.author.login -IdentityMap $IdentityMap
-        $lineCount = ($issue.body -split "`n").Count
+        $author = Resolve-Identity -Value $issue.author.login -IdentityMap $IdentityMap
+        $lineCount = if ([string]::IsNullOrWhiteSpace([string]$issue.body)) { 0 } else { ($issue.body -split "`n").Count }
 
         if (-not $stats.ContainsKey($author)) {
             $stats[$author] = [ordered]@{ Lines = 0; Created = 0; Assigned = 0; Items = @() }
@@ -190,7 +711,7 @@ function Get-IssueStats {
         $stats[$author].Items += $issue.number
 
         foreach ($assignee in $issue.assignees) {
-            $assigneeName = Normalize-Identity -Value $assignee.login -IdentityMap $IdentityMap
+            $assigneeName = Resolve-Identity -Value $assignee.login -IdentityMap $IdentityMap
             if (-not $stats.ContainsKey($assigneeName)) {
                 $stats[$assigneeName] = [ordered]@{ Lines = 0; Created = 0; Assigned = 0; Items = @() }
             }
@@ -237,7 +758,7 @@ function Get-PullRequestStats {
 
                 $parts = $Repo.Split('/')
                 if ($parts.Length -ne 2) {
-                        return @($CurrentPr.assignees | ForEach-Object { Normalize-Identity -Value $_.login -IdentityMap $Map })
+                        return @($CurrentPr.assignees | ForEach-Object { Resolve-Identity -Value $_.login -IdentityMap $Map })
                 }
 
                 $owner = $parts[0]
@@ -298,14 +819,14 @@ query($owner:String!, $name:String!, $number:Int!) {
                         }
 
                         if ($active.Count -gt 0) {
-                                return @($active | ForEach-Object { Normalize-Identity -Value $_ -IdentityMap $Map })
+                                return @($active | ForEach-Object { Resolve-Identity -Value $_ -IdentityMap $Map })
                         }
                 }
                 catch {
                         # Fallback silencioso al estado actual si la API no entrega timeline.
                 }
 
-                return @($CurrentPr.assignees | ForEach-Object { Normalize-Identity -Value $_.login -IdentityMap $Map })
+                return @($CurrentPr.assignees | ForEach-Object { Resolve-Identity -Value $_.login -IdentityMap $Map })
         }
 
     foreach ($prRef in $prs) {
@@ -317,7 +838,7 @@ query($owner:String!, $name:String!, $number:Int!) {
 
         $details += $pr
 
-        $author = Normalize-Identity -Value $pr.author.login -IdentityMap $IdentityMap
+        $author = Resolve-Identity -Value $pr.author.login -IdentityMap $IdentityMap
         if (-not $stats.ContainsKey($author)) {
             $stats[$author] = [ordered]@{
                 Authored = 0
@@ -354,7 +875,7 @@ query($owner:String!, $name:String!, $number:Int!) {
         }
 
         foreach ($request in $pr.reviewRequests) {
-            $requestName = Normalize-Identity -Value $request.login -IdentityMap $IdentityMap
+            $requestName = Resolve-Identity -Value $request.login -IdentityMap $IdentityMap
             if (-not $stats.ContainsKey($requestName)) {
                 $stats[$requestName] = [ordered]@{
                     Authored = 0
@@ -376,7 +897,7 @@ query($owner:String!, $name:String!, $number:Int!) {
                 continue
             }
 
-            $reviewer = Normalize-Identity -Value $review.author.login -IdentityMap $IdentityMap
+            $reviewer = Resolve-Identity -Value $review.author.login -IdentityMap $IdentityMap
             if (-not $stats.ContainsKey($reviewer)) {
                 $stats[$reviewer] = [ordered]@{
                     Authored = 0
@@ -411,7 +932,7 @@ query($owner:String!, $name:String!, $number:Int!) {
         }
 
         if ($null -ne $pr.mergedBy) {
-            $mergedBy = Normalize-Identity -Value $pr.mergedBy.login -IdentityMap $IdentityMap
+            $mergedBy = Resolve-Identity -Value $pr.mergedBy.login -IdentityMap $IdentityMap
             if (-not $stats.ContainsKey($mergedBy)) {
                 $stats[$mergedBy] = [ordered]@{
                     Authored = 0
@@ -457,8 +978,8 @@ function Get-ClosedIssueNumbersFromText {
             continue
         }
 
-        $matches = $issueRefRegex.Matches($line)
-        foreach ($match in $matches) {
+        $issueMatches = $issueRefRegex.Matches($line)
+        foreach ($match in $issueMatches) {
             $repoPart = $match.Groups[1].Value
             $numberPart = $match.Groups[2].Value
 
@@ -528,7 +1049,7 @@ function Get-ParticipantSummary {
     foreach ($name in $ParticipantList) { [void]$allNames.Add($name) }
 
     $participants = @($allNames)
-    if ($ParticipantList.Count -gt 0) {
+    if ($null -ne $ParticipantList -and @($ParticipantList).Count -gt 0) {
         $participants = $ParticipantList
     }
 
@@ -616,6 +1137,10 @@ function Get-ParticipantSummary {
 function Convert-SummaryToMarkdown {
     param(
         [Parameter(Mandatory = $true)]$Summary,
+        [Parameter(Mandatory = $true)]$Traceability,
+        [Parameter(Mandatory = $true)]$IssueResult,
+        [Parameter(Mandatory = $true)]$PrResult,
+        [Parameter(Mandatory = $true)][string]$RepoName,
         [Parameter(Mandatory = $true)][datetime]$From,
         [Parameter(Mandatory = $true)][datetime]$To
     )
@@ -624,38 +1149,138 @@ function Convert-SummaryToMarkdown {
     $topParticipation = $Summary | Sort-Object ParticipationPct -Descending | Select-Object -First 1
     $lowestParticipation = $Summary | Sort-Object ParticipationPct | Select-Object -First 1
 
+    $areaTotals = @{}
+    $areaLeaders = @{}
+    foreach ($row in $Traceability.ByParticipantArea) {
+        if (-not $areaTotals.ContainsKey($row.Area)) {
+            $areaTotals[$row.Area] = 0
+            $areaLeaders[$row.Area] = [ordered]@{ Participant = $row.Participant; Changed = $row.Changed }
+        }
+        $areaTotals[$row.Area] += [int]$row.Changed
+
+        if ([int]$row.Changed -gt [int]$areaLeaders[$row.Area].Changed) {
+            $areaLeaders[$row.Area] = [ordered]@{ Participant = $row.Participant; Changed = $row.Changed }
+        }
+    }
+
+    $issueNumbers = @($IssueResult.RawIssues | ForEach-Object { $_.number } | Sort-Object -Unique)
+    $prNumbers = @($PrResult.RawPullRequests | ForEach-Object { $_.number } | Sort-Object -Unique)
+
     $lines = New-Object System.Collections.Generic.List[string]
+    $lines.Add('## A) Resumen operativo')
+    $lines.Add('')
+    $lines.Add("- Repositorio: $RepoName")
+    $lines.Add("- Rango evaluado: $($From.ToString('yyyy-MM-dd HH:mm:ss')) a $($To.ToString('yyyy-MM-dd HH:mm:ss'))")
+    $lines.Add('')
+    $lines.Add('### 1) Archivos creados con contenido por integrante')
+    $lines.Add('')
+    $lines.Add('| Integrante | Archivos creados con contenido | Areas documentales relacionadas |')
+    $lines.Add('| --- | ---: | --- |')
+    foreach ($participant in ($Summary | Select-Object -ExpandProperty Participant)) {
+        $createdWithContent = @($Traceability.CreatedFilesWithContent | Where-Object { $_.Participant -eq $participant })
+        $areas = @($createdWithContent | Select-Object -ExpandProperty Area -Unique | Sort-Object)
+        $areaText = if ($areas.Count -gt 0) { $areas -join ', ' } else { 'Sin creacion con contenido en el rango' }
+        $lines.Add("| $participant | $($createdWithContent.Count) | $areaText |")
+    }
+    $lines.Add('')
+
+    $lines.Add('### 2) Participacion por integrante')
+    $lines.Add('')
+    $lines.Add('| Integrante | Participacion total | Lineas docs | Lineas backlog | Puntos revision |')
+    $lines.Add('| --- | ---: | ---: | ---: | ---: |')
+    foreach ($item in $Summary) {
+        $lines.Add("| $($item.Participant) | $($item.ParticipationPct)% | $($item.DocumentLines) | $($item.IssueLines) | $($item.ReviewPoints) |")
+    }
+    $lines.Add('')
+    $lines.Add('')
+    $lines.Add('### 3) Participacion por area documental')
+    $lines.Add('')
+    $lines.Add('| Area documental | Lineas cambiadas | Lider del area |')
+    $lines.Add('| --- | ---: | --- |')
+    foreach ($area in ($areaTotals.Keys | Sort-Object { $areaTotals[$_] } -Descending)) {
+        $lines.Add("| $area | $($areaTotals[$area]) | $($areaLeaders[$area].Participant) |")
+    }
+    $lines.Add('')
+    $lines.Add('')
+    $lines.Add('### 4) Hallazgos operativos')
+    $lines.Add('')
+    $lines.Add("- Mayor volumen de escritura documental: $($topDocument.Participant).")
+    $lines.Add("- Mayor participacion total del periodo: $($topParticipation.Participant).")
+    $lines.Add("- Menor participacion total del periodo: $($lowestParticipation.Participant).")
+    if (@($areaTotals.Keys).Count -gt 0) {
+        $principalArea = ($areaTotals.Keys | Sort-Object { $areaTotals[$_] } -Descending | Select-Object -First 1)
+        $lines.Add("- Frente documental de mayor carga: $principalArea ($($areaTotals[$principalArea]) lineas).")
+    }
+    $lines.Add('')
+
+    $lines.Add('## B) Trazabilidad extendida')
+    $lines.Add('')
     $lines.Add('### Metodologia de participacion')
     $lines.Add('')
     $lines.Add("- Ponderacion usada para el porcentaje de participacion semanal para el rango $($From.ToString('yyyy-MM-dd')) a $($To.ToString('yyyy-MM-dd')):")
     $lines.Add("`t- 70% ejecucion documental: lineas modificadas en commits/diffs del periodo.")
     $lines.Add("`t- 20% administracion del backlog: lineas reales de texto en bodies de issues creados en el periodo.")
-    $lines.Add("`t- 10% revision/integracion: puntos reales de revision e integracion en PRs creados en el periodo (`APPROVED = 1.0`, `CHANGES_REQUESTED = 0.75`, `COMMENTED = 0.25`, `merge = 0.5`, `asignacion del PR = 0.25`).")
+    $lines.Add("`t- 10% revision/integracion: puntos reales de revision e integracion en PRs creados en el periodo (APPROVED = 1.0, CHANGES_REQUESTED = 0.75, COMMENTED = 0.25, merge = 0.5, asignacion del PR = 0.25).")
+    $lines.Add("- Regla de respaldo: toda cifra del resumen operativo proviene de evidencia listada en esta seccion.")
     $lines.Add('')
-    $lines.Add('- Resultado de trabajo documental puro por lineas cambiadas:')
-    foreach ($item in ($Summary | Sort-Object DocumentLines -Descending)) {
-        $lines.Add("`t- $($item.Participant): $($item.DocumentLines) lineas ($($item.AddedLines) agregadas, $($item.DeletedLines) eliminadas).")
+
+    $lines.Add('### Fuentes consideradas (issues y PRs)')
+    $lines.Add('')
+    if (@($issueNumbers).Count -gt 0) {
+        $lines.Add("- Issues incluidos en el corte: $($issueNumbers -join ', ').")
+    }
+    else {
+        $lines.Add('- Issues incluidos en el corte: no se detectaron para el rango/filtrado actual.')
+    }
+
+    if (@($prNumbers).Count -gt 0) {
+        $lines.Add("- PRs incluidos en el corte: $($prNumbers -join ', ').")
+    }
+    else {
+        $lines.Add('- PRs incluidos en el corte: no se detectaron para el rango/filtrado actual.')
     }
     $lines.Add('')
-    $lines.Add('- Resultado de backlog/planeacion por lineas reales de issues:')
-    foreach ($item in ($Summary | Sort-Object IssueLines -Descending)) {
-        $lines.Add("`t- $($item.Participant): $($item.IssueLines) lineas, $($item.IssuesCreated) issues creados.")
+
+    $lines.Add('### Archivos creados por integrante')
+    $lines.Add('')
+    if (@($Traceability.CreatedFiles).Count -eq 0) {
+        $lines.Add('- No se detectaron archivos nuevos en docs para el rango/filtrado actual.')
+    }
+    else {
+        foreach ($participant in ($Traceability.CreatedFiles | Select-Object -ExpandProperty Participant -Unique | Sort-Object)) {
+            $lines.Add('- {0}:' -f $participant)
+            $created = $Traceability.CreatedFiles | Where-Object { $_.Participant -eq $participant } | Sort-Object Area, Path
+            foreach ($item in $created) {
+                $lines.Add("`t- [$($item.Area)] $($item.Path)")
+            }
+        }
     }
     $lines.Add('')
-    $lines.Add('- Resultado de revision/integracion por evidencia real en PRs:')
-    foreach ($item in ($Summary | Sort-Object ReviewPoints -Descending)) {
-        $lines.Add("`t- $($item.Participant): $($item.ReviewPoints) puntos, $($item.PRsApproved) aprobaciones, $($item.PRsChangesRequested) solicitudes de cambio, $($item.PRsCommented) comentarios, $($item.PRsMergedBy) merges.")
+
+    $lines.Add('### Evidencia documental por area y archivo')
+    $lines.Add('')
+    foreach ($participant in ($Summary | Select-Object -ExpandProperty Participant)) {
+        $lines.Add('- {0}:' -f $participant)
+        $areas = $Traceability.ByParticipantArea | Where-Object { $_.Participant -eq $participant } | Sort-Object Changed -Descending
+        if (@($areas).Count -eq 0) {
+            $lines.Add("`t- Sin cambios documentales detectados en docs/ para el rango.")
+            continue
+        }
+
+        foreach ($areaRow in $areas) {
+            $lines.Add("`t- Area: $($areaRow.Area) -> $($areaRow.Changed) lineas")
+            $files = $Traceability.ByParticipantFile |
+                Where-Object { $_.Participant -eq $participant -and $_.Area -eq $areaRow.Area } |
+                Sort-Object Changed -Descending |
+                Select-Object -First 5
+            foreach ($fileRow in $files) {
+                $lines.Add("`t`t- $($fileRow.Path): $($fileRow.Changed)")
+            }
+        }
     }
     $lines.Add('')
-    $lines.Add('- Resultado ponderado total de participacion semanal:')
-    foreach ($item in $Summary) {
-        $lines.Add("`t- $($item.Participant): $($item.ParticipationPct)%")
-    }
-    $lines.Add('')
-    $lines.Add('- Lectura del resultado:')
-    $lines.Add("`t- Quien mas trabajo en escritura documental y cambios totales del periodo: $($topDocument.Participant).")
-    $lines.Add("`t- Quien mas participacion total tuvo en el periodo: $($topParticipation.Participant).")
-    $lines.Add("`t- Quien menos participacion tuvo en el periodo: $($lowestParticipation.Participant).")
+
+    $lines.Add('### Desglose por integrante')
     $lines.Add('')
 
     foreach ($item in $Summary) {
@@ -692,8 +1317,23 @@ try {
     $identityMap = Merge-IdentityMaps -BaseMap (Get-DefaultIdentityMap) -MapPath $IdentityMapPath
     $participantList = if ($Participants.Count -gt 0) { $Participants } else { @() }
 
-    $docStats = Get-GitDocumentStats -Root $RepoRoot -From $StartDate -To $EndDate -IdentityMap $identityMap
+    # Validate and correct DeliverablePaths to handle typos and incomplete paths
+    $pathValidationResult = Validate-And-CorrectPaths -InputPaths $DeliverablePaths -RepoRoot $RepoRoot
+    if ($pathValidationResult.Warnings.Count -gt 0) {
+        Write-Warning "Avisos de validacion de paths:"
+        foreach ($warn in $pathValidationResult.Warnings) {
+            Write-Warning "  - $warn"
+        }
+    }
+    $correctedDeliverablePaths = $pathValidationResult.ValidatedPaths
+
     $issueResult = Get-IssueStats -Slug $RepoSlug -From $StartDate -To $EndDate -IdentityMap $identityMap -Numbers $IssueNumbers
+
+    $issueDerivedPaths = Get-DeliverablePathsFromIssueBodies -Issues $issueResult.RawIssues
+    $effectivePathFilters = Get-EffectivePathFilters -ManualPaths $correctedDeliverablePaths -IssuePaths $issueDerivedPaths
+
+    $docStats = Get-GitDocumentStats -Root $RepoRoot -From $StartDate -To $EndDate -IdentityMap $identityMap -UseAllRefs $IncludeAllRefs -PathFilters $effectivePathFilters -IntentAware $IntentAwareLineCount
+    $traceability = Get-DocumentTraceabilityStats -Root $RepoRoot -From $StartDate -To $EndDate -IdentityMap $identityMap -UseAllRefs $IncludeAllRefs -PathFilters $effectivePathFilters -IntentAware $IntentAwareLineCount
 
     $effectivePrNumbers = New-Object System.Collections.Generic.List[int]
     foreach ($n in $PrNumbers) {
@@ -715,10 +1355,30 @@ try {
 
     $summary = Get-ParticipantSummary -DocStats $docStats -IssueStats $issueResult.Totals -PrStats $prResult.Totals -ParticipantList $participantList
 
+    $resultObject = [pscustomobject]@{
+        Metadata = [ordered]@{
+            Repo = $RepoSlug
+            GeneratedAt = (Get-Date).ToString('yyyy-MM-dd HH:mm:ss')
+            StartDate = $StartDate.ToString('yyyy-MM-dd HH:mm:ss')
+            EndDate = $EndDate.ToString('yyyy-MM-dd HH:mm:ss')
+            IncludeAllRefs = $IncludeAllRefs
+            IntentAwareLineCount = $IntentAwareLineCount
+            EffectivePathFilters = @($effectivePathFilters)
+            IssueNumbers = @($IssueNumbers)
+            PullRequestNumbers = @($effectivePrNumbers)
+        }
+        ParticipantSummary = $summary
+        Traceability = $traceability
+        Issues = @($issueResult.RawIssues)
+        PullRequests = @($prResult.RawPullRequests)
+    }
+
     $output = switch ($OutputFormat) {
-        'json' { $summary | ConvertTo-Json -Depth 5 }
-        'object' { $summary }
-        default { Convert-SummaryToMarkdown -Summary $summary -From $StartDate -To $EndDate }
+        'json' { $resultObject | ConvertTo-Json -Depth 8 }
+        'object' { $resultObject }
+        default {
+            Convert-SummaryToMarkdown -Summary $summary -Traceability $traceability -IssueResult $issueResult -PrResult $prResult -RepoName $RepoSlug -From $StartDate -To $EndDate
+        }
     }
 
     if (-not [string]::IsNullOrWhiteSpace($OutputPath)) {
