@@ -38,3 +38,6 @@ Gestión de etapa comercial
 -El nivel de calificación queda registrado en la base de datos.
 -La calificación automática puede influir en la priorización de atención y en la actualización de la etapa comercial.
 -El sistema notifica al equipo humano cuando se identifica un cliente potencial con prioridad alta
+-El sistema debe verificar que el cliente potencial haya aceptado el aviso de privacidad antes de iniciar su evaluación o clasificación
+
+Nota: Las etapas comerciales son independientes de los estados operativos del evento, tales como disponibilidad de cupo, reserva temporal, inscripción o cancelación.

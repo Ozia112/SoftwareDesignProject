@@ -1,10 +1,17 @@
-# RF-COM-07: Informe de Privacidad al Usuario
+## RF-COM-07: Informe de Privacidad al Usuario
 
 ## Descripción
+docs/psd-02-consentimiento-y-privacidad
+El sistema debe mostrar a la persona interesada un aviso de privacidad y términos y condiciones antes de continuar la interacción con el sistema/agente, solicitando su aceptación explícita para garantizar el uso adecuado de datos personales y cumplir con normativas de protección de datos.
+
+
+## Historia de Usuario
+
 
 El sistema debe mostrar a la persona interesada un aviso de privacidad y términos y condiciones antes de continuar la interacción con el sistema/agente, solicitando su aceptación explícita para garantizar el uso adecuado de datos personales y cumplir con normativas de protección de datos.
 
 ## Historia de Usuario
+
 
 **Como** persona interesada que inicia interacción con el sistema  
 **Quiero** recibir y aceptar el aviso de privacidad y términos y condiciones antes de continuar  
@@ -17,3 +24,7 @@ El sistema debe mostrar a la persona interesada un aviso de privacidad y términ
 - [ ] Si acepta: el sistema permite continuar la interacción con el agente
 - [ ] Si rechaza: el sistema informa que no puede continuar sin consentimiento
 - [ ] El consentimiento queda registrado en el sistema para auditoría
+
+## Nota
+
+El consentimiento del usuario es una condición previa para la ejecución de procesos definidos en otros requerimientos, incluyendo la evaluación y clasificación de clientes potenciales (RF-COM-02).
