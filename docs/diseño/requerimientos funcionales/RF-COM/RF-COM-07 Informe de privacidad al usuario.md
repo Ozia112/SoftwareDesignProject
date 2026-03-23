@@ -10,6 +10,7 @@ El sistema debe mostrar a la persona interesada un aviso de privacidad y términ
 
 El sistema debe mostrar a la persona interesada un aviso de privacidad y términos y condiciones antes de continuar la interacción con el sistema/agente, solicitando su aceptación explícita para garantizar el uso adecuado de datos personales y cumplir con normativas de protección de datos.
 
+
 ## Historia de Usuario
 
 
