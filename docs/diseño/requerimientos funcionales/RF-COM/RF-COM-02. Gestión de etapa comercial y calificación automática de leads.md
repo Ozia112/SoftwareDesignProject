@@ -1,4 +1,4 @@
-*# RF-COM-02 Gestión de etapa comercial y calificación automática de leads
+# RF-COM-02 Gestión de etapa comercial y calificación automática de leads
 
 ## Descripción
 
