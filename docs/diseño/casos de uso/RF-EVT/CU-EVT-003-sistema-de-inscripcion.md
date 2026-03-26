@@ -39,7 +39,7 @@ Sistema de gestión de inscripciones - subsistema de registro de Prospectos en e
 ### Actores secundarios
 
 - Banco de contexto (gestiona datos de eventos, inscripciones y lista de espera)
-- Prospecto
+- Persona interesada
 
 ## Disparador
 
@@ -61,7 +61,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 
 ### En fallo
 
-- El sistema no puede inscribir al Prospecto y por ende no queda registrado en el banco de contexto, en caso de que si haya sido inscrito pero era una inscripción temporal el sistema debe eliminarlo del banco de contexto y notificar a los demás Leads [CU-EVT-002]
+- El sistema no puede inscribir al Prospecto y por ende no queda registrado en el banco de contexto, en caso de que si haya sido inscrito pero era una inscripción temporal el sistema debe eliminarlo del banco de contexto y notificar a los demás MQL [CU-EVT-002]
 0
 ## Flujo principal
 

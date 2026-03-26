@@ -37,7 +37,7 @@ Modulo de gestión de inscripción del sistema
 
 - Sistema de notificaciones
 - Banco de contexto (gestiona inscripciones, cupos y lista de espera)
-- Leads
+- Personas interesadas
 
 ## Disparador
 
@@ -74,7 +74,7 @@ El operador administrativo hace cambios en las inscripciones de un evento que no
 
 5. El sistema verifica si hay lista de espera
 
-6. El sistema notifica a los Leads en la lista de espera [RF-EVT-003]
+6. El sistema notifica a los MQL en la lista de espera [RF-EVT-003]
 
 7. Queda registrado el nombre del operador administrativo quien hizo la cancelación
 
