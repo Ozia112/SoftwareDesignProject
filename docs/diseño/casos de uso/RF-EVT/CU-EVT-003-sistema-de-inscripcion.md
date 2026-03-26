@@ -62,7 +62,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 ### En fallo
 
 - El sistema no puede inscribir al Prospecto y por ende no queda registrado en el banco de contexto, en caso de que si haya sido inscrito pero era una inscripción temporal el sistema debe eliminarlo del banco de contexto y notificar a los demás MQL [CU-EVT-002]
-0
+
 ## Flujo principal
 
 1. El operador humano inicia la inscripción del Prospecto
@@ -103,11 +103,10 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 ### E1. El evento está lleno
 
 1. En el paso 2, si el evento está lleno
-2. El sistema detiene y rechaza la inscripción
-3. El sistema notifica al operador humano que se ha llenado el evento
-4. El operador humano debe preguntarle al Prospecto si desea que lo pongan en la lista de espera
-5. Si el Prospecto acepta se le agrega [RF-EVT-07], caso contrario no se le agrega
-6. El flujo termina
+2. El sistema o el operador humano validan la inscripción y detienen/rechazan el proceso por falta de cupo
+3. El operador humano debe preguntarle al MQL si desea que lo pongan en la lista de espera
+4. Si el MQL acepta se le agrega [RF-EVT-07], caso contrario no se le agrega
+5. El flujo termina
 
 ### E2. Falla la inscripción/registro de datos
 
