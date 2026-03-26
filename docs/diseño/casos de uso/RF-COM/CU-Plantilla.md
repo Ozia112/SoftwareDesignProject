@@ -35,8 +35,8 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 ### Actores secundarios
 
 - Sistema de notificaciones
-- Base de datos
-- Administrador
+- Banco de contexto
+- Operador administrativo
 - Pasarela externa
 
 ## Disparador
