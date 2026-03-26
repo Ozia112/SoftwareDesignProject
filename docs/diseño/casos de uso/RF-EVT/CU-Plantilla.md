@@ -35,8 +35,8 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 ### Actores secundarios
 
 - Sistema de notificaciones
-- Base de datos
-- Administrador
+- Banco de contexto
+- Operador administrativo
 - Pasarela externa
 
 ## Disparador
@@ -90,38 +90,3 @@ Evento que inicia el caso de uso.
 
 1. ...
 2. ...
-
-## Reglas de negocio / restricciones
-
-- RN-XX: Regla aplicable
-- Restricción de tiempo, cupo, privacidad, etc.
-
-## Datos relevantes
-
-### Entradas
-
-- Dato 1
-- Dato 2
-
-### Salidas
-
-- Resultado 1
-- Resultado 2
-
-## Diagramas relacionados
-
-- BPMN-XXX-001
-- ../resources/cu-xxx-nnn-01.png
-
-## Observaciones
-
-- Supuestos
-- Dudas abiertas
-- Notas para revisión
-
-## Trazabilidad
-
-- RF: RF-COM-002, RF-EVT-001
-- BPMN: BPMN-CUPO-001
-- DDR: DDR-01
-- Evidencia académica / entrega: enlace si aplica
