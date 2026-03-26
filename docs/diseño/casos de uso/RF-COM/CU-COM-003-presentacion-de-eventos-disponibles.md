@@ -6,20 +6,20 @@
 - Dominio: COM
 - Nombre: Presentación de eventos disponibles
 - Estado: Borrador
-- Versión: v0.2
+- Versión: v0.3
 - Fecha de creación: 2026-03-10
-- Última actualización: 2026-03-19
+- Última actualización: 2026-03-26
 - Responsable: Maximiliano Carrillo Alvarado
 - Issue relacionado: PSD-08, PSD-13
 - PR relacionado: #XX
 
 ## Objetivo
 
-Cuando el Lead pide opciones, el bot lista eventos activos con nombre y breve descripción.
+Cuando la persona interesada pide opciones, el bot lista eventos activos con nombre y breve descripción.
 
 ## Alcance
 
-- En este caso de uso se cubre la presentación del listado de eventos activos al Lead; incluye nombre y una breve descripción.
+- En este caso de uso se cubre la presentación del listado de eventos activos a la persona interesada; incluye nombre y una breve descripción.
 - Incluye la interacción del sistema con la base de datos y filtro básico por horarios/modalidad.
 
 ## RF relacionados
@@ -31,39 +31,39 @@ Cuando el Lead pide opciones, el bot lista eventos activos con nombre y breve de
 
 ### Actor principal
 
-- Lead quien será quien inicie los eventos.
-- Administrador quien pondrá la información de los eventos.
+- Persona interesada quien solicitará la lista de eventos.
+- Operador administrativo quien pondrá la información de los eventos.
 
 ### Actores secundarios
 
 - Base de datos
-- Bot quien proporcionará la lista de los eventos al Lead desde la base de datos.
+- Bot quien proporcionará la lista de los eventos a la persona interesada desde la base de datos.
 
 ## Disparador
 
-El Lead está interesado en otros eventos distintos por el que inició la conversación.
+La persona interesada está interesada en otros eventos distintos por el que inició la conversación.
 
 ## Precondiciones
 
 - Debe existir al menos un Bot automatizado configurado y disponible en el sistema
-- Debe existir información acerca del evento del que el Lead está preguntando.
+- Debe existir información acerca del evento del que la persona interesada está preguntando.
 - Deben estar vigentes los eventos listados.
-- El administrador debe haber actualizado los eventos disponibles
+- El operador administrativo debe haber actualizado los eventos disponibles
 
 ## Postcondiciones
 
-- El sistema devuelve al Bot un listado con eventos activos y el bot le enseña ese listado al Lead.
+- El sistema devuelve al Bot un listado con eventos activos y el bot le enseña ese listado a la persona interesada.
 - Se registra en logs la consulta de eventos.
 
 ### En éxito
 
-- El Lead obtiene una lista con los nombres de los eventos disponibles
-- El Lead puede seleccionar un evento para continuar con otro flujo para obtener información más detallada.
+- La persona interesada obtiene una lista con los nombres de los eventos disponibles
+- La persona interesada puede seleccionar un evento para continuar con otro flujo para obtener información más detallada.
 
 ### En fallo
 
 - El bot es incapaz de contestar.
-- El Lead es informado de que no hay eventos disponibles.
+- La persona interesada es informada de que no hay eventos disponibles.
 - La conversación permanece activa con la opción de continuar con otro flujo o finalizarla.
 
 ## Flujo principal
