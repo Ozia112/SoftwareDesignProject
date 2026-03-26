@@ -1,25 +1,22 @@
-# CU-CUM-002 Flujo de la conversación entre el lead y el bot
+# CU-COM-002 Flujo de la conversación entre la Persona interesada y el Bot
 
 ## Metadatos
-
-- ID: CU-CUM-002
+- ID: CU-COM-002
 - Dominio: COM
-- Nombre: Flujo de la conversación entre el lead y el bot
+- Nombre: Flujo de la conversación entre la Persona interesada y el Bot
 - Estado: Borrador
-- Versión: v0.1
+- Versión: v0.2
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-03-08
+- Última actualización: 2026-03-25
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-XX
-- PR relacionado: #XX
+- Issue relacionado: PSD-15
+- PR relacionado: #52
 
 ## Objetivo
-
-Describrir como el bot debería actuar en la conversación con el lead.
+Describir el flujo de interacción entre la Persona interesada y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un agente humano o abandono.
 
 ## Alcance
-
-Indicar el límite del sistema o subsistema al que aplica este caso de uso.
+Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención humana.
 
 ## RF relacionados
 
@@ -33,125 +30,120 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 
 ### Actor principal
 
-- lead encargado de hacerle preguntas al bot.
+- Persona interesada: inicia la conversación y solicita información.
 
 ### Actores secundarios
 
-- Bot encargado de contestar las preguntas del lead.
-- Base de datos
+- Bot: gestiona la conversación y responde consultas.
+- Sistema: procesa solicitudes y consulta datos.
+- Base de datos: almacena información de eventos.
 
 ## Disparador
 
-Después de que el lead inicia la conversación y hace una pregunta al bot que puede contestar.
+La Persona interesada inicia una conversación con el Bot y realiza una consulta sobre un evento.
 
 ## Precondiciones
 
-- Debe existir al menos un Bot automatizado configurado y disponible en el sistema.
-- Debe existir información acerca del evento del que el lead esta preguntando.
-- Debe estar vigente el evento.
+- Existe al menos un Bot configurado y disponible.
+- Existe al menos un Evento registrado en el sistema.
+- El Evento se encuentra vigente.
+- El sistema tiene acceso a la base de datos.
 
 ## Postcondiciones
 
-- El bot debe notificar al sistema para enviar la conversación al administrador.
-
 ### En éxito
 
-- El lead debe continuar en la conversación con el bot hasta que el bot llegue al punto donde no pueda continuar sin un agente humano.
+- La Persona interesada recibe información del Evento.
+- El Bot puede escalar la conversación a un agente humano.
+- La interacción queda registrada en el sistema.
 
 ### En fallo
 
-- El lead cierra la conversación por falta de interés o respuesta del bot.
+- No se puede obtener información del Evento.
+- La conversación se detiene o continúa sin avance hacia inscripción.
 
 ## Flujo principal
 
-1. El lead entra a la conversación desde un anuncio y le hace una pregunta al bot.
-
-2. El bot debe verificar la disponibilidad del evento de interés del lead. [RF-EVT-01]
-
-3. El bot debe proporcionar la información del evento en cuestión. [RF-COM-05]
-
-4. El lead solicita información sobre horarios y fechas del evento.
-
-5. El bot consulta la información del evento y proporciona las fechas y horarios disponibles al lead. [RF-COM-06]
-
-6. El usuario esta interesado en el evento y quiere inscribirse.
-
-7. El bot debe mandar una notificación de privacidad al usuario para posteriormente pedirle su nombre, su número y opcionalmente su correo electronico.
-
-8. Una vez obtenido la información del lead el bot debe notificar al lead acerca de que va a ser redirigido con un agente humano y si desea continuar.
-
-9. El bot notifica al sistema para colocar al lead en una cola de espera para ser atendido por un agente humano.
-
-10. El sistema registra la solicitud y mantiene la conversación en espera hasta que un agente esté disponible.
+1. La Persona interesada inicia la conversación con el Bot.
+2. El Bot identifica la intención de consulta sobre un Evento.
+3. El Sistema valida la disponibilidad del Evento. [RF-EVT-01]
+4. El Bot presenta información general del Evento. [RF-COM-05]
+5. La Persona interesada solicita fechas y horarios.
+6. El Bot consulta y muestra fechas y horarios disponibles. [RF-COM-06]
+7. La Persona interesada muestra interés en inscribirse.
+8. El Bot muestra aviso de privacidad y solicita consentimiento. [RF-COM-07]
+9. Si acepta, el Bot solicita datos básicos (nombre, teléfono, correo opcional).
+10. El Sistema registra la información de la Persona interesada.
+11. El Bot informa que será transferido a un agente humano.
+12. El Sistema coloca la conversación en cola de espera.
+13. El Sistema registra la interacción.
 
 ## Flujos alternos
 
-### A1. El lead no esta interesado en el evento actual
+### A1. La Persona interesada solicita otros eventos
 
-1. Una vez obtenida la información o los horarios del evento que le causo el interes el lead pregunta si no hay otros eventos.
-2. El bot debe proporcionar una lista con otros eventos disponibles [RF-COM-04]
-3. Regresar al paso donde se consulta el evento.
+1. En el paso 4 o 6, la Persona interesada solicita otras opciones.
+2. El Bot muestra lista de eventos disponibles. [RF-COM-04]
+3. El flujo regresa al paso 4.
 
-### A2. El lead ya esta interesado a inscribirse y esta informado previamente de las fechas
+### A2. La Persona interesada desea inscribirse directamente
 
-1. El lead le dice al bot nada más iniciar la conversación que quiere inscribirse.
-2. El bot le debe confirmar la disponibilidad del evento.
-3. El bot le debe preguntar al lead si sabe los horarios del evento.
-4. Si el lead confirma el bot regresa al paso 7 del flujo original, caso contrario regresa al paso 5.
+1. En el paso 2, la Persona interesada indica intención directa de inscripción.
+2. El Sistema valida disponibilidad. [RF-EVT-01]
+3. Si hay cupo, el flujo continúa en el paso 8.
+4. Si no hay cupo, se activa flujo de excepción E1.
 
 ## Flujos de excepción
 
-### E1. El evento no esta disponible
+### E1. Evento sin disponibilidad
 
-1. El bot verifica la disponibilidad del evento. [RF-EVT-01]
-2. El bot detecta que no esta disponible.
-3. Se informa al lead de la no disponibilidad del evento y se le muestra la lista de los eventos disponibles. [RF-COM-04]
-4. Se continua el flujo de eventos de A1.
+1. En el paso 3, el Sistema detecta que no hay cupo. [RF-EVT-01]
+2. El Bot informa que el Evento está lleno.
+3. El Bot ofrece alternativas (otros eventos). [RF-COM-04]
 
-### E2. Error al obtener información del evento
+### E2. Error al obtener información
 
-1. El bot solicita la información del evento.
-2. El sistema no puede obtener la información.
-3. El bot notifica al lead que la información no sé encuentra disponible temporalmente y le pide que lo intente más tarde.
-4. Se registra el error en los logs
+1. En el paso 4 o 6, el Sistema no puede consultar datos.
+2. El Bot informa indisponibilidad temporal.
+3. Se registra el error en logs.
 
-### E3. El lead no proporciona sus datos
 
-1. El lead se niega a proporcionar su información personal.
-2. El bot notifica que no es posible continuar su inscripción sin sus datos.
-3. La conversación permanece activa sin la posibilidad de inscripción.
+### E3. No aceptación de privacidad
+
+1. En el paso 8, la Persona interesada rechaza el aviso.
+2. El Bot informa que no puede continuar sin consentimiento.
+3. El flujo se detiene.
 
 ## Reglas de negocio / restricciones
 
-- RN-XX: Regla aplicable
-- Restricción de tiempo, cupo, privacidad, etc.
+- RN-COM-04: El Bot debe mostrar eventos disponibles desde la base de datos.
+- RN-COM-05: El Bot debe proporcionar información detallada del Evento.
+- RN-COM-07: No se puede continuar sin consentimiento de privacidad.
+- RN-EVT-01: No se puede avanzar si no hay cupo disponible.
 
 ## Datos relevantes
 
 ### Entradas
 
-- Dato 1
-- Dato 2
+- Consulta de la Persona interesada
+- Evento seleccionado
 
 ### Salidas
 
-- Resultado 1
-- Resultado 2
+- Información del Evento
+- Estado de la conversación
 
 ## Diagramas relacionados
 
-- BPMN-XXX-001
-- ../resources/cu-xxx-nnn-01.png
+- BPMN-COM-002
 
 ## Observaciones
 
-- Supuestos
-- Dudas abiertas
-- Notas para revisión
+- El flujo puede variar dependiendo del nivel de interés.
+- La calificación del lead ocurre en paralelo (RF-COM-02).
 
 ## Trazabilidad
 
-- RF: RF-COM-002, RF-EVT-001
-- BPMN: BPMN-CUPO-001
+- RF: RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01
+- BPMN: BPMN-COM-002
 - DDR: DDR-01
-- Evidencia académica / entrega: enlace si aplica

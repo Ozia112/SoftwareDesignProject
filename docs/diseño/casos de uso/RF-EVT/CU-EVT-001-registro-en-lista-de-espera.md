@@ -6,20 +6,20 @@
 - Dominio: EVT
 - Nombre: Registro en lista de espera
 - Estado: Borrador
-- Versión: v0.1
+- Versión: v0.2
 - Fecha de creación: 2026-03-11
-- Última actualización: 2026-03-11
+- Última actualización: 2026-03-25
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-XX
-- PR relacionado: #XX
+- Issue relacionado: PSD-15
+- PR relacionado: #52
 
 ## Objetivo
 
-Permitir que un lead quede registrado en una lista de espera si los cupos de un evento se agotan para ser avisados si se libera una vacante
+Permitir que la Persona interesada se registre en la lista de espera de un Evento cuando el cupo esté lleno, para ser considerada cuando se libere una vacante.
 
 ## Alcance
 
-Indicar el límite del sistema o subsistema al que aplica este caso de uso.
+Aplica al proceso de registro en lista de espera gestionado por el Sistema cuando un Evento no tiene cupo disponible.
 
 ## RF relacionados
 
@@ -30,109 +30,113 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 
 ### Actor principal
 
-- Lead quien pedirá el cupo en el evento
+- Persona interesada
 
 ### Actores secundarios
 
+- Bot
+- Sistema
 - Base de datos
-- Bot será quien tenga contacto directo con el lead
 
 ## Disparador
 
-El lead interesado solicita inscribirse a un
-Evento y El Sistema detecta que el cupo esta lleno
+La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que el cupo es 0.
 
 ## Precondiciones
 
-- El evento existe y esta activo
-- El evento esta lleno
+- El Evento existe en el sistema
+- El Evento está activo
+- El cupo del Evento es 0
+- La Persona interesada ya interactúa con el Bot
 
 ## Postcondiciones
 
 ### En éxito
 
-- La persona interesada queda registrada a la lista de espera del evento
-- No hay duplicados de una misma persona esperando el mismo evento
+- La Persona interesada queda registrada en la lista de espera
+- Se mantiene un orden determinístico (FIFO o prioridad configurada)
+- No existen duplicados para el mismo Evento
 
 ### En fallo
 
-- El sistema no puede agregar al lead en la lista de espera
+- No se registra a la Persona interesada en la lista de espera
+- El sistema informa la causa
 
 ## Flujo principal
 
-1. El lead le pide al bot inscribirse a un evento
-
-2. Antes de contactar con un agente humano para su inscripción se checa el cupo en la base de datos del evento en cuestión [RF-EVT-001]
-
-3. El sistema detecta que el cupo del evento esta lleno y le envia una notificación al bot
-
-4. El bot debe avisar al lead que no queda cupo para el evento
-
-5. El bot debe preguntarle al lead si esta interesado en dar sus datos para dejarlo en lista de espera en caso de que una vacante se desocupe
-
-6. Si el lead esta interesado este da sus datos al bot, el bot debe checar que no este registrado el número y el nombre del lead en la lista de espera junto a la información del evento [RF-EVT-07]
-
-7. El bot debe informar a el lead su posición en la lista de espera y el que el proceso continuara a futuro
+1. La Persona interesada solicita inscripción en un Evento  
+2. El Sistema valida la disponibilidad de cupo [RF-EVT-01]  
+3. El Sistema detecta que el cupo es 0  
+4. El Bot informa que el Evento está lleno  
+5. El Bot ofrece registrarse en lista de espera  
+6. La Persona interesada acepta  
+7. El Sistema valida que no exista un registro previo en la lista [RF-EVT-07]  
+8. El Sistema registra a la Persona interesada en la lista de espera  
+9. El Sistema asigna una posición según el orden definido  
+10. El Bot informa la posición en la lista y el seguimiento futuro  
 
 ## Flujos alternos
 
-### A1. El lead no quiere dar sus datos
+### A1. Rechazo de registro
 
-1.El lead no esta de acuerdo con dar sus datos para la lista de espera
-2. El bot no puede agregarlo a la lista de espera, debe notificar al lead que no puede proseguir el proceso sin su información
-3. Si el lead decide no continuar el flujo puede continuar si el lead quiere ir a otro evento o terminar en caso contrario
+1. La Persona interesada rechaza ingresar a la lista  
+2. El Bot ofrece otras opciones (otros eventos o finalizar)  
+3. El flujo finaliza  
 
-### A2. El lead ya se encuentra en la lista de espera
+### A2. Registro duplicado
 
-1. En el paso 6, si el lead ya se encuentra en la lista de espera
-2. El bot notifica al lead que ya se encontraba en la lista de espera y le debe notificar su posición actual
-3. El flujo termina
+1. El Sistema detecta que la Persona interesada ya está en la lista  
+2. El Bot informa su posición actual  
+3. El flujo finaliza  
 
 ## Flujos de excepción
 
-### E1. No existe el evento
+### E1. Evento inexistente
 
-1. En el paso 2 no encuentra el evento del que esta interesado el lead
-2. El flujo principal se detiene y le notifica al lead que no existe el evento
-3. El flujo termina
+1. El Sistema no encuentra el Evento  
+2. El Bot informa que no existe  
+3. El flujo finaliza  
 
-### E2. Evento ya acabado
+### E2. Evento no disponible
 
-1. En el paso 2 el evento esta marcado como no disponible
-2. El flujo principal se detiene y le notifica al lead que el evento ya ha concluido
-3. El flujo termina
+1. El Evento está inactivo o finalizado  
+2. El Bot informa que no está disponible  
+3. El flujo finaliza  
+
+### E3. Error en registro
+
+1. Ocurre un error al registrar en la lista  
+2. El Sistema notifica al Bot  
+3. El Bot informa a la Persona interesada  
+4. El flujo finaliza  
 
 ## Reglas de negocio / restricciones
 
-- RN-XX: Regla aplicable
-- Restricción de tiempo, cupo, privacidad, etc.
+- Una Persona interesada no puede registrarse más de una vez por Evento  
+- La lista debe mantener orden determinístico (FIFO por defecto)  
+- El registro requiere datos mínimos de contacto  
 
 ## Datos relevantes
 
 ### Entradas
-
-- Dato 1
-- Dato 2
+- Solicitud de inscripción
+- Datos de la Persona interesada
 
 ### Salidas
-
-- Resultado 1
-- Resultado 2
+- Confirmación de registro en lista de espera
+- Posición en la lista
 
 ## Diagramas relacionados
 
-- BPMN-XXX-001
-- ../resources/cu-xxx-nnn-01.png
+- BPMN-EVT-001
+- ../resources/cu-evt-001.png
 
 ## Observaciones
 
-- Supuestos
-- Dudas abiertas
-- Notas para revisión
+- Puede integrarse con notificaciones automáticas (RF-EVT-03)
+- Puede integrarse con reservas prioritarias futuras
 
 ## Trazabilidad
 
-- RF: RF-COM-002, RF-EVT-001
-- BPMN: BPMN-CUPO-001
+- RF: RF-EVT-01, RF-EVT-07
 - DDR: DDR-01
-- Evidencia académica / entrega: enlace si aplica
