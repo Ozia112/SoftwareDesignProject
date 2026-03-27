@@ -1,4 +1,4 @@
-# Resumen de la junta (27-03-2026)
+# Resumen de la junta (26-03-2026)
 
 - Se presentaron avances individuales en correcciones de requerimientos funcionales y casos de uso para alinearlos con el glosario del proyecto.
 - Se reportó que parte del trabajo de la semana fue de ajuste y regularización del flujo en repositorio (issues, ramas y resolución de conflictos locales).

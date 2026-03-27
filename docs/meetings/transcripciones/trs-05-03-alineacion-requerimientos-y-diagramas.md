@@ -3,7 +3,7 @@
 **Fecha:** 5 de marzo de 2026, 6:14 p.m.  
 **Duración:** 16m 13s
 
-_ISAAC ALEJANDRO ORTIZ ZALDIVAR inició la transcripción_.
+_ISAAC ALEJANDRO ORTIZ ZALDIVAR inició la transcripción._
 
 **Edgar Cambranes Martinez (0:03):**  
 Me perdí un poquitín. ¿Cuántos requisitos funcionales tienen?

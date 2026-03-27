@@ -1,7 +1,7 @@
-# Weekly Equipo 01 – Revisión de sprint y gestión del repo
+# Weekly Equipo 01-20260312_121114 – Grabación de la reunión
 
-**Fecha:** 12/03/2026
-**Duración:** ~24 min  
+**Fecha:** 12 de marzo de 2026  
+**Duración:** ~24 min
 
 _ISAAC ALEJANDRO ORTIZ ZALDIVAR inició la transcripción._
 
@@ -125,3 +125,12 @@ Simplifiquen el proceso. No lo hagan más complejo de lo necesario.
 ---
 
 _ISAAC ALEJANDRO ORTIZ ZALDIVAR detuvo la transcripción._
+
+## Fuentes
+
+- Video de la reunión: [Video de la junta](https://teams.microsoft.com/l/meetingrecap?driveId=b%21AIofdc6CzkOl_D45tzSgSnFYWBdIpTxDsLAX-928piQgJkiZO-_tRp0ZFdFi0_EF&driveItemId=01CJ2MXINP4RKFTNZAXJFKFWPQMJMYMOFX&sitePath=https%3A%2F%2Falumnosuady-my.sharepoint.com%2F%3Av%3A%2Fg%2Fpersonal%2Fa24216345_alumnos_uady_mx%2FIQCv5FRZtyC6SqLZ8GJZhji3AWsMLe3RFXmeVO-btZlmmQw&fileUrl=https%3A%2F%2Falumnosuady-my.sharepoint.com%2Fpersonal%2Fa24216345_alumnos_uady_mx%2FDocuments%2FRecordings%2FWeekly+Equipo+01-20260312_121114-Grabaci%C3%B3n+de+la+reuni%C3%B3n.mp4%3Fweb%3D1&iCalUid=040000008200E00074C5B7101A82E00807EA030CCC6B3C7FC9ACDC010000000000000000100000008A5501F14E53DC4B98D7FADB8A34AA14&masterICalUid=040000008200E00074C5B7101A82E00800000000CC6B3C7FC9ACDC010000000000000000100000008A5501F14E53DC4B98D7FADB8A34AA14&threadId=19%3Ameeting_MTFiZDI1MjEtNGMyZC00ODk2LTkxNjMtYWFhNGI1NDdkZjMy%40thread.v2&organizerId=a3c01b16-e302-4204-801f-8455f00e82b7&tenantId=2b83ac9e-2448-45df-9319-48d86236a5ea&callId=36f1d5c5-e087-4bbe-ab65-83f33b6e0da5&threadType=Meeting&meetingType=Recurring&subType=RecapSharingLink_RecapCore)
+
+---
+
+> - Transcripción realizada por Microsoft Teams.
+> - Revisada y editada por _MAXIMILIANO CARRILLO ALVARADO_
