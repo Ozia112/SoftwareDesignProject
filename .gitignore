@@ -1,6 +1,4 @@
-/docs/prompts/
-/scripts
-*.ps1
 *.yml
 pull_request_template.md
 .vscode
+resultado.md
