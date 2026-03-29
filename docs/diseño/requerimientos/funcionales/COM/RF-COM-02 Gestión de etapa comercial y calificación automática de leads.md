@@ -50,4 +50,4 @@ El sistema debe gestionar las siguientes etapas comerciales asociadas a cada per
 - [ ] La persona interesada recibe un nivel de prioridad: alto, medio o bajo  
 - [ ] El nivel de calificación queda registrado en la base de datos  
 - [ ] La calificación puede influir en la priorización de atención y en la actualización de la etapa comercial  
-- [ ] El sistema notifica al equipo humano cuando se identifica una persona interesada con prioridad alta  
+- [ ] El sistema notifica al equipo humano cuando se identifica una persona interesada con prioridad alta

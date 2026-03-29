@@ -1,6 +1,7 @@
 # CU-COM-002 Flujo de la conversación entre la Persona interesada y el Bot
 
 ## Metadatos
+
 - ID: CU-COM-002
 - Dominio: COM
 - Nombre: Flujo de la conversación entre la Persona interesada y el Bot
@@ -13,9 +14,11 @@
 - PR relacionado: #52
 
 ## Objetivo
+
 Describir el flujo de interacción entre la Persona interesada y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un operador humano o abandono.
 
 ## Alcance
+
 Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención por operador humano.
 
 ## RF relacionados
@@ -109,7 +112,6 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 2. El Bot informa indisponibilidad temporal.
 3. Se registra el error en logs.
 
-
 ### E3. No aceptación de privacidad
 
 1. En el paso 8, la Persona interesada rechaza el aviso.
@@ -149,3 +151,10 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 - RF: RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01
 - BPMN: BPMN-COM-002
 - DDR: DDR-01
+
+[RF-COM-04]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-04%20El%20Bot%20debe%20mostrar%20el%20listado%20de%20eventos%20disponibles.md
+[RF-COM-05]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-05%20El%20Bot%20debe%20proporcionar%20información%20detallada%20de%20cada%20evento.md
+[RF-COM-06]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-06%20El%20Bot%20debe%20informar%20fechas%20de%20inicio%20y%20horarios%20disponibles.md
+[RF-COM-07]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md
+[RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
+[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md

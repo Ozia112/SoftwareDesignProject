@@ -86,19 +86,19 @@ Esta seccion deja la evidencia tecnica completa del mes. Aqui quedan los archivo
 
 | Estado | Archivo | Tipo | Lectura tecnica |
 | --- | --- | --- | --- |
-| 🆕 | [CU-COM-001](../../diseño/casos%20de%20uso/RF-COM/CU-COM-001-asignacion-de.conversaciones-de-un-bot-a-un-operador-humano.md) | Caso de uso | Ajusta el nombre del actor y deja el flujo bot-operador alineado con la redaccion actual. |
+| 🆕 | [CU-COM-001](<../../diseño/casos de uso/COM/CU-COM-001Asignación de conversaciones de un bot a un operador humano.md>) | Caso de uso | Ajusta el nombre del actor y deja el flujo bot-operador alineado con la redaccion actual. |
 | ↩️ | Version anterior de CU-COM-001 | Reemplazo | La version previa queda sustituida por el archivo actual. |
-| 🔄 | [CU-COM-002](../../diseño/casos%20de%20uso/RF-COM/CU-COM-002-flujo-de-la-conversacion-entre-el-lead-y-el-bot.md) | Caso de uso | Refina el flujo conversacional entre lead y bot. |
-| 🆕 | [CU-COM-003](../../diseño/casos%20de%20uso/RF-COM/CU-COM-003-presentacion-de-eventos-disponibles.md) | Caso de uso | Incorpora la presentacion de eventos disponibles. |
+| 🔄 | [CU-COM-002](<../../diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>) | Caso de uso | Refina el flujo conversacional entre lead y bot. |
+| 🆕 | [CU-COM-003](<../../diseño/casos de uso/COM/CU-COM-003 Presentación de eventos disponibles.md>) | Caso de uso | Incorpora la presentacion de eventos disponibles. |
 | ↩️ | Version anterior de CU-CUM-003 | Reemplazo | Corrige la nomenclatura del artefacto previo. |
 | 🔄 | [CU-Plantilla COM](../../diseño/casos%20de%20uso/CU-Plantilla.md) | Plantilla | Homogeneiza la estructura de los casos de uso COM. |
-| 🔄 | [CU-EVT-001](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-001-registro-en-lista-de-espera.md) | Caso de uso | Ajusta el registro en lista de espera. |
-| 🔄 | [CU-EVT-002](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-002-gestion-de-cancelacion.md) | Caso de uso | Ajusta la gestion de cancelacion. |
-| 🆕 | [CU-EVT-003](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-003-sistema-de-inscripcion.md) | Caso de uso | Agrega el sistema de inscripcion. |
+| 🔄 | [CU-EVT-001](<../../diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>) | Caso de uso | Ajusta el registro en lista de espera. |
+| 🔄 | [CU-EVT-002](<../../diseño/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md>) | Caso de uso | Ajusta la gestion de cancelacion. |
+| 🆕 | [CU-EVT-003](<../../diseño/casos de uso/EVT/CU-EVT-003 Sistema de inscripción.md>) | Caso de uso | Agrega el sistema de inscripcion. |
 | 🔄 | [CU-Plantilla EVT](../../diseño/casos%20de%20uso/CU-Plantilla.md) | Plantilla | Normaliza la redaccion de los CU EVT. |
-| 🆕 | [RF-COM-02](../../diseño/requerimientos/funcionales/RF-COM/RF-COM-02.%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md) | Requerimiento | Corrige la version de gestion de etapa comercial y calificacion de leads. |
+| 🆕 | [RF-COM-02](../../diseño/requerimientos/funcionales/COM/RF-COM-02%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md) | Requerimiento | Corrige la version de gestion de etapa comercial y calificacion de leads. |
 | ↩️ | Version anterior de RF-COM-02 | Reemplazo | Se reemplaza la version con nombre inconsistente. |
-| 🔄 | [RF-COM-07](../../diseño/requerimientos/funcionales/RF-COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md) | Requerimiento | Ajusta la redaccion de privacidad y consistencia terminologica. |
+| 🔄 | [RF-COM-07](../../diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md) | Requerimiento | Ajusta la redaccion de privacidad y consistencia terminologica. |
 
 #### Reuniones y seguimiento semanal
 
@@ -128,7 +128,7 @@ Esta seccion deja la evidencia tecnica completa del mes. Aqui quedan los archivo
 
 | Integrante | Requerimientos | Diseno | Glosario | Diagramacion |
 | --- | --- | --- | --- | --- |
-| Maximiliano Carrillo Alvarado | Bloques RF-COM y RF-EVT vinculados a los casos de uso; ver issues #2, #28, #32, #33, #41, #47 y #53. | Casos de uso COM y EVT: [CU-COM-001](../../diseño/casos%20de%20uso/RF-COM/CU-COM-001-asignacion-de.conversaciones-de-un-bot-a-un-operador-humano.md), [CU-COM-002](../../diseño/casos%20de%20uso/RF-COM/CU-COM-002-flujo-de-la-conversacion-entre-el-lead-y-el-bot.md), [CU-COM-003](../../diseño/casos%20de%20uso/RF-COM/CU-COM-003-presentacion-de-eventos-disponibles.md), [CU-EVT-001](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-001-registro-en-lista-de-espera.md), [CU-EVT-002](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-002-gestion-de-cancelacion.md), [CU-EVT-003](../../diseño/casos%20de%20uso/RF-EVT/CU-EVT-003-sistema-de-inscripcion.md). | Reviso consistencia terminologica en los CU y en la redaccion funcional. | Aporto alineacion entre CU y BPMN en la documentacion de eventos. |
+| Maximiliano Carrillo Alvarado | Bloques RF-COM y RF-EVT vinculados a los casos de uso; ver issues #2, #28, #32, #33, #41, #47 y #53. | Casos de uso COM y EVT: [CU-COM-001](<../../diseño/casos de uso/COM/CU-COM-001Asignación de conversaciones de un bot a un operador humano.md>), [CU-COM-002](<../../diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>), [CU-COM-003](<../../diseño/casos de uso/COM/CU-COM-003 Presentación de eventos disponibles.md>), [CU-EVT-001](<../../diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>), [CU-EVT-002](<../../diseño/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md>), [CU-EVT-003](<../../diseño/casos de uso/EVT/CU-EVT-003 Sistema de inscripción.md>). | Reviso consistencia terminologica en los CU y en la redaccion funcional. | Aporto alineacion entre CU y BPMN en la documentacion de eventos. |
 | Isaac Alejandro Ortiz Zaldivar | RF-COM-02, RF-COM-07 y articulacion de requerimientos con flujo operativo; ver issues #22, #24, #25, #27, #30 y PRs de soporte. | [DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md](../../diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md), [pipeline-operativo.md](../../pipeline-operativo.md). | [Definiciones.md](../../diseño/glosario/Definiciones.md) como base terminologica. | [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md) y trazabilidad entre artefactos. |
 | Diego Islas Merino | RF-COM-02 y RF-COM-07, ademas de soporte a la normalizacion de casos EVT; ver issues #3, #26 y #29. | Ajustes de soporte en casos de uso y validacion de consistencia documental. | Validacion puntual de consistencia terminologica en la documentacion de soporte. | Apoyo en BPMN y en el ajuste de diagramas para cerrar trazabilidad. |
 

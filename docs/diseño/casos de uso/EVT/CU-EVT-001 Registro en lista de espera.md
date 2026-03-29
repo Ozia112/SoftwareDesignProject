@@ -64,65 +64,67 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 
 ## Flujo principal
 
-1. La Persona interesada solicita inscripción en un Evento  
-2. El Sistema valida la disponibilidad de cupo [RF-EVT-01]  
-3. El Sistema detecta que el cupo es 0  
-4. El Bot informa que el Evento está lleno  
-5. El Bot ofrece registrarse en lista de espera  
-6. La Persona interesada acepta  
-7. El Sistema valida que no exista un registro previo en la lista [RF-EVT-07]  
-8. El Sistema registra a la Persona interesada en la lista de espera  
-9. El Sistema asigna una posición según el orden definido  
-10. El Bot informa la posición en la lista y el seguimiento futuro  
+1. La Persona interesada solicita inscripción en un Evento
+2. El Sistema valida la disponibilidad de cupo [RF-EVT-01]
+3. El Sistema detecta que el cupo es 0
+4. El Bot informa que el Evento está lleno
+5. El Bot ofrece registrarse en lista de espera
+6. La Persona interesada acepta
+7. El Sistema valida que no exista un registro previo en la lista [RF-EVT-07]
+8. El Sistema registra a la Persona interesada en la lista de espera
+9. El Sistema asigna una posición según el orden definido
+10. El Bot informa la posición en la lista y el seguimiento futuro
 
 ## Flujos alternos
 
 ### A1. Rechazo de registro
 
-1. La Persona interesada rechaza ingresar a la lista  
-2. El Bot ofrece otras opciones (otros eventos o finalizar)  
-3. El flujo finaliza  
+1. La Persona interesada rechaza ingresar a la lista
+2. El Bot ofrece otras opciones (otros eventos o finalizar)
+3. El flujo finaliza
 
 ### A2. Registro duplicado
 
-1. El Sistema detecta que la Persona interesada ya está en la lista  
-2. El Bot informa su posición actual  
-3. El flujo finaliza  
+1. El Sistema detecta que la Persona interesada ya está en la lista
+2. El Bot informa su posición actual
+3. El flujo finaliza
 
 ## Flujos de excepción
 
 ### E1. Evento inexistente
 
-1. El Sistema no encuentra el Evento  
-2. El Bot informa que no existe  
-3. El flujo finaliza  
+1. El Sistema no encuentra el Evento
+2. El Bot informa que no existe
+3. El flujo finaliza
 
 ### E2. Evento no disponible
 
-1. El Evento está inactivo o finalizado  
-2. El Bot informa que no está disponible  
-3. El flujo finaliza  
+1. El Evento está inactivo o finalizado
+2. El Bot informa que no está disponible
+3. El flujo finaliza
 
 ### E3. Error en registro
 
-1. Ocurre un error al registrar en la lista  
-2. El Sistema notifica al Bot  
-3. El Bot informa a la Persona interesada  
-4. El flujo finaliza  
+1. Ocurre un error al registrar en la lista
+2. El Sistema notifica al Bot
+3. El Bot informa a la Persona interesada
+4. El flujo finaliza
 
 ## Reglas de negocio / restricciones
 
-- Una Persona interesada no puede registrarse más de una vez por Evento  
-- La lista debe mantener orden determinístico (FIFO por defecto)  
-- El registro requiere datos mínimos de contacto  
+- Una Persona interesada no puede registrarse más de una vez por Evento
+- La lista debe mantener orden determinístico (FIFO por defecto)
+- El registro requiere datos mínimos de contacto
 
 ## Datos relevantes
 
 ### Entradas
+
 - Solicitud de inscripción
 - Datos de la Persona interesada
 
 ### Salidas
+
 - Confirmación de registro en lista de espera
 - Posición en la lista
 
@@ -140,3 +142,6 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 
 - RF: RF-EVT-01, RF-EVT-07
 - DDR: DDR-01
+
+[RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
+[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md

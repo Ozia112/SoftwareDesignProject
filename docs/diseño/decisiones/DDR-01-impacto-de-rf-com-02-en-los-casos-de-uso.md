@@ -12,7 +12,7 @@
 
 ## Contexto
 
-[RF-COM-02](/docs/diseño/requerimientos/funcionales/RF-COM/RF-COM-02.%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md) fue definido como el requerimiento funcional central del sistema comercial del bot. El requerimiento intenta cubrir en un mismo artefacto: evolucion de etapas comerciales de la persona interesada dentro del embudo comercial, calificación automatica para priorizacion y efectos derivados sobre la atencion humana y operaciones de inscripción.
+[RF-COM-02](/docs/diseño/requerimientos/funcionales/COM/RF-COM-02%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md) fue definido como el requerimiento funcional central del sistema comercial del bot. El requerimiento intenta cubrir en un mismo artefacto: evolucion de etapas comerciales de la persona interesada dentro del embudo comercial, calificación automatica para priorizacion y efectos derivados sobre la atencion humana y operaciones de inscripción.
 
 El analisis de la documentacion indica que en estos momentos varios RFs ya dependen de RF-COM-02, en especial:
 
