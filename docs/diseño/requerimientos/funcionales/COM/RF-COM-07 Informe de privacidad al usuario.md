@@ -21,4 +21,4 @@ El sistema debe registrar el consentimiento o rechazo de la persona interesada p
 - [ ] Si la persona interesada acepta, el sistema permite continuar la interacción con el bot  
 - [ ] Si la persona interesada rechaza, el sistema informa que no puede continuar sin consentimiento  
 - [ ] El consentimiento o rechazo queda registrado en el sistema con fines de auditoría  
-- [ ] El sistema no permite la recolección ni procesamiento de datos sin consentimiento previo  
+- [ ] El sistema no permite la recolección ni procesamiento de datos sin consentimiento previo

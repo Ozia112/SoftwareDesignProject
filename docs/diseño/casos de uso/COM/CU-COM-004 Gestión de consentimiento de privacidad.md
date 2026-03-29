@@ -48,7 +48,6 @@ La Persona interesada inicia una conversación en un canal de comunicación.
 
 ## Postcondiciones
 
-
 ### En éxito
 
 - El consentimiento de la Persona interesada queda registrado.
@@ -117,3 +116,5 @@ La Persona interesada inicia una conversación en un canal de comunicación.
 - RF: RF-COM-07
 - BPMN: BPMN-COM-004
 - DDR: DDR-01
+
+[RF-COM-07]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md

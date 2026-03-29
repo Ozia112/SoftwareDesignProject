@@ -128,3 +128,6 @@ La Persona interesada interactúa con el Bot después de haber aceptado el aviso
 - RF: RF-COM-02, RF-COM-07
 - BPMN: BPMN-COM-005
 - DDR: DDR-01
+
+[RF-COM-02]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-02%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md
+[RF-COM-07]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md

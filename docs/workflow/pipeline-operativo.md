@@ -230,9 +230,20 @@ La rama se crea siempre desde el Issue usando GitHub “Create branch”.
 
 ---
 
-## 7. Pull Requests
+## 7. Plantillas externas y Pull Requests
 
-### 7.1 Nombre del PR
+Las plantillas oficiales del equipo viven en `docs/workflow/` y esta guía solo define cuándo usarlas y cómo nombrar los artefactos.
+
+### 7.1 Archivos de referencia
+
+* [Sprint template](./issues_templates/sprint_template.md)
+* [Weekly template](./issues_templates/weekly_template.md)
+* [PSD template](./issues_templates/psd_template.md)
+* [Pull request template](./operative_templates/guide_pull_request_template.md)
+* [Commit message guide](./operative_templates/commit_message_guide.md)
+* [Milestone template](./issues_templates/milestone_template.md)
+
+### 7.2 Nombre del PR
 
 **PSD:**
 `#<issue-number> PSD-NN: <tema breve>`
@@ -243,17 +254,18 @@ La rama se crea siempre desde el Issue usando GitHub “Create branch”.
 **Sprint:**
 `#<issue-number> Sprint sp-NN: <objetivo breve>`
 
-### 7.2 Descripción mínima del PR
+### 7.3 Cuerpo mínimo del PR
+
+El cuerpo del PR debe seguir `pull_request_template.md` e incluir, como mínimo:
 
 * contexto,
+* issues vinculados,
 * cambios principales,
-* entregables o rutas afectadas,
-* referencia al issue,
-* relación con el Sprint si aplica.
-
-**Recomendado:**
-
-* `Closes #<issue-number>`
+* impacto,
+* checklist de QA,
+* riesgos y observaciones,
+* evidencia,
+* referencia al issue principal con `Closes #<issue-number>` cuando aplique.
 
 ---
 
@@ -420,7 +432,7 @@ Ejemplo:
 
 ---
 
-## 15. Regla final
+## 16. Regla final
 
 Si una actividad produce un entregable del proyecto, debe vivir en un **PSD**.
 Si una actividad documenta una reunión, debe vivir en un **Weekly**.

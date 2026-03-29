@@ -3,7 +3,7 @@
 ## Metadatos
 
 - ID: CU-XXX-NNN
-- Dominio: COM | EVT | RNF | OTRO
+- Dominio: DOM-01 | DOM-02 | RNF | OTRO
 - Nombre: Nombre breve del caso de uso
 - Estado: Borrador | En revision | Aprobado | Sustituido
 - Versión: v0.1
@@ -23,8 +23,8 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 
 ## RF relacionados
 
-- RF-COM-002
-- RF-EVT-001
+- RF-XXX-001
+- RF-YYY-002
 
 ## Actores
 
@@ -34,10 +34,10 @@ Indicar el límite del sistema o subsistema al que aplica este caso de uso.
 
 ### Actores secundarios
 
-- Sistema de notificaciones
-- Banco de contexto
-- Operador administrativo
-- Pasarela externa
+- Sistema de autenticación
+- Servicio de notificaciones
+- Módulo de auditoría
+- Sistema externo integrado
 
 ## Disparador
 
@@ -90,3 +90,39 @@ Evento que inicia el caso de uso.
 
 1. ...
 2. ...
+
+[RF-XXX-YYY]: #
+
+## Reglas de negocio / restricciones
+
+- La entidad principal debe estar en estado válido para procesarse  
+- La información debe provenir de una fuente autorizada  
+- La salida debe incluir los campos mínimos definidos por el negocio  
+
+## Datos relevantes
+
+### Entradas
+
+- Solicitud de operación
+- Parámetros de entrada requeridos
+- Criterios de filtrado (opcional)
+
+### Salidas
+
+- Resultado de la operación
+- Detalle de respuesta (opcional)
+
+## Diagramas relacionados
+
+- BPMN-XXX-001
+- ../resources/cu-xxx-001.png
+
+## Observaciones
+
+- La presentación puede variar según canal o interfaz de consumo
+- Puede ampliarse con integraciones adicionales en futuras versiones
+
+## Trazabilidad
+
+- RF: RF-XXX-001, RF-YYY-002
+- DDR: DDR-XX

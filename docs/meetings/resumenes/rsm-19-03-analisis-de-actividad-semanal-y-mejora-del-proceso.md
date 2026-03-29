@@ -1,16 +1,16 @@
 # Resumen de la junta (19-03-2026)
 
-- Se presento un metodo asistido con IA para evaluar el avance semanal del equipo a partir de issues, pull requests, commits y lineas modificadas en el repositorio.
-- Se definio una ponderacion de participacion semanal (ejecucion documental, administracion de backlog y revision/integracion), y se discutio que esta metrica es util como vista cuantitativa inicial.
-- Se valido que la IA puede detectar estatus real de trabajo (abierto, cerrado, mergeado, incompleto) comparando expectativa del issue contra evidencia en commits y PR.
-- Se identifico que la salida actual del analisis es muy detallada y criptica para lectura rapida, por lo que se requiere una sintesis mas clara por actividad y por resultado.
-- Se acordo mejorar el reporte para responder no solo cuanto se hizo, sino que tan significativo fue cada aporte para el avance del proyecto.
-- Se remarco que el numero de lineas cambiadas no debe usarse como unico criterio de valor, ya que una contribucion pequena puede tener mayor impacto funcional o de diseno.
-- Se planteo convertir los resultados administrativos a una vista grafica/sintetica para facilitar la interpretacion del avance semanal y del estado del sprint.
-- Se comento el uso de WakaTime como apoyo para trazabilidad de esfuerzo (tiempo por lenguaje, editor y documentos), reconociendo limitaciones de la version gratuita por ventana temporal.
-- Se observo desbalance de carga entre integrantes en la semana analizada, y se discutio ajustar el proceso y el alcance para mantener continuidad cuando no todos cumplen.
-- Se acordo mantener el enfoque de simplificacion del proceso: hacerlo mas ligero, escalable, mantenible y facil de entender para nuevos integrantes.
-- Se establecio como siguiente objetivo mejorar la distribucion de la informacion en entregas semanales: menos ruido administrativo y mas claridad sobre avance real en diseno.
+- Se presentó un esquema de seguimiento semanal asistido por IA para analizar issues, pull requests, commits y cambios documentales del repositorio.
+- Se explicó la ponderación de participación utilizada por el equipo para combinar ejecución documental, gestión de backlog y actividades de revisión e integración.
+- Se validó que el análisis puede contrastar lo esperado en cada issue con evidencia real en commits y PR, detectando discrepancias de estado o cierre.
+- Se señaló que la salida actual del reporte resulta extensa y difícil de leer rápidamente, por lo que se requiere una síntesis más clara por actividad y por resultado.
+- Se acordó orientar el reporte a responder no solo cuánto se hizo, sino qué aportó cada contribución al avance real del proyecto.
+- Se enfatizó que la cantidad de líneas modificadas es solo una referencia cuantitativa y no debe interpretarse como medida única de impacto.
+- Se propuso complementar la vista administrativa con una presentación más sintética o visual para facilitar lectura semanal del progreso.
+- Se discutió el uso de WakaTime como evidencia complementaria de esfuerzo, reconociendo su límite temporal en el plan gratuito.
+- Se observó una carga de trabajo desigual en la semana revisada y se planteó ajustar la distribución para mantener continuidad del equipo.
+- Se mantuvo la directriz de simplificar el proceso para hacerlo más escalable, mantenible y entendible para integración de nuevos miembros.
+- Se definió como acción inmediata mejorar las entregas semanales para reducir ruido administrativo y resaltar avances efectivos de diseño.
 
 ## Fuentes
 

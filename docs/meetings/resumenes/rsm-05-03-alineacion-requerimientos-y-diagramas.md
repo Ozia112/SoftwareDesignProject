@@ -1,15 +1,15 @@
-# Resumen de la junta (5‑03‑2026)
+# Resumen de la junta (05-03-2026)
 
-- Se aclaró que actualmente tienen ~14 requerimientos funcionales (incluyendo los de eventos, que también se tratan como funcionales).  
-- Se documentó que ya se ajustaron redacciones y se eliminaron métricas de verificación según la retroalimentación previa; los requerimientos 2 y 8 se combinaron por ser redundantes.  
-- Aún no hay requerimientos no funcionales definidos; se acordó que el enfoque de este mes (esta y la próxima sesión) será definirlos apoyándose en módulos de calidad.  
-- Se confirmó que el requerimiento 2 (originalmente de Saúl) será el “core” del sistema; el resto de RF funcionará como complementos/restricciones alrededor de ese requerimiento central.  
-- El profesor pidió un artefacto que modele el flujo de los RF (no solo texto): se acordó empezar a documentar los procesos mediante *Business Process Diagrams* (BPMN‑like) alineados con las historias de usuario y los RF.  
-- Se está migrando el backlog desde un listado general a documentos individuales por requerimiento funcional (un archivo por RF) para poder referenciarlos de forma atómica desde el repositorio y el Project de GitHub.  
-- Directriz de gestión: toda contribución debe pasar por PR; se espera que en `main` aparezcan los tres como contribuidores al hacer merge de `develop`.  
-- Se acordó llevar una planeación y bitácora semanal de tareas en el Project de GitHub, donde se vea qué debía hacer cada integrante y qué se cumplió, para revisarlo en cada junta.  
-- Se validó que el equipo queda formalmente en 3 integrantes (Isaac, Max y Diego) y que está bien reducir el alcance en consecuencia.  
-- Recomendación adicional: comenzar ya a explorar tecnologías para entender cómo integrar la solución técnica con los procesos definidos.
+- Se revisó el estado de los requerimientos funcionales y se confirmó que el equipo trabaja con 14 RF en total, incluyendo los RF de eventos.
+- Se informó que se ajustó la redacción de requerimientos y se eliminó el enfoque previo de métricas de verificación.
+- Se consolidaron requerimientos redundantes: el RF-2 y otro RF similar se integraron en una sola definición.
+- Se confirmó que todavía no hay requerimientos no funcionales cerrados y se acordó concentrar las siguientes sesiones en su definición.
+- Se estableció que el RF-2 será la base funcional principal del sistema y que los demás RF operarán como complementos alrededor de ese flujo central.
+- Se señaló la necesidad de pasar de descripciones textuales a artefactos de flujo más claros; como acción, se acordó modelar procesos con diagramas de procesos de negocio.
+- Se discutió la migración del backlog hacia documentos atómicos por requerimiento para mejorar la trazabilidad en el repositorio.
+- Se reiteró que el trabajo del equipo debe integrarse mediante pull requests y mantenerse sincronizado entre el repositorio y el tablero del proyecto.
+- Se acordó mantener una planeación semanal visible, con evidencia de lo planeado y de lo ejecutado por integrante.
+- Se confirmó que el equipo queda conformado por tres integrantes y se recomendó iniciar la exploración tecnológica para preparar la etapa de implementación.
 
 ## Fuentes
 

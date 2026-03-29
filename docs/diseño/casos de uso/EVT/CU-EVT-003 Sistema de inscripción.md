@@ -53,15 +53,15 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 
 ## Postcondiciones
 
-- El Prospecto queda inscrito en el banco de contexto
-
 ### En éxito
 
-- El operador humano inscribe al Prospecto al evento y el sistema se encarga de que la inscripción sea permanente
+- El Prospecto queda inscrito en el banco de contexto.
+- El operador humano inscribe al Prospecto al evento y el sistema se encarga de que la inscripción sea permanente.
 
 ### En fallo
 
-- El sistema no puede inscribir al Prospecto y por ende no queda registrado en el banco de contexto, en caso de que si haya sido inscrito pero era una inscripción temporal el sistema debe eliminarlo del banco de contexto y notificar a los demás MQL [CU-EVT-002]
+- El sistema no puede inscribir al Prospecto y, por ende, no queda registrado en el banco de contexto.
+- Si había una inscripción temporal, el sistema debe eliminarla del banco de contexto y notificar a los demás MQL. [CU-EVT-002]
 
 ## Flujo principal
 
@@ -114,3 +114,46 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 2. El sistema debe notificar al operador humano y borrar los datos que se hayan podido registrar para liberar la vacante
 3. El sistema debe permitir al operador humano reintentar la inscripción
 4. El sistema regresa al paso 1 si el agente lo vuelve a intentar, caso contrario el flujo acaba
+
+## Reglas de negocio / restricciones
+
+- No se permite sobreinscripción cuando el cupo del evento está lleno.
+- La vacante temporal debe liberarse si no se confirma el pago dentro del periodo definido.
+- Las inscripciones extemporáneas deben bloquearse según la política del evento.
+- Si el MQL acepta, debe registrarse en lista de espera conforme a RF-EVT-07.
+
+## Datos relevantes
+
+### Entradas
+
+- Datos personales del Prospecto.
+- Evento objetivo de inscripción.
+- Confirmación o ausencia de pago dentro del periodo definido.
+
+### Salidas
+
+- Estado de inscripción (temporal, confirmada, cancelada).
+- Actualización de cupo del evento.
+- Notificación a lista de espera cuando aplique.
+
+## Diagramas relacionados
+
+- BPMN-EVT-003
+
+## Observaciones
+
+- El operador humano guía el proceso mientras el sistema aplica validaciones de cupo y temporalidad.
+- El caso contempla transición entre inscripción temporal y permanente según confirmación de pago.
+
+## Trazabilidad
+
+- RF: RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-06, RF-EVT-07
+- CU: CU-EVT-002
+
+[CU-EVT-002]: /docs/diseño/casos%20de%20uso/EVT/CU-EVT-002%20Gestión%20de%20cancelación.md
+[RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
+[RF-EVT-02]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md
+[RF-EVT-03]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md
+[RF-EVT-04]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md
+[RF-EVT-06]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06%20Gestion%20de%20inscripciones%20extemporaneas.md
+[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md

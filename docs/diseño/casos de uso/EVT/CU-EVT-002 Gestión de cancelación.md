@@ -65,59 +65,59 @@ El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 
 ## Flujo principal
 
-1. El Usuario selecciona una inscripción confirmada  
-2. El Sistema valida que el Evento no ha iniciado  
-3. El Sistema permite ejecutar la cancelación  
-4. El Sistema cambia el estado de la inscripción a cancelada [RF-EVT-05]  
-5. El Sistema libera la vacante asociada  
-6. El Sistema actualiza el cupo disponible  
-7. El Sistema registra la cancelación (usuario, fecha, motivo)  
-8. El Sistema verifica si existe lista de espera  
-9. Si existe, el Sistema dispara notificación al siguiente elegible [RF-EVT-03]  
+1. El Usuario selecciona una inscripción confirmada
+2. El Sistema valida que el Evento no ha iniciado
+3. El Sistema permite ejecutar la cancelación
+4. El Sistema cambia el estado de la inscripción a cancelada [RF-EVT-05]
+5. El Sistema libera la vacante asociada
+6. El Sistema actualiza el cupo disponible
+7. El Sistema registra la cancelación (usuario, fecha, motivo)
+8. El Sistema verifica si existe lista de espera
+9. Si existe, el Sistema dispara notificación al siguiente elegible [RF-EVT-03]
 
 ## Flujos alternos
 
 ### A1. No existe lista de espera
 
-1. En el paso 8, no hay lista de espera  
-2. El flujo finaliza sin notificaciones  
+1. En el paso 8, no hay lista de espera
+2. El flujo finaliza sin notificaciones
 
 ### A2. Cancelación con motivo
 
-1. El Usuario registra un motivo de cancelación  
-2. El Sistema lo almacena junto con el registro  
-3. El flujo continúa normalmente  
+1. El Usuario registra un motivo de cancelación
+2. El Sistema lo almacena junto con el registro
+3. El flujo continúa normalmente
 
 ## Flujos de excepción
 
 ### E1. Evento ya iniciado
 
-1. El Sistema detecta que el Evento ya inició  
-2. Se bloquea la cancelación  
-3. Se notifica al Usuario  
-4. Se registra el intento en logs  
-5. El flujo finaliza  
+1. El Sistema detecta que el Evento ya inició
+2. Se bloquea la cancelación
+3. Se notifica al Usuario
+4. Se registra el intento en logs
+5. El flujo finaliza
 
 ### E2. Inscripción inválida
 
-1. La inscripción no existe o ya está cancelada  
-2. El Sistema rechaza la operación  
-3. Se registra el error  
-4. El flujo finaliza  
+1. La inscripción no existe o ya está cancelada
+2. El Sistema rechaza la operación
+3. Se registra el error
+4. El flujo finaliza
 
 ### E3. Error en notificación
 
-1. Ocurre un error al enviar notificación  
-2. El Sistema registra el incidente  
-3. La cancelación se mantiene válida  
-4. La notificación puede quedar pendiente  
+1. Ocurre un error al enviar notificación
+2. El Sistema registra el incidente
+3. La cancelación se mantiene válida
+4. La notificación puede quedar pendiente
 
 ## Reglas de negocio / restricciones
 
-- Solo se permiten cancelaciones antes del inicio del Evento  
-- La cancelación libera inmediatamente la vacante  
-- La actualización de cupo debe ser consistente (sin sobreventa)  
-- La notificación debe respetar reglas anti-spam  
+- Solo se permiten cancelaciones antes del inicio del Evento
+- La cancelación libera inmediatamente la vacante
+- La actualización de cupo debe ser consistente (sin sobreventa)
+- La notificación debe respetar reglas anti-spam
 
 ## Datos relevantes
 
@@ -146,3 +146,6 @@ El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 
 - RF: RF-EVT-05, RF-EVT-03
 - DDR: DDR-01
+
+[RF-EVT-03]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md
+[RF-EVT-05]: /docs/diseño/requerimientos/funcionales/RF-EVT/RF-EVT-05%20Gestion%20de%20cancelacion%20inscripciones.md
