@@ -6,21 +6,20 @@
 - Dominio: COM
 - Nombre: Presentación de eventos disponibles
 - Estado: Borrador
-- Versión: v0.3
+- Versión: v0.2
 - Fecha de creación: 2026-03-10
-- Última actualización: 2026-03-26
+- Última actualización: 2026-03-25
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-08, PSD-13
-- PR relacionado: #XX
+- Issue relacionado: PSD-15
+- PR relacionado: #52
 
 ## Objetivo
 
-Cuando la persona interesada pide opciones, el bot lista eventos activos con nombre y breve descripción.
+Permitir que la Persona interesada consulte el listado de eventos disponibles con información básica (nombre y descripción) para explorar opciones activas.
 
 ## Alcance
 
-- En este caso de uso se cubre la presentación del listado de eventos activos a la persona interesada; incluye nombre y una breve descripción.
-- Incluye la interacción del sistema con la base de datos y filtro básico por horarios/modalidad.
+Aplica a la interacción entre la Persona interesada y el Bot para la consulta de eventos disponibles almacenados en el sistema.
 
 ## RF relacionados
 
@@ -31,82 +30,108 @@ Cuando la persona interesada pide opciones, el bot lista eventos activos con nom
 
 ### Actor principal
 
-- Persona interesada quien solicitará la lista de eventos.
-- Operador administrativo quien pondrá la información de los eventos.
+- Persona interesada
 
 ### Actores secundarios
 
+- Bot
+- Sistema
 - Base de datos
-- Bot quien proporcionará la lista de los eventos a la persona interesada desde la base de datos.
+- Usuario (operador del sistema)
 
 ## Disparador
 
-La persona interesada está interesada en otros eventos distintos por el que inició la conversación.
+La Persona interesada solicita conocer otros eventos disponibles durante la conversación.
 
 ## Precondiciones
 
-- Debe existir al menos un Bot automatizado configurado y disponible en el sistema
-- Debe existir información acerca del evento del que la persona interesada está preguntando.
-- Deben estar vigentes los eventos listados.
-- El operador administrativo debe haber actualizado los eventos disponibles
+- Existe al menos un Bot activo y configurado
+- Existen eventos registrados en el sistema
+- Los eventos tienen estado activo
+- La Persona interesada ya inició interacción con el Bot
 
 ## Postcondiciones
 
-- El sistema devuelve al Bot un listado con eventos activos y el bot le enseña ese listado a la persona interesada.
-- Se registra en logs la consulta de eventos.
-
 ### En éxito
 
-- La persona interesada obtiene una lista con los nombres de los eventos disponibles
-- La persona interesada puede seleccionar un evento para continuar con otro flujo para obtener información más detallada.
+- La Persona interesada visualiza un listado de eventos disponibles
+- El sistema mantiene el contexto de la conversación para futuras consultas
 
 ### En fallo
 
-- El bot es incapaz de contestar.
-- La persona interesada es informada de que no hay eventos disponibles.
-- La conversación permanece activa con la opción de continuar con otro flujo o finalizarla.
+- La Persona interesada es informada de la imposibilidad de obtener la información
 
 ## Flujo principal
 
-1. El Lead le pide al bot información acerca de otros eventos.
-
-2. El bot debe avisarle al sistema para que este le proporcione la información desde la base de datos del listado de eventos [RF-COM-04]
-
-3. El sistema debe acceder a la base de datos y regresarle la lista de eventos disponibles al bot junto a la descripción de los eventos
-
-4. El bot debe proporcionar al Lead el listado de eventos junto a una breve descripción de cada uno [RF-COM-04].
-
-5. El bot pregunta al Lead si desea conocer más a detalle sobre los eventos listados [RF-COM-05].
+1. La Persona interesada solicita información sobre otros eventos  
+2. El Bot solicita al Sistema el listado de eventos disponibles [RF-COM-04]  
+3. El Sistema consulta la base de datos  
+4. El Sistema devuelve la lista de eventos con nombre y descripción  
+5. El Bot presenta el listado estructurado a la Persona interesada [RF-COM-04]  
+6. El Bot pregunta si desea conocer más detalles de algún evento [RF-COM-05]  
 
 ## Flujos alternos
 
-### A1. El Lead solicita detalle de un evento del listado
+### A1. Solicitud de detalle de evento
 
-1. En el paso 5 del flujo principal, el Lead indica que desea más información de un evento específico.
-2. El bot solicita al sistema el detalle del evento seleccionado [RF-COM-05].
-3. El sistema devuelve información detallada (duración, modalidad, precio, requisitos y certificación) [RF-COM-05]
-4. El bot presenta la información al Lead.
-5. El flujo continúa en el CU-COM-002
+1. En el paso 6, la Persona interesada solicita más información de un evento  
+2. El Bot solicita el detalle al Sistema [RF-COM-05]  
+3. El Sistema devuelve información detallada del evento  
+4. El Bot presenta la información  
+5. El flujo continúa en CU-COM-002  
 
-### A2. El Lead pide filtrar eventos por horario o modalidad
+### A2. Filtrado de eventos
 
-1. Después del paso 4, el Lead pide ver solo eventos en cierto horario/modalidad.
-2. El bot envía el criterio de filtro al sistema
-3. El sistema devuelve únicamente los eventos que cumplen el criterio [RF-COM-04]
-4. El bot muestra el nuevo listado filtrado
-5. El flujo regresa al paso 5 del flujo principal
+1. La Persona interesada solicita filtrar eventos por criterio (horario/modalidad)  
+2. El Bot envía el criterio al Sistema  
+3. El Sistema filtra los eventos [RF-COM-04]  
+4. El Sistema devuelve resultados filtrados  
+5. El Bot presenta el nuevo listado  
+6. Regresa al paso 6 del flujo principal  
 
 ## Flujos de excepción
 
 ### E1. No hay eventos disponibles
 
-1. En el paso 3 del flujo principal, el sistema consulta la base de datos y no encuentra eventos activos [RF-COM-04]
-2. El bot informa al Lead que actualmente no hay eventos disponibles.
-3. El bot ofrece opciones: dejar datos de contacto para avisarle en el futuro o volver a consultar más tarde
-4. El flujo finaliza
+1. El Sistema no encuentra eventos activos  
+2. El Bot informa que no hay eventos disponibles  
+3. El Bot ofrece opciones (esperar, dejar datos o intentar después)  
+4. El flujo finaliza  
 
-### E2. No está funcionando la base de datos
+### E2. Error en base de datos
 
-1. Cuando el sistema trata de acceder a la base de datos en el paso 3 y la base se encuentra caída o en mantenimiento.
-2. El sistema debe notificar al bot que la base de datos no se encuentra disponible
-3. El bot debe decirle al Lead "Por el momento la información no está disponible" y darle la opción de dejar datos de contacto para avisarle en el futuro o volver a consultar más tarde.
+1. El Sistema no puede consultar la base de datos  
+2. El Sistema notifica al Bot  
+3. El Bot informa a la Persona interesada que la información no está disponible  
+4. El Bot ofrece intentar más tarde  
+
+## Reglas de negocio / restricciones
+
+- Los eventos deben estar en estado activo para ser mostrados  
+- La información debe provenir del sistema (fuente única de verdad)  
+- El listado debe mostrar al menos nombre y descripción  
+
+## Datos relevantes
+
+### Entradas
+- Solicitud de eventos
+- Criterios de filtrado (opcional)
+
+### Salidas
+- Lista de eventos disponibles
+- Detalle de evento (opcional)
+
+## Diagramas relacionados
+
+- BPMN-COM-003
+- ../resources/cu-com-003.png
+
+## Observaciones
+
+- La presentación puede variar según canal (chat, web, etc.)
+- Puede integrarse con recomendación de eventos en futuras versiones
+
+## Trazabilidad
+
+- RF: RF-COM-04, RF-COM-05
+- DDR: DDR-01

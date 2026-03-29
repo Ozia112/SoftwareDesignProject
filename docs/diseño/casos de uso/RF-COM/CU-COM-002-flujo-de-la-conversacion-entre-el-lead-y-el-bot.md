@@ -1,25 +1,22 @@
-# CU-COM-002 Flujo de la conversación entre el Lead y el bot
+# CU-COM-002 Flujo de la conversación entre la Persona interesada y el Bot
 
 ## Metadatos
-
 - ID: CU-COM-002
 - Dominio: COM
-- Nombre: Flujo de la conversación entre el Lead y el bot
+- Nombre: Flujo de la conversación entre la Persona interesada y el Bot
 - Estado: Borrador
-- Versión: v0.3
+- Versión: v0.2
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-03-26
+- Última actualización: 2026-03-25
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-08, PSD-13
-- PR relacionado: #XX
+- Issue relacionado: PSD-15
+- PR relacionado: #52
 
 ## Objetivo
-
-Describir cómo el bot debería actuar en la conversación con la persona interesada.
+Describir el flujo de interacción entre la Persona interesada y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un operador humano o abandono.
 
 ## Alcance
-
-- Este caso de uso cubre la interacción básica de la persona interesada con el bot para consultar eventos, validación de disponibilidad, fechas y horarios, además de la captura de datos de la persona interesada con consentimiento explícito.
+Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención por operador humano.
 
 ## RF relacionados
 
@@ -33,94 +30,122 @@ Describir cómo el bot debería actuar en la conversación con la persona intere
 
 ### Actor principal
 
-- Persona interesada encargada de hacer preguntas al bot.
+- Persona interesada: inicia la conversación y solicita información.
 
 ### Actores secundarios
 
-- Bot encargado de contestar las preguntas de la persona interesada.
-- Base de datos
+- Bot: gestiona la conversación y responde consultas.
+- Sistema: procesa solicitudes y consulta datos.
+- Base de datos: almacena información de eventos.
 
 ## Disparador
 
-Después de que la persona interesada inicia la conversación y hace una pregunta al bot que puede contestar.
+La Persona interesada inicia una conversación con el Bot y realiza una consulta sobre un evento.
 
 ## Precondiciones
 
-- Debe existir al menos un Bot automatizado configurado y disponible en el sistema.
-- Debe existir información acerca del evento del que la persona interesada está preguntando.
-- Debe estar vigente el evento.
+- Existe al menos un Bot configurado y disponible.
+- Existe al menos un Evento registrado en el sistema.
+- El Evento se encuentra vigente.
+- El sistema tiene acceso a la base de datos.
 
 ## Postcondiciones
 
-- El bot debe notificar al sistema para enviar la conversación al agente administrativo.
-
 ### En éxito
 
-- La persona interesada debe continuar en la conversación con el bot hasta que el bot llegue al punto donde no pueda continuar sin un operador humano.
+- La Persona interesada recibe información del Evento.
+- El Bot puede escalar la conversación a un operador humano.
+- La interacción queda registrada en el sistema.
 
 ### En fallo
 
-- La persona interesada cierra la conversación por falta de interés o respuesta del bot.
+- No se puede obtener información del Evento.
+- La conversación se detiene o continúa sin avance hacia inscripción.
 
 ## Flujo principal
 
-1. El Lead entra a la conversación desde un anuncio y le hace una pregunta al bot.
-
-2. El bot debe verificar la disponibilidad del evento de interés del Lead. [RF-EVT-01]
-
-3. El bot debe proporcionar la información del evento en cuestión. [RF-COM-05]
-
-4. El Lead solicita información sobre horarios y fechas del evento.
-
-5. El bot consulta la información del evento y proporciona las fechas y horarios disponibles al Lead. [RF-COM-06]
-
-6. El MQL está interesado en el evento y quiere inscribirse.
-
-7. El bot debe mandar una notificación de privacidad al MQL con dos botones que muestren "Acepto" y "Rechazo" para posteriormente pedirle su nombre, su número y, opcionalmente, su correo electrónico. [RF-COM-07]
-
-8. Una vez obtenida la información del MQL, el bot debe notificar al MQL acerca de que va a ser redirigido con un operador humano y si desea continuar.
-
-9. El bot notifica al sistema para colocar al MQL en una cola de espera para ser atendido por un operador humano.
-
-10. El sistema registra la solicitud y mantiene la conversación en espera hasta que un agente esté disponible.
+1. La Persona interesada inicia la conversación con el Bot.
+2. El Bot identifica la intención de consulta sobre un Evento.
+3. El Sistema valida la disponibilidad del Evento. [RF-EVT-01]
+4. El Bot presenta información general del Evento. [RF-COM-05]
+5. La Persona interesada solicita fechas y horarios.
+6. El Bot consulta y muestra fechas y horarios disponibles. [RF-COM-06]
+7. La Persona interesada muestra interés en inscribirse.
+8. El Bot muestra aviso de privacidad y solicita consentimiento. [RF-COM-07]
+9. Si acepta, el Bot solicita datos básicos (nombre, teléfono, correo opcional).
+10. El Sistema registra la información de la Persona interesada.
+11. El Bot informa que será transferido a un operador humano.
+12. El Sistema coloca la conversación en cola de espera.
+13. El Sistema registra la interacción.
 
 ## Flujos alternos
 
-### A1. El Lead no está interesado en el evento actual
+### A1. La Persona interesada solicita otros eventos
 
-1. Una vez obtenida la información o los horarios del evento que le causó el interés, el Lead pregunta si no hay otros eventos.
-2. El bot debe proporcionar una lista con otros eventos disponibles [RF-COM-04]
-3. Regresar al paso donde se consulta el evento.
+1. En el paso 4 o 6, la Persona interesada solicita otras opciones.
+2. El Bot muestra lista de eventos disponibles. [RF-COM-04]
+3. El flujo regresa al paso 4.
 
-### A2. El MQL ya está interesado en inscribirse y está informado previamente de las fechas
+### A2. La Persona interesada desea inscribirse directamente
 
-1. El MQL le dice al bot nada más iniciar la conversación que quiere inscribirse.
-2. El bot le debe confirmar la disponibilidad del evento.
-3. El bot le debe preguntar al MQL si sabe los horarios del evento.
-4. Si el MQL confirma el bot regresa al paso 7 del flujo original, caso contrario regresa al paso 5.
+1. En el paso 2, la Persona interesada indica intención directa de inscripción.
+2. El Sistema valida disponibilidad. [RF-EVT-01]
+3. Si hay cupo, el flujo continúa en el paso 8.
+4. Si no hay cupo, se activa flujo de excepción E1.
 
 ## Flujos de excepción
 
-### E1. El evento no está disponible
+### E1. Evento sin disponibilidad
 
-1. El bot verifica la disponibilidad del evento. [RF-EVT-01]
-2. El bot detecta que no está disponible.
-3. El bot informa al Lead de la no disponibilidad del evento original y le pregunta si desea registrarse en una lista de espera para ese evento, en caso de que se libere un lugar. [RF-EVT-07]
-4. Si el Lead acepta, el bot inicia el flujo de registro en la lista de espera para el evento original. [RF-EVT-07]
-5. Adicionalmente, el bot muestra al Lead la lista de otros eventos disponibles. [RF-COM-04]
-6. Se continúa el flujo de eventos de A1.
+1. En el paso 3, el Sistema detecta que no hay cupo. [RF-EVT-01]
+2. El Bot informa que el Evento está lleno.
+3. El Bot ofrece registro en lista de espera para el Evento original. [RF-EVT-07]
+4. Si la Persona interesada acepta, se activa el flujo de CU-EVT-001. [RF-EVT-07]
+5. El Bot también ofrece alternativas (otros eventos). [RF-COM-04]
 
-### E2. Error al obtener información del evento
+### E2. Error al obtener información
 
-1. El bot solicita la información del evento.
-2. El sistema no puede obtener la información.
-3. El bot notifica al Lead que la información no se encuentra disponible temporalmente y le pide que lo intente más tarde.
-4. Se registra el error en los logs
+1. En el paso 4 o 6, el Sistema no puede consultar datos.
+2. El Bot informa indisponibilidad temporal.
+3. Se registra el error en logs.
 
-### E3. El MQL no proporciona sus datos
 
-1. El MQL se niega a proporcionar su información personal.
-2. El bot notifica que no es posible continuar el proceso de inscripción sin sus datos.
-3. El bot informa al MQL que puede ser atendido por un operador humano para resolver dudas o explorar alternativas de inscripción sin que sus datos hayan sido registrados aún.
-4. El bot notifica al sistema para enviar la conversación a un agente administrativo y colocarla en la cola de espera para ser atendida por un operador humano.
-5. El sistema registra la solicitud y la conversación permanece en espera de la intervención de un operador humano.
+### E3. No aceptación de privacidad
+
+1. En el paso 8, la Persona interesada rechaza el aviso.
+2. El Bot informa que no puede continuar sin consentimiento.
+3. El flujo se detiene.
+
+## Reglas de negocio / restricciones
+
+- RN-COM-04: El Bot debe mostrar eventos disponibles desde la base de datos.
+- RN-COM-05: El Bot debe proporcionar información detallada del Evento.
+- RN-COM-07: No se puede continuar sin consentimiento de privacidad.
+- RN-EVT-01: No se puede avanzar si no hay cupo disponible.
+
+## Datos relevantes
+
+### Entradas
+
+- Consulta de la Persona interesada
+- Evento seleccionado
+
+### Salidas
+
+- Información del Evento
+- Estado de la conversación
+
+## Diagramas relacionados
+
+- BPMN-COM-002
+
+## Observaciones
+
+- El flujo puede variar dependiendo del nivel de interés.
+- La calificación de la Persona interesada ocurre en paralelo (RF-COM-02).
+
+## Trazabilidad
+
+- RF: RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01
+- BPMN: BPMN-COM-002
+- DDR: DDR-01

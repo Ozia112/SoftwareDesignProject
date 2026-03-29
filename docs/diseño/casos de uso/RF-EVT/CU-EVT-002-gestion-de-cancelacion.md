@@ -10,100 +10,139 @@
 - Fecha de creación: 2026-03-11
 - Última actualización: 2026-03-25
 - Responsable: Maximiliano Carrillo Alvarado
-- Issue relacionado: PSD-12
-- PR relacionado: #XX
+- Issue relacionado: PSD-15
+- PR relacionado: #52
 
 ## Objetivo
 
-Debe permitir al operador administrativo gestionar las cancelaciones de una inscripción ya confirmada antes del inicio del evento en cuestión, además, debe actualizar la lista de espera y notificar al siguiente en la lista para que pueda inscribirse al curso actual
+Permitir que un Usuario (operador) registre la cancelación de una inscripción confirmada antes del inicio del Evento, liberando la vacante, actualizando el estado y disparando procesos asociados como notificación a lista de espera.
 
 ## Alcance
 
-Modulo de gestión de inscripción del sistema
+Aplica al módulo de gestión de inscripciones y cupo de Eventos dentro del sistema.
 
 ## RF relacionados
 
-- RF-EVT-001
-- RF-EVT-003
-- RF-EVT-005
+- RF-EVT-03
+- RF-EVT-05
 
 ## Actores
 
 ### Actor principal
 
-- Operador administrativo quien será el que haga los cambios
+- Usuario (operador del sistema)
 
 ### Actores secundarios
 
-- Sistema de notificaciones
+- Sistema
 - Banco de contexto (gestiona inscripciones, cupos y lista de espera)
-- Personas interesadas
+- Persona interesada
 
 ## Disparador
 
-El operador administrativo hace cambios en las inscripciones de un evento que no ha iniciado
+El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 
 ## Precondiciones
 
-- Existe una inscripción para el evento (ya sea que solo haya sido reservada en espera de pago o ya confirmada)
-- Es antes que el evento inicie
+- Existe una inscripción confirmada en el Evento
+- El Evento no ha iniciado
+- El Usuario tiene permisos para realizar la cancelación
 
 ## Postcondiciones
 
 ### En éxito
 
-- Debe incrementar en 1 el cupo disponible en el banco de contexto
-- Si hay lista de espera el sistema debe notificar al siguiente usuario en la lista de espera [RF-EVT-03]
-- Debe quedar registrado el nombre del operador administrativo quien haya hecho la cancelación
+- La vacante se libera
+- El cupo disponible se actualiza
+- Se registra la cancelación (usuario, fecha, motivo opcional)
+- Se actualiza la etapa comercial correspondiente
+- Se dispara notificación a lista de espera si aplica
 
 ### En fallo
 
-- La inscripción permanece sin cambios
-- El banco de contexto permanece sin cambios
-- Se registra en los logs el intento de cancelación
+- No se realizan cambios en la inscripción
+- Se registra el intento fallido en logs
 
 ## Flujo principal
 
-1. El operador administrativo desea cancelar una inscripción activa de un evento
-
-2. El sistema debe verificar la disponibilidad del evneto [RF-EVT-001].
-
-3. El sistema le permite al operador administrativo actualizar el estado de la inscripción
-
-4. El banco de contexto debe sumar en 1 el cupo disponible
-
-5. El sistema verifica si hay lista de espera
-
-6. El sistema notifica a los MQL en la lista de espera [RF-EVT-003]
-
-7. Queda registrado el nombre del operador administrativo quien hizo la cancelación
+1. El Usuario selecciona una inscripción confirmada  
+2. El Sistema valida que el Evento no ha iniciado  
+3. El Sistema permite ejecutar la cancelación  
+4. El Sistema cambia el estado de la inscripción a cancelada [RF-EVT-05]  
+5. El Sistema libera la vacante asociada  
+6. El Sistema actualiza el cupo disponible  
+7. El Sistema registra la cancelación (usuario, fecha, motivo)  
+8. El Sistema verifica si existe lista de espera  
+9. Si existe, el Sistema dispara notificación al siguiente elegible [RF-EVT-03]  
 
 ## Flujos alternos
 
 ### A1. No existe lista de espera
 
-1. En el paso 5, si el sistema no encuentra una lista de espera
-2. El flujo debe continuar directamente en el paso 7
+1. En el paso 8, no hay lista de espera  
+2. El flujo finaliza sin notificaciones  
 
-### A2. El evento ya inicio
+### A2. Cancelación con motivo
 
-1. En el paso 2 si el evento ya esta iniciado
-2. El sistema debe notificar al operador administrativo que no se puede hacer cambios de un evento ya iniciado
-3. Se registra el nombre del operador administrativo en los logs con el intento fallido de cancelación
-4. El flujo termina
+1. El Usuario registra un motivo de cancelación  
+2. El Sistema lo almacena junto con el registro  
+3. El flujo continúa normalmente  
 
 ## Flujos de excepción
 
-### E1. Falla en el envio de notificación de la lista de espera
+### E1. Evento ya iniciado
 
-1. En el paso 6, si el servicio de notificación no responde o devuelve error
-2. El sistema notifica al operador administrativo que se ha hecho la cancelación y se ha liberado el cupo pero que no ha funcionado el servicio de notificación
-3. El sistema registra el incidente en los logs
-4. El sistema deja la notificación como pendiente para que se haga automaticamente (opcional, hay que redefinir como hacer esto a futuro)
-5. finaliza el flujo
+1. El Sistema detecta que el Evento ya inició  
+2. Se bloquea la cancelación  
+3. Se notifica al Usuario  
+4. Se registra el intento en logs  
+5. El flujo finaliza  
 
-### E2. No se pudo cancelar la inscripción
+### E2. Inscripción inválida
 
-1. En el paso 1 o 3, el sistema detecta que la inscripción no existe o ya está cancelada
-2. El sistema rechaza la operación sin modificar cupo ni estados
-3. El flujo termina
+1. La inscripción no existe o ya está cancelada  
+2. El Sistema rechaza la operación  
+3. Se registra el error  
+4. El flujo finaliza  
+
+### E3. Error en notificación
+
+1. Ocurre un error al enviar notificación  
+2. El Sistema registra el incidente  
+3. La cancelación se mantiene válida  
+4. La notificación puede quedar pendiente  
+
+## Reglas de negocio / restricciones
+
+- Solo se permiten cancelaciones antes del inicio del Evento  
+- La cancelación libera inmediatamente la vacante  
+- La actualización de cupo debe ser consistente (sin sobreventa)  
+- La notificación debe respetar reglas anti-spam  
+
+## Datos relevantes
+
+### Entradas
+
+- Identificador de inscripción
+- Motivo de cancelación (opcional)
+
+### Salidas
+
+- Confirmación de cancelación
+- Actualización de cupo
+- Registro en historial
+
+## Diagramas relacionados
+
+- BPMN-EVT-002
+- ../resources/cu-evt-002.png
+
+## Observaciones
+
+- Puede integrarse con políticas de reembolso (fuera de alcance)
+- Puede integrarse con reservas automáticas futuras
+
+## Trazabilidad
+
+- RF: RF-EVT-05, RF-EVT-03
+- DDR: DDR-01
