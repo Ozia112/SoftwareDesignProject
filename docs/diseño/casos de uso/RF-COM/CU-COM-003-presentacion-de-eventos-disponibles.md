@@ -114,12 +114,10 @@ La Persona interesada solicita conocer otros eventos disponibles durante la conv
 ## Datos relevantes
 
 ### Entradas
-
 - Solicitud de eventos
 - Criterios de filtrado (opcional)
 
 ### Salidas
-
 - Lista de eventos disponibles
 - Detalle de evento (opcional)
 
