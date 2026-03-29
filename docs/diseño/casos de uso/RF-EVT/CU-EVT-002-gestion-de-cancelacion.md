@@ -35,7 +35,7 @@ Aplica al módulo de gestión de inscripciones y cupo de Eventos dentro del sist
 ### Actores secundarios
 
 - Sistema
-- Base de datos
+- Banco de contexto (gestiona inscripciones, cupos y lista de espera)
 - Persona interesada
 
 ## Disparador

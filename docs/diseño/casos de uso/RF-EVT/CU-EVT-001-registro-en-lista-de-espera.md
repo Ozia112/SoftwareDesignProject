@@ -36,7 +36,7 @@ Aplica al proceso de registro en lista de espera gestionado por el Sistema cuand
 
 - Bot
 - Sistema
-- Base de datos
+- Banco de contexto (gestiona eventos, cupos y lista de espera)
 
 ## Disparador
 

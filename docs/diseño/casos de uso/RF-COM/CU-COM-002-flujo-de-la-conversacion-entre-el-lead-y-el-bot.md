@@ -13,10 +13,10 @@
 - PR relacionado: #52
 
 ## Objetivo
-Describir el flujo de interacción entre la Persona interesada y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un agente humano o abandono.
+Describir el flujo de interacción entre la Persona interesada y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un operador humano o abandono.
 
 ## Alcance
-Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención humana.
+Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención por operador humano.
 
 ## RF relacionados
 
@@ -54,7 +54,7 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 ### En éxito
 
 - La Persona interesada recibe información del Evento.
-- El Bot puede escalar la conversación a un agente humano.
+- El Bot puede escalar la conversación a un operador humano.
 - La interacción queda registrada en el sistema.
 
 ### En fallo
@@ -74,7 +74,7 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 8. El Bot muestra aviso de privacidad y solicita consentimiento. [RF-COM-07]
 9. Si acepta, el Bot solicita datos básicos (nombre, teléfono, correo opcional).
 10. El Sistema registra la información de la Persona interesada.
-11. El Bot informa que será transferido a un agente humano.
+11. El Bot informa que será transferido a un operador humano.
 12. El Sistema coloca la conversación en cola de espera.
 13. El Sistema registra la interacción.
 
@@ -99,7 +99,9 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 
 1. En el paso 3, el Sistema detecta que no hay cupo. [RF-EVT-01]
 2. El Bot informa que el Evento está lleno.
-3. El Bot ofrece alternativas (otros eventos). [RF-COM-04]
+3. El Bot ofrece registro en lista de espera para el Evento original. [RF-EVT-07]
+4. Si la Persona interesada acepta, se activa el flujo de CU-EVT-001. [RF-EVT-07]
+5. El Bot también ofrece alternativas (otros eventos). [RF-COM-04]
 
 ### E2. Error al obtener información
 
@@ -140,7 +142,7 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 ## Observaciones
 
 - El flujo puede variar dependiendo del nivel de interés.
-- La calificación del lead ocurre en paralelo (RF-COM-02).
+- La calificación de la Persona interesada ocurre en paralelo (RF-COM-02).
 
 ## Trazabilidad
 
