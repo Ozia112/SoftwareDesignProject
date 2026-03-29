@@ -117,7 +117,7 @@ Esta seccion deja la evidencia tecnica completa del mes. Aqui quedan los archivo
 
 | Archivo | Rol en marzo |
 | --- | --- |
-| [pipeline-operativo.md](../../pipeline-operativo.md) | Define el flujo operativo semanal usado para coordinar entregables. |
+| [pipeline-operativo.md](../../workflow/pipeline-operativo.md) | Define el flujo operativo semanal usado para coordinar entregables. |
 | [DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md](../../diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md) | Registra el impacto de RF-COM-02 sobre los casos de uso. |
 | [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md) | Contiene el modelo de diagramación usado para el análisis del flujo. |
 | [Definiciones.md](../../diseño/glosario/Definiciones.md) | Sirve como glosario de consistencia terminológica. |
@@ -129,7 +129,7 @@ Esta seccion deja la evidencia tecnica completa del mes. Aqui quedan los archivo
 | Integrante | Requerimientos | Diseno | Glosario | Diagramacion |
 | --- | --- | --- | --- | --- |
 | Maximiliano Carrillo Alvarado | Bloques RF-COM y RF-EVT vinculados a los casos de uso; ver issues #2, #28, #32, #33, #41, #47 y #53. | Casos de uso COM y EVT: [CU-COM-001](<../../diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>), [CU-COM-002](<../../diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>), [CU-COM-003](<../../diseño/casos de uso/COM/CU-COM-003 Presentación de eventos disponibles.md>), [CU-EVT-001](<../../diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>), [CU-EVT-002](<../../diseño/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md>), [CU-EVT-003](<../../diseño/casos de uso/EVT/CU-EVT-003 Sistema de inscripción.md>). | Reviso consistencia terminologica en los CU y en la redaccion funcional. | Aporto alineacion entre CU y BPMN en la documentacion de eventos. |
-| Isaac Alejandro Ortiz Zaldivar | RF-COM-02, RF-COM-07 y articulacion de requerimientos con flujo operativo; ver issues #22, #24, #25, #27, #30 y PRs de soporte. | [DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md](../../diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md), [pipeline-operativo.md](../../pipeline-operativo.md). | [Definiciones.md](../../diseño/glosario/Definiciones.md) como base terminologica. | [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md) y trazabilidad entre artefactos. |
+| Isaac Alejandro Ortiz Zaldivar | RF-COM-02, RF-COM-07 y articulacion de requerimientos con flujo operativo; ver issues #22, #24, #25, #27, #30 y PRs de soporte. | [DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md](../../diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md), [pipeline-operativo.md](../../workflow/pipeline-operativo.md). | [Definiciones.md](../../diseño/glosario/Definiciones.md) como base terminologica. | [BPMNs.md](../../diseño/modelos%20de%20diseño/BPMNs.md) y trazabilidad entre artefactos. |
 | Diego Islas Merino | RF-COM-02 y RF-COM-07, ademas de soporte a la normalizacion de casos EVT; ver issues #3, #26 y #29. | Ajustes de soporte en casos de uso y validacion de consistencia documental. | Validacion puntual de consistencia terminologica en la documentacion de soporte. | Apoyo en BPMN y en el ajuste de diagramas para cerrar trazabilidad. |
 
 ### 3) Gestion de operatividad (Backlog)
