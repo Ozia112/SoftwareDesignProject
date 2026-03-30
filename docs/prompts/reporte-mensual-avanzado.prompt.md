@@ -6,6 +6,13 @@ Usa este prompt para generar o actualizar un reporte mensual de avance del proye
 
 Generar un documento claro para lectores técnicos y no técnicos, con lectura principal en A-D y auditoria exhaustiva en E. El reporte debe ser riguroso, verificable y reutilizable para meses posteriores sin perder consistencia.
 
+## Modo de uso
+
+- Usa este prompt en dos modos: `reconstruccion` y `actualizacion`.
+- En `reconstruccion`, conserva la estructura canonica del reporte de marzo 2026 tanto como lo permita la evidencia del bundle.
+- En `actualizacion`, usa la misma estructura para el mes objetivo y adapta el contenido a la evidencia nueva sin reintroducir bloques ya cubiertos.
+- Si el bundle corresponde a marzo 2026, el resultado debe intentar reproducir el documento existente con la misma secuencia de apartados, subapartados y familias de tablas.
+
 ## Entradas esperadas
 
 - Nombre del repositorio.
@@ -27,6 +34,8 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 - Explicar el avance del proyecto, no la solicitud del reporte.
 - No mezclar la narrativa principal con la auditoria tecnica.
 - No inventar evidencia, numeros ni relaciones entre artefactos.
+- Validar que todo enlace y toda ruta apunten a un archivo real del workspace; si una referencia es futura, inexistente o rota, corregirla en el texto o eliminarla.
+- Tratar los errores de enlace, rutas mal escritas y referencias futuras como defectos de generacion del reporte, no como deuda documental del proyecto.
 - Si una etapa IEEE no aplica o no tiene evidencia, omitirla.
 - Si un artefacto no tiene respaldo en git o GitHub, no incluirlo.
 - No mencionar issues o pull requests en A-D salvo que formen parte de la trazabilidad general y no como metrica.
@@ -55,6 +64,7 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 - Una narrativa inicial corta.
 - Una tabla breve con lectura sencilla por tema.
 - Un bloque de bullets con lo mas visible del mes.
+- Mantener la secuencia narrativa breve, tabla de lectura y bullets visibles como la forma canonica del reporte de marzo 2026.
 
 ### B) Participacion individual
 
@@ -76,6 +86,7 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 **Forma esperada:**
 - Introduccion breve.
 - Tabla con integrante, enfoque, aporte del mes y lo que deja listo para el siguiente mes.
+- Si el bundle lo permite, reflejar el reparto dominante por integrante con una lectura resumida como la del reporte de marzo 2026, sin volver la seccion una auditoria.
 
 ### C) Que toca para el siguiente mes
 
@@ -91,12 +102,16 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 **Restricciones:**
 - No basar el plan en issues o PRs abiertos.
 - No presentar ideas sueltas sin respaldo documental.
+- No introducir entregables de meses futuros ni semanas inexistentes dentro de un reporte del mes anterior.
 - No mezclar esta seccion con la auditoria de E.
+- Si el siguiente mes requiere una lectura operativa, organizarla en cuatro fases concretas con fechas, artefactos y resultado esperado.
 
 **Forma esperada:**
 - Una lectura corta de lo que sigue.
 - Una tabla con frentes de trabajo, objetivo y apoyo sugerido.
 - Una tabla o bloque adicional con reparto sugerido por integrante, buscando equilibrio de carga.
+- Si el reporte incluye una proyección de meses futuros, esa proyección debe vivir solo aquí y debe presentarse en una única tabla con Abril, Mayo y Junio.
+- Mantener C como bloque de continuidad operativa y no como backlog abierto; la redaccion debe parecer una derivacion directa de las juntas y resúmenes del mes.
 
 ### D) Conclusiones
 
@@ -120,6 +135,8 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 - Bloque de "Lo que sigue en trabajo".
 - Bloque de "Lectura final" enfocado en el avance del proyecto.
 - Bloque de "Lo inmediato" con acciones concretas.
+- Si el mes necesita una proyección operativa por meses, debe quedar como una tabla breve dentro de esta sección y no repetirse en A, B, C o E.
+- Para marzo 2026, la proyección operativa debe quedar dentro de D como tabla breve y no duplicarse en otra parte del reporte.
 
 ### E) Trazabilidad y auditoria (mes)
 
@@ -150,6 +167,12 @@ El bundle debe generarse con `scripts/generate-monthly-report-context.ps1`, que 
 - Tablas por issue resuelto, con lectura tecnica y responsable.
 - Tablas por pull request con autor, fecha de merge y revision visible.
 - Tabla final con fuentes, pesos y cifras base del reporte.
+- Si se incluyen métricas por integrante, deben aparecer en un solo bloque de desglose sin duplicar la misma cifra en tablas paralelas.
+- Toda cifra por integrante debe indicar si es exacta, derivada o estimada, y debe ser consistente con la base de evidencia usada por el reporte.
+- No dejar encabezados vacíos, tablas repetidas ni bloques de desglose sin contenido.
+- Para reproducir el reporte de marzo 2026, la auditoria debe organizarse con este orden canonico cuando la evidencia lo soporte: `0) Corte de cierre`, `0.1) Estado de milestones`, `1) Control de implementacion`, `2) Participacion en ingenieria`, `3) Gestion de operatividad (Backlog)`, `4) Fase de verificacion (QA)`, `5) Base de calculo y evidencia`, `6) Desglose por integrante`.
+- En `6) Desglose por integrante`, usa un solo bloque final con cuatro tablas separadas: `Líneas totales del mes`, `Líneas solo de docs`, `Líneas de backlog` y `Revisiones del mes`.
+- Si la evidencia del mes no soporta un bloque canonico completo, reduce la sección en lugar de inventar contenido o dejar encabezados huérfanos.
 
 ## Estructura obligatoria de salida
 
@@ -195,3 +218,4 @@ Antes de cerrar el texto, revisar:
 - Que el apartado D cierre en terminos de avance desbloqueado del proyecto.
 - Que el apartado E permita auditar el reporte sin depender de la narrativa.
 - Que el texto sea reutilizable para meses posteriores sin reescritura estructural.
+- Que, si el objetivo es recrear marzo 2026, el resultado conserve la misma secuencia de secciones, sub-secciones y tablas base del documento canónico.
