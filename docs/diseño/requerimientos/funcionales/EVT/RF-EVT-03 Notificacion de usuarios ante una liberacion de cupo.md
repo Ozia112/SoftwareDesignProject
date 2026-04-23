@@ -12,12 +12,12 @@ Como Persona interesada necesito recibir una notificación cuando se libere una 
   * Evento, fecha/hora, causa y Persona interesada afectada (si aplica).
 * El Sistema bot identifica automáticamente a Personas interesadas elegibles según reglas configuradas:
   * En lista de espera y/o con interés registrado.
-  * En etapa **Prospecto** o **SQL** (si está configurado).
+  * En etapa **Prospecto** e inscritas en la lista de espera del Evento.
 * La notificación se envía por:
   * El mismo canal donde se originó el interés, o
   * El canal preferido si existe.
 * Si existen múltiples Personas elegibles, El Sistema bot aplica un orden determinístico:
-  * FIFO cronológico (por defecto) o prioridad (si aplica).
+  * Por puntaje del interesado (tiempo de respuesta y cantidad de interacción con el bot), con FIFO cronológico como criterio de desempate.
 * El Sistema bot evita spam:
   * No envía más de **N** notificaciones por liberación / por Persona interesada (N configurable).
 * Toda notificación enviada queda registrada con IDs correlacionables (liberación ↔ 0..N notificaciones).

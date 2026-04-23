@@ -48,6 +48,7 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 - El Evento está activo
 - El cupo del Evento es 0
 - La Persona interesada ya interactúa con el Bot
+- La Persona interesada se encuentra en etapa comercial **Prospecto**
 
 ## Postcondiciones
 

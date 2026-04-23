@@ -64,7 +64,7 @@ La Persona interesada interactúa con el Bot después de haber aceptado el aviso
 ## Flujo principal
 
 1. La Persona interesada interactúa con el Bot.
-2. El Bot realiza preguntas estratégicas (interés, presupuesto, disponibilidad, urgencia).
+2. El Bot evalúa señales de interés de la Persona interesada a través del tiempo de respuesta y la cantidad de interacción.
 3. La Persona interesada responde a las preguntas.
 4. El Sistema recopila y procesa la información obtenida.
 5. El Sistema evalúa la información según reglas configuradas. [RF-COM-02]
@@ -100,7 +100,7 @@ La Persona interesada interactúa con el Bot después de haber aceptado el aviso
 - RN-COM-02-01: La calificación es independiente de la etapa comercial.
 - RN-COM-02-02: La calificación puede influir en la actualización de la etapa.
 - RN-COM-02-03: Solo puede existir una etapa comercial activa por Persona interesada.
-- RN-COM-02-04: La calificación debe basarse en criterios definidos (interés, presupuesto, disponibilidad, urgencia).
+- RN-COM-02-04: La calificación debe basarse en el nivel de interés medido mediante el tiempo de respuesta y la cantidad de interacción de la Persona interesada con el bot.
 
 ## Datos relevantes
 

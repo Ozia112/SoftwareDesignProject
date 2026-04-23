@@ -22,7 +22,7 @@ Proceso de inscripción que ocurre después de la fecha/hora de inicio del event
 
 ## Lista de espera de un evento
 
-Mecanismo para gestionar personas interesadas en inscribirse a un evento que ha agotado su cupo. La lista de espera mantiene un orden basado en las calificaciones de los interesados explicado mas adelante y permite notificar por orden de potencial de inscripción a evento cuando se libere una vacante.
+Mecanismo para gestionar personas interesadas en inscribirse a un evento que ha agotado su cupo. **Solo las personas en etapa Prospecto pueden ingresar a la lista de espera.** La lista mantiene un orden basado en el puntaje de los interesados y permite notificar por orden de prioridad cuando se libere una vacante. En caso de empate en puntaje, se aplica orden FIFO cronológico como criterio de desempate.
 
 ## Etapas
 
@@ -33,27 +33,32 @@ Las etapas se conforman por:
 
 ### Persona interesada (Lead)
 
-Persona que muestra interés por un evento (por ejemplo, al hacer clic en un anuncio, visitar un enlace, pedir informes o enviar un mensaje). Puede haber dejado o no datos de contacto. Es la primera etapa identificable del embudo.
+Persona que muestra interés por un evento (por ejemplo, al hacer clic en un anuncio, visitar un enlace, pedir informes o enviar un mensaje). Puede haber dejado o no datos de contacto. Es la primera etapa identificable del embudo. La prioridad en esta etapa es recopilar los datos de contacto de la persona: nombre, teléfono, edad y cualquier otro dato que permita continuar la comunicación.
 
 ### MQL (Marketing Qualified Lead)
 
-Lead calificado por marketing (Sistema o promotor). Se considera MQL cuando cumple el perfil objetivo y muestra señales de interés real mediante acciones medibles (por ejemplo: llenar un formulario, solicitar horarios, descargar temario, preguntar precio, registrarse a una clase muestra).
-Nota: Las personas interesadas que llegan a esta etapa obligatoriamente deben ser nofiticadas de las politicas de privacidad y consentimiento de datos (RF-COM-07) antes de ser atendidas por el bot o por un operador humano. El sistema debe registrar la aceptación o rechazo del aviso de privacidad para cada persona interesada.
+Lead que cumple señales de interés y cuenta con conocimiento básico de lo que busca. Se considera MQL cuando cumple el perfil objetivo y muestra señales de interés real mediante acciones medibles. Suele solicitar aclaraciones de dudas puntuales como horarios, precios, temarios específicos u otros eventos similares.
+
+Nota: Las personas interesadas que llegan a esta etapa obligatoriamente deben ser notificadas de las políticas de privacidad y consentimiento de datos (RF-COM-07) antes de ser atendidas por el bot o por un operador humano. El sistema debe registrar la aceptación o rechazo del aviso de privacidad para cada persona interesada.
 
 ### Prospecto
 
-Cliente potencial con el que ya existe contacto directo y conversación inicial. En esta etapa se atienden dudas frecuentes, se valida disponibilidad, objetivos, modalidad deseada y se orienta al evento más adecuado.
+Persona que ha solicitado información sobre los métodos de pago y se encuentra en camino a cerrar la venta. En esta etapa se comparte el formato de pago, número de cuenta bancaria e instrucciones para la confirmación del pago.
+
+Las personas que no logran alcanzar cupo en el evento y pasan a una lista de espera siguen siendo consideradas Prospecto mientras esperan una vacante. **Únicamente las personas en etapa Prospecto pueden ingresar a la lista de espera de un evento.**
 
 ### SQL (Sales Qualified Lead)
 
-Prospecto calificado por ventas. En esta etapa ya es apto para una conversación de cierre, se presenta oferta concreta (precio, promociones/becas si aplican), métodos de pago, plazos, requisitos de inscripción y se busca confirmación.
+Persona que ya inició el proceso de pago y solo requiere la confirmación por parte de un operador humano. En esta etapa el cliente potencial ya está ocupando un lugar en el evento mediante una reserva temporal activa, por lo que no puede perder su lugar si la confirmación de pago resulta exitosa.
+
+Si la confirmación falla o la persona decide no continuar, puede regresar a etapa Prospecto o avanzar directamente a Cierre Perdido (por ghosting o negativa explícita a continuar el proceso).
 
 ### Cierre (Ganado / Perdido)
 
 Resultado del proceso de venta:
 
-- **Ganado:** realizó pago y/o quedó inscrito formalmente.
-- **Perdido:** no compra o no se inscribe (por precio, tiempo, falta de interés, no era el curso adecuado o ausencia de respuesta / “ghosting”).
+- **Ganado:** existe evidencia de que el cliente pagó exitosamente y entregó la documentación requerida para la inscripción formal al evento.
+- **Perdido:** no se logra confirmar el pago o la persona decide no continuar con el proceso de inscripción. Puede ser por ghosting (ausencia de respuesta tras intentos de contacto) o por negativa explícita a continuar.
 
 ### Alumno activo
 
@@ -71,8 +76,13 @@ Repositorio de conocimiento e información estructurada que contiene los datos d
 
 Persona interna autorizada para administrar el sistema bot. Puede crear/modificar eventos (precios, horarios, cupo, tutor), revisar el estado de leads/prospectos, intervenir en conversaciones, ajustar mensajes del bot y gestionar casos manuales cuando el flujo automatizado no sea suficiente.
 
-### Calificación de interesados
+### Puntaje de interesados
 
-Proceso mediante el cual el sistema bot evalua a las personas interesadas durante su interacción, asignándoles un puntuaje basado en criterios como rapidez de respuesta, nivel de interés, capacidad presupuestaria, disponibilidad y urgencia.
+Valor numérico cualitativo que el sistema bot asigna a cada persona interesada con base en su nivel de interés, medido a través del tiempo de respuesta y la cantidad de interacción con el bot.
 
-Nota: La calificación de interesados es independiente de la etapa comercial asignada, pero puede influir en la priorización de atención y en la actualización de la etapa comercial.
+El puntaje se utiliza para:
+
+1. Determinar el orden de prioridad en la atención a Prospectos para avanzar a la etapa SQL.
+2. Determinar el orden de prioridad en la lista de espera de un evento que ha agotado su cupo.
+
+El puntaje es independiente de la etapa comercial. No determina por sí solo el avance de etapa, sino que influye exclusivamente en la priorización operativa.

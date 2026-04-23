@@ -10,11 +10,10 @@ Como Persona interesada necesito poder registrarme en una lista de espera para t
 
 ## Criterios de aceptación
 
-* Cuando el cupo llega a **0**, El Sistema bot ofrece ingresar a lista de espera si está habilitada.
+* Cuando el cupo llega a **0**, El Sistema bot ofrece ingresar a lista de espera a las Personas interesadas en etapa **Prospecto**, si la lista está habilitada.
 * Al ingresar, El Sistema bot registra como mínimo:
   * Evento, canal, fecha/hora, etapa comercial actual y datos de contacto disponibles.
-* La lista mantiene un orden determinístico:
-  * FIFO cronológico (por defecto) o prioridad (si se integra con reglas adicionales).
+* La lista mantiene un orden determinístico basado en el **puntaje** del interesado (tiempo de respuesta y cantidad de interacción con el bot). El orden FIFO cronológico se aplica únicamente como criterio de desempate entre interesados con el mismo puntaje.
 * Al liberarse una vacante:
   * El Sistema bot selecciona al siguiente elegible.
   * Envía notificación (RF-EVT-03).
