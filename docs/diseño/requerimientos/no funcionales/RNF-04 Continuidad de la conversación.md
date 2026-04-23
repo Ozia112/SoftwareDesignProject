@@ -2,24 +2,34 @@
 
 ## Descripción
 
-El sistema debe mantener el contexto y el estado de una conversación activa para que la Persona interesada pueda continuar la interacción sin tener que repetir información, incluso si hay pausas cortas, errores de consulta o escalamiento a un operador humano
+El sistema debe mantener el contexto y el estado de una conversación activa para que la Persona interesada pueda continuar la interacción sin repetir información; debe manejar pausas cortas, fallos transitorios y escalamientos preservando el historial.
 
 ## Métrica
 
-- El contexto mínimo (Evento seleccionado, intención, etapa comercial, consentimiento y datos capturados durante la conversación) se conserva durante toda la conversación activa y por al menos 30 minutos de inactividad
-- En reanudaciones dentro de esa ventana, al menos el 90% de las conversaciones continúan sin solicitar nuevamente el Evento seleccionado ni los datos ya capturados en la misma conversación
-- El 100% de los escalamientos bot a operador humano y operador humano a bot conservan el historial de mensajes y el previo de la conversación
+- El contexto mínimo (Evento seleccionado, intención, etapa comercial, consentimiento y datos capturados) se conserva durante la conversación activa y por al menos 30 minutos de inactividad.
+- Reanudaciones dentro de esa ventana: ≥ 90% de conversaciones continúan sin solicitar nuevamente datos ya capturados.
+- 100% de los escalamientos (bot→operador, operador→bot) conservan historial y estado.
+- Capacidad de recuperar estados tras una caída ≤ 5 minutos.
+- Interrupciones < 2 minutos se consideran temporales; > 2 minutos activan flujo de indisponibilidad.
 
 ## Condiciones
 
-- Debe existir un identificador único por conversación y el estado debe persistirse en el backend (no solo en memoria)
-- La continuidad debe respetar el control de acceso por roles (RNF-01), el bot solo accede al estado necesario para continuar el flujo y no expone datos personales en mensajes de resumen
-- Se entiende por “conversación activa” una conversación vigente asignada a un Bot u operador humano, asociada a un canal y registrada por el sistema
-- El historial y el estado forman parte del **Banco de contexto** utilizado por el bot para responder de forma coherente
+- Existe un identificador único por conversación; el estado se persiste en el backend (no solo en memoria).
+- La continuidad respeta controles de acceso (RNF-01); los resúmenes no exponen datos personales sin autorización.
+- Pasados 30 minutos de inactividad, el sistema notifica al usuario que el contexto expiró y reinicia el flujo desde la selección de Evento, sin eliminar los datos capturados del lead (retención conforme a la política de privacidad RF-COM-07).
+- Retención del historial: configurada por tenant conforme a RF-COM-07; por defecto se recomienda retención máxima de 90 días tras cierre (ajustable por requisitos legales).
 
 ## Criterios de aceptación
 
-- Si la Persona interesada hace una pregunta de seguimiento (“¿y el precio?”, “¿y los horarios?”) después de seleccionar un Evento, el bot responde usando el mismo Evento sin solicitar nuevamente el nombre del Evento
-- Si la conversación se escala a un operador humano, el operador visualiza el historial y el estado (Evento seleccionado, punto del flujo y datos capturados) y la Persona interesada no necesita repetir esa información para continuar
-- Si la conversación vuelve del operador humano al bot, el bot retoma el flujo a partir del último estado registrado
-- Ante una falla temporal (por ejemplo, error de consulta) el bot informa la situación sin reiniciar el flujo ni perder el contexto de la conversación
+- Pruebas de reanudación demuestran ≥ 90% sin re-solicitar datos en ventana de 30 minutos.
+- En escalamiento, el operador visualiza el historial y la conversación continúa sin repetir información.
+- Pruebas de recuperación demuestran restauración < 5 minutos tras una caída controlada.
+- Para fallos < 2 minutos el sistema muestra mensaje de indisponibilidad y no pierde contexto; para fallos > 2 minutos el comportamiento sigue la política de indisponibilidad definida.
+
+## Explicación simple (versión no técnica)
+
+- Qué se guarda: se almacena lo básico de la conversación (un identificador, el evento seleccionado, los datos que el usuario proporcionó y el historial de mensajes relevantes).
+- Para qué sirve: para que, si el usuario vuelve o la conversación pasa a un operador humano, nadie tenga que pedirle de nuevo la misma información.
+- Qué pasa si pasa mucho tiempo: si pasan más de 30 minutos de inactividad, el sistema avisa que el contexto expiró y pide empezar de nuevo, pero los datos del lead se conservan según la política de privacidad.
+- Qué ocurre si hay un problema técnico: si el fallo es breve, el sistema intenta recuperar y seguir; si dura más, informa al usuario y aplica la política de indisponibilidad.
+- Privacidad y control: solo personal o sistemas autorizados pueden ver los datos; las solicitudes de eliminación de datos se atienden según lo acordado en el aviso de privacidad.
