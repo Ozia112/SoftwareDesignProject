@@ -74,10 +74,10 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 5. La Persona interesada solicita fechas y horarios.
 6. El Bot consulta y muestra fechas y horarios disponibles. [RF-COM-06]
 7. La Persona interesada muestra interés en inscribirse.
-8. El Bot muestra aviso de privacidad y solicita consentimiento. [RF-COM-07]
-9. Si acepta, el Bot solicita datos básicos (nombre, teléfono, correo opcional).
-10. El Sistema registra la información de la Persona interesada.
-11. El Bot informa que será transferido a un operador humano.
+8. Si el Bot necesita capturar datos de contacto para seguimiento o inscripción, antes de solicitar datos se ejecutará `CU-COM-004` (Gestión de consentimiento de privacidad). Solo tras el consentimiento explícito la información será solicitada y persistida en la base de datos; cuando aplique, la etapa comercial se actualizará a MQL.
+9. El Bot solicita datos básicos (nombre, teléfono, correo) únicamente si hubo consentimiento.
+10. El Sistema registra la información de la Persona interesada y, cuando corresponda, actualiza la etapa a MQL.
+11. Si procede la transferencia a un operador humano (según etapa comercial o naturaleza de la conversación), el Bot informa que será transferido.
 12. El Sistema coloca la conversación en cola de espera.
 13. El Sistema registra la interacción.
 
@@ -102,8 +102,8 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 
 1. En el paso 3, el Sistema detecta que no hay cupo. [RF-EVT-01]
 2. El Bot informa que el Evento está lleno.
-3. El Bot ofrece registro en lista de espera para el Evento original. [RF-EVT-07]
-4. Si la Persona interesada acepta, se activa el flujo de CU-EVT-001. [RF-EVT-07]
+3. Antes de ofrecer registro en lista de espera, el Bot valida la etapa comercial de la Persona interesada. Solo se ofrece el registro en lista de espera si la Persona se encuentra en etapa `Prospecto`. Si la Persona no es `Prospecto`, el Bot ofrecerá recolectar datos y/o pasos para avanzar hasta `Prospecto` (ejecutando `CU-COM-004` si procede) o sugerirá alternativas.
+4. Si la Persona interesada es `Prospecto` y acepta el registro, se activa el flujo de `CU-EVT-001`. [RF-EVT-07]
 5. El Bot también ofrece alternativas (otros eventos). [RF-COM-04]
 
 ### E2. Error al obtener información
@@ -124,6 +124,8 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 - RN-COM-05: El Bot debe proporcionar información detallada del Evento.
 - RN-COM-07: No se puede continuar sin consentimiento de privacidad.
 - RN-EVT-01: No se puede avanzar si no hay cupo disponible.
+ - RN-COM-08: Antes de capturar datos personales, ejecutar `CU-COM-004` para solicitar y registrar el consentimiento; solo persistir datos tras dicho consentimiento.
+ - RN-COM-09: Solo ofrecer el registro en lista de espera cuando la Persona interesada se encuentre en etapa `Prospecto`; en caso contrario, ofrecer la recolección de información necesaria o alternativas.
 
 ## Datos relevantes
 

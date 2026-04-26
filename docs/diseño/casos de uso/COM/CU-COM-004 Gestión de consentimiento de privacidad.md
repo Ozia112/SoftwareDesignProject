@@ -19,7 +19,7 @@ Garantizar que la Persona interesada otorgue consentimiento explícito antes de 
 
 ## Alcance
 
-Aplica al inicio de cualquier conversación gestionada por el sistema bot, previo a la captura de datos o avance en el proceso comercial.
+Aplica en el momento en que el sistema va a capturar datos personales de la Persona interesada (por ejemplo, para seguimiento o inscripción) y específicamente durante la transición operativa de `Lead` a `MQL`.
 
 ## RF relacionados
 
@@ -38,7 +38,7 @@ Aplica al inicio de cualquier conversación gestionada por el sistema bot, previ
 
 ## Disparador
 
-La Persona interesada inicia una conversación en un canal de comunicación.
+Se requiere capturar datos personales de la Persona interesada o la Persona ha manifestado interés en acciones que implican seguimiento (por ejemplo, inscripción), por lo que puede producirse la transición de `Lead` a `MQL`.
 
 ## Precondiciones
 
@@ -60,13 +60,12 @@ La Persona interesada inicia una conversación en un canal de comunicación.
 - Se bloquea la interacción con el Bot.
 
 ## Flujo principal
-
-1. La Persona interesada inicia la conversación.
-2. El Sistema muestra el aviso de privacidad y términos.
-3. El Bot solicita confirmación explícita de aceptación. [RF-COM-07]
-4. La Persona interesada acepta el aviso.
-5. El Sistema registra el consentimiento.
-6. El Sistema habilita la continuidad de la interacción con el Bot.
+1. Se detecta la necesidad de capturar datos personales o de avanzar la Persona interesada de `Lead` a `MQL`.
+2. El Sistema presenta el aviso de privacidad y los términos aplicables al tratamiento de datos que se pretende realizar.
+3. El Bot solicita confirmación explícita de aceptación del aviso y del tratamiento de los datos relacionados. [RF-COM-07]
+4. Si la Persona interesada acepta, el Sistema registra el consentimiento para auditoría.
+5. Tras el registro del consentimiento, el Bot puede solicitar los datos mínimos necesarios y el Sistema persistirá la información en la base de datos. Cuando corresponda, la etapa comercial se actualizará a `MQL`.
+6. Si la Persona interesada rechaza el aviso, el Sistema informa que no puede capturar datos y se detiene el flujo de captura.
 
 ## Flujos alternos
 
@@ -90,6 +89,7 @@ La Persona interesada inicia una conversación en un canal de comunicación.
 - RN-COM-07-01: No se puede continuar la interacción sin consentimiento explícito.
 - RN-COM-07-02: El consentimiento debe quedar registrado para auditoría.
 - RN-COM-07-03: El consentimiento debe solicitarse antes de capturar cualquier dato personal.
+- RN-COM-07-04: El consentimiento registrado habilita la persistencia de datos en la base de datos y la posible actualización de etapa comercial (Lead→MQL).
 
 ## Datos relevantes
 
@@ -110,6 +110,8 @@ La Persona interesada inicia una conversación en un canal de comunicación.
 
 - Este caso de uso es obligatorio antes de cualquier flujo de captura de datos o calificación.
 - Debe ejecutarse una sola vez por sesión o conversación (según configuración).
+
+ - El aviso debe ser mostrado cada vez que se pretenda capturar datos personales que no hayan sido previamente consentidos, y en particular al pasar de `Lead` a `MQL`.
 
 ## Trazabilidad
 

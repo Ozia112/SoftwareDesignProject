@@ -21,6 +21,8 @@ Permitir que el sistema automáticamente vincule al canal de comunicación entra
 
 - Este caso de uso cubre el escenario en que una persona interesada inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un operador humano cuando el bot no pueda continuar.
 - Incluye cola de espera, selección de operador humano disponible y registro de logs
+ - Este caso de uso cubre el escenario en que una persona interesada inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un operador humano cuando el bot no pueda continuar o cuando la etapa comercial de la persona lo requiera (por ejemplo, Prospecto o SQL).
+ - Incluye cola de espera, selección de operador humano disponible, registro de logs y la persistencia de datos de contacto cuando la Persona pasa de Lead a MQL.
 
 ## RF relacionados
 
@@ -49,6 +51,7 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 - Debe existir al menos una conversación activa en el canal de comunicación.
 - Debe existir al menos un Bot automatizado configurado y disponible en el sistema.
 - El sistema de registro de logs debe estar activo.
+ - El sistema puede registrar y persistir datos de contacto en la base de datos y actualizar la etapa comercial a MQL cuando la Persona interesada entregue datos y otorgue consentimiento (ver CU-COM-004).
 
 ## Postcondiciones
 
@@ -64,17 +67,17 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 - Cuando la conversación debe escalarse a un operador humano pero el bot o el sistema no activan o no completan dicha transición (no se levanta la bandera o falla la asignación), provocando que la conversación se interrumpa sin ser atendida por un operador humano.
 
 ## Flujo principal
-
-1. El sistema debe continuar una conversación automáticamente a través de un bot cuando el Lead inicie la conversación. [RF-COM-01]
-2. El Bot automatizado comienza a interactuar con el usuario.
-3. El bot empieza a describir el evento al Lead. [RF-COM-05]
-4. El bot llega al punto donde no puede continuar la conversación.
-5. El sistema mueve la conversación a una cola de espera que puede ver el operador administrativo.
-6. El operador administrativo selecciona una conversación en espera.
-7. El sistema muestra la opción de asignar la conversación a un operador humano.
-8. El operador administrativo selecciona el operador humano disponible.
-9. La conversación pasa a manos del operador humano disponible. [RF-COM-01]
-10. El sistema registra la asignación en el log del sistema.
+1. El sistema inicia la conversación automáticamente a través de un Bot cuando la Persona interesada (Lead) inicia la interacción. [RF-COM-01]
+2. El Bot automatizado comienza a interactuar con la Persona interesada.
+3. Si la Persona interesada demuestra interés en seguimiento o inscripción, el Bot puede necesitar capturar datos básicos de contacto. Antes de capturar cualquier dato, se debe ejecutar el flujo de `CU-COM-004` (Gestión de consentimiento de privacidad). Si la Persona acepta, el Sistema persiste los datos en la base de datos y, cuando corresponda, actualiza la etapa comercial a MQL.
+4. El Bot describe el evento según corresponda. [RF-COM-05]
+5. El Bot detecta que ha llegado al límite de sus capacidades para resolver la consulta, o que la naturaleza de la interacción (por ejemplo, gestión de pagos o negociación) requiere intervención humana.
+6. El Sistema valida la etapa comercial de la Persona interesada: si la etapa es `Prospecto` o `SQL`, o si el bot determina que la intervención humana es necesaria independientemente de la etapa, se procede al escalamiento; en caso contrario, se ofrecen alternativas automatizadas o seguimiento asincrónico.
+7. Si procede el escalamiento, el Sistema mueve la conversación a una cola de espera visible por los operadores humanos y administrativos.
+8. Un operador administrativo selecciona una conversación en espera.
+9. El sistema muestra la opción de asignar la conversación a un operador humano y el operador selecciona al disponible.
+10. La conversación pasa a manos del operador humano seleccionado. [RF-COM-01]
+11. El sistema registra la asignación en los logs y conserva la trazabilidad de la actualización de etapa y de los datos persistidos cuando aplique.
 
 ## Flujos alternos
 
@@ -119,6 +122,8 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 - La conversación debe permanecer en estado trazable durante toda transición bot-operador.
 - Solo operadores humanos disponibles pueden recibir conversaciones escaladas.
 - Toda asignación o reasignación debe quedar registrada en logs del sistema.
+ - El escalamiento a operador humano debe estar anclado a la etapa comercial y a la naturaleza de la interacción: Prospecto y SQL requieren intervención humana preferente.
+ - El sistema debe persistir en la base de datos los datos de contacto cuando la Persona pase de Lead a MQL tras otorgar consentimiento (CU-COM-004).
 
 ## Datos relevantes
 

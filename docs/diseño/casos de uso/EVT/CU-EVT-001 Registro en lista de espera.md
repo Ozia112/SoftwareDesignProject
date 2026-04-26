@@ -48,13 +48,14 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 - El Evento está activo
 - El cupo del Evento es 0
 - La Persona interesada ya interactúa con el Bot
+ - La Persona interesada se encuentra en etapa comercial `Prospecto` (requisito para registrarse en lista de espera).
 
 ## Postcondiciones
 
 ### En éxito
 
 - La Persona interesada queda registrada en la lista de espera
-- Se mantiene un orden determinístico (FIFO o prioridad configurada)
+ - Se mantiene un orden determinístico basado en puntaje de los interesados; en caso de empate se aplica FIFO como criterio de desempate.
 - No existen duplicados para el mismo Evento
 
 ### En fallo
@@ -72,7 +73,7 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 6. La Persona interesada acepta
 7. El Sistema valida que no exista un registro previo en la lista [RF-EVT-07]
 8. El Sistema registra a la Persona interesada en la lista de espera
-9. El Sistema asigna una posición según el orden definido
+9. El Sistema asigna una posición según el orden definido (orden por puntaje; desempate por FIFO)
 10. El Bot informa la posición en la lista y el seguimiento futuro
 
 ## Flujos alternos
@@ -113,8 +114,8 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 ## Reglas de negocio / restricciones
 
 - Una Persona interesada no puede registrarse más de una vez por Evento
-- La lista debe mantener orden determinístico (FIFO por defecto)
-- El registro requiere datos mínimos de contacto
+ - La lista debe mantener orden primario por `puntaje` de interesados; FIFO se usa solo como criterio de desempate.
+ - El registro requiere datos mínimos de contacto y consentimiento explícito para el tratamiento de datos.
 
 ## Datos relevantes
 
