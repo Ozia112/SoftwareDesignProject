@@ -95,7 +95,7 @@ La Persona interesada solicita conocer otros eventos disponibles durante la conv
 
 1. El Sistema no encuentra eventos activos
 2. El Bot informa que no hay eventos disponibles
-3. El Bot ofrece opciones (esperar, dejar datos o intentar después). Si la Persona interesada desea dejar datos, se debe ejecutar `CU-COM-004` para solicitar consentimiento antes de capturar y persistir cualquier dato. Si la opción es entrar a lista de espera, se debe validar la etapa comercial requerida (ver `CU-EVT-001`).
+3. El Bot ofrece opciones (esperar, dejar datos o intentar después). Si la Persona interesada desea dejar datos, se debe ejecutar `CU-COM-004` para solicitar consentimiento antes de capturar y persistir cualquier dato. Si la opción es entrar a lista de espera, se debe validar la etapa comercial requerida [CU-EVT-001]
 4. El flujo finaliza
 
 ### E2. Error en base de datos

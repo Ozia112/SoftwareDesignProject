@@ -60,6 +60,7 @@ Se requiere capturar datos personales de la Persona interesada o la Persona ha m
 - Se bloquea la interacción con el Bot.
 
 ## Flujo principal
+
 1. Se detecta la necesidad de capturar datos personales o de avanzar la Persona interesada de `Lead` a `MQL`.
 2. El Sistema presenta el aviso de privacidad y los términos aplicables al tratamiento de datos que se pretende realizar.
 3. El Bot solicita confirmación explícita de aceptación del aviso y del tratamiento de los datos relacionados. [RF-COM-07]
@@ -110,8 +111,7 @@ Se requiere capturar datos personales de la Persona interesada o la Persona ha m
 
 - Este caso de uso es obligatorio antes de cualquier flujo de captura de datos o calificación.
 - Debe ejecutarse una sola vez por sesión o conversación (según configuración).
-
- - El aviso debe ser mostrado cada vez que se pretenda capturar datos personales que no hayan sido previamente consentidos, y en particular al pasar de `Lead` a `MQL`.
+- El aviso debe ser mostrado cada vez que se pretenda capturar datos personales que no hayan sido previamente consentidos, y en particular al pasar de `Lead` a `MQL`.
 
 ## Trazabilidad
 

@@ -124,8 +124,8 @@ La Persona interesada inicia una conversación con el Bot y realiza una consulta
 - RN-COM-05: El Bot debe proporcionar información detallada del Evento.
 - RN-COM-07: No se puede continuar sin consentimiento de privacidad.
 - RN-EVT-01: No se puede avanzar si no hay cupo disponible.
- - RN-COM-08: Antes de capturar datos personales, ejecutar `CU-COM-004` para solicitar y registrar el consentimiento; solo persistir datos tras dicho consentimiento.
- - RN-COM-09: Solo ofrecer el registro en lista de espera cuando la Persona interesada se encuentre en etapa `Prospecto`; en caso contrario, ofrecer la recolección de información necesaria o alternativas.
+- RN-COM-08: Antes de capturar datos personales, ejecutar `CU-COM-004` para solicitar y registrar el consentimiento; solo persistir datos tras dicho consentimiento.
+- RN-COM-09: Solo ofrecer el registro en lista de espera cuando la Persona interesada se encuentre en etapa `Prospecto`; en caso contrario, ofrecer la recolección de información necesaria o alternativas.
 
 ## Datos relevantes
 
