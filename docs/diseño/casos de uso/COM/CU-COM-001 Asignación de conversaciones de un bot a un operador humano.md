@@ -1,4 +1,4 @@
-# CU-COM-001 Asignación de conversaciones de un bot a un operador humano
+# CU-COM-001 Asignación de conversaciones de un canal de comunicación a Bot
 
 ## Metadatos
 
@@ -8,8 +8,9 @@
 - Estado: Borrador
 - Versión: v0.3
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-03-26
+- Última actualización: 2026-04-28
 - Responsable: Maximiliano Carrillo Alvarado
+- Última corrección por: Isaac Ortiz
 - Issue relacionado: PSD-08, PSD-13
 - PR relacionado: #XX
 
@@ -19,13 +20,12 @@ Permitir que el sistema automáticamente vincule al canal de comunicación entra
 
 ## Alcance
 
-- Este caso de uso cubre el escenario en que una persona interesada inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un operador humano cuando el bot no pueda continuar.
-- Incluye cola de espera, selección de operador humano disponible y registro de logs
+Cubre el escenario en que una persona interesada inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un operador humano cuando el bot no pueda continuar. Incluye cola de espera, selección de operador humano disponible y registro de logs.
 
 ## RF relacionados
 
-- RF-COM-01
-- RF-COM-05
+- [RF-COM-01]
+- [RF-COM-05]
 
 ## Actores
 
@@ -63,18 +63,32 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 
 - Cuando la conversación debe escalarse a un operador humano pero el bot o el sistema no activan o no completan dicha transición (no se levanta la bandera o falla la asignación), provocando que la conversación se interrumpa sin ser atendida por un operador humano.
 
-## Flujo principal
+## Flujo principal — Lead
 
-1. El sistema debe continuar una conversación automáticamente a través de un bot cuando el Lead inicie la conversación. [RF-COM-01]
-2. El Bot automatizado comienza a interactuar con el usuario.
-3. El bot empieza a describir el evento al Lead. [RF-COM-05]
-4. El bot llega al punto donde no puede continuar la conversación.
-5. El sistema mueve la conversación a una cola de espera que puede ver el operador administrativo.
-6. El operador administrativo selecciona una conversación en espera.
-7. El sistema muestra la opción de asignar la conversación a un operador humano.
-8. El operador administrativo selecciona el operador humano disponible.
-9. La conversación pasa a manos del operador humano disponible. [RF-COM-01]
-10. El sistema registra la asignación en el log del sistema.
+1. El Bot no logra comprender la información proporcionada por el Lead o el Lead hace una pregunta que no puede resolverse con la información disponible en los bancos de contexto consultados en [CU-COM-003 Gestión de bancos de contexto]. [RF-COM-05]
+2. El Bot ofrece la opción de escalar a un operador humano para continuar la conversación. [RF-COM-01]
+3. Si el Lead acepta, el bot levanta una bandera de escalamiento a operador humano. [RF-COM-01]
+4. El sistema asigna la conversación a la bandeja de atención humana. [RF-COM-01]
+
+## Flujo principal — MQL
+
+1. El Bot no logra comprender la duda del MQL o el MQL hace una pregunta que no puede resolverse con la información disponible en los bancos de contexto consultados en [CU-COM-003 Gestión de bancos de contexto]. [RF-COM-05]
+2. El Bot ofrece la opción de escalar a un operador humano para continuar la conversación. [RF-COM-01]
+3. Si el MQL acepta, el bot levanta una bandera de escalamiento a operador humano. [RF-COM-01]
+4. El sistema asigna la conversación a la bandeja de atención humana. [RF-COM-01]
+
+## Flujo principal — Prospecto
+
+1. El Bot no logra comprender la duda del Prospecto o el Prospecto hace una pregunta que no puede resolverse con la información disponible en los bancos de contexto consultados en [CU-COM-003 Gestión de bancos de contexto]. [RF-COM-05]
+2. El Bot ofrece la opción de escalar a un operador humano para continuar la conversación. [RF-COM-01]
+3. Si el Prospecto acepta, el bot levanta una bandera de escalamiento a operador humano. [RF-COM-01]
+4. El sistema asigna la conversación a la bandeja de atención humana. [RF-COM-01]
+
+## Flujo principal — SQL
+
+1. El Bot determina automáticamente que la verificación de pago solo puede ser realizada por un operador humano. [RF-COM-01]
+2. El bot levanta una bandera de escalamiento a operador humano. [RF-COM-01]
+3. El sistema asigna la conversación a la bandeja de atención humana. [RF-COM-01]
 
 ## Flujos alternos
 
@@ -83,7 +97,9 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 1. El Bot detecta que la conversación requiere intervención humana.
 2. El Bot le notifica al Lead que esa pregunta va a necesitar intervención humana y le pregunta si quiere continuar.
 3. El Lead decide continuar la conversación con el bot.
-4. El bot regresa al paso 3.
+4. El bot regresa al paso 1 de cualquier flujo principal.
+
+Nota: Este flujo solo aplica a clientes potenciales con las etapas: Lead, MQL y Prospecto. Para SQL el bot no ofrece la opción de continuar la conversación.
 
 ### A2. Devolución de la conversación al bot
 
@@ -116,9 +132,9 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 
 ## Reglas de negocio / restricciones
 
-- La conversación debe permanecer en estado trazable durante toda transición bot-operador.
-- Solo operadores humanos disponibles pueden recibir conversaciones escaladas.
-- Toda asignación o reasignación debe quedar registrada en logs del sistema.
+- RN-COM-01-01: La conversación debe permanecer en estado trazable durante toda transición bot-operador.
+- RN-COM-01-02: Solo operadores humanos disponibles pueden recibir conversaciones escaladas.
+- RN-COM-01-03: Toda asignación o reasignación debe quedar registrada en logs del sistema.
 
 ## Datos relevantes
 
@@ -146,6 +162,9 @@ Cuando una persona interesada decide entrar a una conversación de un evento de 
 ## Trazabilidad
 
 - RF: RF-COM-01, RF-COM-05
+- BPMN: BPMN-COM-001
+- DDR: DDR-01
 
 [RF-COM-01]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-01%20Asignación%20de%20conversaciones%20de%20un%20canal%20de%20comunicación%20a%20Bot.md
 [RF-COM-05]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-05%20El%20Bot%20debe%20proporcionar%20información%20detallada%20de%20cada%20evento.md
+[CU-COM-003 Gestión de bancos de contexto]: /docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md

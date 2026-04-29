@@ -8,8 +8,9 @@
 - Estado: Borrador
 - Versión: v0.2
 - Fecha de creación: 2026-03-11
-- Última actualización: 2026-03-25
+- Última actualización: 2026-03-28
 - Responsable: Maximiliano Carrillo Alvarado
+- Última corrección: Isaac Ortiz
 - Issue relacionado: PSD-15
 - PR relacionado: #52
 
@@ -23,72 +24,65 @@ Aplica al proceso de registro en lista de espera gestionado por el Sistema cuand
 
 ## RF relacionados
 
-- RF-EVT-01
-- RF-EVT-07
+- [RF-COM-02]
+- [RF-EVT-01]
+- [RF-EVT-07]
 
 ## Actores
 
 ### Actor principal
 
-- Persona interesada
+- Cliente potencial en etapa Prospecto
 
 ### Actores secundarios
 
 - Bot
 - Sistema
-- Banco de contexto (gestiona eventos, cupos y lista de espera)
 
 ## Disparador
 
-La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que el cupo es 0.
+El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el cupo es 0.
 
 ## Precondiciones
 
-- El Evento existe en el sistema
-- El Evento está activo
-- El cupo del Evento es 0
-- La Persona interesada ya interactúa con el Bot
-- La Persona interesada se encuentra en etapa comercial **Prospecto**
+- El Prospecto ha sido notificado que el evento está lleno y se le ha ofrecido la opción de registrarse en la lista de espera.
+- El Prospecto acepta registrarse en la lista de espera.
 
 ## Postcondiciones
 
 ### En éxito
 
-- La Persona interesada queda registrada en la lista de espera
-- Se mantiene un orden determinístico (FIFO o prioridad configurada)
-- No existen duplicados para el mismo Evento
+- El Prospecto queda registrado en la lista de espera
+- Se mantiene un orden determinado por calificacion y FIFO para desempates en la lista de espera.
+- No existen registros duplicados del mismo Cliente potencial en la lista de espera para el mismo Evento.
 
 ### En fallo
 
-- No se registra a la Persona interesada en la lista de espera
+- No se registra al Prospecto en la lista de espera
 - El sistema informa la causa
 
 ## Flujo principal
 
-1. La Persona interesada solicita inscripción en un Evento
-2. El Sistema valida la disponibilidad de cupo [RF-EVT-01]
-3. El Sistema detecta que el cupo es 0
-4. El Bot informa que el Evento está lleno
-5. El Bot ofrece registrarse en lista de espera
-6. La Persona interesada acepta
-7. El Sistema valida que no exista un registro previo en la lista [RF-EVT-07]
-8. El Sistema registra a la Persona interesada en la lista de espera
-9. El Sistema asigna una posición según el orden definido
-10. El Bot informa la posición en la lista y el seguimiento futuro
+1. El Bot recibe la aceptación del Cliente potencial para registrarse en la lista de espera. [RF-EVT-07]
+2. El Bot verifica la etapa comercial del Cliente potencial para confirmar que es Prospecto. [RF-COM-02]
+3. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar el Banco de contexto de evento y validar que no exista un registro previo del mismo Cliente potencial en la lista de espera del Evento. [RF-EVT-07]
+4. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar la lista de espera del Evento y comparar la calificación del Prospecto con los registros existentes para determinar su posición. [RF-EVT-07]
+5. El Bot notifica al Prospecto su registro exitoso en la lista de espera y su posición actual. [RF-EVT-07]
+6. El Bot le informa al Prospecto que será notificado si se libera un cupo. [RF-EVT-07]
 
 ## Flujos alternos
 
-### A1. Rechazo de registro
+### A1. Registro duplicado
 
-1. La Persona interesada rechaza ingresar a la lista
-2. El Bot ofrece otras opciones (otros eventos o finalizar)
-3. El flujo finaliza
+1. En el paso 3, [CU-COM-003 Gestión de bancos de contexto] detecta que el Cliente potencial ya está registrado en la lista de espera para el mismo Evento. [RF-EVT-07]
+2. El Bot informa al Cliente potencial que ya está registrado y le comunica su posición actual en la lista de espera. [RF-EVT-07]
+3. El flujo finaliza.
 
-### A2. Registro duplicado
+### A2. Registro sin etapa Prospecto
 
-1. El Sistema detecta que la Persona interesada ya está en la lista
-2. El Bot informa su posición actual
-3. El flujo finaliza
+1. El Sistema detecta que el Cliente potencial no se encuentra en etapa comercial Prospecto. [RF-COM-02]
+2. El Bot informa al Cliente potencial que no es elegible para registrarse en la lista de espera debido a su etapa comercial actual. [RF-COM-02]
+3. El flujo finaliza.
 
 ## Flujos de excepción
 
@@ -100,8 +94,8 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 
 ### E2. Evento no disponible
 
-1. El Evento está inactivo o finalizado
-2. El Bot informa que no está disponible
+1. El Sistema detecta que el Evento está inactivo o finalizado
+2. El Bot informa que no está disponible para registros en lista de espera o inscripcion directa
 3. El flujo finaliza
 
 ### E3. Error en registro
@@ -114,7 +108,7 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 ## Reglas de negocio / restricciones
 
 - Una Persona interesada no puede registrarse más de una vez por Evento
-- La lista debe mantener orden determinístico (FIFO por defecto)
+- La lista de espera se ordena principalmente por calificación/puntaje, utilizando FIFO como criterio de desempate en caso de calificaciones iguales.
 - El registro requiere datos mínimos de contacto
 
 ## Datos relevantes
@@ -141,8 +135,10 @@ La Persona interesada intenta inscribirse a un Evento y el Sistema detecta que e
 
 ## Trazabilidad
 
-- RF: RF-EVT-01, RF-EVT-07
-- DDR: DDR-01
+- RF: RF-COM-02, RF-EVT-07
+- BPMN: BPMN-EVT-001
 
+[CU-COM-003 Gestión de bancos de contexto]: /docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md
+[RF-COM-02]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-02%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md
 [RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
 [RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md
