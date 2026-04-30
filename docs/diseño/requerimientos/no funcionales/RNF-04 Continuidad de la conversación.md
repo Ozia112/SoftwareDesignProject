@@ -2,7 +2,7 @@
 
 ## Descripción
 
-El sistema debe mantener el contexto y el estado de una conversación activa para que la Persona interesada pueda continuar la interacción sin repetir información; debe manejar pausas cortas, fallos transitorios y escalamientos preservando el historial.
+El sistema debe mantener el contexto y el estado de una conversación activa para que el Cliente potencial pueda continuar la interacción sin repetir información; debe manejar pausas cortas, fallos transitorios y escalamientos preservando el historial.
 
 ## Métrica
 
