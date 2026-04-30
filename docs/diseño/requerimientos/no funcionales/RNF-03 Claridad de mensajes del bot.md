@@ -23,7 +23,7 @@ Los mensajes del bot deben ser precisos, verificables y comprensibles para el Cl
 
 ## Criterios de aceptación
 
-- En consultas sobre un Evento, los valores entregados por el bot coinciden exactamente con los almacenados en la base de datos.
+- En consultas sobre un Evento, los valores entregados por el bot coinciden exactamente con los almacenados en banco de contexto de evento.
 - En revisión de 10 flujos de prueba documentados, ningún mensaje contiene patrones de identificadores internos ni la estructura '¿Quieres [verbo] [objeto]?' en contextos informativos.
 - En mensajes comunes, la longitud no supera 100 palabras y no hay errores ortográficos.
 - Si se aplica, la medición de legibilidad alcanza el nivel B1 en el conjunto de pruebas.
