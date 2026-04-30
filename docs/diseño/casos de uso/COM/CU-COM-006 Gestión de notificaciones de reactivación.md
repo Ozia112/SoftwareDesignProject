@@ -11,8 +11,8 @@
 - Última actualización: 2026-04-29
 - Responsable: Isaac Ortiz
 - Última corrección por: Isaac Ortiz
-- Issue relacionado: pendiente
-- PR relacionado: pendiente
+- Issue relacionado: [PSD-21 [docs] Correccion de contradicciones de Casos de uso y alineacion al glosario #65](https://github.com/Ozia112/SoftwareDesignProject/issues/65)
+- PR relacionado: [65 psd 21 docs correccion de contradicciones de casos de uso y alineacion al glosario](https://github.com/Ozia112/SoftwareDesignProject/pull/65)
 
 ## Objetivo
 
