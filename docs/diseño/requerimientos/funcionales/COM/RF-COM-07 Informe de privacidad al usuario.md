@@ -2,23 +2,18 @@
 
 ## Descripción
 
-El sistema debe presentar a la persona interesada un aviso de privacidad y términos y condiciones antes de permitir cualquier interacción con el bot, solicitando su consentimiento explícito para el tratamiento de sus datos personales.
-
-Este proceso es obligatorio para continuar dentro del flujo de atención y debe cumplirse antes de que la persona interesada avance dentro de las etapas del proceso comercial, conforme a lo definido en el glosario.
-
-El sistema debe registrar el consentimiento o rechazo de la persona interesada para fines de auditoría y cumplimiento normativo.
+El sistema debe garantizae que la persona interesada tenga acceso al inicio de una conversación con el sistema los avisos de privacidad y terminos y condiciones relacionados con el tratamiento de sus datos personales. El inicio de conversación por parte de la persona interesada despues de recibir el aviso y TyCs se interpreta como consentimiento tacito para el tratamiento de sus datos personales conforme a lo establecido en el aviso y TyCs. La ultima caracteristica debe ser explicada explicitamente en el chat.
 
 ## Historia de Usuario
 
 **Como** persona interesada que inicia interacción con el sistema  
-**Quiero** recibir y aceptar el aviso de privacidad y términos y condiciones antes de continuar  
-**Para** conocer el uso de mis datos personales y otorgar consentimiento informado conforme a normativas de protección de datos  
+**Quiero** recibir el aviso de privacidad y términos y condiciones al inicio de la conversación, y que se me explique que continuar la conversación implica mi consentimiento tácito  
+**Para** tomar una decisión informada sobre si continuar y así otorgar consentimiento para el tratamiento de mis datos personales conforme a normativas de protección de datos  
 
 ## Criterios de Aceptación
 
 - [ ] La persona interesada recibe automáticamente un mensaje inicial con el aviso de privacidad y términos al iniciar la conversación  
-- [ ] El sistema solicita confirmación explícita de aceptación ("Acepto" / "No acepto")  
-- [ ] Si la persona interesada acepta, el sistema permite continuar la interacción con el bot  
-- [ ] Si la persona interesada rechaza, el sistema informa que no puede continuar sin consentimiento  
-- [ ] El consentimiento o rechazo queda registrado en el sistema con fines de auditoría  
-- [ ] El sistema no permite la recolección ni procesamiento de datos sin consentimiento previo
+- [ ] El mensaje inicial explica de forma explícita que continuar la conversación después de recibir el aviso y TyCs se interpreta como consentimiento tácito para el tratamiento de datos personales  
+- [ ] Si la persona interesada continúa la conversación tras recibir el aviso, el sistema registra dicha acción como consentimiento tácito  
+- [ ] El sistema no recolecta ni procesa datos personales hasta que la persona interesada continúe la conversación después de recibir el aviso  
+- [ ] El consentimiento tácito o la ausencia de continuación quedan registrados en el sistema con fines de auditoría

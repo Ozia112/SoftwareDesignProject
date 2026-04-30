@@ -1,5 +1,7 @@
 # RF-COM-01. Asignación de conversaciones de un canal de comunicación a Bot
 
+## Descripcion
+
 El sistema debe permitir asignar conversaciones de un canal de comunicación a un Bot automatizado.
 
 ## Historia de usuario
@@ -8,9 +10,9 @@ El sistema debe permitir asignar conversaciones de un canal de comunicación a u
 *Quiero* asignar conversaciones entrantes a un Bot automatizado
 *Para* asegurar una atención oportuna y organizada de los usuarios
 
-Criterios de aceptación.
+## Criterios de aceptación
 
-- El sistema permite seleccionar una conversación.
-- El sistema puede asignar la conversación a un Bot automatizado.
-- El Bot automatizado puede asignar a un agente humano, el cual recibe una notificación para sustituir al bot.
-- Todas las asignaciones quedan registradas en logs.
+- [ ] El sistema permite seleccionar una conversación.
+- [ ] El sistema puede asignar la conversación a un Bot automatizado.
+- [ ] El Bot automatizado puede asignar a un agente humano, el cual recibe una notificación para sustituir al bot.
+- [ ] Todas las asignaciones quedan registradas en logs.

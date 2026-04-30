@@ -113,7 +113,7 @@ La validación terminologica por RF confirma este diagnostico.
 
 - RF-COM-02 usa correctamente la idea de historial y unicidad de etapa activa, pero falla al afirmar que la calificación puede actualizar la etapa y al presentar Cierre Ganado o pérdidas especificas como si fueran etapas simples.
 - RF-COM-04, RF-COM-05 y RF-COM-06 describen consultas sobre Evento y usan leguaje funcionalmente valido, pero deberian hablar de persona interesada en lugar de usuario genérico y aclarar que esas interacciones son insumos observables del proceso comercial, no etapas por si mismas.
-- RF-COM-07 contradice la ubicacion normativa del consentimiento al exigirlo el inciio de toda conversacion. Esa redaccion puede impedir los flujos informativos iniciales de RF-COM-04 a RF-COM-06 y debe moverse al punto de identificación comercial real.
+- RF-COM-07 contradice la ubicacion normativa del consentimiento al exigirlo el inciio de toda conversación. Esa redaccion puede impedir los flujos informativos iniciales de RF-COM-04 a RF-COM-06 y debe moverse al punto de identificación comercial real.
 - RF-EVT-01 describe un proceso del Evento y de cupos, no una transición comercial. La validacón de cupo puede bloquear inscripcion o pago, pero no debe redefinir por si misma la etapa comercial.
 - RF-EVT-02 regula una reserva temporal de vacante. Su dependencia con SQL es correcta como prerrequisito, pero la reserva pertenece al evento y no debe alterar la etapa por si sola.
 - RF-EVT-03 identifica elegibilidad y notificación, pero su criterio FIFO entra en conflicto con el glosario. El criterio correcto es orden por calificación y desempate cronológico.

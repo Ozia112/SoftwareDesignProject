@@ -27,8 +27,8 @@ Sistema de gestión de inscripciones - subsistema de registro de Prospectos en e
 - RF-EVT-02
 - RF-EVT-03
 - RF-EVT-04
+- RF-EVT-05
 - RF-EVT-06
-- RF-EVT-07
 
 ## Actores
 
@@ -94,7 +94,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 
 1. El sistema verifica la disponibilidad del evento [RF-EVT-01]
 2. Al evento ya ha avanzado más de lo permitido para las inscripciones
-3. El sistema debe bloquear las inscripciones del evento en cuestión [RF-EVT-06]
+3. El sistema debe bloquear las inscripciones del evento en cuestión [RF-EVT-05]
 4. El sistema debe cancelar las inscripciones temporales [RF-EVT-04]
 5. Si quedan inscripciones temporales pasa al flujo A2, caso contrario el flujo termina
 
@@ -105,7 +105,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 1. En el paso 2, si el evento está lleno
 2. El sistema o el operador humano validan la inscripción y detienen/rechazan el proceso por falta de cupo
 3. El operador humano debe preguntarle al MQL si desea que lo pongan en la lista de espera
-4. Si el MQL acepta se le agrega [RF-EVT-07], caso contrario no se le agrega
+4. Si el MQL acepta se le agrega [RF-EVT-06], caso contrario no se le agrega
 5. El flujo termina
 
 ### E2. Falla la inscripción/registro de datos
@@ -120,7 +120,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 - No se permite sobreinscripción cuando el cupo del evento está lleno.
 - La vacante temporal debe liberarse si no se confirma el pago dentro del periodo definido.
 - Las inscripciones extemporáneas deben bloquearse según la política del evento.
-- Si el MQL acepta, debe registrarse en lista de espera conforme a RF-EVT-07.
+- Si el MQL acepta, debe registrarse en lista de espera conforme a RF-EVT-06.
 
 ## Datos relevantes
 
@@ -147,7 +147,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 
 ## Trazabilidad
 
-- RF: RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-06, RF-EVT-07
+- RF: RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-05, RF-EVT-06
 - CU: CU-EVT-002
 
 [CU-EVT-002]: /docs/diseño/casos%20de%20uso/EVT/CU-EVT-002%20Gestión%20de%20cancelación.md
@@ -155,5 +155,5 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 [RF-EVT-02]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md
 [RF-EVT-03]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md
 [RF-EVT-04]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md
-[RF-EVT-06]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06%20Gestion%20de%20inscripciones%20extemporaneas.md
-[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md
+[RF-EVT-05]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>
+[RF-EVT-06]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>

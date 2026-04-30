@@ -4,7 +4,7 @@
 
 El sistema debe evaluar, clasificar y gestionar automáticamente a las personas interesadas durante su interacción con el agente conversacional y a lo largo del proceso comercial, asignando y manteniendo actualizada la etapa comercial correspondiente conforme a su avance dentro del proceso de captación, seguimiento y conversión.
 
-El bot debe realizar la calificación automática de las personas interesadas durante la conversación, evaluándolas con base en criterios definidos como nivel de interés, capacidad presupuestaria, disponibilidad y nivel de urgencia. Esto permite priorizar la atención humana hacia aquellos casos con mayor probabilidad de inscripción y optimizar la gestión operativa del equipo de admisiones.
+El bot debe realizar la calificación automática de las personas interesadas durante la conversación, asignando un puntaje numérico basado en el nivel de interés medido a través del tiempo de respuesta y la cantidad de interacción con el bot. Esto permite priorizar la atención a Prospectos con mayor probabilidad de avanzar a SQL y determinar el orden de prioridad en la lista de espera de eventos con cupo agotado.
 
 Con base en dicha evaluación y en los eventos registrados durante la interacción, el sistema debe asignar y actualizar automáticamente la etapa del proceso comercial asociada a cada persona interesada.
 
@@ -44,7 +44,7 @@ El sistema debe gestionar las siguientes etapas comerciales asociadas a cada per
 
 - [ ] El bot realiza preguntas estratégicas para identificar el nivel de interés  
 - [ ] El sistema ejecuta la calificación automática durante la conversación  
-- [ ] La clasificación utiliza criterios definidos: interés, presupuesto, disponibilidad y urgencia  
+- [ ] La clasificación utiliza como criterio el nivel de interés del interesado, medido mediante el tiempo de respuesta y la cantidad de interacción con el bot  
 - [ ] La clasificación se basa en reglas configuradas en el sistema  
 - [ ] El sistema asigna automáticamente una calificación a la persona interesada  
 - [ ] La persona interesada recibe un nivel de prioridad: alto, medio o bajo  
