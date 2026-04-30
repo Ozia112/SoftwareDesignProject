@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Los mensajes del bot deben ser precisos, verificables y comprensibles para la Persona interesada, sin exponer identificadores ni tecnicismos internos.
+Los mensajes del bot deben ser precisos, verificables y comprensibles para el Cliente potencial, sin exponer identificadores ni tecnicismos internos.
 
 ## Métrica
 
