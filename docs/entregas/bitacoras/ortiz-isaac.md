@@ -1,82 +1,184 @@
-# Bitacora de tareas - Ortiz Isaac
+# Bitácora de tareas - Ortiz Isaac
 
-## 29 / 04 / 2026
+---
 
-Corrección de contradicciones documentales, alineación del glosario con los casos de uso, renombramiento y ampliación de CU-COM-003, corrección de errores de referencias y trazabilidad en CU-COM-001, CU-COM-002, CU-COM-004, CU-COM-005 y CU-EVT-001, verificación de cierre de las 5 contradicciones documentadas, corrección de criterios de calificación y modelo de consentimiento en RF-COM-02 y RF-COM-07, normalización de formato estructural en RF-COM-01/03/04/05/06, corrección de etapas comerciales incorrectas y criterios de ordenamiento inconsistentes en RF-EVT-01 a RF-EVT-07 (incluyendo eliminación justificada de RF-EVT-05 por redundancia), y creación de CU-COM-006 para gestión de notificaciones de reactivación con flujo de desuscripción.
+## 24 – 30 de abril de 2026
+
+Corrección integral de contradicciones documentales, alineación del glosario, renombramiento y ampliación de CU-COM-003, corrección de trazabilidad en múltiples CUs y RFs de los dominios COM y EVT, eliminación de RF-EVT-05 por redundancia, creación de CU-COM-006 y normalización de metadatos tras el cambio.
 
 - CU-COM-003 tenía nombre y función mal definidos:  
-  El archivo se llamaba "Presentación de eventos disponibles" sin reflejar que su responsabilidad real es la gestión de bancos de contexto general y de evento. Además carecía de un flujo de escritura para las operaciones de reserva temporal, liberación y bloqueo de cupos requeridas por RF-EVT-02 y RF-EVT-04. Los demás CUs que dependían de estas operaciones (CU-COM-002) no tenían a dónde delegar.  
+  El archivo se llamaba "Presentación de eventos disponibles" sin reflejar que su responsabilidad real es la gestión de bancos de contexto. Carecía del flujo de escritura para reserva temporal, liberación y bloqueo de cupos requerido por RF-EVT-02 y RF-EVT-04, y los CUs que dependían de esas operaciones no tenían a dónde delegar.  
   **Decisiones:**
-  - [X] Se renombra y reescribe [`CU-COM-003 Gestion de bancos de contexto.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md): el nombre del archivo se actualiza para reflejar su función real. Se agrega el flujo principal de actualización de banco de contexto de evento (reserva temporal, liberación y bloqueo de cupo), la excepción E4 para fallos de escritura con rollback, la regla RN-COM-03-06 que restringe las escrituras al bot dentro del proceso CU-COM-002 o al operador humano, y se separan las entradas y salidas en secciones de lectura y escritura.
+  - [X] [`CU-COM-003 Gestion de bancos de contexto.md`](</docs/diseño/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md>) — Renombrado y reescrito: se actualiza el nombre, se agrega el flujo de actualización del banco de contexto de evento (reserva temporal, liberación y bloqueo de cupo), la excepción E4 con rollback, la regla RN-COM-03-06 y se separan entradas/salidas en secciones de lectura y escritura. — **Modificado:** 29 / 04 / 2026
+  - [X] `CU-COM-003 Presentación de eventos disponibles.md` — Eliminado al ser renombrado al archivo correcto. — **Eliminado:** 29 / 04 / 2026
 
-- Definiciones.md contenía información fantasma, señales inexistentes y terminología inconsistente:  
-  El glosario incluía contenido no respaldado por ningún CU (sub-bots especializados, priorización por etapa en la cola de espera, documentación requerida en Cierre Ganado, camino de regresión de SQL a Prospecto), señales de transición que no existían en los flujos de ningún caso de uso (`registro_en_lista_de_espera`, `notificacion_vacante_lista_de_espera`, `avance_a_sql`, `lista_de_espera_aceptada`), y el término "puntaje" siendo utilizado donde el sistema normalizado usa "calificación".  
+- El glosario contenía información fantasma, señales inexistentes y terminología inconsistente:  
+  Definiciones.md incluía contenido no respaldado por ningún CU, cuatro señales de transición que no existían en ningún flujo, y usaba "puntaje" donde el sistema normalizado usa "calificación".  
   **Decisiones:**
-  - [X] Se corrige [`Definiciones.md`](/docs/diseño/glosario/Definiciones.md): se elimina contenido fantasma de Bot, Cola de espera, Cierre Ganado y Alumno activo; se remueven las cuatro señales inexistentes; se aclara que la calificación es independiente de la etapa comercial y sirve únicamente para priorización operativa; se corrige la definición de Reserva temporal ("pierda" → "no pierda"); se normaliza "puntaje" a "calificación" en todo el documento; se corrige "Banco de contexto de eventos" a "Banco de contexto de evento" (singular); se redefine Exploit del bot para coincidir exactamente con los patrones de CU-COM-005; se agrega la definición de Cartera de clientes (etapa Prospecto o posterior: SQL, Cierre Ganado / Alumno activo); se añade la candidatura de notificaciones de reactivación a partir de la etapa Prospecto.
+  - [X] [`Definiciones.md`](</docs/diseño/glosario/Definiciones.md>) — Se elimina contenido fantasma; se remueven las cuatro señales inexistentes; se normaliza "puntaje" a "calificación"; se corrige la definición de Reserva temporal; se redefine Exploit del bot; se agrega la definición de Cartera de clientes y la candidatura de notificaciones de reactivación. — **Modificado:** 29 / 04 / 2026
 
 - Errores de referencias, trazabilidad y flujos en los CUs del dominio COM:  
-  CU-COM-001 no tenía los 4 flujos diferenciados por etapa comercial ni la nota de que SQL es escalamiento automático. CU-COM-002 no delegaba la reserva ni la liberación de cupo a CU-COM-003, no invocaba CU-COM-001 en el paso de escalamiento, y omitía RF-COM-02 en su sección de RF relacionados. CU-COM-004 tenía el nombre de archivo incorrecto en sus referencias y le faltaban definiciones de enlace al pie. CU-COM-005 repetía pasos en A3, tenía señales en la sección incorrecta (Entradas en vez de Salidas) y presentaba una postcondición redundante.  
+  CU-COM-001 no tenía los 4 flujos diferenciados por etapa comercial. CU-COM-002 no delegaba reserva/liberación de cupo a CU-COM-003 ni invocaba CU-COM-001 en el escalamiento. CU-COM-004 tenía nombre de archivo incorrecto en sus referencias. CU-COM-005 repetía pasos en A3 y tenía señales en la sección incorrecta.  
   **Decisiones:**
-  - [X] Se corrige [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-001%20Asignaci%C3%B3n%20de%20conversaciones%20de%20un%20bot%20a%20un%20operador%20humano.md): se reorganizan 4 flujos principales independientes por etapa comercial (Lead, MQL, Prospecto, SQL); se añade nota en A1 indicando que el flujo SQL es escalamiento automático sin opción de continuar con el bot; se normalizan las definiciones de enlace al pie del archivo.
-  - [X] Se corrige [`CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-002%20Flujo%20de%20la%20conversaci%C3%B3n%20entre%20persona%20interesada%20y%20el%20bot.md): el paso 12 delega la reserva de cupo a CU-COM-003; el paso A1-4 delega la liberación de cupo a CU-COM-003; el paso 15 invoca CU-COM-001 para el escalamiento; se añade RF-COM-02 a la sección de RF relacionados; se corrige el typo "consersacion" → "conversación"; se agrega la definición de enlace de CU-COM-001 al pie del archivo.
-  - [X] Se renombra y corrige [`CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-004%20Presentaci%C3%B3n%20de%20avisos%20legales%20y%20registro%20de%20consentimiento%20t%C3%A1cito.md): el archivo se renombra de "Gestión de consentimiento de privacidad" a su nombre correcto; se convierte la referencia a RF-COM-07 al formato de enlace en corchetes; se añade la definición de enlace de RF-COM-07 al pie del archivo.
-  - [X] Se corrige [`RF-COM-07 Informe de privacidad al usuario.md`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md): se especifica que el aviso de privacidad y TyCs se presenta al inicio de la conversación antes de recopilar cualquier información personal; se aclara que el uso del sistema se interpreta como consentimiento tácito y no requiere confirmación explícita mediante botones o comandos.
-  - [X] Se corrige [`CU-COM-005 Calificación automática y gestión de etapa comercial.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-005%20Calificaci%C3%B3n%20autom%C3%A1tica%20y%20gesti%C3%B3n%20de%20etapa%20comercial.md): se consolidan los pasos de A3 eliminando la repetición del mecanismo de A2; se mueve `exploit_reincidente` de Entradas a Salidas; se elimina la postcondición redundante "Se registra el error" en el caso de fallo; se elimina la observación redundante; se corrige la tilde en "Última"; se corrige la definición de enlace de CU-COM-004 al nombre de archivo correcto.
+  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Se reorganizan 4 flujos independientes por etapa comercial (Lead, MQL, Prospecto, SQL); se añade nota de escalamiento automático en SQL. — **Modificado:** 29 / 04 / 2026
+  - [X] [`CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>) — Paso 12 delega reserva a CU-COM-003; paso A1-4 delega liberación a CU-COM-003; paso 15 invoca CU-COM-001; se añade RF-COM-02 en RF relacionados. — **Modificado:** 29 / 04 / 2026
+  - [X] [`CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md`](</docs/diseño/casos de uso/COM/CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md>) — Renombrado desde "Gestión de consentimiento de privacidad"; referencias a RF-COM-07 convertidas al formato de enlace. — **Modificado:** 29 / 04 / 2026
+  - [X] `CU-COM-004 Gestión de consentimiento de privacidad.md` — Eliminado al ser renombrado al archivo correcto. — **Eliminado:** 29 / 04 / 2026
+  - [X] [`CU-COM-005 Calificación automática y gestión de etapa comercial.md`](</docs/diseño/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md>) — Se consolidan pasos de A3; se mueve `exploit_reincidente` a Salidas; se elimina postcondición redundante. — **Modificado:** 29 / 04 / 2026
 
-- Errores en CU-EVT-001 y pendientes de la sesión anterior:  
-  CU-EVT-001 tenía el criterio de orden de la lista de espera sin coincidir con el glosario (calificación como criterio primario, FIFO como desempate), faltaba un flujo alterno para el registro de clientes sin etapa Prospecto, los RF relacionados no usaban el formato de enlace en corchetes, y los metadatos tenían un typo. Estas correcciones estaban marcadas como pendientes en la entrada del 25/04.  
+- Errores en CU-EVT-001 y pendientes de sesión anterior:  
+  El criterio de orden de la lista de espera no coincidía con el glosario, faltaba el flujo alterno para clientes sin etapa Prospecto, y los RF relacionados no usaban formato de enlace.  
   **Decisiones:**
-  - [X] Se corrige [`CU-EVT-001 Registro en lista de espera.md`](/docs/diseño/casos%20de%20uso/EVT/CU-EVT-001%20Registro%20en%20lista%20de%20espera.md): se corrige el criterio de orden de la lista de espera (calificación como criterio primario, FIFO como desempate); se añade el flujo alterno A2 "Registro sin etapa Prospecto"; se añade RF-COM-02 a la sección de RF relacionados; se convierten todos los RF relacionados al formato de enlace en corchetes; se añaden las definiciones de enlace al pie del archivo; se corrige el typo en metadatos "Ultima corrección" → "Última corrección por".
+  - [X] [`CU-EVT-001 Registro en lista de espera.md`](</docs/diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>) — Se corrige criterio de orden (calificación primaria, FIFO como desempate); se añade flujo alterno A2; se añade RF-COM-02 en RF relacionados; se convierten RF al formato de enlace. — **Modificado:** 29 / 04 / 2026
 
-- Verificación de cierre de las 5 contradicciones documentadas:  
-  Se tenía el archivo `contradicciones-cus.md` con 5 contradicciones identificadas entre los casos de uso. Se verificó que las correcciones aplicadas en la sesión del 25/04 y en la presente sesión resolvieran todas las contradicciones de forma consistente y trazable.  
+- Ausencia de mecanismo de notificación proactiva y desuscripción para la cartera de clientes:  
+  No existía ningún caso de uso que cubriera la reactivación de clientes potenciales mediante notificaciones outbound ni un mecanismo de desuscripción, representando un vacío funcional en la gestión de la cartera.  
   **Decisiones:**
-  - [X] Verificadas y cerradas las 5 contradicciones: (1) Momento del aviso de privacidad → CU-COM-002 paso 2 activa CU-COM-004 al inicio de la conversación; (2) Criterio de orden de lista de espera → CU-EVT-001 con calificación primaria y FIFO como desempate; (3) Puntaje actualiza etapa → CU-COM-005 RN-COM-02-01 y RN-COM-02-03 las separan explícitamente; (4) Lista de espera sin validar etapa Prospecto → CU-COM-002 E1 y E1.2 cubren ambos caminos; (5) Escalamiento no anclado a etapas → CU-COM-001 con 4 flujos principales independientes por etapa.
-
-- Ausencia de mecanismo de notificación proactiva y de desuscripción para la cartera de clientes:  
-  No existía ningún caso de uso que cubriera el escenario de reactivación de clientes potenciales mediante notificaciones outbound cuando un evento se reabriera o se publicara uno relacionado. Tampoco existía un mecanismo para que los clientes potenciales pudieran solicitar dejar de recibir este tipo de notificaciones, lo que representaba un vacío funcional en la gestión de la cartera.  
-  **Decisiones:**
-  - [X] Se crea [`CU-COM-006 Gestión de notificaciones de reactivación.md`](/docs/diseño/casos%20de%20uso/COM/CU-COM-006%20Gesti%C3%B3n%20de%20notificaciones%20de%20reactivaci%C3%B3n.md): nuevo caso de uso (v0.1, Responsable: Isaac Ortiz) con tres flujos principales (notificación por reapertura de evento, notificación por evento relacionado y gestión de solicitud de desuscripción), flujos alternos para destinatario sin canal activo, destinatario ya notificado recientemente y destinatario ya desuscrito, excepciones para fallo de consulta de cartera y fallo de envío individual, y 6 reglas de negocio que cubren elegibilidad (Prospecto o posterior con consentimiento tácito), anti-spam, no-inicio automático de flujo comercial, restricción de escrituras, criterios configurables de evento relacionado y condiciones de reversión de la preferencia de desuscripción.
+  - [X] [`CU-COM-006 Gestión de notificaciones de reactivación.md`](</docs/diseño/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md>) — Creado con tres flujos principales (reapertura de evento, evento relacionado, desuscripción), flujos alternos, excepciones y 6 reglas de negocio que cubren elegibilidad, anti-spam y restricción de escrituras. — **Creado:** 29 / 04 / 2026
 
 - Etapas comerciales incorrectas y triggers mal definidos en RFs del dominio EVT:  
-  RF-EVT-01 no acotaba en qué momentos del proceso comercial se ejecuta la validación de cupo (decía "cada vez que consulte o intente avanzar", sin precisar etapas). RF-EVT-02 establecía que la reserva temporal se activa cuando el cliente potencial en etapa **SQL** confirma intención de inscripción, cuando en realidad la reserva ocurre al transicionar de MQL a Prospecto, antes de llegar a SQL. RF-EVT-04 definía tres políticas alternativas (A/B/C) para el momento de confirmación de vacante sin indicar cuál aplicaba, generando ambigüedad sobre cuándo la vacante pasa a Confirmada y quién la confirma.  
+  RF-EVT-01 no acotaba los momentos del proceso comercial en que se valida el cupo. RF-EVT-02 establecía la reserva en etapa SQL cuando ocurre al transicionar de MQL a Prospecto. RF-EVT-04 tenía tres políticas alternativas ambiguas sin indicar cuál aplicaba.  
   **Decisiones:**
-  - [X] Se corrige [`RF-EVT-01 Verificacion de disponibilidad de cupo.md`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md): se acota la validación a dos momentos explícitos del proceso comercial: consulta inicial del Evento y transición a Prospecto. Se elimina la referencia vaga a "generar enlace de pago" como punto de validación.
-  - [X] Se corrige [`RF-EVT-02 Reservacion de vacante durante proceso de venta.md`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md): se corrige la etapa de activación de la reserva de SQL a MQL (cuando el cliente potencial manifiesta intención de inscripción); se precisa que la confirmación de inscripción ocurre a través de un operador humano en etapa SQL; se especifica que el tiempo de tolerancia de la reserva es configurable por el administrador por Evento y se almacena en el banco de contexto.
-  - [X] Se corrige [`RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md): se eliminan las tres políticas alternativas A/B/C; se establece una única regla: la vacante pasa a Confirmada únicamente cuando el operador humano confirma correctamente la inscripción de un cliente potencial en etapa SQL; se definen tres causas excepcionales de liberación de vacante Confirmada (ausencia confirmada, extemporáneo, reembolso) con sus respectivas condiciones de auditoría.
+  - [X] [`RF-EVT-01 Verificacion de disponibilidad de cupo.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md>) — Se acota la validación a dos momentos explícitos: consulta inicial del evento y transición a Prospecto. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-EVT-02 Reservacion de vacante durante proceso de venta.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md>) — Se corrige la etapa de activación de SQL a MQL; se precisa confirmación por operador en SQL; se especifica tiempo de tolerancia configurable. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md>) — Se eliminan las tres políticas A/B/C; se establece una única regla de confirmación por operador en SQL; se definen tres causas excepcionales de liberación. — **Modificado:** 29 / 04 / 2026
 
-- Criterio de ordenamiento inconsistente entre lista de espera y notificaciones de liberación:  
-  RF-EVT-07 establecía FIFO cronológico como criterio de ordenamiento por defecto para la lista de espera, con prioridad opcional mediante "reglas adicionales". RF-EVT-03 usaba el mismo criterio FIFO por defecto para seleccionar a quién notificar. Ambos eran inconsistentes con la política acordada en el glosario y en CU-EVT-001, que define el score (calificación) como criterio primario y FIFO únicamente como desempate.  
+- Criterio de ordenamiento inconsistente en lista de espera y notificaciones:  
+  RF-EVT-03 y RF-EVT-07 usaban FIFO como criterio principal, inconsistente con la política del glosario y CU-EVT-001 que define calificación como criterio primario y FIFO solo como desempate.  
   **Decisiones:**
-  - [X] Se corrige [`RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md): se sustituye FIFO como criterio principal por score (calificación) con FIFO como desempate; se añade la regla de N notificaciones por N vacantes liberadas; se agrega el seguimiento de respuesta del cliente potencial notificado (si no responde, se prosigue con el siguiente elegible).
-  - [X] Se corrige [`RF-EVT-07 Gestion de lista de espera.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>): se reemplaza FIFO como criterio de ordenamiento por score como criterio primario y FIFO como desempate; se añade verificación explícita de existencia de lista de espera antes de disparar la notificación; se elimina la opción de "reserva temporal prioritaria" que quedaba sin respaldo en ningún otro RF; se añade la definición de enlace a RF-EVT-03 al pie del archivo.
+  - [X] [`RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md>) — Se sustituye FIFO por calificación+FIFO; se añade regla N notificaciones por N vacantes y seguimiento de respuesta. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-EVT-07 Gestion de lista de espera.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>) — Se reemplaza FIFO por calificación como criterio primario; se añade verificación de existencia de lista de espera; se elimina "reserva temporal prioritaria" sin respaldo. — **Modificado:** 29 / 04 / 2026
 
-- RF-EVT-05 redundante tras absorción de sus escenarios por RF-EVT-04 y RF-EVT-03:  
-  RF-EVT-05 cubría la cancelación de inscripciones confirmadas antes del inicio del Evento, la liberación de la vacante resultante y el disparo del flujo de lista de espera/notificaciones. Tras las correcciones aplicadas a RF-EVT-04 (que ahora define causas excepcionales de liberación de vacante Confirmada, incluyendo reembolso y ausencia confirmada) y RF-EVT-03 (que ya maneja la notificación posterior a cualquier liberación), los escenarios de RF-EVT-05 quedaron completamente cubiertos sin necesidad de un RF independiente.  
+- RF-EVT-05 redundante tras absorción por RF-EVT-04 y RF-EVT-03:  
+  Los escenarios de cancelación de inscripciones confirmadas y liberación de vacante quedaron completamente cubiertos por RF-EVT-04 (causas excepcionales de liberación) y RF-EVT-03 (notificación tras liberación), sin pérdida de cobertura funcional.  
   **Decisiones:**
-  - [X] Se elimina `RF-EVT-05 Gestion de cancelacion inscripciones.md`: su contenido queda absorbido por RF-EVT-04 (causes excepcionales de liberación: reembolso, ausencia confirmada) y RF-EVT-03 (notificación tras liberación y disparo de lista de espera). No se pierde cobertura funcional.  
-  - [X] Se corrige [`CU-EVT-002 Gestión de cancelación.md`](/docs/diseño/casos%20de%20uso/EVT/CU-EVT-002%20Gesti%C3%B3n%20de%20cancelaci%C3%B3n.md): se sustituye la referencia a RF-EVT-05 por RF-EVT-04 en RF relacionados, flujo principal (paso 4) y sección de trazabilidad; se reemplaza el actor secundario "Banco de contexto" por la invocación a CU-COM-003 siguiendo el patrón establecido en el dominio COM; se normaliza "Persona interesada" a "Cliente potencial"; se añade la definición de enlace de RF-EVT-04 al pie del archivo y se elimina la de RF-EVT-05; se actualiza la versión a v0.3.
+  - [X] `RF-EVT-05 Gestion de cancelacion inscripciones.md` — Eliminado por redundancia; su cobertura queda absorbida por RF-EVT-04 y RF-EVT-03. — **Eliminado:** 29 / 04 / 2026
+  - [X] [`CU-EVT-002 Gestión de cancelación.md`](</docs/diseño/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md>) — Se sustituye referencia a RF-EVT-05 por RF-EVT-04; se reemplaza actor "Banco de contexto" por invocación a CU-COM-003; se normaliza "Persona interesada" a "Cliente potencial". — **Modificado:** 29 / 04 / 2026
+
 - RF-EVT-06 con cobertura de bloqueos incompleta al superar umbral extemporáneo:  
-  RF-EVT-06 solo especificaba el bloqueo de nuevas inscripciones cuando el avance del Evento superaba el umbral configurable. No mencionaba que el mismo umbral debía bloquear también las cancelaciones extemporáneas y las solicitudes de reembolso, dejando una laguna funcional que permitiría operaciones inconsistentes con la política del negocio una vez superado el umbral.  
+  RF-EVT-06 solo bloqueaba nuevas inscripciones al superar el umbral, sin mencionar que el mismo umbral debe bloquear cancelaciones extemporáneas y solicitudes de reembolso.  
   **Decisiones:**
-  - [X] Se corrige [`RF-EVT-06 Gestion de inscripciones extemporaneas.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>): se añade que al superar el umbral también se bloquean cancelaciones extemporáneas y solicitudes de reembolso relacionadas con el Evento; se precisa que los clientes potenciales elegibles de la lista de espera son quienes pueden inscribirse mientras el umbral no sea superado.
+  - [X] [`RF-EVT-06 Gestion de inscripciones extemporaneas.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>) — Se añade bloqueo de cancelaciones y reembolsos al superar el umbral; se precisan los clientes elegibles de lista de espera. — **Modificado:** 29 / 04 / 2026
 
-- Normalización de terminología, formato de criterios e historias de usuario en RFs del dominio EVT:  
-  Los RFs del dominio EVT (RF-EVT-01 al RF-EVT-07) usaban el término "Persona interesada" en lugar del término normalizado "Cliente potencial" establecido en el glosario. Las historias de usuario no seguían el formato estándar "Como... Quiero... Para...". Los criterios de aceptación no usaban el formato de casilla de verificación `[ ]` adoptado en el resto de los RFs del proyecto.  
+- Criterios de calificación incorrectos en RF-COM-02 y modelo de consentimiento incorrecto en RF-COM-07:  
+  RF-COM-02 evaluaba cuatro criterios (interés, presupuesto, disponibilidad, urgencia) cuando el sistema solo mide nivel de interés. RF-COM-07 requería consentimiento explícito con botones, inconsistente con el modelo tácito adoptado en CU-COM-004.  
   **Decisiones:**
-  - [X] Se normalizan [`RF-EVT-01`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md), [`RF-EVT-02`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md), [`RF-EVT-03`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md), [`RF-EVT-04`](/docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md), [`RF-EVT-06`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>) y [`RF-EVT-07`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>): se sustituye "Persona interesada" por "Cliente potencial" en toda su extensión; se reformatean las historias de usuario al esquema "Como... Quiero... Para..."; se convierten los criterios de aceptación al formato de casilla de verificación `[ ]`.
-
-- Criterios de calificación incorrectos en RF-COM-02:  
-  RF-COM-02 establecía que la calificación automática evaluaba a los clientes potenciales con base en cuatro criterios: nivel de interés, capacidad presupuestaria, disponibilidad y urgencia. Sin embargo, el glosario y CU-COM-005 definen que el sistema únicamente mide el nivel de interés a través del tiempo de respuesta y la cantidad de interacción con el bot, sin evaluar presupuesto, disponibilidad ni urgencia. Además, la descripción no mencionaba el uso de la calificación para determinar el orden de prioridad en la lista de espera.  
-  **Decisiones:**
-  - [X] Se corrige [`RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-02%20Gesti%C3%B3n%20de%20etapa%20comercial%20y%20calificaci%C3%B3n%20autom%C3%A1tica%20de%20leads.md): se sustituyen los cuatro criterios de calificación por el único criterio correcto (nivel de interés medido por tiempo de respuesta y cantidad de interacción con el bot); se precisa en la descripción que la calificación sirve para priorizar la atención a Prospectos con mayor probabilidad de avanzar a SQL y para determinar el orden en la lista de espera.
-
-- Modelo de consentimiento explícito incorrecto en RF-COM-07:  
-  RF-COM-07 requería que el sistema solicitara confirmación explícita del usuario mediante un par de opciones ("Acepto" / "No acepto") antes de permitir cualquier interacción, y que la ausencia de consentimiento bloqueara completamente el flujo. Este modelo era inconsistente con el adoptado en CU-COM-004, donde el consentimiento es tácito: continuar la conversación después de recibir el aviso de privacidad y TyCs se interpreta como consentimiento, sin requerir confirmación por botones o comandos.  
-  **Decisiones:**
-  - [X] Se corrige [`RF-COM-07 Informe de privacidad al usuario.md`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md): se reemplaza el modelo de consentimiento explícito por el modelo de consentimiento tácito; se elimina el criterio de bloqueo por rechazo explícito; se añade el criterio de que el mensaje inicial debe explicar de forma explícita que continuar la conversación implica consentimiento tácito; se actualiza la historia de usuario para reflejar el nuevo modelo.
+  - [X] [`RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md>) — Se sustituyen los cuatro criterios por el único correcto (nivel de interés por tiempo de respuesta e interacción); se precisa uso de la calificación para prioridad en lista de espera. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-COM-07 Informe de privacidad al usuario.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md>) — Se reemplaza el modelo de consentimiento explícito por consentimiento tácito; se elimina criterio de bloqueo por rechazo; se actualiza la historia de usuario. — **Modificado:** 29 / 04 / 2026
 
 - Inconsistencia de formato estructural en RFs del dominio COM:  
-  RF-COM-01, RF-COM-03, RF-COM-04, RF-COM-05 y RF-COM-06 no seguían la estructura de secciones Markdown adoptada en el proyecto: las secciones "Descripción" y "Criterios de aceptación" eran texto plano o texto en negrita en lugar de encabezados `##`, y los criterios de aceptación no usaban el formato de casilla de verificación `[ ]`.  
+  RF-COM-01, 03, 04, 05 y 06 usaban texto plano o negrita para secciones que debían ser encabezados `##`, y los criterios de aceptación no usaban el formato `[ ]`.  
   **Decisiones:**
-  - [X] Se normalizan [`RF-COM-01`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-01%20Asignaci%C3%B3n%20de%20conversaciones%20de%20un%20canal%20de%20comunicaci%C3%B3n%20a%20Bot.md), [`RF-COM-03`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-03%20Captura%20y%20gesti%C3%B3n%20de%20datos%20de%20la%20persona%20interesada%20desde%20conversaciones%20multicanal.md), [`RF-COM-04`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-04%20El%20Bot%20debe%20mostrar%20el%20listado%20de%20eventos%20disponibles.md), [`RF-COM-05`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-05%20El%20Bot%20debe%20proporcionar%20informaci%C3%B3n%20detallada%20de%20cada%20evento.md) y [`RF-COM-06`](/docs/diseño/requerimientos/funcionales/COM/RF-COM-06%20El%20Bot%20debe%20informar%20fechas%20de%20inicio%20y%20horarios%20disponibles.md): se añade encabezado `## Descripcion` donde faltaba; se convierten los encabezados de "Criterios de aceptación" de texto plano o negrita a encabezado `##`; se convierten todos los criterios de aceptación al formato de casilla de verificación `[ ]`.
+  - [X] [`RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md>) — Normalización de encabezados y criterios de aceptación al formato `[ ]`. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md>) — Normalización de encabezados y criterios de aceptación al formato `[ ]`. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md>) — Normalización de encabezados y criterios de aceptación al formato `[ ]`. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md>) — Normalización de encabezados y criterios de aceptación al formato `[ ]`. — **Modificado:** 29 / 04 / 2026
+  - [X] [`RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md>) — Normalización de encabezados y criterios de aceptación al formato `[ ]`. — **Modificado:** 29 / 04 / 2026
+
+- Metadatos desactualizados y normalización de IDs de RFs en CUs tras eliminación de RF-EVT-05:  
+  Tras la eliminación de RF-EVT-05, los IDs de los RFs posteriores quedaron desalineados en los metadatos de varios CUs. Adicionalmente, las referencias de issue y PR en CU-COM-006 no estaban en el formato correcto.  
+  **Decisiones:**
+  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Corrección de metadatos y normalización de IDs. — **Modificado:** 30 / 04 / 2026
+  - [X] [`CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>) — Corrección de metadatos y normalización de IDs. — **Modificado:** 30 / 04 / 2026
+  - [X] [`CU-COM-003 Gestion de bancos de contexto.md`](</docs/diseño/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md>) — Corrección de metadatos y normalización de IDs. — **Modificado:** 30 / 04 / 2026
+  - [X] [`CU-COM-006 Gestión de notificaciones de reactivación.md`](</docs/diseño/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md>) — Corrección de referencias a issue y PR al formato correcto. — **Modificado:** 30 / 04 / 2026
+  - [X] [`CU-EVT-001 Registro en lista de espera.md`](</docs/diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>) — Corrección de metadatos y normalización de IDs. — **Modificado:** 30 / 04 / 2026
+  - [X] [`CU-EVT-003 Sistema de inscripción.md`](</docs/diseño/casos de uso/EVT/CU-EVT-003 Sistema de inscripción.md>) — Corrección de metadatos y normalización de IDs. — **Modificado:** 30 / 04 / 2026
+
+---
+
+## 17 – 23 de abril de 2026
+
+Corrección de escenarios de uso, definiciones del glosario y alineación de criterios de calificación y ordenamiento en artefactos del dominio COM y EVT.
+
+- CU-COM-005, CU-EVT-001, RF-COM-02, RF-EVT-03 y RF-EVT-07 tenían criterios y escenarios desalineados entre sí:  
+  Los escenarios de uso de calificación de lead y gestión de lista de espera presentaban inconsistencias entre el glosario, los casos de uso y los requerimientos funcionales en cuanto al criterio de calificación y el criterio de ordenamiento de la lista de espera.  
+  **Decisiones:**
+  - [X] [`CU-COM-005 Calificación automática y gestión de etapa comercial.md`](</docs/diseño/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md>) — Actualización de escenarios de uso conforme al modelo de calificación corregido. — **Modificado:** 23 / 04 / 2026
+  - [X] [`CU-EVT-001 Registro en lista de espera.md`](</docs/diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>) — Actualización de escenarios de uso conforme al criterio de ordenamiento (calificación primaria, FIFO desempate). — **Modificado:** 23 / 04 / 2026
+  - [X] [`Definiciones.md`](</docs/diseño/glosario/Definiciones.md>) — Actualización de definiciones de calificación de lead y gestión de lista de espera para alinear con criterios correctos. — **Modificado:** 23 / 04 / 2026
+  - [X] [`RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md>) — Ajuste preliminar de criterios de calificación. — **Modificado:** 23 / 04 / 2026
+  - [X] [`RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md>) — Ajuste del criterio de ordenamiento para notificaciones. — **Modificado:** 23 / 04 / 2026
+  - [X] [`RF-EVT-07 Gestion de lista de espera.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>) — Ajuste del criterio de ordenamiento de la lista de espera. — **Modificado:** 23 / 04 / 2026
+
+---
+
+## 10 – 16 de abril de 2026
+
+Sin cambios en artefactos de diseño durante este periodo.
+
+---
+
+## 3 – 9 de abril de 2026
+
+Sin cambios en artefactos de diseño durante este periodo.
+
+---
+
+## 27 de marzo – 2 de abril de 2026
+
+Reorganización de casos de uso y requerimientos funcionales por dominio, alineación de trazabilidad de inscripción y corrección de nombres de archivo.
+
+- Los CUs y RFs no estaban organizados por dominio y tenían rutas y nombres inconsistentes:  
+  Los casos de uso de COM y EVT estaban mezclados en carpetas por RF en lugar de por dominio. Los nombres de archivo de CU-COM-001 tenían un error tipográfico. La plantilla de CU estaba duplicada en varias carpetas.  
+  **Decisiones:**
+  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Corrección del nombre de archivo (eliminación del espacio faltante entre "CU-COM-001" y el título). — **Modificado:** 29 / 03 / 2026
+  - [X] [`CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre persona interesada y el bot.md>) — Alineación con comentarios canónicos de revisión. — **Modificado:** 29 / 03 / 2026
+  - [X] [`CU-EVT-001 Registro en lista de espera.md`](</docs/diseño/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md>) — Alineación con comentarios canónicos de revisión. — **Modificado:** 29 / 03 / 2026
+  - [X] [`CU-EVT-002 Gestión de cancelación.md`](</docs/diseño/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md>) — Alineación con comentarios canónicos de revisión. — **Modificado:** 29 / 03 / 2026
+  - [X] [`CU-Plantilla.md`](</docs/diseño/casos de uso/CU-Plantilla.md>) — Plantilla consolidada en la carpeta raíz de CU; eliminadas las copias duplicadas en subcarpetas. — **Modificado:** 29 / 03 / 2026
+  - [X] [`DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md`](</docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md>) — Corrección del nombre del archivo (eliminación de error tipográfico en el prefijo). — **Modificado:** 29 / 03 / 2026
+
+  Todos los CUs y RFs de los dominios COM y EVT fueron reorganizados a sus rutas por dominio (`casos de uso/COM/`, `casos de uso/EVT/`, `requerimientos/funcionales/COM/`, `requerimientos/funcionales/EVT/`) y se alineó la trazabilidad de inscripción entre ellos. — **Modificados:** 29 / 03 / 2026
+
+---
+
+## 20 – 26 de marzo de 2026
+
+Sin cambios en artefactos de diseño durante este periodo.
+
+---
+
+## 13 – 19 de marzo de 2026
+
+Reestructuración de rutas de los requerimientos funcionales para separar funcionales de no funcionales.
+
+- Los RFs estaban en una ruta plana que no permitía agregar requerimientos no funcionales de forma ordenada:  
+  Todos los requerimientos funcionales estaban en `requerimientos funcionales/RF-COM/` y `requerimientos funcionales/RF-EVT/` sin separación por tipo. Se reestructuró la ruta para anticipar la incorporación de RNFs.  
+  **Decisiones:**
+  - [X] Todos los RFs del dominio COM (`RF-COM-01` a `RF-COM-07`) y del dominio EVT (`RF-EVT-01` a `RF-EVT-07`) — Movidos a la nueva ruta `requerimientos/funcionales/COM/` y `requerimientos/funcionales/EVT/` respectivamente. — **Modificados:** 17 / 03 / 2026
+
+---
+
+## 6 – 12 de marzo de 2026
+
+Creación del DDR de análisis de impacto de RF-COM-02 y actualización del glosario con notas de comportamiento.
+
+- No existía análisis documentado del impacto de RF-COM-02 sobre el resto del sistema:  
+  RF-COM-02 define la calificación automática y la gestión de etapa comercial, pero su impacto sobre los demás RFs y CUs del dominio COM y EVT no estaba analizado ni documentado, generando ambigüedades en los flujos dependientes.  
+  **Decisiones:**
+  - [X] [`DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md`](</docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md>) — Creado con el análisis de impacto de RF-COM-02 sobre sus dependencias en los dominios COM y EVT. — **Creado:** 11 / 03 / 2026
+  - [X] [`Definiciones.md`](</docs/diseño/glosario/Definiciones.md>) — Actualizado con notas temporales para definir correctamente momentos y comportamientos confusos identificados durante el análisis. — **Modificado:** 11 / 03 / 2026
+
+---
+
+## 27 de febrero – 5 de marzo de 2026
+
+Creación de los requerimientos funcionales del dominio EVT, el glosario base del sistema y RF-COM-07.
+
+- El sistema no contaba con requerimientos funcionales del dominio EVT ni con glosario base:  
+  Era necesario establecer la base documental del dominio EVT para poder construir los casos de uso y el modelo de diseño. Se crearon los 7 RF del dominio EVT junto con el glosario inicial de definiciones del sistema.  
+  **Decisiones:**
+  - [X] [`RF-EVT-01 Verificacion de disponibilidad de cupo.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md>) — Creado para especificar la verificación de disponibilidad de cupos. — **Creado:** 02 / 03 / 2026
+  - [X] [`RF-EVT-02 Reservacion de vacante durante proceso de venta.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md>) — Creado para especificar la reserva temporal de vacantes durante el proceso comercial. — **Creado:** 02 / 03 / 2026
+  - [X] [`RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md>) — Creado para especificar el mecanismo de notificación al liberar un cupo. — **Creado:** 02 / 03 / 2026
+  - [X] [`RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md>) — Creado para especificar el bloqueo de vacantes tras confirmación de pago. — **Creado:** 02 / 03 / 2026
+  - [X] `RF-EVT-05 Gestion de cancelacion inscripciones.md` — Creado para especificar la gestión de cancelación de inscripciones (posteriormente eliminado por redundancia en abril). — **Creado:** 02 / 03 / 2026
+  - [X] [`RF-EVT-06 Gestion de inscripciones extemporaneas.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>) — Creado para especificar el control de inscripciones fuera de plazo. — **Creado:** 02 / 03 / 2026
+  - [X] [`RF-EVT-07 Gestion de lista de espera.md`](</docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>) — Creado para especificar la gestión de la lista de espera de cupos. — **Creado:** 02 / 03 / 2026
+  - [X] [`Definiciones.md`](</docs/diseño/glosario/Definiciones.md>) — Creado como glosario base del sistema con las definiciones iniciales del dominio. — **Creado:** 02 / 03 / 2026
+
+- El dominio COM carecía del requerimiento de privacidad y aviso legal al usuario:  
+  No existía ningún RF que especificara la obligación del sistema de informar al usuario sobre el aviso de privacidad y los términos y condiciones antes de recopilar datos.  
+  **Decisiones:**
+  - [X] [`RF-COM-07 Informe de privacidad al usuario.md`](</docs/diseño/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md>) — Creado para especificar la presentación del aviso de privacidad y TyCs al usuario al inicio de la conversación. — **Creado:** 05 / 03 / 2026
