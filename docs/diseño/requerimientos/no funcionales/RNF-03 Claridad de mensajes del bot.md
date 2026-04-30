@@ -6,7 +6,7 @@ Los mensajes del bot deben ser precisos, verificables y comprensibles para el Cl
 
 ## Métrica
 
-- Los valores factuales (fechas, horarios, precios, cupos) deben coincidir exactamente con los registrados en la base de datos al momento de la consulta.
+- Los valores factuales (fechas, horarios, precios, cupos) deben coincidir exactamente con los registrados en el banco de contexto de evento o general al momento de la consulta.
 - No se exponen tecnicismos ni identificadores internos: IDs, nombres de tablas, estados del sistema (p. ej. `LEAD_HOT`), tokens o etiquetas internas.
 - No usar preguntas de confirmación explícita en contextos informativos/comerciales; ofrecer opciones o preguntas abiertas en su lugar.
 - Uso del español neutro; registro (`usted`/`tú`) según configuración.
