@@ -6,10 +6,11 @@
 - Dominio: EVT
 - Nombre: Gestión de cancelación
 - Estado: Borrador
-- Versión: v0.2
+- Versión: v0.3
 - Fecha de creación: 2026-03-11
-- Última actualización: 2026-03-25
+- Última actualización: 2026-04-29
 - Responsable: Maximiliano Carrillo Alvarado
+- Última corrección por: Isaac Ortiz
 - Issue relacionado: PSD-15
 - PR relacionado: #52
 
@@ -23,8 +24,8 @@ Aplica al módulo de gestión de inscripciones y cupo de Eventos dentro del sist
 
 ## RF relacionados
 
-- RF-EVT-03
-- RF-EVT-05
+- [RF-EVT-03]
+- [RF-EVT-04]
 
 ## Actores
 
@@ -35,8 +36,8 @@ Aplica al módulo de gestión de inscripciones y cupo de Eventos dentro del sist
 ### Actores secundarios
 
 - Sistema
-- Banco de contexto (gestiona inscripciones, cupos y lista de espera)
-- Persona interesada
+- [CU-COM-003 Gestión de bancos de contexto]: gestiona inscripciones, cupos y lista de espera
+- Cliente potencial
 
 ## Disparador
 
@@ -68,7 +69,7 @@ El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 1. El Usuario selecciona una inscripción confirmada
 2. El Sistema valida que el Evento no ha iniciado
 3. El Sistema permite ejecutar la cancelación
-4. El Sistema cambia el estado de la inscripción a cancelada [RF-EVT-05]
+4. El Sistema cambia el estado de la inscripción a cancelada conforme a las causas excepcionales de liberación definidas en [RF-EVT-04]
 5. El Sistema libera la vacante asociada
 6. El Sistema actualiza el cupo disponible
 7. El Sistema registra la cancelación (usuario, fecha, motivo)
@@ -144,8 +145,9 @@ El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 
 ## Trazabilidad
 
-- RF: RF-EVT-05, RF-EVT-03
+- RF: RF-EVT-04, RF-EVT-03
 - DDR: DDR-01
 
 [RF-EVT-03]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-03%20Notificacion%20de%20usuarios%20ante%20una%20liberacion%20de%20cupo.md
-[RF-EVT-05]: /docs/diseño/requerimientos/funcionales/RF-EVT/RF-EVT-05%20Gestion%20de%20cancelacion%20inscripciones.md
+[RF-EVT-04]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md
+[CU-COM-003 Gestión de bancos de contexto]: /docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md
