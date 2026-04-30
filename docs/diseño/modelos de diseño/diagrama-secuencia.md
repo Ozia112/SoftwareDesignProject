@@ -1,11 +1,23 @@
-# Diagramas de Secuencia (UML)
+1. Captación + consentimiento + calificación
 
-Los diagramas de secuencia son una herramienta visual utilizada para modelar y representar la interacción entre los distintos componentes de un sistema a lo largo del tiempo, mostrando el orden en que ocurren los mensajes dentro de un proceso.
+Este diagrama muestra el flujo inicial del sistema. La persona interesada inicia la interacción, recibe el 
+aviso de privacidad y decide si acepta o no. Si acepta, el sistema registra el consentimiento, recopila 
+sus datos y la clasifica automáticamente como Lead, MQL o Prospecto según su nivel de interés.
 
-En el caso de nuestro sistema, se implementaron tres diagramas de secuencia para representar los siguientes procesos:
+Define el punto de entrada al sistema y el inicio del proceso comercial.
 
-Proceso de captación de la persona interesada y calificación del cliente potencial (lead).
-Proceso de validación de cupo, reserva temporal y confirmación de inscripción.
-Proceso de gestión de excepciones, incluyendo lista de espera, cancelaciones y control de inscripciones extemporáneas.
+2. Validación de cupo + reserva + inscripción
 
-[Vista de el diagrama de secuencia](https://drive.google.com/file/d/1q8iMVGREe6lELxKINtZepPLEvuyiq48r/view?usp=sharing)
+Este diagrama representa el flujo principal de inscripción. El sistema valida la disponibilidad de cupo, 
+genera una reserva temporal y solicita el pago. Un operador valida el comprobante y, dependiendo del resultado, 
+se confirma la inscripción o se libera la vacante.
+
+Modela el proceso central de conversión a cliente inscrito.
+
+3. Excepciones (lista de espera + cancelación + extemporáneo)
+
+Este diagrama muestra escenarios alternos como lista de espera, cancelaciones e inscripciones extemporáneas. El sistema gestiona la falta de cupo, libera vacantes y decide si permite o no inscripciones tardías según las reglas definidas.
+
+Asegura el manejo correcto de situaciones fuera del flujo principal.
+
+[Vista de los diagaramas de secuencia]
