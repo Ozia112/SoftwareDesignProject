@@ -6,7 +6,7 @@
 - Dominio: COM
 - Nombre: Flujo de la conversación entre la Persona interesada y el Bot
 - Estado: Borrador
-- Versión: v0.2
+- Versión: v0.3
 - Fecha de creación: 2026-03-08
 - Última actualización: 2026-04-28
 - Responsable: Maximiliano Carrillo Alvarado
@@ -114,8 +114,8 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 
 1. En el paso 10, [CU-COM-003 Gestión de bancos de contexto] devuelve que no hay cupo disponible en el Evento. [RF-EVT-01]
 2. El Bot informa que el Evento está lleno.
-3. El Bot ofrece registro en lista de espera para el Evento original. [RF-EVT-07]
-4. Si el Prospecto acepta, se activa el flujo de [CU-EVT-001]. [RF-EVT-07]
+3. El Bot ofrece registro en lista de espera para el Evento original. [RF-EVT-06]
+4. Si el Prospecto acepta, se activa el flujo de [CU-EVT-001]. [RF-EVT-06]
 5. Si el Prospecto no acepta, el Bot ofrece alternativas (otros eventos). [RF-COM-04]
 6. Si el Prospecto muestra interés en otro evento, se regresa al paso 5 y su etapa comercial se reduce a MQL. [RF-COM-02]
 7. Si el Prospecto no muestra interés en otros eventos y no acepta la lista de espera, el Bot finaliza la conversación.
@@ -173,7 +173,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 [RF-COM-07]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-07%20Informe%20de%20privacidad%20al%20usuario.md
 [RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
 [RF-EVT-02]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md
-[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md
+[RF-EVT-06]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>
 [CU-COM-001 Asignación de conversaciones de un bot a un operador humano]: /docs/diseño/casos%20de%20uso/COM/CU-COM-001%20Asignación%20de%20conversaciones%20de%20un%20bot%20a%20un%20operador%20humano.md
 [CU-COM-003 Gestión de bancos de contexto]: /docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md
 [CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito]: /docs/diseño/casos%20de%20uso/COM/CU-COM-004%20Presentación%20de%20avisos%20legales%20y%20registro%20de%20consentimiento%20tácito.md

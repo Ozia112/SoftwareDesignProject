@@ -1,4 +1,4 @@
-# RF-EVT-07. El Sistema bot debe gestionar una lista de espera cuando el cupo se agote
+# RF-EVT-06. El Sistema bot debe gestionar una lista de espera cuando el cupo se agote
 
 ## Descripción
 

@@ -26,7 +26,7 @@ Aplica al proceso de registro en lista de espera gestionado por el Sistema cuand
 
 - [RF-COM-02]
 - [RF-EVT-01]
-- [RF-EVT-07]
+- [RF-EVT-06]
 
 ## Actores
 
@@ -63,19 +63,19 @@ El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el
 
 ## Flujo principal
 
-1. El Bot recibe la aceptación del Cliente potencial para registrarse en la lista de espera. [RF-EVT-07]
+1. El Bot recibe la aceptación del Cliente potencial para registrarse en la lista de espera. [RF-EVT-06]
 2. El Bot verifica la etapa comercial del Cliente potencial para confirmar que es Prospecto. [RF-COM-02]
-3. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar el Banco de contexto de evento y validar que no exista un registro previo del mismo Cliente potencial en la lista de espera del Evento. [RF-EVT-07]
-4. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar la lista de espera del Evento y comparar la calificación del Prospecto con los registros existentes para determinar su posición. [RF-EVT-07]
-5. El Bot notifica al Prospecto su registro exitoso en la lista de espera y su posición actual. [RF-EVT-07]
-6. El Bot le informa al Prospecto que será notificado si se libera un cupo. [RF-EVT-07]
+3. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar el Banco de contexto de evento y validar que no exista un registro previo del mismo Cliente potencial en la lista de espera del Evento. [RF-EVT-06]
+4. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar la lista de espera del Evento y comparar la calificación del Prospecto con los registros existentes para determinar su posición. [RF-EVT-06]
+5. El Bot notifica al Prospecto su registro exitoso en la lista de espera y su posición actual. [RF-EVT-06]
+6. El Bot le informa al Prospecto que será notificado si se libera un cupo. [RF-EVT-06]
 
 ## Flujos alternos
 
 ### A1. Registro duplicado
 
-1. En el paso 3, [CU-COM-003 Gestión de bancos de contexto] detecta que el Cliente potencial ya está registrado en la lista de espera para el mismo Evento. [RF-EVT-07]
-2. El Bot informa al Cliente potencial que ya está registrado y le comunica su posición actual en la lista de espera. [RF-EVT-07]
+1. En el paso 3, [CU-COM-003 Gestión de bancos de contexto] detecta que el Cliente potencial ya está registrado en la lista de espera para el mismo Evento. [RF-EVT-06]
+2. El Bot informa al Cliente potencial que ya está registrado y le comunica su posición actual en la lista de espera. [RF-EVT-06]
 3. El flujo finaliza.
 
 ### A2. Registro sin etapa Prospecto
@@ -135,10 +135,10 @@ El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el
 
 ## Trazabilidad
 
-- RF: RF-COM-02, RF-EVT-07
+- RF: RF-COM-02, RF-EVT-06
 - BPMN: BPMN-EVT-001
 
 [CU-COM-003 Gestión de bancos de contexto]: /docs/diseño/casos%20de%20uso/COM/CU-COM-003%20Gestion%20de%20bancos%20de%20contexto.md
 [RF-COM-02]: /docs/diseño/requerimientos/funcionales/COM/RF-COM-02%20Gestión%20de%20etapa%20comercial%20y%20calificación%20automática%20de%20leads.md
 [RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
-[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md
+[RF-EVT-06]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>

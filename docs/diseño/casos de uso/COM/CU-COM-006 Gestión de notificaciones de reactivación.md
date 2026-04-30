@@ -10,6 +10,7 @@
 - Fecha de creación: 2026-04-29
 - Última actualización: 2026-04-29
 - Responsable: Isaac Ortiz
+- Última corrección por: Isaac Ortiz
 - Issue relacionado: pendiente
 - PR relacionado: pendiente
 

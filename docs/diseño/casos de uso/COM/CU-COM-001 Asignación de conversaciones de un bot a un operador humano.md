@@ -1,4 +1,4 @@
-# CU-COM-001 Asignación de conversaciones de un canal de comunicación a Bot
+# CU-COM-001 Asignación de bot a un operador humano
 
 ## Metadatos
 
@@ -6,7 +6,7 @@
 - Dominio: COM
 - Nombre: Asignación de conversaciones de un canal de comunicación a Bot
 - Estado: Borrador
-- Versión: v0.3
+- Versión: v0.4
 - Fecha de creación: 2026-03-08
 - Última actualización: 2026-04-28
 - Responsable: Maximiliano Carrillo Alvarado

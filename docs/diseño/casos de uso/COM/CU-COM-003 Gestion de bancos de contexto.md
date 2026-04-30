@@ -57,8 +57,8 @@ Repositorio de información pública y configurable de un Evento específico. Es
 - [RF-EVT-01]
 - [RF-EVT-02]
 - [RF-EVT-04]
+- [RF-EVT-05]
 - [RF-EVT-06]
-- [RF-EVT-07]
 
 ## Actores
 
@@ -105,7 +105,7 @@ El Bot requiere información del sistema para responder a una consulta de la Per
 
 ## Flujo principal — Banco de contexto de evento
 
-1. El Bot recibe una solicitud que requiere información específica de un Evento (fechas, horarios, cupos, costos, temario, instructores, modalidad, etc.). [RF-COM-05] [RF-COM-06] [RF-EVT-01] [RF-EVT-06] [RF-EVT-07]
+1. El Bot recibe una solicitud que requiere información específica de un Evento (fechas, horarios, cupos, costos, temario, instructores, modalidad, etc.). [RF-COM-05] [RF-COM-06] [RF-EVT-01] [RF-EVT-05] [RF-EVT-06]
 2. El Bot envía la solicitud al Sistema especificando el identificador del Evento y los campos requeridos.
 3. El Sistema identifica el Evento y consulta su Banco de contexto de evento.
 4. El Sistema devuelve el paquete de información del Evento (completo o por partes según lo solicitado).
@@ -207,7 +207,7 @@ El Bot requiere información del sistema para responder a una consulta de la Per
 
 ## Trazabilidad
 
-- RF: RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01, RF-EVT-02, RF-EVT-04, RF-EVT-06, RF-EVT-07
+- RF: RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01, RF-EVT-02, RF-EVT-04, RF-EVT-05, RF-EVT-06
 - BPMN: BPMN-COM-003
 - DDR: DDR-01
 
@@ -219,5 +219,5 @@ El Bot requiere información del sistema para responder a una consulta de la Per
 [RF-EVT-01]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-01%20Verificacion%20de%20disponibilidad%20de%20cupo.md
 [RF-EVT-02]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-02%20Reservacion%20de%20vacante%20durante%20proceso%20de%20venta.md
 [RF-EVT-04]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-04%20Bloqueo%20de%20vacantes%20despues%20de%20confirmacion%20de%20pago.md
-[RF-EVT-06]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06%20Gestion%20de%20inscripciones%20extemporaneas.md
-[RF-EVT-07]: /docs/diseño/requerimientos/funcionales/EVT/RF-EVT-07%20Gestion%20de%20lista%20de%20espera.md
+[RF-EVT-05]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md>
+[RF-EVT-06]: </docs/diseño/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md>

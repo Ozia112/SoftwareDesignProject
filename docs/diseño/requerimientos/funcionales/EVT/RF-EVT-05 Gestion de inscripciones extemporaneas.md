@@ -1,4 +1,4 @@
-# RF-EVT-06. El Sistema bot debe permitir o bloquear inscripciones extemporáneas (Evento en curso)
+# RF-EVT-05. El Sistema bot debe permitir o bloquear inscripciones extemporáneas (Evento en curso)
 
 ## Descripción
 
