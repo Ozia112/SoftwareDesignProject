@@ -14,5 +14,9 @@ El sistema debe permitir asignar conversaciones de un canal de comunicación a u
 
 - [ ] El sistema permite seleccionar una conversación.
 - [ ] El sistema puede asignar la conversación a un Bot automatizado.
-- [ ] El Bot automatizado puede asignar a un agente humano, el cual recibe una notificación para sustituir al bot.
+- [ ] El Sistema asigna la conversación al operador humano cuando el Bot emite la señal de escalamiento.
 - [ ] Todas las asignaciones quedan registradas en logs.
+
+## Trazabilidad
+
+- CU: CU-COM-001, CU-EVT-003
