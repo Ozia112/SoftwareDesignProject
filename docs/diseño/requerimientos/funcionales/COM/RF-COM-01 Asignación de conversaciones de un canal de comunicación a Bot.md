@@ -19,4 +19,4 @@ El sistema debe permitir asignar conversaciones de un canal de comunicación a u
 
 ## Trazabilidad
 
-- CU: CU-COM-001, CU-EVT-003
+- CU:CU-COM-001, CU-EVT-003
