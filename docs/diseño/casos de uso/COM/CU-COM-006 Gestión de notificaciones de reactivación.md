@@ -24,7 +24,7 @@ Aplica a toda comunicación outbound iniciada por el sistema bot hacia clientes 
 
 ## RF relacionados
 
-- (pendiente de definición de RF específico para notificaciones outbound de reactivación)
+- [RF-COM-08 Gestión de notificaciones de reactivación outbound]
 
 ## Actores
 

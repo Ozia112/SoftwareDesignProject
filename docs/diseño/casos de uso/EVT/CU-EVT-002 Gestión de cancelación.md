@@ -69,12 +69,16 @@ El Usuario decide cancelar una inscripción de un Evento antes de su inicio.
 1. El Usuario selecciona una inscripción confirmada
 2. El Sistema valida que el Evento no ha iniciado
 3. El Sistema permite ejecutar la cancelación
-4. El Sistema cambia el estado de la inscripción a cancelada conforme a las causas excepcionales de liberación definidas en [RF-EVT-04]
+4. El Sistema cambia el estado de la inscripción a cancelada por decisión operativa del Usuario (cancelación pre-inicio, anterior a cualquier causa excepcional)
 5. El Sistema libera la vacante asociada
 6. El Sistema actualiza el cupo disponible
 7. El Sistema registra la cancelación (usuario, fecha, motivo)
 8. El Sistema verifica si existe lista de espera
 9. Si existe, el Sistema dispara notificación al siguiente elegible [RF-EVT-03]
+
+## Nota aclaratoria
+
+RF-EVT-04 cubre liberaciones post-confirmación de pago por causas excepcionales (Ausencia confirmada, Extemporáneo, Solicitud de reembolso). Este caso de uso (CU-EVT-002) cubre cancelaciones pre-inicio, anteriores a la confirmación de pago, ejecutadas por decisión operativa del Usuario antes de que el Evento inicie.
 
 ## Flujos alternos
 

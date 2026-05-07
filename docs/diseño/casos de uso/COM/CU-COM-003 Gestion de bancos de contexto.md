@@ -120,6 +120,7 @@ El Bot requiere información del sistema para responder a una consulta de la Per
    - `reserva_temporal`: decrementa los cupos disponibles en 1 y registra la reserva temporal asociada a la Persona interesada con un timestamp de expiración. [RF-EVT-02]
    - `liberacion_reserva`: incrementa los cupos disponibles en 1 y elimina el registro de reserva temporal de la Persona interesada. [RF-EVT-02]
    - `bloqueo_cupo`: convierte la reserva temporal en definitiva tras confirmación de pago y marca el cupo como ocupado de forma permanente. [RF-EVT-04]
+   - `registro_desuscripcion`: registra la preferencia de desuscripción de la Persona interesada en el Banco de contexto general para evitar futuras notificaciones de reactivación. [CU-COM-006]
 5. El Sistema registra la operación con timestamp en los logs del sistema. [RF-EVT-02] [RF-EVT-04]
 6. El Sistema confirma al Bot que la operación se realizó correctamente.
 7. El Bot adapta el flujo conversacional en función del resultado de la operación.
@@ -175,7 +176,7 @@ El Bot requiere información del sistema para responder a una consulta de la Per
 - RN-COM-03-03: La información del Banco de contexto de evento debe estar marcada como activa para ser entregada al Bot.
 - RN-COM-03-04: Los bancos de contexto pueden entregarse completos o por partes según la granularidad de la solicitud.
 - RN-COM-03-05: El banco de contexto general solo entregará eventos que coincidan con el estado de evento solicitado por el Bot (por ejemplo, solo eventos activos, historial de eventos pasados para eventos anuales, eventos en curso, etc.)
-- RN-COM-03-06: Las operaciones de escritura sobre el Banco de contexto de evento solo pueden ser solicitadas por el Bot como consecuencia directa del proceso de venta gestionado por CU-COM-002; ninguna operación de escritura de cupo puede ejecutarse fuera de ese contexto salvo intervención manual de un operador humano.
+- RN-COM-03-06: Las operaciones de escritura sobre el Banco de contexto de evento solo pueden ser solicitadas por el Bot como consecuencia directa del proceso de venta gestionado por CU-COM-002 o del proceso de inscripción gestionado por CU-EVT-003; ninguna operación de escritura de cupo puede ejecutarse fuera de ese contexto salvo intervención manual de un operador humano.
 
 ## Datos relevantes
 
@@ -187,7 +188,7 @@ El Bot requiere información del sistema para responder a una consulta de la Per
 
 ### Entradas — Actualización de banco de contexto de evento
 
-- Tipo de operación: `reserva_temporal`, `liberacion_reserva`, `bloqueo_cupo`
+- Tipo de operación: `reserva_temporal`, `liberacion_reserva`, `bloqueo_cupo`, `registro_desuscripcion`
 - Identificador del Evento
 - Identificador de la Persona interesada
 
