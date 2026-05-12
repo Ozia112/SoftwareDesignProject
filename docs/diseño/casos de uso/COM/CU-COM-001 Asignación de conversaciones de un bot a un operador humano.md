@@ -6,9 +6,9 @@
 - Dominio: COM
 - Nombre: Asignación de conversaciones de un canal de comunicación a Bot
 - Estado: Borrador
-- Versión: v0.4
+- Versión: v0.5
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-04-28
+- Última actualización: 2026-05-05
 - Responsable: Maximiliano Carrillo Alvarado
 - Última corrección por: Isaac Ortiz
 - Issue relacionado: PSD-08, PSD-13
@@ -16,11 +16,17 @@
 
 ## Objetivo
 
-Permitir que el sistema automáticamente vincule al canal de comunicación entrante un Bot automatizado, con el fin de garantizar una atención rápida, organizada y escalable a los usuarios.
+Orquestar la asignación automática de conversaciones entre canales de comunicación, el Bot automatizado y operadores humanos, garantizando una atención rápida, organizada y escalable. El sistema gestiona todas las transiciones: asignación inicial del canal al Bot, escalamiento del Bot al operador humano cuando sea necesario, y devolución del operador humano al Bot cuando aplique.
 
 ## Alcance
 
-Cubre el escenario en que una persona interesada inicia una conversación en un canal de comunicación hasta la asignación de dicha conversación a un operador humano cuando el bot no pueda continuar. Incluye cola de espera, selección de operador humano disponible y registro de logs.
+Cubre el ciclo completo de control conversacional del sistema:
+
+1. Asignación inicial del canal entrante al Bot automatizado.
+2. Escalamiento del Bot al operador humano cuando el Bot no pueda continuar (Lead, MQL, Prospecto sin resolución o SQL por confirmación de pago).
+3. Devolución del operador humano al Bot cuando la conversación regresa a una etapa automatizable.
+4. Gestión de colas de espera cuando no hay operadores disponibles.
+5. Registro de auditoría completo de todas las transiciones.
 
 ## RF relacionados
 

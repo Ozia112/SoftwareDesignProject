@@ -1,25 +1,32 @@
-# CU-EVT-003 Sistema de inscripción
+# CU-EVT-003 Gestión de cupos de eventos
 
 ## Metadatos
 
 - ID: CU-EVT-003
 - Dominio: EVT
-- Nombre: Sistema de inscripción
+- Nombre: Gestión de cupos de eventos
 - Estado: Borrador
-- Versión: v0.2
+- Versión: v0.3
 - Fecha de creación: 2026-03-16
-- Última actualización: 2026-03-25
+- Última actualización: 2026-05-05
 - Responsable: Maximiliano Carrillo Alvarado
+- Última correción por: Isaac Ortiz
 - Issue relacionado: PSD-12
 - PR relacionado: #XX
 
 ## Objetivo
 
-El sistema debe apoyar al operador humano que trata con el Prospecto evitando mal funcionamiento como sobre inscribir a un evento con un cupo lleno y evitar errores humanos como inscribir alguien cuando un evento ya ha iniciado/finalizado
+Gestionar el estado de cupos durante el ciclo de inscripción de Cliente potencial en etapa Prospecto o SQL, asegurando la reserva temporal, bloqueo permanente tras confirmación de pago, y liberación de cupo en casos de no pago, abandono, cambio de evento o causas excepcionales.
 
 ## Alcance
 
-Sistema de gestión de inscripciones - subsistema de registro de Prospectos en eventos. Aplica al proceso de inscripción de Prospectos interesados a eventos específicos, con validaciones de disponibilidad, bloqueos temporales de cupos y confirmación de pago.
+Gestión centralizada de estados de cupo durante el ciclo de inscripción. Aplica a:
+
+- Reserva temporal de cupo cuando un Cliente potencial en etapa Prospecto manifiesta intención de inscribirse (disparado por CU-COM-002).
+- Bloqueo definitivo de cupo cuando un Cliente potencial en etapa SQL confirma el pago (disparado por operador humano vía CU-COM-001).
+- Liberación de cupo temporal cuando: no se confirma el pago en tiempo, el Cliente potencial abandona la conversación, o cambia de evento (disparado por CU-COM-002 o por vencimiento temporal).
+- Liberación de cupo bloqueado por causas excepcionales conforme a RF-EVT-04: ausencia confirmada, inscripción extemporánea, solicitud de reembolso (disparado por operador humano o CU-EVT-002).
+- Validaciones de disponibilidad de cupo para proteger contra sobreventa.
 
 ## RF relacionados
 
@@ -61,7 +68,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 ### En fallo
 
 - El sistema no puede inscribir al Prospecto y, por ende, no queda registrado en el banco de contexto.
-- Si había una inscripción temporal, el sistema debe eliminarla del banco de contexto y notificar a los demás MQL. [CU-EVT-002]
+- Si había una inscripción temporal, el sistema debe eliminarla del banco de contexto y notificar a la lista de espera si hay al menos un cliente potencial en la lista. [CU-EVT-002]
 
 ## Flujo principal
 
@@ -69,7 +76,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 2. El sistema debe verificar que el evento este disponible [RF-EVT-01]
 3. El sistema reserva la vacante [RF-EVT-02]
 4. El operador humano agrega la información personal del Prospecto al banco de contexto
-5. El debe bloquear la vacante temporalmente [RF-EVT-02]
+5. El sistema debe bloquear la vacante temporalmente [RF-EVT-02]
 6. El sistema notifica al operador humano que la inscripción ha sido exitosa
 7. El operador humano le informa al Prospecto que se ha quedado registrado y espera la confirmación de su pago en un periodo de tiempo
 
@@ -96,7 +103,16 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 2. Al evento ya ha avanzado más de lo permitido para las inscripciones
 3. El sistema debe bloquear las inscripciones del evento en cuestión [RF-EVT-05]
 4. El sistema debe cancelar las inscripciones temporales [RF-EVT-04]
-5. Si quedan inscripciones temporales pasa al flujo A2, caso contrario el flujo termina
+5. El sistema libera las inscripciones temporales
+6. El flujo termina
+
+### A4. Abandono o cambio de evento
+
+1. El sistema detecta que el Cliente potencial abandona la conversación o cambia de evento (disparado por CU-COM-002)
+2. El sistema debe verificar la inscripción temporal [RF-EVT-02]
+3. El sistema debe quitar la información del Prospecto en el evento del banco de contexto y aumentar en 1 el cupo del evento
+4. El sistema debe notificar a la lista de espera [RF-EVT-03]
+5. El flujo termina
 
 ## Flujos de excepción
 
@@ -114,6 +130,14 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 2. El sistema debe notificar al operador humano y borrar los datos que se hayan podido registrar para liberar la vacante
 3. El sistema debe permitir al operador humano reintentar la inscripción
 4. El sistema regresa al paso 1 si el agente lo vuelve a intentar, caso contrario el flujo acaba
+
+### E3. Liberación por causas excepcionales
+
+1. El operador humano o el sistema detecta una causa excepcional (ausencia confirmada, inscripción extemporánea, solicitud de reembolso) conforme a RF-EVT-04
+2. El sistema verifica la inscripción bloqueada
+3. El sistema libera el cupo bloqueado y actualiza el estado del evento
+4. El sistema notifica a la lista de espera si aplica [RF-EVT-03]
+5. El flujo termina
 
 ## Reglas de negocio / restricciones
 

@@ -1,14 +1,14 @@
-# CU-COM-002 Flujo de la conversación entre la Persona interesada y el Bot
+# CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot
 
 ## Metadatos
 
 - ID: CU-COM-002
 - Dominio: COM
-- Nombre: Flujo de la conversación entre la Persona interesada y el Bot
+- Nombre: Flujo de la conversación entre el Cliente potencial y el Bot
 - Estado: Borrador
-- Versión: v0.3
+- Versión: v0.4
 - Fecha de creación: 2026-03-08
-- Última actualización: 2026-04-28
+- Última actualización: 2026-05-05
 - Responsable: Maximiliano Carrillo Alvarado
 - Última corrección por: Isaac Ortiz
 - Issue relacionado: PSD-15
@@ -16,11 +16,11 @@
 
 ## Objetivo
 
-Describir el flujo de interacción entre el Cliente potencial y el Bot, desde el inicio de la conversación hasta el punto de escalamiento a un operador humano o abandono.
+Describir el flujo de interacción entre el Cliente potencial y el Bot, desde la asignación automática del bot por el sistema hasta el punto de escalamiento a un operador humano, cambio de evento, o abandono. Cubre la captura de datos, consulta de eventos, validación de disponibilidad, reserva de cupo e inscripción temporal.
 
 ## Alcance
 
-Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención por operador humano.
+Aplica al módulo de conversación del sistema bot, incluyendo consulta de eventos, validación de disponibilidad, entrega de información y transición a atención por operador humano o gestión de lista de espera.
 
 ## RF relacionados
 
@@ -35,7 +35,7 @@ Aplica al módulo de conversación del sistema bot, incluyendo consulta de event
 
 ### Actor principal
 
-- Cliente potencial: inicia la conversación para obtener información sobre eventos y potencialmente inscribirse.
+- Cliente potencial: interactúa con el Bot ya asignado por el sistema para obtener información sobre eventos y potencialmente inscribirse.
 
 ### Actores secundarios
 
@@ -44,7 +44,7 @@ Aplica al módulo de conversación del sistema bot, incluyendo consulta de event
 
 ## Disparador
 
-El Cliente potencial inicia una conversación con el Bot y realiza una consulta sobre un evento.
+El sistema ha asignado un Bot a la conversación del Cliente potencial en el canal de comunicación, y el Cliente potencial inicia la interacción.
 
 ## Precondiciones
 
@@ -79,7 +79,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 9. El Cliente potencial muestra interés en inscribirse con preguntas clave como métodos de pago y procesos de inscripción.
 10. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener la disponibilidad de cupo del Evento. [RF-EVT-01]
 11. Haya o no haya cupo, se activa el [CU-COM-005 Gestión de etapa comercial].
-12. Si hay cupo reserva uno temporal para el Cliente potencial y activa [CU-COM-003 Gestión de bancos de contexto]. [RF-EVT-02]
+12. Si hay cupo se activa [CU-EVT-003 Gestión de cupos de eventos] para reservar un cupo temporal para el Cliente potencial. [RF-EVT-02]
 13. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener información de métodos de pago y proceso de inscripción, y el Bot la presenta al Cliente potencial. [RF-COM-04]
 14. El Bot detecta que el cliente potencial ha enviado mensajes que detonan la necesidad de confirmación de pago por parte de un operador humano por lo tanto se activa el [CU-COM-005 Gestión de etapa comercial].
 15. El Bot informa que será transferido a un operador humano y se activa el flujo de [CU-COM-001 Asignación de conversaciones de un bot a un operador humano].
@@ -91,7 +91,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 1. Desde el paso 5 hasta el paso 13, el Cliente potencial solicita otras opciones de eventos disponibles.
 2. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener el listado de eventos disponibles y el Bot lo presenta. [RF-COM-04]
 3. El Cliente potencial selecciona un evento diferente al original.
-4. Si el Cliente potencial está en la etapa comercial Prospecto, el Bot quita el cupo reservado para el evento original, activa [CU-COM-003 Gestión de bancos de contexto] y regresa al paso 5.
+4. Si el Cliente potencial está en la etapa comercial Prospecto, el Bot solicita a [CU-EVT-003 Gestión de cupos de eventos] que libere el cupo reservado del evento original y regresa al paso 5.
 
 ### A2. El Cliente potencial desea inscribirse directamente
 
@@ -128,7 +128,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 
 ### E3. No aceptación de privacidad
 
-1. En el paso 2, la Persona interesada no continua la conversación después de recibir el aviso de privacidad y términos y condiciones. [RF-COM-07]
+1. En el paso 2, el Cliente potencial no continua la conversación después de recibir el aviso de privacidad y términos y condiciones. [RF-COM-07]
 2. El Bot detecta falta de respuesta y deja la conversación en "hold".
 3. El flujo se detiene.
 
@@ -143,7 +143,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 
 ### Entradas
 
-- Consulta de la Persona interesada
+- Consulta del Cliente potencial
 - Evento seleccionado
 
 ### Salidas
@@ -158,7 +158,7 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 ## Observaciones
 
 - El flujo puede variar dependiendo del nivel de interés.
-- La calificación de la Persona interesada ocurre en paralelo (RF-COM-02).
+- La calificación del Cliente potencial ocurre en paralelo (RF-COM-02).
 
 ## Trazabilidad
 
@@ -179,3 +179,4 @@ El Cliente potencial inicia una conversación con el Bot y realiza una consulta 
 [CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito]: /docs/diseño/casos%20de%20uso/COM/CU-COM-004%20Presentación%20de%20avisos%20legales%20y%20registro%20de%20consentimiento%20tácito.md
 [CU-COM-005 Gestión de etapa comercial]: /docs/diseño/casos%20de%20uso/COM/CU-COM-005%20Calificación%20automática%20y%20gestión%20de%20etapa%20comercial.md
 [CU-EVT-001]: /docs/diseño/casos%20de%20uso/EVT/CU-EVT-001%20Registro%20en%20lista%20de%20espera.md
+[CU-EVT-003 Gestión de cupos de eventos]: /docs/diseño/casos%20de%20uso/EVT/CU-EVT-003%20Gestión%20de%20cupos%20de%20eventos.md
