@@ -16,7 +16,7 @@
 
 ## Objetivo
 
-Permitir que la Persona interesada se registre en la lista de espera de un Evento cuando el cupo esté lleno, para ser considerada cuando se libere una vacante.
+Permitir que el Cliente potencial se registre en la lista de espera de un Evento cuando el cupo esté lleno, para ser considerado cuando se libere una vacante.
 
 ## Alcance
 
@@ -64,7 +64,7 @@ El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el
 ## Flujo principal
 
 1. El Bot recibe la aceptación del Cliente potencial para registrarse en la lista de espera. [RF-EVT-06]
-2. El Bot verifica la etapa comercial del Cliente potencial para confirmar que es Prospecto. [RF-COM-02]
+2. El Sistema verifica la etapa comercial del Cliente potencial para confirmar que es Prospecto; el Bot recibe la confirmación. [RF-COM-02]
 3. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar el Banco de contexto de evento y validar que no exista un registro previo del mismo Cliente potencial en la lista de espera del Evento. [RF-EVT-06]
 4. Se activa [CU-COM-003 Gestión de bancos de contexto] para consultar la lista de espera del Evento y comparar la calificación del Prospecto con los registros existentes para determinar su posición. [RF-EVT-06]
 5. El Bot notifica al Prospecto su registro exitoso en la lista de espera y su posición actual. [RF-EVT-06]
@@ -102,12 +102,12 @@ El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el
 
 1. Ocurre un error al registrar en la lista
 2. El Sistema notifica al Bot
-3. El Bot informa a la Persona interesada
+3. El Bot informa al Cliente potencial
 4. El flujo finaliza
 
 ## Reglas de negocio / restricciones
 
-- Una Persona interesada no puede registrarse más de una vez por Evento
+- Un Cliente potencial no puede registrarse más de una vez por Evento
 - La lista de espera se ordena principalmente por calificación/puntaje, utilizando FIFO como criterio de desempate en caso de calificaciones iguales.
 - El registro requiere datos mínimos de contacto
 
@@ -116,7 +116,7 @@ El Cliente potencial intenta inscribirse a un Evento y el Sistema detecta que el
 ### Entradas
 
 - Solicitud de inscripción
-- Datos de la Persona interesada
+- Datos del Cliente potencial
 
 ### Salidas
 

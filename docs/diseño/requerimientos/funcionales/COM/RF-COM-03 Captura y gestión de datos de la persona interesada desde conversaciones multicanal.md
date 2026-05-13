@@ -2,12 +2,16 @@
 
 ## Descripcion
 
-El sistema debe capturar, almacenar y asociar automáticamente los datos del usuario provenientes de una conversación en una red social (Facebook, WhatsApp, Instagram, etc.).
+El sistema debe capturar, almacenar y asociar automáticamente los datos del Cliente potencial provenientes de una conversación en una red social (Facebook, WhatsApp, Instagram, etc.).
+
+## Prerrequisito
+
+- Consentimiento tácito registrado conforme al consent gate de RF-COM-07 antes de solicitar o capturar datos personales del Cliente potencial (nombre, teléfono, correo, etc.).
 
 ## Historia de usuario
 
 *Como* organización que gestiona leads desde múltiples canales
-*Quiero* capturar, almacenar y asociar automáticamente los datos del usuario desde cualquier conversación
+*Quiero* capturar, almacenar y asociar automáticamente los datos del Cliente potencial desde cualquier conversación
 *Para* centralizar la información y dar seguimiento eficiente a cada persona interesada
 
 ## Criterios de aceptación
@@ -18,6 +22,6 @@ El sistema debe capturar, almacenar y asociar automáticamente los datos del usu
 - [ ] El sistema permite capturar datos adicionales: eventos/cursos de interés, horario preferido, modalidad y notas internas.
 - [ ] El sistema valida el formato de correo electrónico y número de celular (opcional futuro: verificación por mensaje/código).
 - [ ] Los datos se almacenan en base de datos y pueden consultarse en cualquier momento por Bots autorizados.
-- [ ] Solo Usuarios autorizados pueden ver o editar datos sensibles del cliente potencial.
+- [ ] El sistema restringe la visualización y edición de datos sensibles del Cliente potencial a personal autorizado.
 - [ ] Cada conversación entrante genera o actualiza un registro asociado a una persona interesada.
 - [ ] La información puede recuperarse y consultarse en cualquier momento (persistencia comprobable).
