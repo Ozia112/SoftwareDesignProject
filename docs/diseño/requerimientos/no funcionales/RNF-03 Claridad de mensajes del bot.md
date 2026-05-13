@@ -35,7 +35,7 @@ Los mensajes del bot deben ser precisos, verificables y comprensibles para el Cl
   - Nunca exponer excepciones, stack traces, IDs internos, tokens o nombres de tablas.
   - Incluir metadatos estructurados en la respuesta (no visibles al usuario) con campos: `error_code`, `retryable` (boolean), `severity` (info/warn/error), `trace_id`.
   - Tiempo máximo para presentar el mensaje de fallo al usuario: ≤ 2 s desde la detección del error.
-  - Si la operación es reintento-able, el sistema debe permitir reintentos automáticos con backoff configurado y notificar al usuario del intento.
+  - Si la operación es reintentable, el sistema debe permitir reintentos automáticos con backoff configurado y notificar al usuario del intento.
 
 - Condiciones de validación:
   - Se construirán pruebas automáticas para los escenarios más frecuentes (reservas, transiciones de etapa, bloqueo por regla de negocio) que verifiquen:
