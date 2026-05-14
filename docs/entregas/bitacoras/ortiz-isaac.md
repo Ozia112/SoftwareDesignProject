@@ -4,28 +4,22 @@
 
 ## 8 – 14 de mayo de 2026
 
-Corrección y normalización de nombres de casos de uso, consolidación de PLs mergeadas y actualización de diagramas BPMN con referencias locales.
+Ajuste de campos de casos de uso, restauración y actualización de diagrama BPMN, y consolidación de documentación de diseño.
 
-- Renombramiento de CUs para mayor claridad semántica y consistencia terminológica:  
-  CU-COM-002 tenía nombre genérico "Flujo de la conversación entre persona interesada y el bot" que no reflejaba el tipo específico de cliente (potencial). CU-EVT-003 se llamaba "Sistema de inscripción" siendo su responsabilidad específica la gestión de cupos de eventos.  
+- Ajuste de campos específicos en casos de uso para alinearse a los nuevos procesos de gestión de cupos:  
+  Fue necesario actualizar CU-COM-001 y CU-COM-002 para reflejar correctamente los flujos de asignación de conversaciones y presentación del Cliente potencial al Bot. Se agregó CU-EVT-003 para consolidar la gestión de cupos de eventos como responsabilidad centralizada.  
   **Decisiones:**
-  - [X] [`CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md>) — Renombrado desde "Flujo de la conversación entre persona interesada y el bot" para especificar el tipo de actor (Cliente potencial). — **Modificado:** 12 / 05 / 2026
-  - [X] [`CU-EVT-003 Gestión de cupos de eventos.md`](</docs/diseño/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md>) — Renombrado desde "Sistema de inscripción" para precisar su responsabilidad específica. — **Modificado:** 12 / 05 / 2026
-  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Actualización de referencias y metadatos tras renombramientos de CUs. — **Modificado:** 12 / 05 / 2026
+  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Actualización de campos y flujos para alinearse a procesos vigentes. — **Modificado:** 12 / 05 / 2026
+  - [X] [`CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md>) — Ajuste de campos específicos para reflejar flujos actualizados. — **Modificado:** 12 / 05 / 2026
+  - [X] [`CU-EVT-003 Gestión de cupos de eventos.md`](</docs/diseño/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md>) — Creado para centralizar la gestión de cupos de eventos. — **Creado:** 12 / 05 / 2026
+  - **Commit relacionado:** `002dfbe` — feat(docs): update CU-COM-001 and CU-COM-002; add CU-EVT-003 for event capacity management (PSD-23, issue #73)
 
-- Consolidación de cuatro pull requests de correcciones documentales:  
-  Se realizó merge de cuatro PRs independientes que abordaban correcciones de autoridades conceptuales, cobertura de RNF, terminología genérica y contradicciones documentales.  
+- Restauración y actualización de diagrama BPMN con referencias locales y contenido mejorado:  
+  El archivo BPMNs.md tenía una referencia externa a Miro en lugar de vincular el diagrama SVG local. Se restauró y actualizó el diagrama BPMN-001.svg como visualización del flujo de conversación. Faltaba descripción clara del flujo BPMN-001 y sus relaciones con los casos de uso actualizados.  
   **Decisiones:**
-  - [X] [PR #78 - PSD-24: Corrección de autoridades conceptuales](</pull/78>) — Merge de correcciones de autoridades conceptuales (sistema ejecuta, bot emite señal). — **Mergeado:** 12 / 05 / 2026
-  - [X] [PR #79 - PSD-27: Completar cobertura de RNF](</pull/79>) — Merge de actualización de cobertura de requerimientos no funcionales para transiciones y mensajes de dominio. — **Mergeado:** 12 / 05 / 2026
-  - [X] [PR #81 - PSD-25: Corrección de terminología genérica](</pull/81>) — Merge de correcciones de terminología para alinearse al glosario. — **Mergeado:** 12 / 05 / 2026
-  - [X] [PR #80 - PSD-26: Corrección de contradicciones y referencias](</pull/80>) — Merge de correcciones de contradicciones, solapamientos y referencias faltantes entre artefactos. — **Mergeado:** 12 / 05 / 2026
-
-- Actualización de documentación de modelos BPMN con referencias locales y contenido mejorado:  
-  El archivo BPMNs.md tenía una referencia externa a Miro en lugar de vincular el diagrama SVG local. Faltaba descripción clara del flujo BPMN-001 y sus relaciones con los casos de uso.  
-  **Decisiones:**
-  - [X] `BPMN-001.svg` — Agregado al repositorio como diagrama visual del flujo de conversación entre Cliente potencial y Bot. — **Agregado:** 14 / 05 / 2026
-  - [X] [`BPMNs.md`](</docs/diseño/modelos de diseño/BPMNs.md>) — Actualización de referencias a Miro por link local al SVG; adición de descripción completa del flujo BPMN-001; inclusión de todos los casos de uso relacionados (CU-COM-001, CU-COM-003, CU-COM-004, CU-COM-005, CU-EVT-001, CU-EVT-003); documentación de flujo principal, flujos alternativos y excepciones. — **Modificado:** 14 / 05 / 2026
+  - [X] [`BPMN-001.svg`](</docs/diseño/modelos de diseño/BPMN-001.svg>) — Restaurado y actualizado como diagrama visual del flujo de conversación entre Cliente potencial y Bot. — **Restaurado/Actualizado:** 14 / 05 / 2026
+  - [X] [`BPMNs.md`](</docs/diseño/modelos de diseño/BPMNs.md>) — Actualización de referencias a Miro por link local al SVG; adición de descripción completa del flujo BPMN-001 basado en CU-COM-002; inclusión de todos los casos de uso relacionados (CU-COM-001, CU-COM-003, CU-COM-004, CU-COM-005, CU-EVT-001, CU-EVT-003); documentación de flujo principal, flujos alternativos y excepciones. — **Modificado:** 14 / 05 / 2026
+  - **Commit relacionado:** `60b0df5` — (docs): Actualizacion de BPMNs.md para reflejar el estado actual de los BPMNs y sus flujos descritos (PSD-22, issue #72)
 
 ---
 
