@@ -2,6 +2,33 @@
 
 ---
 
+## 8 – 14 de mayo de 2026
+
+Ajuste de campos de casos de uso, restauración y actualización de diagrama BPMN, y consolidación de documentación de diseño.
+
+- Ajuste de campos específicos en casos de uso para alinearse a los nuevos procesos de gestión de cupos:  
+  Fue necesario actualizar CU-COM-001 y CU-COM-002 para reflejar correctamente los flujos de asignación de conversaciones y presentación del Cliente potencial al Bot. Se agregó CU-EVT-003 para consolidar la gestión de cupos de eventos como responsabilidad centralizada.  
+  **Decisiones:**
+  - [X] [`CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md`](</docs/diseño/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md>) — Actualización de campos y flujos para alinearse a procesos vigentes. — **Modificado:** 12 / 05 / 2026
+  - [X] [`CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md`](</docs/diseño/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md>) — Ajuste de campos específicos para reflejar flujos actualizados. — **Modificado:** 12 / 05 / 2026
+  - [X] [`CU-EVT-003 Gestión de cupos de eventos.md`](</docs/diseño/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md>) — Creado para centralizar la gestión de cupos de eventos. — **Creado:** 12 / 05 / 2026
+  - **Commit relacionado:** `002dfbe` — feat(docs): update CU-COM-001 and CU-COM-002; add CU-EVT-003 for event capacity management (PSD-23, issue #73)
+
+- Restauración y actualización de diagrama BPMN con referencias locales y contenido mejorado:  
+  El archivo BPMNs.md tenía una referencia externa a Miro en lugar de vincular el diagrama SVG local. Se restauró y actualizó el diagrama BPMN-001.svg como visualización del flujo de conversación. Faltaba descripción clara del flujo BPMN-001 y sus relaciones con los casos de uso actualizados.  
+  **Decisiones:**
+  - [X] [`BPMN-001.svg`](</docs/diseño/modelos de diseño/BPMN-001.svg>) — Restaurado y actualizado como diagrama visual del flujo de conversación entre Cliente potencial y Bot. — **Restaurado/Actualizado:** 14 / 05 / 2026
+  - [X] [`BPMNs.md`](</docs/diseño/modelos de diseño/BPMNs.md>) — Actualización de referencias a Miro por link local al SVG; adición de descripción completa del flujo BPMN-001 basado en CU-COM-002; inclusión de todos los casos de uso relacionados (CU-COM-001, CU-COM-003, CU-COM-004, CU-COM-005, CU-EVT-001, CU-EVT-003); documentación de flujo principal, flujos alternativos y excepciones. — **Modificado:** 14 / 05 / 2026
+  - **Commit relacionado:** `60b0df5` — (docs): Actualizacion de BPMNs.md para reflejar el estado actual de los BPMNs y sus flujos descritos (PSD-22, issue #72)
+
+---
+
+## 1 – 7 de mayo de 2026
+
+Sin cambios en artefactos de diseño durante este periodo.
+
+---
+
 ## 24 – 30 de abril de 2026
 
 Corrección integral de contradicciones documentales, alineación del glosario, renombramiento y ampliación de CU-COM-003, corrección de trazabilidad en múltiples CUs y RFs de los dominios COM y EVT, eliminación de RF-EVT-05 por redundancia, creación de CU-COM-006 y normalización de metadatos tras el cambio.
