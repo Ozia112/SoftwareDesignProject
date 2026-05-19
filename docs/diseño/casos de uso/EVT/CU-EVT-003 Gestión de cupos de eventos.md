@@ -120,8 +120,8 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 
 1. En el paso 2, si el evento está lleno
 2. El sistema o el operador humano validan la inscripción y detienen/rechazan el proceso por falta de cupo
-3. El operador humano debe preguntarle al MQL si desea que lo pongan en la lista de espera
-4. Si el MQL acepta se le agrega [RF-EVT-06], caso contrario no se le agrega
+3. El operador humano debe preguntarle al Prospecto si desea que lo pongan en la lista de espera
+4. Si el Prospecto acepta se le agrega [RF-EVT-06], caso contrario no se le agrega
 5. El flujo termina
 
 ### E2. Falla la inscripción/registro de datos
@@ -144,7 +144,7 @@ Un operador humano quiere inscribir a un Prospecto interesado a un evento en esp
 - No se permite sobreinscripción cuando el cupo del evento está lleno.
 - La vacante temporal debe liberarse si no se confirma el pago dentro del periodo definido.
 - Las inscripciones extemporáneas deben bloquearse según la política del evento.
-- Si el MQL acepta, debe registrarse en lista de espera conforme a RF-EVT-06.
+- Si el Prospecto acepta, debe registrarse en lista de espera conforme a RF-EVT-06.
 
 ## Datos relevantes
 
