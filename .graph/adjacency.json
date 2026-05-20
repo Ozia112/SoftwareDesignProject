@@ -30,6 +30,7 @@
   },
   "AREA-DISENO": {
     "contains": [
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-DDR",
       "DOM-SECUENCIA"
@@ -532,6 +533,27 @@
       "DOM-CU-EVT"
     ]
   },
+  "DOM-ARQUITECTURA": {
+    "contains": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ]
+  },
+  "ARCH-ESTRUCTURA-CODIGO": {
+    "derives_from": [
+      "DDR-02",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "implements_future": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
   "DOM-DDR": {
     "contains": [
       "DDR-01",
@@ -687,6 +709,20 @@
     ]
   },
   "SUP-SCRIPTS": {
+    "contains": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-SCRIPT-ACTIVITY-SUMMARY": {
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT": {
     "supports": [
       "SUP-ENTREGAS"
     ]
@@ -697,7 +733,6 @@
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING"
     ]
   },
@@ -733,13 +768,6 @@
     "supports": [
       "AREA-SRC-FUTURO",
       "DDR-02"
-    ]
-  },
-  "SUP-UTILS-NOTAS": {
-    "references": [
-      "AREA-ANALISIS",
-      "AREA-DISENO",
-      "AREA-SOPORTE"
     ]
   },
   "SUP-MAPA-NODOS": {

@@ -17,9 +17,6 @@
     "contained_by": [
       "REPO"
     ],
-    "referenced_by": [
-      "SUP-UTILS-NOTAS"
-    ],
     "supported_by": [
       "SUP-MEETINGS",
       "SUP-UTILS-RESTRUCTURING"
@@ -29,9 +26,6 @@
     "contained_by": [
       "REPO"
     ],
-    "referenced_by": [
-      "SUP-UTILS-NOTAS"
-    ],
     "supported_by": [
       "SUP-MEETINGS",
       "SUP-UTILS-RESTRUCTURING"
@@ -40,9 +34,6 @@
   "AREA-SOPORTE": {
     "contained_by": [
       "REPO"
-    ],
-    "referenced_by": [
-      "SUP-UTILS-NOTAS"
     ],
     "supported_by": [
       "SUP-UTILS-RESTRUCTURING",
@@ -54,6 +45,7 @@
       "REPO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "DDR-02"
     ],
     "supported_by": [
@@ -581,6 +573,16 @@
       "DOM-MODELOS-PROBLEMA"
     ]
   },
+  "DOM-ARQUITECTURA": {
+    "contained_by": [
+      "AREA-DISENO"
+    ]
+  },
+  "ARCH-ESTRUCTURA-CODIGO": {
+    "contained_by": [
+      "DOM-ARQUITECTURA"
+    ]
+  },
   "DOM-DDR": {
     "contained_by": [
       "AREA-DISENO"
@@ -619,6 +621,7 @@
       "DOM-DDR"
     ],
     "derived_by": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "AREA-SRC-FUTURO",
       "SRC-ORQ-COMMERCIAL",
       "SRC-ORQ-CONTEXT",
@@ -729,6 +732,8 @@
     "supported_by": [
       "README",
       "SUP-PROMPTS",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-SCRIPTS"
     ]
   },
@@ -748,6 +753,16 @@
       "SUP-ENTREGAS"
     ]
   },
+  "SUP-SCRIPT-ACTIVITY-SUMMARY": {
+    "contained_by": [
+      "SUP-SCRIPTS"
+    ]
+  },
+  "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT": {
+    "contained_by": [
+      "SUP-SCRIPTS"
+    ]
+  },
   "SUP-UTILS": {
     "contained_by": [
       "AREA-SOPORTE"
@@ -763,6 +778,7 @@
       "SUP-UTILS"
     ],
     "derived_by": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "DDR-02"
     ]
   },
@@ -781,11 +797,6 @@
       "SUP-UTILS"
     ]
   },
-  "SUP-UTILS-NOTAS": {
-    "contained_by": [
-      "SUP-UTILS"
-    ]
-  },
   "SUP-MAPA-NODOS": {
     "contained_by": [
       "AREA-SOPORTE"
@@ -796,6 +807,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-001",
       "CU-COM-002",
       "CU-COM-004",
@@ -812,6 +824,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-005",
       "RF-COM-02"
     ]
@@ -821,6 +834,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-003",
       "RF-COM-04",
       "RF-COM-05",
@@ -832,6 +846,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-EVT-001",
       "CU-EVT-002",
       "CU-EVT-003",
@@ -848,6 +863,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-006",
       "RF-COM-08",
       "RF-EVT-03"
@@ -858,6 +874,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-001",
       "RNF-01"
     ]
@@ -867,6 +884,7 @@
       "AREA-SRC-FUTURO"
     ],
     "implemented_by_future": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "DDR-02",
       "RNF-01",
       "RNF-05"

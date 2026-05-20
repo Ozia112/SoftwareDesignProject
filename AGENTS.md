@@ -47,6 +47,31 @@ Regenerate and commit `.graph/` whenever the YAML source changes so agents can u
 
 ---
 
+## Graph Node ID Policy
+
+Graph node IDs MUST represent stable repository artifacts, domains, decisions, requirements, use cases, or future source anchors.
+
+Do not use temporary GitHub issue IDs, sprint ticket IDs, or task IDs as graph node IDs when the ticket only tracks the work needed to create or update an artifact. Those IDs become obsolete when the issue closes and pollute long-lived retrieval.
+
+Use a stable artifact-oriented ID instead, for example:
+
+- `ARCH-ESTRUCTURA-CODIGO` for `docs/diseño/arquitectura/estructura-de-codigo.md`
+- `DDR-*` for design decisions
+- `CU-*`, `RF-*`, `RNF-*`, `RN-*` for analysis artifacts
+- `SEQ-*`, `COLLAB-*` for design diagrams
+- `SRC-ORQ-*` for future source anchors
+
+Issue IDs such as `PSD-29` may be mentioned in PR descriptions, commit messages, changelog notes, or short document provenance when useful, but they SHOULD NOT be canonical graph IDs unless the issue itself creates a durable repository artifact whose stable identifier is intentionally the same as the issue.
+
+When adding documentation created from an issue:
+
+1. Choose the final artifact path first.
+2. Choose a stable node ID based on the artifact role and location.
+3. Add graph aliases for searchable concepts, not for transient ticket bookkeeping.
+4. Link the issue in the PR or commit instead of making it part of the graph identity.
+
+---
+
 ## Mandatory Search Order
 
 Before using grep, glob, recursive search, or broad document scanning, agents MUST follow this order:
@@ -171,7 +196,7 @@ Claude Code and other coding agents MUST align implementation with the documente
 | Reglas EVT | `docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md` |
 | DDR-01 | `docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md` |
 | DDR-02 | `docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md` |
-| Estrategia v2.0 | `docs/soporte/utils/estrategia de implementacion chat.md` |
+| Estrategia v2.0 | `utils/estrategia de implementacion chat.md` |
 
 ### Central Principle
 

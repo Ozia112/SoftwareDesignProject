@@ -86,6 +86,11 @@
   },
   {
     "from": "AREA-DISENO",
+    "to": "DOM-ARQUITECTURA",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-DISENO",
     "to": "DOM-DDR",
     "type": "contains"
   },
@@ -1210,6 +1215,61 @@
     "type": "supports"
   },
   {
+    "from": "DOM-ARQUITECTURA",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
+    "type": "contains"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+    "type": "derives_from"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "AREA-SRC-FUTURO",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-TENANT",
+    "type": "implements_future"
+  },
+  {
+    "from": "ARCH-ESTRUCTURA-CODIGO",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "implements_future"
+  },
+  {
     "from": "DOM-DDR",
     "to": "DDR-01",
     "type": "contains"
@@ -1571,6 +1631,26 @@
   },
   {
     "from": "SUP-SCRIPTS",
+    "to": "SUP-SCRIPT-ACTIVITY-SUMMARY",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-SCRIPTS",
+    "to": "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-SCRIPTS",
+    "to": "SUP-ENTREGAS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-SCRIPT-ACTIVITY-SUMMARY",
+    "to": "SUP-ENTREGAS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
     "to": "SUP-ENTREGAS",
     "type": "supports"
   },
@@ -1597,11 +1677,6 @@
   {
     "from": "SUP-UTILS",
     "to": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
-    "type": "contains"
-  },
-  {
-    "from": "SUP-UTILS",
-    "to": "SUP-UTILS-NOTAS",
     "type": "contains"
   },
   {
@@ -1663,21 +1738,6 @@
     "from": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
     "to": "DDR-02",
     "type": "supports"
-  },
-  {
-    "from": "SUP-UTILS-NOTAS",
-    "to": "AREA-ANALISIS",
-    "type": "references"
-  },
-  {
-    "from": "SUP-UTILS-NOTAS",
-    "to": "AREA-DISENO",
-    "type": "references"
-  },
-  {
-    "from": "SUP-UTILS-NOTAS",
-    "to": "AREA-SOPORTE",
-    "type": "references"
   },
   {
     "from": "SUP-MAPA-NODOS",
