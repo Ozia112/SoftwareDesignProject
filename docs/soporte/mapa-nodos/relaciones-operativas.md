@@ -33,8 +33,8 @@ Este documento resume recorridos frecuentes sobre el grafo. Sirve como "primera 
 1. Abrir el `CU-*`.
 2. Revisar su bloque `RF relacionados`, `Reglas de negocio relacionadas` y `Trazabilidad`.
 3. Comparar con el catalogo `RN-COM` o `RN-EVT`.
-4. Revisar `docs/soporte/utils/guia-depuracion-de-casos-de-uso.md`.
-5. Si hay contradicciones, revisar `docs/soporte/utils/contradicciones-cus.md`.
+4. Revisar `utils/guia-depuracion-de-casos-de-uso.md`.
+5. Si hay contradicciones, revisar `utils/contradicciones-cus.md`.
 
 ### Preparar una entrega o reporte
 

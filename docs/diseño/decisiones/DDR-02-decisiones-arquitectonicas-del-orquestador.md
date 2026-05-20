@@ -7,7 +7,7 @@
 - Estado: Propuesto
 - Fecha: 2026-05-19
 - Responsable: Maximiliano Carrillo Alvarado
-- Referencias: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [Estrategia de implementación v2.0](/docs/soporte/utils/estrategia%20de%20implementacion%20chat.md)
+- Referencias: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [Estrategia de implementación v2.0](/utils/estrategia%20de%20implementacion%20chat.md)
 
 ---
 
@@ -320,7 +320,7 @@ Se adopta el stack recomendado en la estrategia v2.0 por su alineación directa 
 ## Trazabilidad
 
 - DDR relacionado: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md)
-- Estrategia: [Estrategia de implementación v2.0](/docs/soporte/utils/estrategia%20de%20implementacion%20chat.md)
+- Estrategia: [Estrategia de implementación v2.0](/utils/estrategia%20de%20implementacion%20chat.md)
 - CU clave:
 	- CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006
 	- CU-EVT-001, CU-EVT-002, CU-EVT-003

@@ -57,7 +57,7 @@ nodes:
     title: Documentacion de diseno
     path: docs/diseño
     purpose: "Solucion tecnica, decisiones y comportamiento entre componentes."
-    contains: [DOM-DDR, DOM-SECUENCIA, DOM-COLABORACION]
+    contains: [DOM-ARQUITECTURA, DOM-DDR, DOM-SECUENCIA, DOM-COLABORACION]
 
   - id: AREA-SOPORTE
     type: area
@@ -422,6 +422,28 @@ nodes:
     path: docs/analisis/modelos del problema/casos de uso/CU-Plantilla.md
     supports: [DOM-CU-COM, DOM-CU-EVT]
 
+  - id: DOM-ARQUITECTURA
+    type: domain
+    title: Arquitectura de diseno
+    path: docs/diseño/arquitectura
+    contains: [ARCH-ESTRUCTURA-CODIGO]
+
+  - id: ARCH-ESTRUCTURA-CODIGO
+    type: artifact
+    title: Estructura de codigo, stack tecnologico y justificacion
+    path: docs/diseño/arquitectura/estructura-de-codigo.md
+    aliases: [estructura-de-codigo, blueprint de codigo, stack tecnologico, monorepo, prisma schema]
+    derives_from: [DDR-02, SUP-UTILS-ESTRATEGIA-IMPLEMENTACION]
+    implements_future:
+      - AREA-SRC-FUTURO
+      - SRC-ORQ-CONVERSATION
+      - SRC-ORQ-COMMERCIAL
+      - SRC-ORQ-CONTEXT
+      - SRC-ORQ-EVENTS
+      - SRC-ORQ-NOTIFICATIONS
+      - SRC-ORQ-TENANT
+      - SRC-ORQ-TOOL-CALLS
+
   - id: DOM-DDR
     type: domain
     title: Decisiones de diseno
@@ -547,57 +569,65 @@ nodes:
   - id: SUP-SCRIPTS
     type: domain
     title: Scripts de soporte
-    path: docs/soporte/scripts
+    path: utils/scripts
+    contains:
+      - SUP-SCRIPT-ACTIVITY-SUMMARY
+      - SUP-SCRIPT-MONTHLY-REPORT-CONTEXT
+    supports: [SUP-ENTREGAS]
+
+  - id: SUP-SCRIPT-ACTIVITY-SUMMARY
+    type: artifact
+    title: Generador de resumen de actividad individual
+    path: utils/scripts/generate-individual-activity-summary.ps1
+    supports: [SUP-ENTREGAS]
+
+  - id: SUP-SCRIPT-MONTHLY-REPORT-CONTEXT
+    type: artifact
+    title: Generador de contexto de reporte mensual
+    path: utils/scripts/generate-monthly-report-context.ps1
     supports: [SUP-ENTREGAS]
 
   - id: SUP-UTILS
     type: domain
     title: Utilidades y analisis auxiliares
-    path: docs/soporte/utils
+    path: utils
     contains:
       - SUP-UTILS-RESTRUCTURING
       - SUP-UTILS-ESTRATEGIA-IMPLEMENTACION
       - SUP-UTILS-GUIA-DEPURACION-CU
       - SUP-UTILS-CONTRADICCIONES-CU
       - SUP-UTILS-DESAJUSTE-IMPLEMENTACION
-      - SUP-UTILS-NOTAS
 
   - id: SUP-UTILS-RESTRUCTURING
     type: artifact
     title: Reestructuracion documental entre analisis y diseno
-    path: docs/soporte/utils/reestructuracion-analisis-diseno.md
+    path: utils/reestructuracion-analisis-diseno.md
     supports: [AREA-ANALISIS, AREA-DISENO, AREA-SOPORTE]
 
   - id: SUP-UTILS-ESTRATEGIA-IMPLEMENTACION
     type: artifact
     title: Estrategia de implementacion chat
-    path: docs/soporte/utils/estrategia de implementacion chat.md
+    path: utils/estrategia de implementacion chat.md
     references: [DDR-02]
     supports: [AREA-SRC-FUTURO]
 
   - id: SUP-UTILS-GUIA-DEPURACION-CU
     type: artifact
     title: Guia de depuracion de casos de uso
-    path: docs/soporte/utils/guia-depuracion-de-casos-de-uso.md
+    path: utils/guia-depuracion-de-casos-de-uso.md
     supports: [DOM-CU-COM, DOM-CU-EVT]
 
   - id: SUP-UTILS-CONTRADICCIONES-CU
     type: artifact
     title: Contradicciones en casos de uso
-    path: docs/soporte/utils/contradicciones-cus.md
+    path: utils/contradicciones-cus.md
     supports: [DOM-CU-COM, DOM-CU-EVT, DDR-01]
 
   - id: SUP-UTILS-DESAJUSTE-IMPLEMENTACION
     type: artifact
     title: Reporte de desajuste de artefactos con implementacion
-    path: docs/soporte/utils/reporte de desajuste de arterfactos con implementacion.md
+    path: utils/reporte de desajuste de arterfactos con implementacion.md
     supports: [AREA-SRC-FUTURO, DDR-02]
-
-  - id: SUP-UTILS-NOTAS
-    type: artifact
-    title: Notas de trabajo
-    path: docs/soporte/utils/notas.md
-    references: [AREA-ANALISIS, AREA-DISENO, AREA-SOPORTE]
 
   - id: SUP-MAPA-NODOS
     type: domain

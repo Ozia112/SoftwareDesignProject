@@ -504,6 +504,30 @@
       "tags": [],
       "aliases": []
     },
+    "DOM-ARQUITECTURA": {
+      "id": "DOM-ARQUITECTURA",
+      "type": "domain",
+      "title": "Arquitectura de diseno",
+      "path": "docs/diseño/arquitectura",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "ARCH-ESTRUCTURA-CODIGO": {
+      "id": "ARCH-ESTRUCTURA-CODIGO",
+      "type": "artifact",
+      "title": "Estructura de codigo, stack tecnologico y justificacion",
+      "path": "docs/diseño/arquitectura/estructura-de-codigo.md",
+      "status": null,
+      "tags": [],
+      "aliases": [
+        "estructura-de-codigo",
+        "blueprint de codigo",
+        "stack tecnologico",
+        "monorepo",
+        "prisma schema"
+      ]
+    },
     "DOM-DDR": {
       "id": "DOM-DDR",
       "type": "domain",
@@ -679,7 +703,25 @@
       "id": "SUP-SCRIPTS",
       "type": "domain",
       "title": "Scripts de soporte",
-      "path": "docs/soporte/scripts",
+      "path": "utils/scripts",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-SCRIPT-ACTIVITY-SUMMARY": {
+      "id": "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "type": "artifact",
+      "title": "Generador de resumen de actividad individual",
+      "path": "utils/scripts/generate-individual-activity-summary.ps1",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT": {
+      "id": "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "type": "artifact",
+      "title": "Generador de contexto de reporte mensual",
+      "path": "utils/scripts/generate-monthly-report-context.ps1",
       "status": null,
       "tags": [],
       "aliases": []
@@ -688,7 +730,7 @@
       "id": "SUP-UTILS",
       "type": "domain",
       "title": "Utilidades y analisis auxiliares",
-      "path": "docs/soporte/utils",
+      "path": "utils",
       "status": null,
       "tags": [],
       "aliases": []
@@ -697,7 +739,7 @@
       "id": "SUP-UTILS-RESTRUCTURING",
       "type": "artifact",
       "title": "Reestructuracion documental entre analisis y diseno",
-      "path": "docs/soporte/utils/reestructuracion-analisis-diseno.md",
+      "path": "utils/reestructuracion-analisis-diseno.md",
       "status": null,
       "tags": [],
       "aliases": []
@@ -706,7 +748,7 @@
       "id": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "type": "artifact",
       "title": "Estrategia de implementacion chat",
-      "path": "docs/soporte/utils/estrategia de implementacion chat.md",
+      "path": "utils/estrategia de implementacion chat.md",
       "status": null,
       "tags": [],
       "aliases": []
@@ -715,7 +757,7 @@
       "id": "SUP-UTILS-GUIA-DEPURACION-CU",
       "type": "artifact",
       "title": "Guia de depuracion de casos de uso",
-      "path": "docs/soporte/utils/guia-depuracion-de-casos-de-uso.md",
+      "path": "utils/guia-depuracion-de-casos-de-uso.md",
       "status": null,
       "tags": [],
       "aliases": []
@@ -724,7 +766,7 @@
       "id": "SUP-UTILS-CONTRADICCIONES-CU",
       "type": "artifact",
       "title": "Contradicciones en casos de uso",
-      "path": "docs/soporte/utils/contradicciones-cus.md",
+      "path": "utils/contradicciones-cus.md",
       "status": null,
       "tags": [],
       "aliases": []
@@ -733,16 +775,7 @@
       "id": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "type": "artifact",
       "title": "Reporte de desajuste de artefactos con implementacion",
-      "path": "docs/soporte/utils/reporte de desajuste de arterfactos con implementacion.md",
-      "status": null,
-      "tags": [],
-      "aliases": []
-    },
-    "SUP-UTILS-NOTAS": {
-      "id": "SUP-UTILS-NOTAS",
-      "type": "artifact",
-      "title": "Notas de trabajo",
-      "path": "docs/soporte/utils/notas.md",
+      "path": "utils/reporte de desajuste de arterfactos con implementacion.md",
       "status": null,
       "tags": [],
       "aliases": []
@@ -893,6 +926,12 @@
       "SEQ-01",
       "UC-DIAGRAM"
     ],
+    "actividad": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "activity": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
     "actores": [
       "RNF-01"
     ],
@@ -967,6 +1006,9 @@
     "ante": [
       "RF-EVT-03"
     ],
+    "arch": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
     "area": [
       "AREA-ANALISIS",
       "AREA-DISENO",
@@ -976,6 +1018,10 @@
     "arquitectonicas": [
       "DDR-02"
     ],
+    "arquitectura": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "DOM-ARQUITECTURA"
+    ],
     "artefactos": [
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
     ],
@@ -983,6 +1029,7 @@
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
     ],
     "artifact": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "BPMN-001",
       "BPMN-INDEX",
       "COLLAB-01",
@@ -1031,11 +1078,12 @@
       "SEQ-03",
       "SEQ-04",
       "SEQ-INDEX",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-UTILS-CONTRADICCIONES-CU",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
@@ -1071,6 +1119,9 @@
     ],
     "bloqueo": [
       "RF-EVT-04"
+    ],
+    "blueprint": [
+      "ARCH-ESTRUCTURA-CODIGO"
     ],
     "bot": [
       "CU-COM-001",
@@ -1164,6 +1215,7 @@
       "SRC-ORQ-TOOL-CALLS"
     ],
     "codigo": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "AREA-SRC-FUTURO"
     ],
     "colaboracion": [
@@ -1241,11 +1293,13 @@
       "SEQ-01"
     ],
     "context": [
-      "SRC-ORQ-CONTEXT"
+      "SRC-ORQ-CONTEXT",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ],
     "contexto": [
       "CU-COM-003",
-      "SRC-ORQ-CONTEXT"
+      "SRC-ORQ-CONTEXT",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ],
     "continuidad": [
       "RNF-04"
@@ -1307,6 +1361,7 @@
       "DOM-DDR"
     ],
     "de": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "AREA-ANALISIS",
       "AREA-DISENO",
       "AREA-SOPORTE",
@@ -1323,6 +1378,7 @@
       "CU-EVT-003",
       "CU-PLANTILLA",
       "DDR-01",
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-CU-COM",
       "DOM-CU-EVT",
@@ -1361,12 +1417,13 @@
       "SRC-ORQ-NOTIFICATIONS",
       "SRC-ORQ-TOOL-CALLS",
       "SUP-MAPA-NODOS",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-SCRIPTS",
       "SUP-UTILS-CONTRADICCIONES-CU",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-WORKFLOW-TEMPLATES",
       "UC-DIAGRAM"
     ],
@@ -1444,12 +1501,14 @@
       "SEQ-INDEX"
     ],
     "diseno": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "AREA-DISENO",
       "COLLAB-01",
       "COLLAB-02",
       "COLLAB-INDEX",
       "DDR-01",
       "DDR-02",
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-DDR",
       "DOM-SECUENCIA",
@@ -1470,6 +1529,7 @@
       "RF-COM-06"
     ],
     "docs": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "AREA-ANALISIS",
       "AREA-DISENO",
       "AREA-SOPORTE",
@@ -1490,6 +1550,7 @@
       "CU-PLANTILLA",
       "DDR-01",
       "DDR-02",
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-CU-COM",
       "DOM-CU-EVT",
@@ -1537,14 +1598,6 @@
       "SUP-MAPA-NODOS",
       "SUP-MEETINGS",
       "SUP-PROMPTS",
-      "SUP-SCRIPTS",
-      "SUP-UTILS",
-      "SUP-UTILS-CONTRADICCIONES-CU",
-      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
-      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
-      "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
-      "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
@@ -1559,6 +1612,7 @@
       "SUP-UTILS-RESTRUCTURING"
     ],
     "dom": [
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-CU-COM",
       "DOM-CU-EVT",
@@ -1574,6 +1628,7 @@
       "DOM-SECUENCIA"
     ],
     "domain": [
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-CU-COM",
       "DOM-CU-EVT",
@@ -1634,6 +1689,9 @@
     ],
     "estrategia": [
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "estructura": [
+      "ARCH-ESTRUCTURA-CODIGO"
     ],
     "etapa": [
       "CU-COM-005",
@@ -1720,6 +1778,14 @@
     "ganado": [
       "COLLAB-01"
     ],
+    "generador": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "generate": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
     "gestion": [
       "CU-COM-003",
       "CU-COM-005",
@@ -1765,6 +1831,9 @@
       "COLLAB-INDEX",
       "SEQ-INDEX"
     ],
+    "individual": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
     "informacion": [
       "RF-COM-05"
     ],
@@ -1793,6 +1862,9 @@
     ],
     "issues": [
       "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "justificacion": [
+      "ARCH-ESTRUCTURA-CODIGO"
     ],
     "la": [
       "CU-COM-002",
@@ -1826,6 +1898,7 @@
       "SUP-MAPA-NODOS"
     ],
     "md": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "BPMN-INDEX",
       "COLLAB-INDEX",
       "CU-COM-001",
@@ -1871,7 +1944,6 @@
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW-PIPELINE"
     ],
@@ -1880,6 +1952,9 @@
     ],
     "mensajes": [
       "RNF-03"
+    ],
+    "mensual": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ],
     "modelos": [
       "BPMN-001",
@@ -1906,6 +1981,12 @@
       "SRC-ORQ-EVENTS",
       "SRC-ORQ-NOTIFICATIONS",
       "SRC-ORQ-TENANT"
+    ],
+    "monorepo": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "monthly": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ],
     "mostrar": [
       "RF-COM-04"
@@ -1939,9 +2020,6 @@
     ],
     "nodos": [
       "SUP-MAPA-NODOS"
-    ],
-    "notas": [
-      "SUP-UTILS-NOTAS"
     ],
     "notificacion": [
       "RF-EVT-03",
@@ -2034,6 +2112,9 @@
       "COLLAB-01",
       "README"
     ],
+    "prisma": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
     "privacidad": [
       "RF-COM-07"
     ],
@@ -2065,6 +2146,10 @@
     ],
     "prospecto": [
       "SEQ-01"
+    ],
+    "ps1": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ],
     "reactivacion": [
       "CU-COM-006",
@@ -2099,7 +2184,11 @@
     "repo": [
       "REPO"
     ],
+    "report": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
     "reporte": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
     ],
     "repositorio": [
@@ -2138,6 +2227,9 @@
     ],
     "restructuring": [
       "SUP-UTILS-RESTRUCTURING"
+    ],
+    "resumen": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
     ],
     "reuniones": [
       "SUP-MEETINGS"
@@ -2185,7 +2277,16 @@
     "root": [
       "REPO"
     ],
+    "schema": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "script": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
     "scripts": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-SCRIPTS"
     ],
     "secuencia": [
@@ -2229,13 +2330,6 @@
       "SUP-MEETINGS",
       "SUP-PROMPTS",
       "SUP-SCRIPTS",
-      "SUP-UTILS",
-      "SUP-UTILS-CONTRADICCIONES-CU",
-      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
-      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
-      "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
-      "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES"
@@ -2253,18 +2347,25 @@
       "SRC-ORQ-TENANT",
       "SRC-ORQ-TOOL-CALLS"
     ],
+    "stack": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "summary": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
     "sup": [
       "SUP-ENTREGAS",
       "SUP-MAPA-NODOS",
       "SUP-MEETINGS",
       "SUP-PROMPTS",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-SCRIPTS",
       "SUP-UTILS",
       "SUP-UTILS-CONTRADICCIONES-CU",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW",
       "SUP-WORKFLOW-PIPELINE",
@@ -2282,6 +2383,9 @@
     "tacito": [
       "CU-COM-004"
     ],
+    "tecnologico": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
     "templates": [
       "SUP-WORKFLOW-TEMPLATES"
     ],
@@ -2293,9 +2397,6 @@
     ],
     "tool": [
       "SRC-ORQ-TOOL-CALLS"
-    ],
-    "trabajo": [
-      "SUP-UTILS-NOTAS"
     ],
     "transicion": [
       "SEQ-01"
@@ -2341,12 +2442,14 @@
       "SUP-UTILS"
     ],
     "utils": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-SCRIPTS",
       "SUP-UTILS",
       "SUP-UTILS-CONTRADICCIONES-CU",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING"
     ],
     "vacante": [
@@ -2374,6 +2477,7 @@
       "RNF-XX-PLANTILLA"
     ],
     "y": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-002",
       "CU-COM-004",
       "CU-COM-005",
@@ -2399,6 +2503,7 @@
       "AREA-SRC-FUTURO"
     ],
     "artifact": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "BPMN-001",
       "BPMN-INDEX",
       "COLLAB-01",
@@ -2447,11 +2552,12 @@
       "SEQ-03",
       "SEQ-04",
       "SEQ-INDEX",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
       "SUP-UTILS-CONTRADICCIONES-CU",
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
-      "SUP-UTILS-NOTAS",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
@@ -2467,6 +2573,7 @@
       "SRC-ORQ-TOOL-CALLS"
     ],
     "domain": [
+      "DOM-ARQUITECTURA",
       "DOM-COLABORACION",
       "DOM-CU-COM",
       "DOM-CU-EVT",
@@ -2696,6 +2803,12 @@
     "docs/diseño": [
       "AREA-DISENO"
     ],
+    "docs/diseño/arquitectura": [
+      "DOM-ARQUITECTURA"
+    ],
+    "docs/diseño/arquitectura/estructura-de-codigo.md": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
     "docs/diseño/comportamiento/colaboracion": [
       "DOM-COLABORACION"
     ],
@@ -2753,30 +2866,6 @@
     "docs/soporte/prompts": [
       "SUP-PROMPTS"
     ],
-    "docs/soporte/scripts": [
-      "SUP-SCRIPTS"
-    ],
-    "docs/soporte/utils": [
-      "SUP-UTILS"
-    ],
-    "docs/soporte/utils/contradicciones-cus.md": [
-      "SUP-UTILS-CONTRADICCIONES-CU"
-    ],
-    "docs/soporte/utils/estrategia de implementacion chat.md": [
-      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
-    ],
-    "docs/soporte/utils/guia-depuracion-de-casos-de-uso.md": [
-      "SUP-UTILS-GUIA-DEPURACION-CU"
-    ],
-    "docs/soporte/utils/notas.md": [
-      "SUP-UTILS-NOTAS"
-    ],
-    "docs/soporte/utils/reestructuracion-analisis-diseno.md": [
-      "SUP-UTILS-RESTRUCTURING"
-    ],
-    "docs/soporte/utils/reporte de desajuste de arterfactos con implementacion.md": [
-      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
-    ],
     "docs/soporte/workflow": [
       "SUP-WORKFLOW",
       "SUP-WORKFLOW-TEMPLATES"
@@ -2807,6 +2896,33 @@
     ],
     "src/tool-calls": [
       "SRC-ORQ-TOOL-CALLS"
+    ],
+    "utils": [
+      "SUP-UTILS"
+    ],
+    "utils/contradicciones-cus.md": [
+      "SUP-UTILS-CONTRADICCIONES-CU"
+    ],
+    "utils/estrategia de implementacion chat.md": [
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "utils/guia-depuracion-de-casos-de-uso.md": [
+      "SUP-UTILS-GUIA-DEPURACION-CU"
+    ],
+    "utils/reestructuracion-analisis-diseno.md": [
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "utils/reporte de desajuste de arterfactos con implementacion.md": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "utils/scripts": [
+      "SUP-SCRIPTS"
+    ],
+    "utils/scripts/generate-individual-activity-summary.ps1": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "utils/scripts/generate-monthly-report-context.ps1": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
     ]
   }
 }
