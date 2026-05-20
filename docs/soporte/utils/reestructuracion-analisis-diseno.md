@@ -127,3 +127,25 @@ Si el objetivo es separar con claridad analisis y diseño, la correccion mas imp
 1. Todo `RF`, `RNF`, `CU`, `glosario`, `BPMN` y `diagrama de casos de uso` debe salir de la carpeta `diseño`.
 2. En `diseño` deberian quedar solo decisiones, arquitectura y diagramas de comportamiento de la solucion.
 3. `meetings`, `workflow`, `prompts` y `entregas` deben vivir como documentacion de soporte, fuera de la division analisis/diseño.
+
+## Actualizacion para mapa de nodos
+
+Al construir el mapa inicial del repositorio se detectaron artefactos que no estaban cubiertos por la tabla original o que fueron agregados despues de la reestructuracion inicial.
+
+| Artefacto actual                                                                                   | Clasificacion propuesta | Nodo sugerido                         | Motivo                                                                 |
+| -------------------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------- | ---------------------------------------------------------------------- |
+| `docs/analisis/reglas de negocio/README.md`                                                        | Analisis                | `DOM-RN-COM` / `DOM-RN-EVT`           | Define criterio y convencion para reglas de negocio.                   |
+| `docs/analisis/reglas de negocio/RN-Plantilla.md`                                                  | Analisis                | `RN-PLANTILLA`                        | Plantilla para reglas de negocio.                                      |
+| `docs/analisis/reglas de negocio/COM/catalogo-rn-com.md`                                          | Analisis                | `RN-COM-CATALOG`                      | Catalogo normativo de reglas comerciales.                              |
+| `docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md`                                          | Analisis                | `RN-EVT-CATALOG`                      | Catalogo normativo de reglas de eventos.                               |
+| `docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md`                     | Diseño                  | `DDR-02`                              | Decision arquitectonica que conecta documentacion con codigo futuro.    |
+| `docs/soporte/entregas/**`                                                                         | Soporte                 | `SUP-ENTREGAS`                        | Evidencia de avance, reportes y bitacoras.                             |
+| `docs/soporte/scripts/generate-individual-activity-summary.ps1`                                    | Soporte                 | `SUP-SCRIPTS`                         | Automatizacion para reportes individuales.                             |
+| `docs/soporte/scripts/generate-monthly-report-context.ps1`                                         | Soporte                 | `SUP-SCRIPTS`                         | Automatizacion para contexto de reportes mensuales.                    |
+| `docs/soporte/utils/contradicciones-cus.md`                                                        | Soporte                 | `SUP-UTILS-CONTRADICCIONES-CU`        | Analisis auxiliar para depuracion de casos de uso.                     |
+| `docs/soporte/utils/estrategia de implementacion chat.md`                                          | Soporte                 | `SUP-UTILS-ESTRATEGIA-IMPLEMENTACION` | Insumo tecnico auxiliar usado por `DDR-02`.                            |
+| `docs/soporte/utils/guia-depuracion-de-casos-de-uso.md`                                           | Soporte                 | `SUP-UTILS-GUIA-DEPURACION-CU`        | Guia operativa para mejorar casos de uso.                              |
+| `docs/soporte/utils/reporte de desajuste de arterfactos con implementacion.md`                     | Soporte                 | `SUP-UTILS-DESAJUSTE-IMPLEMENTACION`  | Reporte auxiliar para alinear artefactos con implementacion.           |
+| `docs/soporte/mapa-nodos/**`                                                                       | Soporte                 | `SUP-MAPA-NODOS`                      | Capa de navegacion para agentes de IA y futura trazabilidad con `src/`. |
+
+El mapa vivo queda en `docs/soporte/mapa-nodos/` y debe actualizarse cada vez que se agregue un RF, RNF, CU, RN, DDR, diagrama relevante o modulo bajo `src/`.

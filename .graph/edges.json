@@ -1,0 +1,1817 @@
+[
+  {
+    "from": "REPO",
+    "to": "README",
+    "type": "contains"
+  },
+  {
+    "from": "REPO",
+    "to": "AREA-ANALISIS",
+    "type": "contains"
+  },
+  {
+    "from": "REPO",
+    "to": "AREA-DISENO",
+    "type": "contains"
+  },
+  {
+    "from": "REPO",
+    "to": "AREA-SOPORTE",
+    "type": "contains"
+  },
+  {
+    "from": "REPO",
+    "to": "AREA-SRC-FUTURO",
+    "type": "contains"
+  },
+  {
+    "from": "README",
+    "to": "REPO",
+    "type": "supports"
+  },
+  {
+    "from": "README",
+    "to": "SUP-ENTREGAS",
+    "type": "supports"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-GLOSARIO",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RF-COM",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RF-EVT",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RNF",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-CU-COM",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-CU-EVT",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RN-BASE",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RN-COM",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-RN-EVT",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-MODELOS-PROBLEMA",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-DISENO",
+    "to": "DOM-DDR",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-DISENO",
+    "to": "DOM-SECUENCIA",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-DISENO",
+    "to": "DOM-COLABORACION",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-WORKFLOW",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-MEETINGS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-ENTREGAS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-PROMPTS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-SCRIPTS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-UTILS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SOPORTE",
+    "to": "SUP-MAPA-NODOS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-TENANT",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-SRC-FUTURO",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "DOM-GLOSARIO",
+    "to": "GLOSARIO-DEFINICIONES",
+    "type": "contains"
+  },
+  {
+    "from": "GLOSARIO-DEFINICIONES",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-02",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-03",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-04",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-05",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-06",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-07",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-COM",
+    "to": "RF-COM-08",
+    "type": "contains"
+  },
+  {
+    "from": "RF-COM-01",
+    "to": "CU-COM-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-01",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-01",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-COM-02",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-03",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-03",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-04",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-04",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-04",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-05",
+    "to": "CU-COM-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-05",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-05",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-05",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-06",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-06",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-06",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "CU-COM-004",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-COM-07",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-COM-08",
+    "to": "CU-COM-006",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-COM-08",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-02",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-03",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-04",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-05",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RF-EVT",
+    "to": "RF-EVT-06",
+    "type": "contains"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "CU-COM-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-01",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-02",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-03",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-03",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-03",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-03",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-04",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-05",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-05",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-05",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "RF-EVT-06",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-02",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-03",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-04",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-05",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RNF",
+    "to": "RNF-XX-PLANTILLA",
+    "type": "contains"
+  },
+  {
+    "from": "RNF-01",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "implements_future"
+  },
+  {
+    "from": "RNF-01",
+    "to": "SRC-ORQ-TENANT",
+    "type": "implements_future"
+  },
+  {
+    "from": "RNF-02",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RNF-03",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RNF-04",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "RNF-05",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-001",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-002",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-003",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-004",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-005",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-COM",
+    "to": "CU-COM-006",
+    "type": "contains"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "RF-COM-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "RF-COM-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-001",
+    "to": "SRC-ORQ-TENANT",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-COM-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-COM-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-COM-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-COM-07",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-EVT-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-002",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-COM-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-COM-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-COM-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-COM-07",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-EVT-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-EVT-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RF-EVT-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-003",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-004",
+    "to": "RF-COM-07",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-004",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-004",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-004",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-004",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-005",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-005",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-005",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-005",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-005",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-COM-006",
+    "to": "RF-COM-08",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-COM-006",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-006",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-COM-006",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-CU-EVT",
+    "to": "CU-EVT-001",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-EVT",
+    "to": "CU-EVT-002",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CU-EVT",
+    "to": "CU-EVT-003",
+    "type": "contains"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "RF-EVT-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-001",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "RF-EVT-03",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-002",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-03",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RF-EVT-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-RN-COM",
+    "to": "RN-COM-CATALOG",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-004",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "CU-COM-006",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-07",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-COM-08",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "DOM-RN-BASE",
+    "to": "RN-README",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-RN-BASE",
+    "to": "RN-PLANTILLA",
+    "type": "contains"
+  },
+  {
+    "from": "RN-README",
+    "to": "DOM-RN-COM",
+    "type": "supports"
+  },
+  {
+    "from": "RN-README",
+    "to": "DOM-RN-EVT",
+    "type": "supports"
+  },
+  {
+    "from": "RN-PLANTILLA",
+    "to": "DOM-RN-COM",
+    "type": "supports"
+  },
+  {
+    "from": "RN-PLANTILLA",
+    "to": "DOM-RN-EVT",
+    "type": "supports"
+  },
+  {
+    "from": "DOM-RN-EVT",
+    "to": "RN-EVT-CATALOG",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-03",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RF-EVT-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "DOM-MODELOS-PROBLEMA",
+    "to": "BPMN-INDEX",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-MODELOS-PROBLEMA",
+    "to": "BPMN-001",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-MODELOS-PROBLEMA",
+    "to": "UC-DIAGRAM",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-MODELOS-PROBLEMA",
+    "to": "CU-PLANTILLA",
+    "type": "contains"
+  },
+  {
+    "from": "BPMN-INDEX",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "BPMN-001",
+    "to": "BPMN-INDEX",
+    "type": "traces_to"
+  },
+  {
+    "from": "BPMN-001",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "UC-DIAGRAM",
+    "to": "DOM-CU-COM",
+    "type": "traces_to"
+  },
+  {
+    "from": "UC-DIAGRAM",
+    "to": "DOM-CU-EVT",
+    "type": "traces_to"
+  },
+  {
+    "from": "CU-PLANTILLA",
+    "to": "DOM-CU-COM",
+    "type": "supports"
+  },
+  {
+    "from": "CU-PLANTILLA",
+    "to": "DOM-CU-EVT",
+    "type": "supports"
+  },
+  {
+    "from": "DOM-DDR",
+    "to": "DDR-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-DDR",
+    "to": "DDR-02",
+    "type": "contains"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-COM-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-COM-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-COM-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-COM-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-COM-07",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-01",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-02",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-03",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-04",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-05",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "RF-EVT-06",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-01",
+    "to": "GLOSARIO-DEFINICIONES",
+    "type": "governed_by"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-004",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-COM-006",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "DDR-02",
+    "to": "DDR-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "DDR-02",
+    "to": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+    "type": "derives_from"
+  },
+  {
+    "from": "DDR-02",
+    "to": "AREA-SRC-FUTURO",
+    "type": "implements_future"
+  },
+  {
+    "from": "DDR-02",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "implements_future"
+  },
+  {
+    "from": "DOM-SECUENCIA",
+    "to": "SEQ-INDEX",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-SECUENCIA",
+    "to": "SEQ-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-SECUENCIA",
+    "to": "SEQ-02",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-SECUENCIA",
+    "to": "SEQ-03",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-SECUENCIA",
+    "to": "SEQ-04",
+    "type": "contains"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-COM-004",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-INDEX",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-01",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-01",
+    "to": "CU-COM-004",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-01",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-02",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-02",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-03",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-03",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-03",
+    "to": "CU-COM-006",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-04",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "SEQ-04",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "DOM-COLABORACION",
+    "to": "COLLAB-INDEX",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-COLABORACION",
+    "to": "COLLAB-01",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-COLABORACION",
+    "to": "COLLAB-02",
+    "type": "contains"
+  },
+  {
+    "from": "COLLAB-INDEX",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-INDEX",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-INDEX",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-INDEX",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-INDEX",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-01",
+    "to": "CU-COM-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-01",
+    "to": "CU-COM-005",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-01",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-02",
+    "to": "CU-EVT-001",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-02",
+    "to": "CU-EVT-002",
+    "type": "traces_to"
+  },
+  {
+    "from": "COLLAB-02",
+    "to": "CU-EVT-003",
+    "type": "traces_to"
+  },
+  {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-TEMPLATES",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-PIPELINE",
+    "to": "AREA-SOPORTE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATES",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-MEETINGS",
+    "to": "AREA-ANALISIS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-MEETINGS",
+    "to": "AREA-DISENO",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-ENTREGAS",
+    "to": "README",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-ENTREGAS",
+    "to": "SUP-SCRIPTS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-ENTREGAS",
+    "to": "SUP-PROMPTS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-PROMPTS",
+    "to": "SUP-ENTREGAS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-SCRIPTS",
+    "to": "SUP-ENTREGAS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-RESTRUCTURING",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-GUIA-DEPURACION-CU",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-CONTRADICCIONES-CU",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS",
+    "to": "SUP-UTILS-NOTAS",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-UTILS-RESTRUCTURING",
+    "to": "AREA-ANALISIS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-RESTRUCTURING",
+    "to": "AREA-DISENO",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-RESTRUCTURING",
+    "to": "AREA-SOPORTE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+    "to": "AREA-SRC-FUTURO",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+    "to": "DDR-02",
+    "type": "references"
+  },
+  {
+    "from": "SUP-UTILS-GUIA-DEPURACION-CU",
+    "to": "DOM-CU-COM",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-GUIA-DEPURACION-CU",
+    "to": "DOM-CU-EVT",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-CONTRADICCIONES-CU",
+    "to": "DOM-CU-COM",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-CONTRADICCIONES-CU",
+    "to": "DOM-CU-EVT",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-CONTRADICCIONES-CU",
+    "to": "DDR-01",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+    "to": "AREA-SRC-FUTURO",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+    "to": "DDR-02",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-UTILS-NOTAS",
+    "to": "AREA-ANALISIS",
+    "type": "references"
+  },
+  {
+    "from": "SUP-UTILS-NOTAS",
+    "to": "AREA-DISENO",
+    "type": "references"
+  },
+  {
+    "from": "SUP-UTILS-NOTAS",
+    "to": "AREA-SOPORTE",
+    "type": "references"
+  },
+  {
+    "from": "SUP-MAPA-NODOS",
+    "to": "REPO",
+    "type": "supports"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "CU-COM-001",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "CU-COM-002",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RNF-04",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-COMMERCIAL",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-COMMERCIAL",
+    "to": "CU-COM-005",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-COMMERCIAL",
+    "to": "RF-COM-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "CU-COM-003",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "RF-COM-04",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "RF-COM-05",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "RF-COM-06",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "CU-EVT-001",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "CU-EVT-002",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "CU-EVT-003",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-NOTIFICATIONS",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-NOTIFICATIONS",
+    "to": "CU-COM-006",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-NOTIFICATIONS",
+    "to": "RF-COM-08",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-NOTIFICATIONS",
+    "to": "RF-EVT-03",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TENANT",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TENANT",
+    "to": "CU-COM-001",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TENANT",
+    "to": "RNF-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TOOL-CALLS",
+    "to": "DDR-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TOOL-CALLS",
+    "to": "RNF-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TOOL-CALLS",
+    "to": "RNF-05",
+    "type": "derives_from"
+  }
+]
