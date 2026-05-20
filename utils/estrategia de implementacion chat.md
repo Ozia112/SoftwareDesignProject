@@ -10,13 +10,13 @@
 
 Antes de escribir una sola línea de código, los siguientes PSDs deben cerrarse porque definen contratos que el código tiene que implementar literalmente. Si el código se escribe contra documentación contradicha, habrá retrabajo.
 
-| PSD    | Severidad | Qué cambia                                                                   | Impacto en código                                          |
-| ------ | --------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| PSD-23 | Alta      | CU-COM-001 alcance de orquestación; CU-COM-002 terminología; CU-EVT-003 flujo de cupos | Define quién llama a QuotaService y cuándo                |
-| PSD-24 | Alta      | RF-COM-01 y RF-EVT-01: el Sistema (no el bot) ejecuta asignaciones y verificaciones | Define el contrato `emit_stage_signal` vs. ejecutar directo |
-| PSD-26 | Media     | RF-COM-02 calificación≠etapa; RF-EVT-02 momento de reserva (Prospecto, no MQL); RF-COM-08 nuevo | Define el disparador de `reserve_quota`                   |
-| PSD-25 | Media     | Terminología RF-COM-03/04/05/06; CU-EVT-001 actor y verificador de etapa     | Impacta los mensajes del bot y los criterios de las tool calls |
-| PSD-27 | Baja      | SLA de transición bot↔operador; patrón de mensaje de error de dominio; health-check | Impacta configuración de RNF verificables en CI            |
+| PSD    | Severidad | Qué cambia                                                                                      | Impacto en código                                              |
+| ------ | --------- | ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| PSD-23 | Alta      | CU-COM-001 alcance de orquestación; CU-COM-002 terminología; CU-EVT-003 flujo de cupos          | Define quién llama a QuotaService y cuándo                     |
+| PSD-24 | Alta      | RF-COM-01 y RF-EVT-01: el Sistema (no el bot) ejecuta asignaciones y verificaciones             | Define el contrato `emit_stage_signal` vs. ejecutar directo    |
+| PSD-26 | Media     | RF-COM-02 calificación≠etapa; RF-EVT-02 momento de reserva (Prospecto, no MQL); RF-COM-08 nuevo | Define el disparador de `reserve_quota`                        |
+| PSD-25 | Media     | Terminología RF-COM-03/04/05/06; CU-EVT-001 actor y verificador de etapa                        | Impacta los mensajes del bot y los criterios de las tool calls |
+| PSD-27 | Baja      | SLA de transición bot↔operador; patrón de mensaje de error de dominio; health-check             | Impacta configuración de RNF verificables en CI                |
 
 **Acción requerida:** abrir los PSDs 23–27 como Issues en GitHub y completarlos en el primer sprint antes del sprint de código.
 
@@ -28,7 +28,7 @@ Antes de escribir una sola línea de código, los siguientes PSDs deben cerrarse
 
 Este principio resuelve la raíz de las contradicciones documentadas en DDR-01, PSD-23 y PSD-24. Toda decisión de diseño debe validarse contra esta regla:
 
-```
+```log
 Bot:     conversacion_iniciada  →  Sistema: actualiza etapa a Lead
 Bot:     datos_completados      →  Sistema: actualiza etapa a MQL
 Bot:     pregunta_inscripcion   →  Sistema: actualiza etapa a Prospecto + reserve_quota
@@ -44,22 +44,22 @@ El bot **nunca** escribe en base de datos, **nunca** ejecuta transiciones comerc
 
 Cada servicio tiene una responsabilidad directamente derivada de los CU documentados.
 
-| Servicio                   | CU que implementa                      | Responsabilidad                                                                 |
-| -------------------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
-| `MessageRouter`            | CU-COM-001 (asignación inicial)        | Recibe webhook del canal, crea conversación, asigna bot o enruta al operador    |
-| `AgentRunner`              | CU-COM-002 (flujo conversación)        | Ejecuta el run loop del LLM: turno de mensaje → tool calls → respuesta al canal |
-| `HandoffManager`           | CU-COM-001 (escalamiento y devolución) | Gestiona la transición bot→operador y operador→bot, mantiene cola priorizada    |
-| `ConsentService`           | CU-COM-004                             | Registra consentimiento tácito al primer mensaje; bloquea datos antes de eso    |
-| `CommercialStageService`   | CU-COM-005 (gestión de etapa)          | Máquina de estados Lead→MQL→Prospecto→SQL→Cierre; acepta señales del bot        |
+| Servicio                   | CU que implementa                      | Responsabilidad                                                                      |
+| -------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------ |
+| `MessageRouter`            | CU-COM-001 (asignación inicial)        | Recibe webhook del canal, crea conversación, asigna bot o enruta al operador         |
+| `AgentRunner`              | CU-COM-002 (flujo conversación)        | Ejecuta el run loop del LLM: turno de mensaje → tool calls → respuesta al canal      |
+| `HandoffManager`           | CU-COM-001 (escalamiento y devolución) | Gestiona la transición bot→operador y operador→bot, mantiene cola priorizada         |
+| `ConsentService`           | CU-COM-004                             | Registra consentimiento tácito al primer mensaje; bloquea datos antes de eso         |
+| `CommercialStageService`   | CU-COM-005 (gestión de etapa)          | Máquina de estados Lead→MQL→Prospecto→SQL→Cierre; acepta señales del bot             |
 | `ScoringService`           | CU-COM-005 (calificación automática)   | Calcula puntuación 0–20 en cada interacción; detecta exploits; aplica penalizaciones |
-| `ContextBankService`       | CU-COM-003                             | Única puerta de acceso a lectura y escritura de bancos de contexto              |
-| `QuotaService`             | CU-EVT-003                             | Reserva temporal, liberación, bloqueo definitivo de cupos con bloqueo atómico   |
-| `WaitingListService`       | CU-EVT-001 + RF-EVT-06                 | Alta en lista de espera; orden por calificación, FIFO como desempate            |
-| `NotificationService`      | RF-EVT-03 + CU-COM-006                 | N notificaciones por N vacantes; timeout y reintentos; notificaciones outbound  |
-| `CancellationService`      | CU-EVT-002                             | Cancelación pre-inicio; libera cupo; notifica lista de espera                   |
-| `AuditLogService`          | Transversal                            | Append-only con `conversation_id` + `transaction_id`; soporte de LFPDPPP       |
-| `TenantConfigService`      | Multi-tenant                           | Resuelve credenciales cifradas del tenant (DB, LLM key, canal key) por `tenantId` |
-| `ConversationSessionStore` | RNF-04                                 | Historial activo en Redis (TTL 30 min); checkpoint a DB al cerrar conversación  |
+| `ContextBankService`       | CU-COM-003                             | Única puerta de acceso a lectura y escritura de bancos de contexto                   |
+| `QuotaService`             | CU-EVT-003                             | Reserva temporal, liberación, bloqueo definitivo de cupos con bloqueo atómico        |
+| `WaitingListService`       | CU-EVT-001 + RF-EVT-06                 | Alta en lista de espera; orden por calificación, FIFO como desempate                 |
+| `NotificationService`      | RF-EVT-03 + CU-COM-006                 | N notificaciones por N vacantes; timeout y reintentos; notificaciones outbound       |
+| `CancellationService`      | CU-EVT-002                             | Cancelación pre-inicio; libera cupo; notifica lista de espera                        |
+| `AuditLogService`          | Transversal                            | Append-only con `conversation_id` + `transaction_id`; soporte de LFPDPPP             |
+| `TenantConfigService`      | Multi-tenant                           | Resuelve credenciales cifradas del tenant (DB, LLM key, canal key) por `tenantId`    |
+| `ConversationSessionStore` | RNF-04                                 | Historial activo en Redis (TTL 30 min); checkpoint a DB al cerrar conversación       |
 
 ---
 
@@ -200,11 +200,13 @@ model AuditLog {
 ### Cache y colas: Redis + BullMQ
 
 **Redis para:**
+
 - `ConversationSessionStore`: historial activo de la conversación con TTL de 30 min (RNF-04). Evita reconstruir el historial completo desde DB en cada turno del bot.
 - `WaitingListStore`: Sorted Set por `eventId` con score = calificación del lead (replica en memoria el índice de DB para consultas de prioridad de baja latencia).
 - `IdempotencyStore`: deduplicación de tool calls con TTL de 24 h.
 
 **BullMQ para:**
+
 - `ReservationExpiryQueue`: job por reserva temporal con delay = TTL de la reserva. Libera cupo y notifica lista de espera al vencer.
 - `NotificationQueue`: envío de N notificaciones por N vacantes liberadas, con retries y backoff exponencial.
 - `OutboundNotificationQueue`: notificaciones de reactivación de CU-COM-006.
@@ -231,6 +233,7 @@ const response = await client.messages.create({
 ```
 
 **Modelos soportados por el tenant:**
+
 - `claude-haiku-4-5-20251001` — bot de producción (rápido, barato, suficiente para tool use)
 - `claude-sonnet-4-6` — cuando se necesita mayor razonamiento en casos complejos
 - El tenant configura su modelo en `TenantConfig`; el sistema no asume un modelo fijo.
@@ -261,6 +264,7 @@ interface IChatChannel {
 ### Observabilidad: OpenTelemetry
 
 Tracing distribuido por conversación: cada turno del bot, cada tool call, cada transición de etapa y cada operación de cupo genera un span. Esto permite calcular:
+
 - Latencia P90/P99 por paso del flujo (RNF-02)
 - Costo por conversación en tokens
 - Tasa de handoff a humano
@@ -290,42 +294,42 @@ Cerrar PSDs 23, 24, 26 antes de comenzar. Son los que definen los contratos de c
 
 ### Fase 2: Servicios de dominio (2–3 semanas)
 
-8. `ConsentService` (CU-COM-004): consent gate al primer mensaje
-9. `CommercialStageService` (CU-COM-005): máquina de estados con las 4 señales de transición + reducción por `evento_cambiado`
-10. `ScoringService` (CU-COM-005): cálculo continuo 0–20, penalizaciones, detección de exploits, señal `exploit_reincidente`
-11. `ContextBankService` (CU-COM-003): lectura de bancos general y de evento; operaciones de escritura (`reserva_temporal`, `liberacion_reserva`, `bloqueo_cupo`, `registro_desuscripcion`)
-12. `QuotaService` (CU-EVT-003): bloqueo atómico con `SELECT ... FOR UPDATE` o transacción con bloqueo optimista; idempotencia por `idempotency_key`
-13. `WaitingListService` (CU-EVT-001 + RF-EVT-06): alta, consulta priorizada, verificación antes de notificar
+1. `ConsentService` (CU-COM-004): consent gate al primer mensaje
+2. `CommercialStageService` (CU-COM-005): máquina de estados con las 4 señales de transición + reducción por `evento_cambiado`
+3. `ScoringService` (CU-COM-005): cálculo continuo 0–20, penalizaciones, detección de exploits, señal `exploit_reincidente`
+4. `ContextBankService` (CU-COM-003): lectura de bancos general y de evento; operaciones de escritura (`reserva_temporal`, `liberacion_reserva`, `bloqueo_cupo`, `registro_desuscripcion`)
+5. `QuotaService` (CU-EVT-003): bloqueo atómico con `SELECT ... FOR UPDATE` o transacción con bloqueo optimista; idempotencia por `idempotency_key`
+6. `WaitingListService` (CU-EVT-001 + RF-EVT-06): alta, consulta priorizada, verificación antes de notificar
 
 **Entregable:** flujo principal de CU-COM-002 completo sin el bot (simulado con tool calls manuales).
 
 ### Fase 3: Orquestación del bot (2 semanas)
 
-14. `ToolRegistry`: registro de `IToolHandler` por nombre de tool call; DI con NestJS
-15. Implementar los 8 tool handlers del contrato definido en §4
-16. `AgentRunner` (CU-COM-002): run loop con Anthropic SDK, integración con `ConversationSessionStore`, límite de turnos por conversación configurable
-17. `MessageRouter` (CU-COM-001): webhook handlers por canal, routing a bot o bandeja humana
-18. `HandoffManager` (CU-COM-001): escalamiento bot→operador, cola priorizada por score + SLA, devolución operador→bot
-19. Adaptadores de canal: `WhatsAppAdapter`, `TelegramAdapter`
+1. `ToolRegistry`: registro de `IToolHandler` por nombre de tool call; DI con NestJS
+2. Implementar los 8 tool handlers del contrato definido en §4
+3. `AgentRunner` (CU-COM-002): run loop con Anthropic SDK, integración con `ConversationSessionStore`, límite de turnos por conversación configurable
+4. `MessageRouter` (CU-COM-001): webhook handlers por canal, routing a bot o bandeja humana
+5. `HandoffManager` (CU-COM-001): escalamiento bot→operador, cola priorizada por score + SLA, devolución operador→bot
+6. Adaptadores de canal: `WhatsAppAdapter`, `TelegramAdapter`
 
 **Entregable:** conversación end-to-end completa (CU-COM-002 + CU-COM-001) en un canal real.
 
 ### Fase 4: Automatización operativa (1–2 semanas)
 
-20. `ReservationExpiryJob`: BullMQ delayed job por reserva; libera cupo y encola notificación a lista de espera
-21. `NotificationService` (RF-EVT-03): N notificaciones por N vacantes, timeout por notificación, reintento con backoff
-22. `OutboundNotificationJob` (CU-COM-006): notificaciones de reactivación a cartera de clientes con consentimiento registrado
-23. `CancellationService` (CU-EVT-002): cancelación pre-inicio por operador, liberación de cupo bloqueado por causas excepcionales
+1. `ReservationExpiryJob`: BullMQ delayed job por reserva; libera cupo y encola notificación a lista de espera
+2. `NotificationService` (RF-EVT-03): N notificaciones por N vacantes, timeout por notificación, reintento con backoff
+3. `OutboundNotificationJob` (CU-COM-006): notificaciones de reactivación a cartera de clientes con consentimiento registrado
+4. `CancellationService` (CU-EVT-002): cancelación pre-inicio por operador, liberación de cupo bloqueado por causas excepcionales
 
 **Entregable:** reservas expiran automáticamente; lista de espera recibe notificaciones ordenadas por score.
 
 ### Fase 5: Observabilidad y hardening (1 semana)
 
-24. OpenTelemetry: spans por turno de bot, tool call, transición de etapa, operación de cupo
-25. Dashboard operativo: latencia P90, tasa de handoff, tasa de expiración de reservas, costo por conversación en tokens
-26. `TenantCredentialService`: rotación de API keys sin downtime, revocación al cancelar tenant
-27. Rate limiting por tenant (429 con retry-after)
-28. Pruebas de carga: 50 conversaciones concurrentes, 10 mensajes de historial (RNF-02)
+1. OpenTelemetry: spans por turno de bot, tool call, transición de etapa, operación de cupo
+2. Dashboard operativo: latencia P90, tasa de handoff, tasa de expiración de reservas, costo por conversación en tokens
+3. `TenantCredentialService`: rotación de API keys sin downtime, revocación al cancelar tenant
+4. Rate limiting por tenant (429 con retry-after)
+5. Pruebas de carga: 50 conversaciones concurrentes, 10 mensajes de historial (RNF-02)
 
 ---
 
@@ -420,35 +424,36 @@ Una vez que este handler funciona, implementar `AgentRunner` con el run loop de 
 
 Usar esta tabla al implementar cada servicio para validar que cubre lo que el CU requiere:
 
-| CU         | Servicio(s)                                    | Verificación clave                                                           |
-| ---------- | ---------------------------------------------- | ---------------------------------------------------------------------------- |
-| CU-COM-001 | MessageRouter + HandoffManager                 | Flujo A2 (devolución al bot) rechaza si está en etapa SQL                    |
-| CU-COM-002 | AgentRunner + todos los tool handlers          | Flujo A1 (cambio de evento) libera cupo original antes de reservar el nuevo  |
-| CU-COM-003 | ContextBankService                             | RN-COM-03-06 permite escritura desde CU-COM-002 **y** CU-EVT-003             |
-| CU-COM-004 | ConsentService                                 | Bot no captura datos personales hasta que `check_consent_status` = true      |
-| CU-COM-005 | CommercialStageService + ScoringService        | Calificación no modifica etapa; señal `exploit_reincidente` bloquea la conversación |
-| CU-COM-006 | NotificationService + OutboundNotificationJob  | Requiere RF-COM-08 (creado en PSD-26) antes de implementar                   |
-| CU-EVT-001 | WaitingListService                             | Solo acepta leads en etapa Prospecto; orden por score + FIFO                 |
-| CU-EVT-002 | CancellationService                            | No referencia RF-EVT-04 para cancelaciones pre-inicio (corregir en PSD-26)   |
-| CU-EVT-003 | QuotaService                                   | Flujo principal dispara reserva automáticamente al transicionar a Prospecto (no cuando el operador lo inicia manualmente) |
+| CU         | Servicio(s)                                   | Verificación clave                                                                                                        |
+| ---------- | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| CU-COM-001 | MessageRouter + HandoffManager                | Flujo A2 (devolución al bot) rechaza si está en etapa SQL                                                                 |
+| CU-COM-002 | AgentRunner + todos los tool handlers         | Flujo A1 (cambio de evento) libera cupo original antes de reservar el nuevo                                               |
+| CU-COM-003 | ContextBankService                            | RN-COM-03-06 permite escritura desde CU-COM-002 **y** CU-EVT-003                                                          |
+| CU-COM-004 | ConsentService                                | Bot no captura datos personales hasta que `check_consent_status` = true                                                   |
+| CU-COM-005 | CommercialStageService + ScoringService       | Calificación no modifica etapa; señal `exploit_reincidente` bloquea la conversación                                       |
+| CU-COM-006 | NotificationService + OutboundNotificationJob | Requiere RF-COM-08 (creado en PSD-26) antes de implementar                                                                |
+| CU-EVT-001 | WaitingListService                            | Solo acepta leads en etapa Prospecto; orden por score + FIFO                                                              |
+| CU-EVT-002 | CancellationService                           | No referencia RF-EVT-04 para cancelaciones pre-inicio (corregir en PSD-26)                                                |
+| CU-EVT-003 | QuotaService                                  | Flujo principal dispara reserva automáticamente al transicionar a Prospecto (no cuando el operador lo inicia manualmente) |
 
 ---
 
 ## 9. Resumen de decisiones técnicas
 
-| Decisión                    | Elección                  | Alternativa considerada         |
-| --------------------------- | ------------------------- | ------------------------------- |
-| Lenguaje                    | TypeScript (Node.js 20+)  | Python                          |
-| Framework backend           | NestJS                    | Fastify + Inversify             |
-| ORM + migraciones           | Prisma                    | Drizzle + migraciones manuales  |
-| Base de datos               | PostgreSQL del tenant     | MySQL (menor soporte de FOR UPDATE en Prisma) |
-| Cache + colas               | Redis + BullMQ            | RabbitMQ                        |
-| LLM                         | Anthropic (`@anthropic-ai/sdk`) | OpenAI (depende del tenant) |
-| Observabilidad              | OpenTelemetry + Grafana   | Datadog (costo)                 |
-| Auth multi-tenant           | JWT + TenantContextMiddleware | API Keys por tenant           |
+| Decisión          | Elección                        | Alternativa considerada                       |
+| ----------------- | ------------------------------- | --------------------------------------------- |
+| Lenguaje          | TypeScript (Node.js 20+)        | Python                                        |
+| Framework backend | NestJS                          | Fastify + Inversify                           |
+| ORM + migraciones | Prisma                          | Drizzle + migraciones manuales                |
+| Base de datos     | PostgreSQL del tenant           | MySQL (menor soporte de FOR UPDATE en Prisma) |
+| Cache + colas     | Redis + BullMQ                  | RabbitMQ                                      |
+| LLM               | Anthropic (`@anthropic-ai/sdk`) | OpenAI (depende del tenant)                   |
+| Observabilidad    | OpenTelemetry + Grafana         | Datadog (costo)                               |
+| Auth multi-tenant | JWT + TenantContextMiddleware   | API Keys por tenant                           |
 
 ---
 
+```chat
 # Chat de estrategia de implementación (historial)
 
 User: Ayudame a crear una estrategia de implementación para el proyecto basado en la documentacion presentada, dame soluciones posibles problemas de factibilidad, estrategias que mejoren o eficienticen los costes operativos, computacionales y que mejoren la escalabilidad del proyecto.
