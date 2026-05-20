@@ -9,9 +9,10 @@ import type {
 import { toolCallOk, toolCallErr } from '../../dto/tool-calls.dto';
 
 @Injectable()
-export class GetGeneralContextHandler
-  implements IToolHandler<GetGeneralContextInput, GetGeneralContextOutput>
-{
+export class GetGeneralContextHandler implements IToolHandler<
+  GetGeneralContextInput,
+  GetGeneralContextOutput
+> {
   readonly name = 'get_general_context';
 
   readonly schema = {

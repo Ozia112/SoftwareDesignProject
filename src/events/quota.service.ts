@@ -4,7 +4,11 @@ import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
 import { v4 as uuidv4 } from 'uuid';
 import { AuditLogService } from '../audit/audit-log.service';
-import type { ReserveQuotaOutput, ReleaseQuotaOutput, BlockQuotaOutput } from '../dto/tool-calls.dto';
+import type {
+  ReserveQuotaOutput,
+  ReleaseQuotaOutput,
+  BlockQuotaOutput,
+} from '../dto/tool-calls.dto';
 
 const RESERVATION_TTL_MINUTES = 30;
 
@@ -77,7 +81,11 @@ export class QuotaService {
     await this.expiryQueue.add(
       'expire',
       { reservationId: reservation.id, tenantId, eventId, leadId, conversationId },
-      { delay: RESERVATION_TTL_MINUTES * 60 * 1000, attempts: 3, backoff: { type: 'exponential', delay: 5000 } },
+      {
+        delay: RESERVATION_TTL_MINUTES * 60 * 1000,
+        attempts: 3,
+        backoff: { type: 'exponential', delay: 5000 },
+      },
     );
 
     await this.auditLog.record(db, {

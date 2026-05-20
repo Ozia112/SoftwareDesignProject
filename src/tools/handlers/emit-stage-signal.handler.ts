@@ -11,9 +11,10 @@ import type {
 import { toolCallOk, toolCallErr } from '../../dto/tool-calls.dto';
 
 @Injectable()
-export class EmitStageSignalHandler
-  implements IToolHandler<EmitStageSignalInput, EmitStageSignalOutput>
-{
+export class EmitStageSignalHandler implements IToolHandler<
+  EmitStageSignalInput,
+  EmitStageSignalOutput
+> {
   readonly name = 'emit_stage_signal';
 
   readonly schema = {

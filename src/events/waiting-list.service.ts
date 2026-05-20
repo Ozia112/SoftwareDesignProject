@@ -63,11 +63,7 @@ export class WaitingListService {
 
     // Cache en Redis Sorted Set: score = (score * 1e10) - joinedAt.getTime() para orden combinado
     const sortedScore = lead.score * 1e10 - entry.joinedAt.getTime();
-    await this.redis.zadd(
-      this.redisKey(tenantId, eventId),
-      sortedScore.toString(),
-      leadId,
-    );
+    await this.redis.zadd(this.redisKey(tenantId, eventId), sortedScore.toString(), leadId);
 
     await this.auditLog.record(db, {
       tenantId,
@@ -79,7 +75,9 @@ export class WaitingListService {
     });
 
     const position = await this.getPosition(db, tenantId, eventId, leadId);
-    this.logger.log(`Lead ${leadId} joined waiting list for event ${eventId} at position ${position}`);
+    this.logger.log(
+      `Lead ${leadId} joined waiting list for event ${eventId} at position ${position}`,
+    );
     return { position };
   }
 
@@ -109,7 +107,11 @@ export class WaitingListService {
     count = 1,
   ): Promise<string[]> {
     // Verificar que cada lead sigue siendo PROSPECTO antes de notificar
-    const topLeadIds = await this.redis.zrevrange(this.redisKey(tenantId, eventId), 0, count * 2 - 1);
+    const topLeadIds = await this.redis.zrevrange(
+      this.redisKey(tenantId, eventId),
+      0,
+      count * 2 - 1,
+    );
 
     const eligible: string[] = [];
     for (const leadId of topLeadIds) {

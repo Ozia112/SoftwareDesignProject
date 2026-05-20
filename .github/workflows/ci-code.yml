@@ -188,7 +188,7 @@ jobs:
 
       - name: Jest coverage
         if: steps.project.outputs.has_node == 'true'
-        run: pnpm run --if-present test -- --coverage
+        run: pnpm run --if-present test:cov
 
       - name: NestJS build
         if: steps.project.outputs.has_node == 'true'

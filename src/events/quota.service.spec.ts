@@ -33,9 +33,11 @@ function mockDbWithQuota(available: number, existing?: any) {
           }),
           update: jest.fn().mockResolvedValue(undefined),
         },
-        $queryRaw: jest.fn().mockResolvedValue([
-          { id: 'evt-1', totalQuota: 10, reservedQuota: 10 - available, confirmedQuota: 0 },
-        ]),
+        $queryRaw: jest
+          .fn()
+          .mockResolvedValue([
+            { id: 'evt-1', totalQuota: 10, reservedQuota: 10 - available, confirmedQuota: 0 },
+          ]),
       };
       return fn(txClient);
     }),

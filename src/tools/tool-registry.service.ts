@@ -25,7 +25,12 @@ export class ToolRegistry {
     // Tool calls disponibles por etapa — DDR-02 regla 3
     const restricted: Record<string, string[]> = {
       LEAD: ['get_general_context', 'emit_stage_signal', 'request_human_handoff'],
-      MQL: ['get_general_context', 'get_event_context', 'emit_stage_signal', 'request_human_handoff'],
+      MQL: [
+        'get_general_context',
+        'get_event_context',
+        'emit_stage_signal',
+        'request_human_handoff',
+      ],
       PROSPECTO: [
         'get_general_context',
         'get_event_context',

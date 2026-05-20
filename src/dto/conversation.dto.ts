@@ -3,10 +3,10 @@ import type { ChannelType } from '@prisma/client';
 export interface IncomingMessageDto {
   tenantId: string;
   channelType: ChannelType;
-  channelId: string;   // ID del usuario en el canal (phone, telegram_id, etc.)
-  messageId: string;   // ID del mensaje en el canal (para dedup)
+  channelId: string; // ID del usuario en el canal (phone, telegram_id, etc.)
+  messageId: string; // ID del mensaje en el canal (para dedup)
   text: string;
-  timestamp: string;   // ISO-8601
+  timestamp: string; // ISO-8601
   metadata?: Record<string, unknown>;
 }
 

@@ -29,9 +29,7 @@ export class OutboundNotificationProcessor {
     // Verificar consentimiento (CU-COM-004 — solo contactar con consentimiento)
     const lead = await db.lead.findFirst({ where: { id: leadId, tenantId } });
     if (!lead?.consentAt) {
-      this.logger.warn(
-        `Outbound notification skipped for lead ${leadId}: no consent registered`,
-      );
+      this.logger.warn(`Outbound notification skipped for lead ${leadId}: no consent registered`);
       return;
     }
 

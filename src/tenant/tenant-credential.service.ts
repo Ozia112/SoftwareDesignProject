@@ -40,11 +40,7 @@ export class TenantCredentialService {
     return Buffer.concat([decipher.update(ciphertext), decipher.final()]).toString('utf8');
   }
 
-  async setCredential(
-    tenantId: string,
-    credentialType: string,
-    plainValue: string,
-  ): Promise<void> {
+  async setCredential(tenantId: string, credentialType: string, plainValue: string): Promise<void> {
     const encryptedValue = this.encrypt(plainValue);
     await this.prismaSystem.tenantCredential.upsert({
       where: { tenantId_credentialType: { tenantId, credentialType } },

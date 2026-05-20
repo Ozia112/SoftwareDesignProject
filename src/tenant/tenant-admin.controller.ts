@@ -7,11 +7,13 @@ import type { TenantCredentialDto } from '../dto/tenant.dto';
 import { IsString, IsNotEmpty, IsIn } from 'class-validator';
 
 class SetCredentialDto implements TenantCredentialDto {
-  @IsString() @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   @IsIn(['llm_api_key', 'whatsapp_token', 'telegram_token', 'db_url'])
   credentialType: 'llm_api_key' | 'whatsapp_token' | 'telegram_token' | 'db_url';
 
-  @IsString() @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   plainValue: string;
 }
 
@@ -53,10 +55,7 @@ export class TenantAdminController {
 
   @Post(':tenantId/credentials')
   @ApiOperation({ summary: 'Set encrypted credential for tenant' })
-  async setCredential(
-    @Param('tenantId') tenantId: string,
-    @Body() dto: SetCredentialDto,
-  ) {
+  async setCredential(@Param('tenantId') tenantId: string, @Body() dto: SetCredentialDto) {
     await this.credentialService.setCredential(tenantId, dto.credentialType, dto.plainValue);
     await this.tenantConfigService.invalidateCache(tenantId);
     return { ok: true, credentialType: dto.credentialType };

@@ -27,11 +27,7 @@ const HANDLERS = [
 
 @Module({
   imports: [CommercialModule, ContextBankModule, EventsModule],
-  providers: [
-    ToolRegistry,
-    ...HANDLERS,
-    { provide: HandoffManager, useClass: HandoffManagerImpl },
-  ],
+  providers: [ToolRegistry, ...HANDLERS, { provide: HandoffManager, useClass: HandoffManagerImpl }],
   exports: [ToolRegistry],
 })
 export class ToolsModule implements OnModuleInit {

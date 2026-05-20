@@ -1,10 +1,7 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import Redis from 'ioredis';
-import type {
-  GetGeneralContextOutput,
-  GetEventContextOutput,
-} from '../dto/tool-calls.dto';
+import type { GetGeneralContextOutput, GetEventContextOutput } from '../dto/tool-calls.dto';
 
 const CONTEXT_CACHE_TTL = 300;
 

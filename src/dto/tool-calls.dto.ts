@@ -74,12 +74,7 @@ export type RegisterWaitingListInput = { eventId: string; idempotencyKey: Idempo
 export type RegisterWaitingListOutput = { position: number };
 
 export type RequestHumanHandoffInput = {
-  reason:
-    | 'pago_pendiente'
-    | 'no_resuelto'
-    | 'peticion_del_usuario'
-    | 'politica'
-    | 'fallo_tecnico';
+  reason: 'pago_pendiente' | 'no_resuelto' | 'peticion_del_usuario' | 'politica' | 'fallo_tecnico';
 };
 export type RequestHumanHandoffOutput = { handoffId: string; queued: boolean };
 

@@ -114,7 +114,10 @@ export class AgentRunnerService {
             toolResults.push({
               type: 'tool_result',
               tool_use_id: block.id,
-              content: JSON.stringify({ ok: false, error: { code: 'NOT_FOUND', message: `Tool ${block.name} not found` } }),
+              content: JSON.stringify({
+                ok: false,
+                error: { code: 'NOT_FOUND', message: `Tool ${block.name} not found` },
+              }),
               is_error: true,
             });
             continue;

@@ -18,10 +18,7 @@ describe('ScoringService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        ScoringService,
-        { provide: AuditLogService, useValue: mockAuditLog },
-      ],
+      providers: [ScoringService, { provide: AuditLogService, useValue: mockAuditLog }],
     }).compile();
 
     service = module.get<ScoringService>(ScoringService);
@@ -29,34 +26,44 @@ describe('ScoringService', () => {
 
   it('should increase score on contact_data_provided', async () => {
     const db = mockDb(0);
-    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'contact_data_provided' });
+    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', {
+      type: 'contact_data_provided',
+    });
     expect(result.delta).toBe(3);
     expect(result.score).toBe(3);
   });
 
   it('should decrease score on spam_detected', async () => {
     const db = mockDb(10);
-    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'spam_detected' });
+    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', {
+      type: 'spam_detected',
+    });
     expect(result.delta).toBe(-4);
     expect(result.score).toBe(6);
   });
 
   it('should cap score at 20', async () => {
     const db = mockDb(18);
-    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'payment_confirmed' });
+    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', {
+      type: 'payment_confirmed',
+    });
     expect(result.score).toBe(20);
   });
 
   it('should not go below 0', async () => {
     const db = mockDb(2);
-    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'exploit_attempt' });
+    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', {
+      type: 'exploit_attempt',
+    });
     expect(result.score).toBe(0);
   });
 
   it('should detect exploit reincidente on second exploit', async () => {
     const db = mockDb(10);
     await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'exploit_attempt' });
-    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', { type: 'exploit_attempt' });
+    const result = await service.applyEvent(db, 't1', 'lead-1', 'conv-1', {
+      type: 'exploit_attempt',
+    });
     expect(result.exploitReincidente).toBe(true);
   });
 

@@ -16,12 +16,7 @@ import { AuditModule } from '../audit/audit.module';
     MessageRouterService,
     HandoffManagerImpl,
   ],
-  exports: [
-    ConversationSessionStore,
-    AgentRunnerService,
-    MessageRouterService,
-    HandoffManagerImpl,
-  ],
+  exports: [ConversationSessionStore, AgentRunnerService, MessageRouterService, HandoffManagerImpl],
 })
 export class ConversationModule {
   configure(consumer: MiddlewareConsumer) {

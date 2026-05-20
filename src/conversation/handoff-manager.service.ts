@@ -55,9 +55,7 @@ export class HandoffManagerImpl extends HandoffManager {
     // No permitir devolver al bot si está en SQL (precondición CU-COM-001 A2)
     const lead = await db.lead.findFirst({ where: { id: conv.leadId, tenantId } });
     if (lead?.currentStage === 'SQL') {
-      this.logger.warn(
-        `returnToBot blocked: lead ${lead.id} is in SQL stage`,
-      );
+      this.logger.warn(`returnToBot blocked: lead ${lead.id} is in SQL stage`);
       return false;
     }
 

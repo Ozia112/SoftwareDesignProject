@@ -9,4 +9,4 @@ dist/
 .env
 coverage/
 *.log
-.DS_Store
+.DS_Store.claude/

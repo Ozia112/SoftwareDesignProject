@@ -1,7 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { QuotaService } from '../../events/quota.service';
 import type { IToolHandler, ToolContext } from '../tool-handler.interface';
-import type { ReleaseQuotaInput, ReleaseQuotaOutput, ToolCallResult } from '../../dto/tool-calls.dto';
+import type {
+  ReleaseQuotaInput,
+  ReleaseQuotaOutput,
+  ToolCallResult,
+} from '../../dto/tool-calls.dto';
 import { toolCallOk, toolCallErr } from '../../dto/tool-calls.dto';
 
 @Injectable()

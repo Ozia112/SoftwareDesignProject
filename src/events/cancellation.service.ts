@@ -45,9 +45,10 @@ export class CancellationService {
         data: { status: ReservationStatus.RELEASED, releasedAt: new Date() },
       });
 
-      const decrement = reservation.status === ReservationStatus.CONFIRMED
-        ? { confirmedQuota: { decrement: 1 } }
-        : { reservedQuota: { decrement: 1 } };
+      const decrement =
+        reservation.status === ReservationStatus.CONFIRMED
+          ? { confirmedQuota: { decrement: 1 } }
+          : { reservedQuota: { decrement: 1 } };
 
       await tx.event.update({ where: { id: eventId }, data: decrement });
       quotaReleased = true;

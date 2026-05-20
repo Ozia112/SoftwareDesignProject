@@ -9,9 +9,10 @@ import { toolCallOk, toolCallErr } from '../../dto/tool-calls.dto';
 import { HandoffManager } from '../handoff-manager.interface';
 
 @Injectable()
-export class RequestHumanHandoffHandler
-  implements IToolHandler<RequestHumanHandoffInput, RequestHumanHandoffOutput>
-{
+export class RequestHumanHandoffHandler implements IToolHandler<
+  RequestHumanHandoffInput,
+  RequestHumanHandoffOutput
+> {
   readonly name = 'request_human_handoff';
 
   readonly schema = {

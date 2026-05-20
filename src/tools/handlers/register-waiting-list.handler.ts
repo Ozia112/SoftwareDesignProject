@@ -10,9 +10,10 @@ import type {
 import { toolCallOk, toolCallErr } from '../../dto/tool-calls.dto';
 
 @Injectable()
-export class RegisterWaitingListHandler
-  implements IToolHandler<RegisterWaitingListInput, RegisterWaitingListOutput>
-{
+export class RegisterWaitingListHandler implements IToolHandler<
+  RegisterWaitingListInput,
+  RegisterWaitingListOutput
+> {
   readonly name = 'register_waiting_list';
 
   readonly schema = {
