@@ -1,5 +1,9 @@
 *.yml
+*.ps1
 pull_request_template.md
 .vscode
+.claude
+.github
 resultado.md
-/utils
+/docs/soporte/scripts/
+/docs/soporte/utils/
