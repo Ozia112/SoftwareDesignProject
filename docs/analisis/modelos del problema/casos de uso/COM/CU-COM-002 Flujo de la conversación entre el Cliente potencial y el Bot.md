@@ -78,8 +78,8 @@ El sistema ha asignado un Bot a la conversación del Cliente potencial en el can
 8. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener fechas y horarios del Evento y el Bot los presenta. [RF-COM-06]
 9. El Cliente potencial muestra interés en inscribirse con preguntas clave como métodos de pago y procesos de inscripción.
 10. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener la disponibilidad de cupo del Evento. [RF-EVT-01]
-11. Haya o no haya cupo, se activa el [CU-COM-005 Gestión de etapa comercial].
-12. Si hay cupo se activa [CU-EVT-003 Gestión de cupos de eventos] para reservar un cupo temporal para el Cliente potencial. [RF-EVT-02]
+11. Haya o no haya cupo, se activa el [CU-COM-005 Gestión de etapa comercial] para actualizar la etapa.
+12. Si la etapa resultante es **Prospecto** y hay cupo, se activa [CU-EVT-003 Gestión de cupos de eventos] para **reservar un cupo temporal** para el Cliente potencial. [RF-EVT-02]
 13. Se activa [CU-COM-003 Gestión de bancos de contexto] para obtener información de métodos de pago y proceso de inscripción, y el Bot la presenta al Cliente potencial. [RF-COM-04]
 14. El Bot detecta que el cliente potencial ha enviado mensajes que detonan la necesidad de confirmación de pago por parte de un operador humano por lo tanto se activa el [CU-COM-005 Gestión de etapa comercial].
 15. El Bot informa que será transferido a un operador humano y se activa el flujo de [CU-COM-001 Asignación de conversaciones de un bot a un operador humano].

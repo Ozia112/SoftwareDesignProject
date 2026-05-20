@@ -22,6 +22,8 @@ Gestionar la etapa comercial de la Persona interesada y calcular su calificació
 
 Aplica a toda interacción gestionada por el Bot desde el inicio de la conversación hasta el escalamiento. Es invocado por CU-COM-002 y CU-COM-001 en cada punto donde se produzca un evento de transición de etapa o se requiera actualizar la calificación.
 
+Este CU gestiona **transiciones automáticas solo hasta SQL**. La etapa **Cierre** existe como etapa comercial válida con resultado **Ganado/Perdido**, pero se alcanza **manualmente** tras intervención humana y no es una transición automática descrita por este CU.
+
 ## RF relacionados
 
 - [RF-COM-02]

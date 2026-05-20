@@ -72,7 +72,7 @@ La estrategia v2.0 refuerza y operacionaliza el diagnóstico de DDR-01. La sigui
 | Evitar que estados operativos (reserva/cupo/inscripción/cancelación) se modelen como etapas comerciales | **Validado** | Las operaciones EVT no escriben etapa; si un cambio comercial aplica, debe ocurrir por señal de etapa (CU-COM-005). |
 | Lista de espera: orden por calificación, FIFO como desempate | **Validado** | `WaitingListService` aplica score DESC y FIFO para empates (coherente con CU-EVT-001 y estrategia v2.0). |
 | Privacidad/consentimiento: ubicarlo de forma normativa y no bloquear indebidamente consultas | **Validado con precisión** | Se adopta CU-COM-004: el sistema muestra avisos legales y registra consentimiento tácito al primer mensaje. Antes de consentir, no se capturan datos ni se habilitan tool calls con escritura. |
-| Cierre como etapa con resultado (Ganado/Perdido), no como etapas inventadas | **Parcial / pendiente** | Se mantiene el término "Cierre" como etapa, pero el modelado del resultado (Ganado/Perdido) queda pendiente de alineación documental (ver contradicciones/DDRs futuros). |
+| Cierre como etapa con resultado (Ganado/Perdido), no como etapas inventadas | **Validado con delimitación** | **CIERRE** existe como etapa comercial final con resultado **Ganado/Perdido**; sin embargo, se alcanza **manualmente** tras intervención humana (no es una transición automática del bot ni de CU-COM-005). |
 
 ---
 
