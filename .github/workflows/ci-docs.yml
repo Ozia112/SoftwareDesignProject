@@ -104,4 +104,7 @@ jobs:
           "*.md"
           "docs/**/*.md"
           "!docs/soporte/entregas/**/*.md"
+          "!docs/soporte/prompt/**/*.md"
+          "!docs/soporte/prompts/**/*.md"
+          "!docs/soporte/workflow/**/*.md"
           "!utils/**/*.md"
