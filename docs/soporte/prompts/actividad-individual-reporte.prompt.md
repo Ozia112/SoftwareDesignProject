@@ -30,7 +30,7 @@ Genera un apartado titulado `## Actividades realizadas por integrante` con esta 
   - Fin: `<YYYY-MM-DD HH:mm:ss>`
 - Concentrado por participante en formato JSON, tabla o texto estructurado.
 - Opcionalmente: lista de issues y PRs que forman parte del sprint o del reporte.
-- Si cuentas con una lista exacta de issues y PRs del sprint, ├║sala para filtrar el concentrado y evitar ruido de otros trabajos del mismo rango.
+- Si cuentas con una lista exacta de issues y PRs del sprint, úsala para filtrar el concentrado y evitar ruido de otros trabajos del mismo rango.
 - El script puede autodetectar PRs vinculados a issues por palabras clave de cierre (`Closes`, `Fixes`, `Resolves` y variantes) con referencias tipo `#123` o `owner/repo#123`.
 
 ## Reglas de redaccion
@@ -46,7 +46,7 @@ Genera un apartado titulado `## Actividades realizadas por integrante` con esta 
   - lineas de backlog,
   - puntos de revision/integracion,
   - breve interpretacion del resultado.
-- Si detectas limitaciones metodologicas, menci├│nalas en 1 o 2 lineas dentro de la metodologia.
+- Si detectas limitaciones metodologicas, menciónalas en 1 o 2 lineas dentro de la metodologia.
 
 ## Plantilla de llamada
 
@@ -69,5 +69,5 @@ Si no proporcionas PRs, el script intenta detectarlos automaticamente por palabr
 Usa este concentrado:
 <pegar salida JSON o markdown del script>
 
-Mant├®n la estructura general del reporte actual y no modifiques otras secciones.
+Mantén la estructura general del reporte actual y no modifiques otras secciones.
 ```
