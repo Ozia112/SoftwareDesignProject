@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Bot Orchestrator — Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --surface2: #21262d;
+        --border: #30363d;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --accent: #58a6ff;
+        --green: #3fb950;
+        --orange: #d29922;
+        --red: #f85149;
+        --purple: #bc8cff;
+        --yellow: #e3b341;
+        --cyan: #39d0d8;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        min-height: 100vh;
+      }
+
+      /* ── Header ── */
+      header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, var(--accent), var(--purple));
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+
+      .badge {
+        font-size: 10px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .badge-demo {
+        background: rgba(210, 153, 34, 0.2);
+        color: var(--orange);
+        border: 1px solid rgba(210, 153, 34, 0.3);
+      }
+
+      .status-bar {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--muted);
+        display: inline-block;
+        margin-right: 4px;
+      }
+
+      .status-dot.ok {
+        background: var(--green);
+        box-shadow: 0 0 6px var(--green);
+        animation: pulse 2s infinite;
+      }
+
+      .status-dot.err {
+        background: var(--red);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* ── Layout principal ── */
+      .main {
+        display: grid;
+        grid-template-columns: 320px 1fr 320px;
+        grid-template-rows: auto 1fr;
+        gap: 0;
+        height: calc(100vh - 56px);
+        overflow: hidden;
+      }
+
+      /* ── Barra de escenarios ── */
+      .scenario-bar {
+        grid-column: 1 / -1;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+      }
+
+      .scenario-bar span {
+        font-size: 12px;
+        color: var(--muted);
+        white-space: nowrap;
+        margin-right: 4px;
+      }
+
+      .btn {
+        padding: 6px 14px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface2);
+        color: var(--text);
+        font-size: 12px;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #000;
+        font-weight: 600;
+      }
+
+      .btn.primary:hover {
+        opacity: 0.85;
+        color: #000;
+      }
+
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      /* ── Paneles laterales ── */
+      .panel {
+        background: var(--surface);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .panel:last-child {
+        border-right: none;
+        border-left: 1px solid var(--border);
+      }
+
+      .panel-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-shrink: 0;
+      }
+
+      .panel-title {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .panel-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 12px;
+      }
+
+      .panel-body::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .panel-body::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 2px;
+      }
+
+      /* ── Centro: chat + logs ── */
+      .center {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* ── Chat (vista cliente) ── */
+      .chat-area {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        background: var(--bg);
+      }
+
+      .chat-area::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .chat-area::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 2px;
+      }
+
+      .msg {
+        max-width: 72%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.5;
+        position: relative;
+        animation: fadeIn 0.2s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .msg.user {
+        background: var(--accent);
+        color: #000;
+        align-self: flex-end;
+        border-bottom-right-radius: 4px;
+      }
+
+      .msg.bot {
+        background: var(--surface2);
+        color: var(--text);
+        align-self: flex-start;
+        border-bottom-left-radius: 4px;
+        border: 1px solid var(--border);
+      }
+
+      .msg.system-msg {
+        background: rgba(88, 166, 255, 0.1);
+        color: var(--accent);
+        align-self: center;
+        border: 1px solid rgba(88, 166, 255, 0.2);
+        font-size: 11px;
+        padding: 6px 12px;
+        border-radius: 20px;
+      }
+
+      .msg-meta {
+        font-size: 10px;
+        color: rgba(0, 0, 0, 0.5);
+        margin-top: 4px;
+        text-align: right;
+      }
+
+      .msg.bot .msg-meta {
+        color: var(--muted);
+        text-align: left;
+      }
+
+      /* ── Input de chat ── */
+      .chat-input {
+        padding: 12px 16px;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        display: flex;
+        gap: 8px;
+      }
+
+      .chat-input input {
+        flex: 1;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 8px 14px;
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
+        font-size: 13px;
+        outline: none;
+        transition: border-color 0.15s;
+      }
+
+      .chat-input input:focus {
+        border-color: var(--accent);
+      }
+
+      .chat-input input::placeholder {
+        color: var(--muted);
+      }
+
+      /* ── Terminal log ── */
+      .log-area {
+        height: 180px;
+        background: #010409;
+        border-top: 1px solid var(--border);
+        overflow-y: auto;
+        padding: 8px 12px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        flex-shrink: 0;
+      }
+
+      .log-area::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .log-area::-webkit-scrollbar-thumb {
+        background: var(--border);
+      }
+
+      .log-line {
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+
+      .log-line.info {
+        color: var(--cyan);
+      }
+
+      .log-line.success {
+        color: var(--green);
+      }
+
+      .log-line.error {
+        color: var(--red);
+      }
+
+      .log-line.warn {
+        color: var(--yellow);
+      }
+
+      .log-line.dim {
+        color: var(--muted);
+      }
+
+      /* ── Panel izquierdo: tenant dashboard ── */
+      .stage-track {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 16px;
+      }
+
+      .stage-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        font-size: 12px;
+      }
+
+      .stage-item.active {
+        background: rgba(63, 185, 80, 0.1);
+        border-color: rgba(63, 185, 80, 0.3);
+        color: var(--green);
+      }
+
+      .stage-item.done {
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+
+      .stage-item.pending {
+        color: var(--muted);
+      }
+
+      .stage-icon {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        flex-shrink: 0;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+      }
+
+      .stage-item.active .stage-icon {
+        background: var(--green);
+        border-color: var(--green);
+        color: #000;
+      }
+
+      .stage-item.done .stage-icon {
+        background: var(--border);
+      }
+
+      .metric-card {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 8px;
+      }
+
+      .metric-label {
+        font-size: 10px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 4px;
+      }
+
+      .metric-value {
+        font-size: 22px;
+        font-weight: 700;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .metric-value.green {
+        color: var(--green);
+      }
+
+      .metric-value.accent {
+        color: var(--accent);
+      }
+
+      .metric-value.purple {
+        color: var(--purple);
+      }
+
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      /* ── Panel derecho: eventos ── */
+      .event-card {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+
+      .event-card:hover {
+        border-color: var(--accent);
+      }
+
+      .event-card.selected {
+        border-color: var(--accent);
+        background: rgba(88, 166, 255, 0.08);
+      }
+
+      .event-name {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .event-meta {
+        font-size: 11px;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+
+      .tag-green {
+        background: rgba(63, 185, 80, 0.15);
+        color: var(--green);
+      }
+
+      .tag-yellow {
+        background: rgba(227, 179, 65, 0.15);
+        color: var(--yellow);
+      }
+
+      .tag-red {
+        background: rgba(248, 81, 73, 0.15);
+        color: var(--red);
+      }
+
+      .quota-bar {
+        height: 4px;
+        background: var(--surface);
+        border-radius: 2px;
+        margin-top: 8px;
+        overflow: hidden;
+      }
+
+      .quota-fill {
+        height: 100%;
+        background: var(--green);
+        border-radius: 2px;
+        transition: width 0.5s ease;
+      }
+
+      /* ── Section labels ── */
+      .section-label {
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        padding: 8px 0 4px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 8px;
+      }
+
+      /* ── Config panel ── */
+      .config-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border);
+        font-size: 12px;
+      }
+
+      .config-row:last-child {
+        border-bottom: none;
+      }
+
+      .config-key {
+        color: var(--muted);
+      }
+
+      .config-val {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        color: var(--accent);
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      /* ── Typing indicator ── */
+      .typing {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding: 10px 14px;
+        background: var(--surface2);
+        border-radius: 12px;
+        border-bottom-left-radius: 4px;
+        align-self: flex-start;
+        border: 1px solid var(--border);
+        display: none;
+      }
+
+      .typing.visible {
+        display: flex;
+      }
+
+      .typing span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--muted);
+        animation: bounce 1.2s infinite;
+      }
+
+      .typing span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .typing span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0.8);
+          opacity: 0.5;
+        }
+        40% {
+          transform: scale(1.2);
+          opacity: 1;
+        }
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 900px) {
+        .main {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto 1fr auto;
+        }
+
+        .panel:first-child,
+        .panel:last-child {
+          display: none;
+        }
+
+        .main > .center {
+          grid-column: 1;
+        }
+      }
+
+      .chat-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--green), var(--cyan));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .chat-identity strong {
+        display: block;
+        font-size: 13px;
+      }
+
+      .chat-identity small {
+        font-size: 11px;
+        color: var(--green);
+      }
+
+      .wa-badge {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .wa-icon {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <div class="logo-icon">🤖</div>
+        SaaS Bot Orchestrator
+        <span class="badge badge-demo">Demo</span>
+      </div>
+      <div class="status-bar">
+        <span><span class="status-dot" id="dot-orch"></span>Orquestador</span>
+        <span><span class="status-dot" id="dot-pg"></span>PostgreSQL</span>
+        <span><span class="status-dot" id="dot-redis"></span>Redis</span>
+        <span><span class="status-dot" id="dot-wa"></span>WhatsApp</span>
+        <span id="clock" style="color: var(--muted); font-size: 12px"></span>
+      </div>
+    </header>
+
+    <div class="main">
+      <!-- ── Barra de escenarios ── -->
+      <div class="scenario-bar">
+        <span>Escenarios:</span>
+        <button class="btn primary" onclick="runScenario('init')">▶ Iniciar demo</button>
+        <button class="btn" onclick="runScenario('contact')">📋 Contacto</button>
+        <button class="btn" onclick="runScenario('inscripcion')">🎓 Inscripción</button>
+        <button class="btn" onclick="runScenario('sinCupo')">🚫 Sin cupo → lista espera</button>
+        <button class="btn" onclick="runScenario('pago')">💳 Confirmar pago</button>
+        <button class="btn" onclick="runScenario('escalado')">🧑‍💼 Escalar a operador</button>
+        <button class="btn" onclick="runScenario('custom')">✏️ Mensaje libre</button>
+        <div style="margin-left: auto; display:flex; gap:8px;">
+          <button class="btn" onclick="clearAll()" style="color: var(--red)">🗑 Limpiar</button>
+          <a href="http://localhost:3000/api/docs" target="_blank" class="btn">📖 Swagger</a>
+        </div>
+      </div>
+
+      <!-- ── Panel izquierdo: Tenant Dashboard ── -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">🏢 Vista del Tenant</div>
+          <span class="badge badge-demo">Academia Digital MX</span>
+        </div>
+        <div class="panel-body">
+          <div class="section-label">Etapa comercial del lead</div>
+          <div class="stage-track" id="stage-track">
+            <div class="stage-item pending" id="s-LEAD">
+              <div class="stage-icon">1</div>
+              <div>
+                <div>LEAD</div>
+                <div style="font-size:10px; color: var(--muted)">Conversación iniciada</div>
+              </div>
+            </div>
+            <div class="stage-item pending" id="s-MQL">
+              <div class="stage-icon">2</div>
+              <div>
+                <div>MQL</div>
+                <div style="font-size:10px; color: var(--muted)">Datos de contacto</div>
+              </div>
+            </div>
+            <div class="stage-item pending" id="s-PROSPECTO">
+              <div class="stage-icon">3</div>
+              <div>
+                <div>PROSPECTO</div>
+                <div style="font-size:10px; color: var(--muted)">Interés en inscripción</div>
+              </div>
+            </div>
+            <div class="stage-item pending" id="s-SQL">
+              <div class="stage-icon">4</div>
+              <div>
+                <div>SQL</div>
+                <div style="font-size:10px; color: var(--muted)">Pago pendiente</div>
+              </div>
+            </div>
+            <div class="stage-item pending" id="s-CIERRE">
+              <div class="stage-icon">5</div>
+              <div>
+                <div>CIERRE</div>
+                <div style="font-size:10px; color: var(--muted)">Ganado / Perdido</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-label">Métricas de sesión</div>
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <div class="metric-label">Puntuación</div>
+              <div class="metric-value green" id="m-score">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Tool calls</div>
+              <div class="metric-value accent" id="m-tools">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Mensajes</div>
+              <div class="metric-value purple" id="m-msgs">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Turnos</div>
+              <div class="metric-value" id="m-turns">0</div>
+            </div>
+          </div>
+
+          <div class="section-label">Configuración del tenant</div>
+          <div class="config-row">
+            <span class="config-key">Tenant ID</span>
+            <span class="config-val">demo-tenant</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Modelo LLM</span>
+            <span class="config-val" id="cfg-model">claude-haiku-4-5</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Canal activo</span>
+            <span class="config-val">WEB / WhatsApp</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Lead ID</span>
+            <span class="config-val" id="cfg-leadid">–</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Conversación</span>
+            <span class="config-val" id="cfg-convid">–</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Centro: Chat + Terminal ── -->
+      <div class="center">
+        <div class="chat-header">
+          <div class="avatar">A</div>
+          <div class="chat-identity">
+            <strong>Ana — Academia Digital MX</strong>
+            <small>● en línea</small>
+          </div>
+          <div class="wa-badge">
+            <span class="wa-icon">📱</span>
+            Canal: Web Chat
+          </div>
+        </div>
+
+        <div class="chat-area" id="chat-area">
+          <div class="msg system-msg">Demo iniciado — escribe un mensaje o usa los escenarios arriba</div>
+        </div>
+
+        <div class="typing" id="typing">
+          <span></span><span></span><span></span>
+        </div>
+
+        <div class="chat-input">
+          <input
+            type="text"
+            id="msg-input"
+            placeholder="Escribe un mensaje como cliente..."
+            onkeydown="if(event.key==='Enter') sendMsg()"
+          />
+          <button class="btn primary" onclick="sendMsg()">Enviar →</button>
+        </div>
+
+        <div class="log-area" id="log-area">
+          <div class="log-line dim">── Terminal del sistema ──────────────────────────────────</div>
+        </div>
+      </div>
+
+      <!-- ── Panel derecho: Eventos disponibles ── -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">📅 Eventos del tenant</div>
+        </div>
+        <div class="panel-body">
+          <div class="section-label">Cursos disponibles</div>
+
+          <div class="event-card" id="evt-EXCEL-01" onclick="selectEvent('EVT-EXCEL-01')">
+            <div class="event-name">Curso Excel Avanzado</div>
+            <div class="event-meta">
+              <span>📅 15 Jun 2026 · 9am–6pm</span>
+              <span>📍 Presencial · CDMX</span>
+              <span>💲 $2,800 MXN</span>
+            </div>
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"
+            >
+              <span class="tag tag-green" id="qt-EXCEL-01">✓ 20 cupos</span>
+              <span style="font-size:11px;color:var(--muted)">EVT-EXCEL-01</span>
+            </div>
+            <div class="quota-bar">
+              <div class="quota-fill" id="qf-EXCEL-01" style="width: 100%"></div>
+            </div>
+          </div>
+
+          <div class="event-card" id="evt-PBI-01" onclick="selectEvent('EVT-PBI-01')">
+            <div class="event-name">Taller Power BI</div>
+            <div class="event-meta">
+              <span>📅 20 Jun 2026 · 10am–2pm</span>
+              <span>💻 Online (Zoom)</span>
+              <span>💲 $1,500 MXN</span>
+            </div>
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"
+            >
+              <span class="tag tag-green" id="qt-PBI-01">✓ 30 cupos</span>
+              <span style="font-size:11px;color:var(--muted)">EVT-PBI-01</span>
+            </div>
+            <div class="quota-bar">
+              <div class="quota-fill" id="qf-PBI-01" style="width: 100%"></div>
+            </div>
+          </div>
+
+          <div class="event-card" id="evt-CONT-01" onclick="selectEvent('EVT-CONT-01')">
+            <div class="event-name">Diplomado Contabilidad Digital</div>
+            <div class="event-meta">
+              <span>📅 1 Jul – 30 Sep 2026</span>
+              <span>🔄 Híbrido · Mar/Jue/Sáb</span>
+              <span>💲 $8,500 MXN</span>
+            </div>
+            <div
+              style="display:flex;align-items:center;justify-content:space-between;margin-top:8px"
+            >
+              <span class="tag tag-yellow" id="qt-CONT-01">⚡ 15 cupos</span>
+              <span style="font-size:11px;color:var(--muted)">EVT-CONT-01</span>
+            </div>
+            <div class="quota-bar">
+              <div class="quota-fill" id="qf-CONT-01" style="width: 100%"></div>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-top:16px">API · últimas llamadas</div>
+          <div id="api-log" style="font-family: 'JetBrains Mono', monospace; font-size: 11px; display:flex; flex-direction:column; gap:4px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ── Config ──────────────────────────────────────────────────────────
+      const API = 'http://localhost:3000/api/v1';
+      const TENANT = 'demo-tenant';
+      const USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
+
+      // ── Estado ──────────────────────────────────────────────────────────
+      let state = {
+        stage: null,
+        score: 0,
+        toolCalls: 0,
+        messages: 0,
+        turns: 0,
+        leadId: null,
+        convId: null,
+        selectedEvent: null,
+      };
+
+      // ── Utilidades ──────────────────────────────────────────────────────
+      function now() {
+        return new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+      }
+
+      function log(msg, type = 'dim') {
+        const area = document.getElementById('log-area');
+        const line = document.createElement('div');
+        line.className = `log-line ${type}`;
+        line.textContent = `[${now()}] ${msg}`;
+        area.appendChild(line);
+        area.scrollTop = area.scrollHeight;
+      }
+
+      function apiLog(method, path, status) {
+        const el = document.getElementById('api-log');
+        const row = document.createElement('div');
+        const color = status >= 200 && status < 300 ? '#3fb950' : '#f85149';
+        row.innerHTML = `<span style="color:${color}">${status}</span> <span style="color:#8b949e">${method}</span> <span style="color:#58a6ff;word-break:break-all">${path}</span>`;
+        el.prepend(row);
+        if (el.children.length > 8) el.lastChild.remove();
+      }
+
+      function addMsg(text, role, meta = '') {
+        const area = document.getElementById('chat-area');
+        const div = document.createElement('div');
+        div.className = `msg ${role}`;
+        div.innerHTML = `${text}${meta ? `<div class="msg-meta">${meta}</div>` : ''}`;
+        area.appendChild(div);
+        area.scrollTop = area.scrollHeight;
+      }
+
+      function setTyping(visible) {
+        document.getElementById('typing').classList.toggle('visible', visible);
+        const area = document.getElementById('chat-area');
+        if (visible) area.scrollTop = area.scrollHeight;
+      }
+
+      function updateStage(stage) {
+        if (!stage || stage === state.stage) return;
+        const stages = ['LEAD', 'MQL', 'PROSPECTO', 'SQL', 'CIERRE'];
+        const idx = stages.indexOf(stage);
+        stages.forEach((s, i) => {
+          const el = document.getElementById(`s-${s}`);
+          if (!el) return;
+          el.className = 'stage-item ' + (i < idx ? 'done' : i === idx ? 'active' : 'pending');
+        });
+        if (stage !== state.stage) {
+          log(`Etapa → ${stage}`, 'success');
+          state.stage = stage;
+        }
+      }
+
+      function updateMetrics() {
+        document.getElementById('m-score').textContent = state.score;
+        document.getElementById('m-tools').textContent = state.toolCalls;
+        document.getElementById('m-msgs').textContent = state.messages;
+        document.getElementById('m-turns').textContent = state.turns;
+        document.getElementById('cfg-leadid').textContent = state.leadId
+          ? state.leadId.slice(0, 12) + '…'
+          : '–';
+        document.getElementById('cfg-convid').textContent = state.convId
+          ? state.convId.slice(0, 12) + '…'
+          : '–';
+      }
+
+      function selectEvent(id) {
+        document.querySelectorAll('.event-card').forEach((c) => c.classList.remove('selected'));
+        const key = id.replace('EVT-', '');
+        document.getElementById(`evt-${key}`)?.classList.add('selected');
+        state.selectedEvent = id;
+        log(`Evento seleccionado: ${id}`, 'info');
+      }
+
+      // ── API call ────────────────────────────────────────────────────────
+      async function sendMessage(text) {
+        setTyping(true);
+        state.messages++;
+        state.turns++;
+        updateMetrics();
+
+        const body = {
+          channelId: USER_CHANNEL,
+          text,
+          messageId: `gui-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        };
+
+        log(`→ POST /${TENANT}/messages "${text.slice(0, 50)}"`, 'info');
+
+        try {
+          const res = await fetch(`${API}/${TENANT}/messages`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Tenant-Id': TENANT },
+            body: JSON.stringify(body),
+          });
+
+          apiLog('POST', `/${TENANT}/messages`, res.status);
+          const data = await res.json();
+
+          setTyping(false);
+
+          if (data.response) {
+            addMsg(data.response, 'bot', `Ana · ${now()}`);
+            log(`← Bot respondió (${data.response.length} chars)`, 'success');
+          }
+
+          if (data.stage) updateStage(data.stage);
+          if (data.toolCallsExecuted) {
+            state.toolCalls += data.toolCallsExecuted;
+            log(`Tool calls ejecutadas: ${data.toolCallsExecuted}`, 'info');
+          }
+          if (data.leadId) state.leadId = data.leadId;
+          if (data.conversationId) state.convId = data.conversationId;
+          updateMetrics();
+        } catch (err) {
+          setTyping(false);
+          log(`Error: ${err.message}`, 'error');
+          addMsg('⚠️ Error conectando al servidor. ¿Está corriendo el orquestador?', 'system-msg');
+        }
+      }
+
+      // ── Escenarios predefinidos ──────────────────────────────────────────
+      const SCENARIOS = {
+        init: [
+          'Hola, buenas tardes',
+          '¿Qué cursos tienen disponibles?',
+        ],
+        contact: [
+          'Mi nombre es Carlos Mendoza',
+          'Mi correo es carlos@empresa.com y mi teléfono 55 1234 5678',
+        ],
+        inscripcion: [
+          '¿Tienen disponibilidad en el curso de Excel Avanzado?',
+          'Me gustaría inscribirme al curso del 15 de junio',
+          '¿Cuánto cuesta y qué incluye?',
+        ],
+        sinCupo: [
+          'El diplomado de contabilidad, ¿tiene cupo?',
+          'Si no hay cupo, ¿puedo quedar en lista de espera?',
+          'Sí, apúntame a la lista por favor',
+        ],
+        pago: [
+          'Ya realicé el depósito al número de cuenta proporcionado',
+          'El comprobante lo puedo enviar por correo, ¿cuál es?',
+          'Perfecto, ¿cómo confirmo mi inscripción?',
+        ],
+        escalado: [
+          'Necesito hablar con alguien de facturación, tengo un problema con mi CFDI',
+          'Es urgente, necesito la factura antes de las 5pm',
+        ],
+        custom: null,
+      };
+
+      async function runScenario(key) {
+        if (key === 'custom') {
+          const input = document.getElementById('msg-input');
+          input.focus();
+          input.placeholder = 'Escribe tu mensaje libre...';
+          return;
+        }
+
+        const messages = SCENARIOS[key];
+        if (!messages) return;
+
+        addMsg(`▶ Escenario: ${key}`, 'system-msg');
+
+        for (const msg of messages) {
+          await new Promise((r) => setTimeout(r, 600));
+          addMsg(msg, 'user', `Tú · ${now()}`);
+          await sendMessage(msg);
+          await new Promise((r) => setTimeout(r, 800));
+        }
+      }
+
+      // ── Envío manual ────────────────────────────────────────────────────
+      async function sendMsg() {
+        const input = document.getElementById('msg-input');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        addMsg(text, 'user', `Tú · ${now()}`);
+        await sendMessage(text);
+      }
+
+      function clearAll() {
+        document.getElementById('chat-area').innerHTML =
+          '<div class="msg system-msg">Chat limpiado — nueva sesión</div>';
+        document.getElementById('log-area').innerHTML =
+          '<div class="log-line dim">── Terminal limpiada ─────────────────────────────────────</div>';
+        document.getElementById('api-log').innerHTML = '';
+        state = {
+          stage: null, score: 0, toolCalls: 0, messages: 0,
+          turns: 0, leadId: null, convId: null, selectedEvent: null,
+        };
+        ['LEAD', 'MQL', 'PROSPECTO', 'SQL', 'CIERRE'].forEach((s) => {
+          const el = document.getElementById(`s-${s}`);
+          if (el) el.className = 'stage-item pending';
+        });
+        updateMetrics();
+      }
+
+      // ── Health polling ───────────────────────────────────────────────────
+      async function checkHealth() {
+        try {
+          const res = await fetch(`${API}/health`, { signal: AbortSignal.timeout(2000) });
+          const ok = res.ok;
+          document.getElementById('dot-orch').className = 'status-dot ' + (ok ? 'ok' : 'err');
+          document.getElementById('dot-pg').className = 'status-dot ' + (ok ? 'ok' : 'err');
+          document.getElementById('dot-redis').className = 'status-dot ok'; // si orch arranca, redis está ok
+        } catch {
+          document.getElementById('dot-orch').className = 'status-dot err';
+          document.getElementById('dot-pg').className = 'status-dot err';
+        }
+
+        // WhatsApp bridge
+        try {
+          const res = await fetch('http://localhost:4000/health', { signal: AbortSignal.timeout(1000) });
+          document.getElementById('dot-wa').className = 'status-dot ' + (res.ok ? 'ok' : 'err');
+        } catch {
+          document.getElementById('dot-wa').className = 'status-dot err';
+        }
+      }
+
+      // ── Reloj ────────────────────────────────────────────────────────────
+      function updateClock() {
+        document.getElementById('clock').textContent = new Date().toLocaleTimeString('es-MX');
+      }
+
+      // ── Init ────────────────────────────────────────────────────────────
+      checkHealth();
+      setInterval(checkHealth, 5000);
+      updateClock();
+      setInterval(updateClock, 1000);
+      log('GUI demo cargada · conectando al orquestador...', 'info');
+    </script>
+  </body>
+</html>

@@ -12,8 +12,10 @@ import { AuditModule } from './audit/audit.module';
 import { ToolsModule } from './tools/tools.module';
 import { ChannelsModule } from './channels/channels.module';
 import { ObservabilityModule } from './observability/observability.module';
+import { HealthController } from './common/health.controller';
 
 @Module({
+  controllers: [HealthController],
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
