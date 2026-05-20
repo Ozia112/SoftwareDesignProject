@@ -113,7 +113,12 @@ jobs:
           --health-retries 5
     env:
       DATABASE_URL: postgresql://app:app@localhost:5432/app_test?schema=public
-      REDIS_URL: redis://localhost:6379
+      REDIS_HOST: localhost
+      REDIS_PORT: "6379"
+      ENCRYPTION_MASTER_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      JWT_SECRET: ci-jwt-secret
+      THROTTLE_TTL: "60"
+      THROTTLE_LIMIT: "1000"
       CI: "true"
     steps:
       - name: Checkout repository
@@ -193,3 +198,4 @@ jobs:
       - name: NestJS build
         if: steps.project.outputs.has_node == 'true'
         run: pnpm run --if-present build
+
