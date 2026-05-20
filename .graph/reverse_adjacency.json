@@ -37,6 +37,7 @@
     ],
     "supported_by": [
       "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE"
     ]
   },
@@ -50,7 +51,8 @@
     ],
     "supported_by": [
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
-      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-WORKFLOW-CI-CODE"
     ]
   },
   "DOM-GLOSARIO": {
@@ -712,10 +714,22 @@
       "SUP-WORKFLOW"
     ],
     "supported_by": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-TEMPLATES"
     ]
   },
   "SUP-WORKFLOW-TEMPLATES": {
+    "contained_by": [
+      "SUP-WORKFLOW"
+    ]
+  },
+  "SUP-WORKFLOW-CI-CODE": {
+    "contained_by": [
+      "SUP-WORKFLOW"
+    ]
+  },
+  "SUP-WORKFLOW-CI-DOCS": {
     "contained_by": [
       "SUP-WORKFLOW"
     ]
@@ -800,6 +814,10 @@
   "SUP-MAPA-NODOS": {
     "contained_by": [
       "AREA-SOPORTE"
+    ],
+    "supported_by": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
     ]
   },
   "SRC-ORQ-CONVERSATION": {

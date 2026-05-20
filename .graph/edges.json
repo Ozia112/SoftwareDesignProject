@@ -1590,6 +1590,16 @@
     "type": "contains"
   },
   {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-CI-CODE",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-CI-DOCS",
+    "type": "contains"
+  },
+  {
     "from": "SUP-WORKFLOW-PIPELINE",
     "to": "AREA-SOPORTE",
     "type": "supports"
@@ -1597,6 +1607,36 @@
   {
     "from": "SUP-WORKFLOW-TEMPLATES",
     "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-CODE",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-CODE",
+    "to": "SUP-MAPA-NODOS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-CODE",
+    "to": "AREA-SRC-FUTURO",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-DOCS",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-DOCS",
+    "to": "SUP-MAPA-NODOS",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-CI-DOCS",
+    "to": "AREA-SOPORTE",
     "type": "supports"
   },
   {
