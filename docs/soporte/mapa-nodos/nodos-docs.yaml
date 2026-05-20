@@ -1,0 +1,670 @@
+schema: repo-node-map/v0.1
+purpose: >
+  Grafo inicial del repositorio para orientar agentes de IA, reducir tool calling
+  exploratorio y preparar trazabilidad futura hacia codigo bajo src/.
+
+entry_points:
+  - id: AREA-ANALISIS
+    when: "Necesidades, RF, RNF, CU, glosario, reglas de negocio o modelos del problema."
+  - id: AREA-DISENO
+    when: "Decisiones tecnicas, secuencia, colaboracion, arquitectura u orquestador."
+  - id: AREA-SOPORTE
+    when: "Workflow, reuniones, entregas, prompts, scripts y utilidades de trabajo."
+  - id: AREA-SRC-FUTURO
+    when: "Implementacion futura en src/ y trazabilidad codigo-documentacion."
+
+relation_vocabulary:
+  contains: "Agrupa nodos hijos."
+  traces_to: "Declara trazabilidad directa."
+  governed_by: "Queda condicionado por reglas o decisiones."
+  derives_from: "Deriva de una fuente primaria."
+  implements_future: "Ancla de implementacion futura."
+  supports: "Ayuda a producir, mantener o auditar."
+  references: "Relacion contextual."
+
+nodes:
+  - id: REPO
+    type: root
+    title: SoftwareDesignProject
+    path: .
+    contains: [README, AREA-ANALISIS, AREA-DISENO, AREA-SOPORTE, AREA-SRC-FUTURO]
+
+  - id: README
+    type: artifact
+    title: README principal
+    path: README.md
+    supports: [REPO, SUP-ENTREGAS]
+
+  - id: AREA-ANALISIS
+    type: area
+    title: Documentacion de analisis
+    path: docs/analisis
+    purpose: "Problema, necesidades, reglas, requerimientos, casos de uso y modelos del dominio."
+    contains:
+      - DOM-GLOSARIO
+      - DOM-RF-COM
+      - DOM-RF-EVT
+      - DOM-RNF
+      - DOM-CU-COM
+      - DOM-CU-EVT
+      - DOM-RN-BASE
+      - DOM-RN-COM
+      - DOM-RN-EVT
+      - DOM-MODELOS-PROBLEMA
+
+  - id: AREA-DISENO
+    type: area
+    title: Documentacion de diseno
+    path: docs/diseño
+    purpose: "Solucion tecnica, decisiones y comportamiento entre componentes."
+    contains: [DOM-DDR, DOM-SECUENCIA, DOM-COLABORACION]
+
+  - id: AREA-SOPORTE
+    type: area
+    title: Documentacion de soporte
+    path: docs/soporte
+    purpose: "Operacion del equipo, evidencia, prompts, scripts y utilidades."
+    contains:
+      - SUP-WORKFLOW
+      - SUP-MEETINGS
+      - SUP-ENTREGAS
+      - SUP-PROMPTS
+      - SUP-SCRIPTS
+      - SUP-UTILS
+      - SUP-MAPA-NODOS
+
+  - id: AREA-SRC-FUTURO
+    type: area
+    title: Codigo futuro
+    status: planned
+    path: src
+    purpose: "Ancla reservada para implementacion del orquestador y contratos de tool calls."
+    derives_from: [DDR-02]
+    contains:
+      - SRC-ORQ-CONVERSATION
+      - SRC-ORQ-COMMERCIAL
+      - SRC-ORQ-CONTEXT
+      - SRC-ORQ-EVENTS
+      - SRC-ORQ-NOTIFICATIONS
+      - SRC-ORQ-TENANT
+      - SRC-ORQ-TOOL-CALLS
+
+  - id: DOM-GLOSARIO
+    type: domain
+    title: Glosario del dominio
+    path: docs/analisis/glosario
+    contains: [GLOSARIO-DEFINICIONES]
+
+  - id: GLOSARIO-DEFINICIONES
+    type: artifact
+    title: Definiciones
+    path: docs/analisis/glosario/Definiciones.md
+    tags: [analisis, vocabulario, dominio]
+    governed_by: [DDR-01]
+
+  - id: DOM-RF-COM
+    type: domain
+    title: Requerimientos funcionales COM
+    path: docs/analisis/requerimientos/funcionales/COM
+    contains: [RF-COM-01, RF-COM-02, RF-COM-03, RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-COM-08]
+
+  - id: RF-COM-01
+    type: artifact
+    title: Asignacion de conversaciones a Bot
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md
+    traces_to: [CU-COM-001, CU-EVT-003]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RF-COM-02
+    type: artifact
+    title: Gestion de etapa comercial y calificacion automatica de leads
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md
+    traces_to: [CU-COM-002, CU-COM-005, CU-EVT-001]
+    governed_by: [DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-COMMERCIAL]
+
+  - id: RF-COM-03
+    type: artifact
+    title: Captura y gestion de datos desde conversaciones multicanal
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md
+    traces_to: [CU-COM-002]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RF-COM-04
+    type: artifact
+    title: Listado de eventos disponibles
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md
+    traces_to: [CU-COM-002, CU-COM-003]
+    implements_future: [SRC-ORQ-CONTEXT]
+
+  - id: RF-COM-05
+    type: artifact
+    title: Informacion detallada de cada evento
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md
+    traces_to: [CU-COM-001, CU-COM-002, CU-COM-003]
+    implements_future: [SRC-ORQ-CONTEXT]
+
+  - id: RF-COM-06
+    type: artifact
+    title: Fechas de inicio y horarios disponibles
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md
+    traces_to: [CU-COM-002, CU-COM-003]
+    implements_future: [SRC-ORQ-CONTEXT]
+
+  - id: RF-COM-07
+    type: artifact
+    title: Informe de privacidad al usuario
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md
+    traces_to: [CU-COM-002, CU-COM-003, CU-COM-004]
+    governed_by: [DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RF-COM-08
+    type: artifact
+    title: Gestion de notificaciones de reactivacion outbound
+    path: docs/analisis/requerimientos/funcionales/COM/RF-COM-08 Gestión de notificaciones de reactivación outbound.md
+    traces_to: [CU-COM-006]
+    implements_future: [SRC-ORQ-NOTIFICATIONS]
+
+  - id: DOM-RF-EVT
+    type: domain
+    title: Requerimientos funcionales EVT
+    path: docs/analisis/requerimientos/funcionales/EVT
+    contains: [RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-05, RF-EVT-06]
+
+  - id: RF-EVT-01
+    type: artifact
+    title: Verificacion de disponibilidad de cupo
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md
+    traces_to: [CU-COM-001, CU-COM-002, CU-COM-003, CU-EVT-003]
+    governed_by: [DDR-01]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: RF-EVT-02
+    type: artifact
+    title: Reservacion de vacante durante proceso de venta
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md
+    traces_to: [CU-COM-002, CU-COM-003, CU-EVT-003]
+    governed_by: [DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: RF-EVT-03
+    type: artifact
+    title: Notificacion ante liberacion de cupo
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md
+    traces_to: [CU-EVT-002, CU-EVT-003]
+    implements_future: [SRC-ORQ-NOTIFICATIONS, SRC-ORQ-EVENTS]
+
+  - id: RF-EVT-04
+    type: artifact
+    title: Bloqueo de vacantes despues de confirmacion de pago
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md
+    traces_to: [CU-COM-003, CU-EVT-002, CU-EVT-003]
+    governed_by: [DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: RF-EVT-05
+    type: artifact
+    title: Gestion de inscripciones extemporaneas
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md
+    traces_to: [CU-COM-003, CU-EVT-003]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: RF-EVT-06
+    type: artifact
+    title: Gestion de lista de espera
+    path: docs/analisis/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md
+    traces_to: [CU-COM-003, CU-EVT-001, CU-EVT-003]
+    governed_by: [DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: DOM-RNF
+    type: domain
+    title: Requerimientos no funcionales
+    path: docs/analisis/requerimientos/no funcionales
+    contains: [RNF-01, RNF-02, RNF-03, RNF-04, RNF-05, RNF-XX-PLANTILLA]
+
+  - id: RNF-01
+    type: artifact
+    title: Interaccion entre actores y base de datos
+    path: docs/analisis/requerimientos/no funcionales/RNF-01 Interacción entre los actores del sistema y la base de datos.md
+    tags: [seguridad]
+    implements_future: [SRC-ORQ-TOOL-CALLS, SRC-ORQ-TENANT]
+
+  - id: RNF-02
+    type: artifact
+    title: Rendimiento del bot
+    path: docs/analisis/requerimientos/no funcionales/RNF-02 Rendimiento del bot.md
+    tags: [rendimiento]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RNF-03
+    type: artifact
+    title: Claridad de mensajes del bot
+    path: docs/analisis/requerimientos/no funcionales/RNF-03 Claridad de mensajes del bot.md
+    tags: [usabilidad, conversacion]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RNF-04
+    type: artifact
+    title: Continuidad de la conversacion
+    path: docs/analisis/requerimientos/no funcionales/RNF-04 Continuidad de la conversación.md
+    tags: [continuidad, sesion]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: RNF-05
+    type: artifact
+    title: Disponibilidad del sistema
+    path: docs/analisis/requerimientos/no funcionales/RNF-05 Disponibilidad del sistema.md
+    tags: [disponibilidad]
+    implements_future: [SRC-ORQ-TOOL-CALLS]
+
+  - id: RNF-XX-PLANTILLA
+    type: artifact
+    title: Plantilla de RNF
+    path: docs/analisis/requerimientos/no funcionales/RNF-XX Plantilla.md
+    tags: [plantilla]
+
+  - id: DOM-CU-COM
+    type: domain
+    title: Casos de uso COM
+    path: docs/analisis/modelos del problema/casos de uso/COM
+    contains: [CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006]
+
+  - id: CU-COM-001
+    type: artifact
+    title: Asignacion de conversaciones bot-operador
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md
+    traces_to: [RF-COM-01, RF-COM-05]
+    governed_by: [RN-COM-CATALOG, DDR-01]
+    implements_future: [SRC-ORQ-CONVERSATION, SRC-ORQ-TENANT]
+
+  - id: CU-COM-002
+    type: artifact
+    title: Flujo de conversacion entre cliente potencial y bot
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md
+    traces_to: [RF-COM-02, RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01, RF-EVT-02]
+    governed_by: [RN-COM-CATALOG, DDR-01]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: CU-COM-003
+    type: artifact
+    title: Gestion de bancos de contexto
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md
+    traces_to: [RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01, RF-EVT-02, RF-EVT-04, RF-EVT-05, RF-EVT-06]
+    governed_by: [RN-COM-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-CONTEXT]
+
+  - id: CU-COM-004
+    type: artifact
+    title: Avisos legales y consentimiento tacito
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md
+    traces_to: [RF-COM-07]
+    governed_by: [RN-COM-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-CONVERSATION]
+
+  - id: CU-COM-005
+    type: artifact
+    title: Gestion de etapa comercial y calificacion automatica
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md
+    traces_to: [RF-COM-02]
+    governed_by: [RN-COM-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-COMMERCIAL]
+
+  - id: CU-COM-006
+    type: artifact
+    title: Gestion de notificaciones de reactivacion
+    path: docs/analisis/modelos del problema/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md
+    traces_to: [RF-COM-08]
+    governed_by: [RN-COM-CATALOG, DDR-02]
+    implements_future: [SRC-ORQ-NOTIFICATIONS]
+
+  - id: DOM-CU-EVT
+    type: domain
+    title: Casos de uso EVT
+    path: docs/analisis/modelos del problema/casos de uso/EVT
+    contains: [CU-EVT-001, CU-EVT-002, CU-EVT-003]
+
+  - id: CU-EVT-001
+    type: artifact
+    title: Registro en lista de espera
+    path: docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md
+    traces_to: [RF-COM-02, RF-EVT-06]
+    governed_by: [RN-EVT-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: CU-EVT-002
+    type: artifact
+    title: Gestion de cancelacion
+    path: docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md
+    traces_to: [RF-EVT-03, RF-EVT-04]
+    governed_by: [RN-EVT-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: CU-EVT-003
+    type: artifact
+    title: Gestion de cupos de eventos
+    path: docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md
+    traces_to: [RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-05, RF-EVT-06, CU-EVT-002]
+    governed_by: [RN-EVT-CATALOG, DDR-01, DDR-02]
+    implements_future: [SRC-ORQ-EVENTS]
+
+  - id: DOM-RN-COM
+    type: domain
+    title: Reglas de negocio COM
+    path: docs/analisis/reglas de negocio/COM
+    contains: [RN-COM-CATALOG]
+
+  - id: RN-COM-CATALOG
+    type: artifact
+    title: Catalogo de reglas de negocio COM
+    path: docs/analisis/reglas de negocio/COM/catalogo-rn-com.md
+    traces_to: [CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006, RF-COM-01, RF-COM-02, RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-COM-08, RF-EVT-02, RF-EVT-04]
+
+  - id: DOM-RN-BASE
+    type: domain
+    title: Base de reglas de negocio
+    path: docs/analisis/reglas de negocio
+    contains: [RN-README, RN-PLANTILLA]
+
+  - id: RN-README
+    type: artifact
+    title: README de reglas de negocio
+    path: docs/analisis/reglas de negocio/README.md
+    supports: [DOM-RN-COM, DOM-RN-EVT]
+
+  - id: RN-PLANTILLA
+    type: artifact
+    title: Plantilla de regla de negocio
+    path: docs/analisis/reglas de negocio/RN-Plantilla.md
+    supports: [DOM-RN-COM, DOM-RN-EVT]
+
+  - id: DOM-RN-EVT
+    type: domain
+    title: Reglas de negocio EVT
+    path: docs/analisis/reglas de negocio/EVT
+    contains: [RN-EVT-CATALOG]
+
+  - id: RN-EVT-CATALOG
+    type: artifact
+    title: Catalogo de reglas de negocio EVT
+    path: docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md
+    traces_to: [CU-EVT-001, CU-EVT-002, CU-EVT-003, RF-COM-02, RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-05, RF-EVT-06]
+
+  - id: DOM-MODELOS-PROBLEMA
+    type: domain
+    title: Modelos del problema
+    path: docs/analisis/modelos del problema
+    contains: [BPMN-INDEX, BPMN-001, UC-DIAGRAM, CU-PLANTILLA]
+
+  - id: BPMN-INDEX
+    type: artifact
+    title: Indice BPMN
+    path: docs/analisis/modelos del problema/bpmn/BPMNs.md
+    traces_to: [CU-COM-002]
+
+  - id: BPMN-001
+    type: artifact
+    title: BPMN 001
+    path: docs/analisis/modelos del problema/bpmn/BPMN-001.svg
+    traces_to: [BPMN-INDEX, CU-COM-002]
+
+  - id: UC-DIAGRAM
+    type: artifact
+    title: Diagrama de casos de uso
+    path: docs/diseño/modelos de diseño/Diagrama de casos de uso.png
+    status: pendiente-mover-a-analisis
+    traces_to: [DOM-CU-COM, DOM-CU-EVT]
+
+  - id: CU-PLANTILLA
+    type: artifact
+    title: Plantilla de caso de uso
+    path: docs/analisis/modelos del problema/casos de uso/CU-Plantilla.md
+    supports: [DOM-CU-COM, DOM-CU-EVT]
+
+  - id: DOM-DDR
+    type: domain
+    title: Decisiones de diseno
+    path: docs/diseño/decisiones
+    contains: [DDR-01, DDR-02]
+
+  - id: DDR-01
+    type: artifact
+    title: Alineacion de RF-COM-02 como nucleo comercial
+    path: docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md
+    traces_to: [RF-COM-02, RF-COM-04, RF-COM-05, RF-COM-06, RF-COM-07, RF-EVT-01, RF-EVT-02, RF-EVT-03, RF-EVT-04, RF-EVT-05, RF-EVT-06]
+    governed_by: [GLOSARIO-DEFINICIONES]
+
+  - id: DDR-02
+    type: artifact
+    title: Decisiones arquitectonicas del orquestador
+    path: docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md
+    derives_from: [DDR-01, SUP-UTILS-ESTRATEGIA-IMPLEMENTACION]
+    traces_to: [CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006, CU-EVT-001, CU-EVT-002, CU-EVT-003]
+    implements_future: [AREA-SRC-FUTURO, SRC-ORQ-TOOL-CALLS]
+
+  - id: DOM-SECUENCIA
+    type: domain
+    title: Diagramas de secuencia
+    path: docs/diseño/comportamiento/secuencia
+    contains:
+      - SEQ-INDEX
+      - SEQ-01
+      - SEQ-02
+      - SEQ-03
+      - SEQ-04
+
+  - id: SEQ-INDEX
+    type: artifact
+    title: Indice de diagramas de secuencia
+    path: docs/diseño/comportamiento/secuencia/diagrama-secuencia.md
+    traces_to: [CU-COM-002, CU-COM-004, CU-COM-005, CU-EVT-001, CU-EVT-002, CU-EVT-003]
+
+  - id: SEQ-01
+    type: artifact
+    title: Captacion, consentimiento y transicion a prospecto
+    path: docs/diseño/comportamiento/secuencia/sequence-diagram-01-captacion-consentimiento-y-transicion-a-prospecto.svg
+    traces_to: [CU-COM-002, CU-COM-004, CU-COM-005]
+
+  - id: SEQ-02
+    type: artifact
+    title: Inscripcion, reserva temporal SQL y confirmacion
+    path: docs/diseño/comportamiento/secuencia/sequence-diagram-02-inscripcion-reserva-temporal-sql-y-confirmacion.svg
+    traces_to: [CU-EVT-003, CU-COM-005]
+
+  - id: SEQ-03
+    type: artifact
+    title: Lista de espera y notificacion por liberacion de vacante
+    path: docs/diseño/comportamiento/secuencia/sequence-diagram-03-lista-de-espera-y-notificacion-por-liberacion-de-vacante.svg
+    traces_to: [CU-EVT-001, CU-EVT-003, CU-COM-006]
+
+  - id: SEQ-04
+    type: artifact
+    title: Cancelacion pre-inicio e inscripcion extemporanea
+    path: docs/diseño/comportamiento/secuencia/sequence-diagram-04-cancelacion-pre-inicio-e-inscripcion-extemporanea.svg
+    traces_to: [CU-EVT-002, CU-EVT-003]
+
+  - id: DOM-COLABORACION
+    type: domain
+    title: Diagramas de colaboracion
+    path: docs/diseño/comportamiento/colaboracion
+    contains: [COLLAB-INDEX, COLLAB-01, COLLAB-02]
+
+  - id: COLLAB-INDEX
+    type: artifact
+    title: Indice de diagramas de colaboracion
+    path: docs/diseño/comportamiento/colaboracion/diagrama-colaboracion.md
+    traces_to: [CU-COM-002, CU-COM-005, CU-EVT-001, CU-EVT-002, CU-EVT-003]
+
+  - id: COLLAB-01
+    type: artifact
+    title: Colaboracion principal hasta cierre ganado
+    path: docs/diseño/comportamiento/colaboracion/collaboration-diagram-01-captacion-hasta-cierre-ganado.svg
+    traces_to: [CU-COM-002, CU-COM-005, CU-EVT-003]
+
+  - id: COLLAB-02
+    type: artifact
+    title: Colaboracion de excepciones
+    path: docs/diseño/comportamiento/colaboracion/collaboration-diagram-02-colaboracion-de-excepciones.svg
+    traces_to: [CU-EVT-001, CU-EVT-002, CU-EVT-003]
+
+  - id: SUP-WORKFLOW
+    type: domain
+    title: Workflow del equipo
+    path: docs/soporte/workflow
+    contains: [SUP-WORKFLOW-PIPELINE, SUP-WORKFLOW-TEMPLATES]
+
+  - id: SUP-WORKFLOW-PIPELINE
+    type: artifact
+    title: Pipeline operativo
+    path: docs/soporte/workflow/pipeline-operativo.md
+    supports: [AREA-SOPORTE]
+
+  - id: SUP-WORKFLOW-TEMPLATES
+    type: artifact
+    title: Plantillas operativas de issues y PR
+    path: docs/soporte/workflow
+    supports: [SUP-WORKFLOW-PIPELINE]
+
+  - id: SUP-MEETINGS
+    type: domain
+    title: Reuniones
+    path: docs/soporte/meetings
+    supports: [AREA-ANALISIS, AREA-DISENO]
+
+  - id: SUP-ENTREGAS
+    type: domain
+    title: Entregas y bitacoras
+    path: docs/soporte/entregas
+    supports: [README, SUP-SCRIPTS, SUP-PROMPTS]
+
+  - id: SUP-PROMPTS
+    type: domain
+    title: Prompts reutilizables
+    path: docs/soporte/prompts
+    supports: [SUP-ENTREGAS]
+
+  - id: SUP-SCRIPTS
+    type: domain
+    title: Scripts de soporte
+    path: docs/soporte/scripts
+    supports: [SUP-ENTREGAS]
+
+  - id: SUP-UTILS
+    type: domain
+    title: Utilidades y analisis auxiliares
+    path: docs/soporte/utils
+    contains:
+      - SUP-UTILS-RESTRUCTURING
+      - SUP-UTILS-ESTRATEGIA-IMPLEMENTACION
+      - SUP-UTILS-GUIA-DEPURACION-CU
+      - SUP-UTILS-CONTRADICCIONES-CU
+      - SUP-UTILS-DESAJUSTE-IMPLEMENTACION
+      - SUP-UTILS-NOTAS
+
+  - id: SUP-UTILS-RESTRUCTURING
+    type: artifact
+    title: Reestructuracion documental entre analisis y diseno
+    path: docs/soporte/utils/reestructuracion-analisis-diseno.md
+    supports: [AREA-ANALISIS, AREA-DISENO, AREA-SOPORTE]
+
+  - id: SUP-UTILS-ESTRATEGIA-IMPLEMENTACION
+    type: artifact
+    title: Estrategia de implementacion chat
+    path: docs/soporte/utils/estrategia de implementacion chat.md
+    references: [DDR-02]
+    supports: [AREA-SRC-FUTURO]
+
+  - id: SUP-UTILS-GUIA-DEPURACION-CU
+    type: artifact
+    title: Guia de depuracion de casos de uso
+    path: docs/soporte/utils/guia-depuracion-de-casos-de-uso.md
+    supports: [DOM-CU-COM, DOM-CU-EVT]
+
+  - id: SUP-UTILS-CONTRADICCIONES-CU
+    type: artifact
+    title: Contradicciones en casos de uso
+    path: docs/soporte/utils/contradicciones-cus.md
+    supports: [DOM-CU-COM, DOM-CU-EVT, DDR-01]
+
+  - id: SUP-UTILS-DESAJUSTE-IMPLEMENTACION
+    type: artifact
+    title: Reporte de desajuste de artefactos con implementacion
+    path: docs/soporte/utils/reporte de desajuste de arterfactos con implementacion.md
+    supports: [AREA-SRC-FUTURO, DDR-02]
+
+  - id: SUP-UTILS-NOTAS
+    type: artifact
+    title: Notas de trabajo
+    path: docs/soporte/utils/notas.md
+    references: [AREA-ANALISIS, AREA-DISENO, AREA-SOPORTE]
+
+  - id: SUP-MAPA-NODOS
+    type: domain
+    title: Mapa de nodos del repositorio
+    path: docs/soporte/mapa-nodos
+    supports: [REPO]
+
+  - id: SRC-ORQ-CONVERSATION
+    type: code-anchor
+    title: Modulo futuro de conversacion
+    status: planned
+    path: src/conversation
+    services: [MessageRouter, AgentRunner, HandoffManager, AuditLogService, ConversationSessionStore]
+    derives_from: [DDR-02, CU-COM-001, CU-COM-002, RNF-04]
+
+  - id: SRC-ORQ-COMMERCIAL
+    type: code-anchor
+    title: Modulo futuro comercial
+    status: planned
+    path: src/commercial
+    services: [CommercialStageService, ScoringService]
+    derives_from: [DDR-02, CU-COM-005, RF-COM-02]
+
+  - id: SRC-ORQ-CONTEXT
+    type: code-anchor
+    title: Modulo futuro de bancos de contexto
+    status: planned
+    path: src/context-bank
+    services: [ContextBankService]
+    derives_from: [DDR-02, CU-COM-003, RF-COM-04, RF-COM-05, RF-COM-06]
+
+  - id: SRC-ORQ-EVENTS
+    type: code-anchor
+    title: Modulo futuro de eventos y cupos
+    status: planned
+    path: src/events
+    services: [QuotaService, WaitingListService, CancellationService]
+    derives_from: [DDR-02, CU-EVT-001, CU-EVT-002, CU-EVT-003]
+
+  - id: SRC-ORQ-NOTIFICATIONS
+    type: code-anchor
+    title: Modulo futuro de notificaciones
+    status: planned
+    path: src/notifications
+    services: [NotificationService]
+    derives_from: [DDR-02, CU-COM-006, RF-COM-08, RF-EVT-03]
+
+  - id: SRC-ORQ-TENANT
+    type: code-anchor
+    title: Modulo futuro multi-tenant
+    status: planned
+    path: src/tenant
+    services: [TenantConfigService]
+    derives_from: [DDR-02, CU-COM-001, RNF-01]
+
+  - id: SRC-ORQ-TOOL-CALLS
+    type: code-anchor
+    title: Contratos futuros de tool calls
+    status: planned
+    path: src/tool-calls
+    derives_from: [DDR-02, RNF-01, RNF-05]
+    tool_calls:
+      - get_general_context
+      - get_event_context
+      - emit_stage_signal
+      - reserve_quota
+      - release_quota
+      - block_quota
+      - register_waiting_list
+      - request_human_handoff
