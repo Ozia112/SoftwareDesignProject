@@ -672,6 +672,35 @@
       "tags": [],
       "aliases": []
     },
+    "SUP-WORKFLOW-CI-CODE": {
+      "id": "SUP-WORKFLOW-CI-CODE",
+      "type": "artifact",
+      "title": "Workflow CI de codigo",
+      "path": ".github/workflows/ci-code.yml",
+      "status": null,
+      "tags": [],
+      "aliases": [
+        "ci-code",
+        "github actions",
+        "typescript ci",
+        "prisma ci",
+        "graph update"
+      ]
+    },
+    "SUP-WORKFLOW-CI-DOCS": {
+      "id": "SUP-WORKFLOW-CI-DOCS",
+      "type": "artifact",
+      "title": "Workflow CI de documentacion",
+      "path": ".github/workflows/ci-docs.yml",
+      "status": null,
+      "tags": [],
+      "aliases": [
+        "ci-docs",
+        "github actions",
+        "markdownlint",
+        "graph update"
+      ]
+    },
     "SUP-MEETINGS": {
       "id": "SUP-MEETINGS",
       "type": "domain",
@@ -926,6 +955,10 @@
       "SEQ-01",
       "UC-DIAGRAM"
     ],
+    "actions": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
+    ],
     "actividad": [
       "SUP-SCRIPT-ACTIVITY-SUMMARY"
     ],
@@ -1085,6 +1118,8 @@
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
       "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
       "UC-DIAGRAM"
@@ -1196,6 +1231,10 @@
     "chat": [
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
     ],
+    "ci": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
+    ],
     "cierre": [
       "COLLAB-01"
     ],
@@ -1212,11 +1251,13 @@
       "SRC-ORQ-EVENTS",
       "SRC-ORQ-NOTIFICATIONS",
       "SRC-ORQ-TENANT",
-      "SRC-ORQ-TOOL-CALLS"
+      "SRC-ORQ-TOOL-CALLS",
+      "SUP-WORKFLOW-CI-CODE"
     ],
     "codigo": [
       "ARCH-ESTRUCTURA-CODIGO",
-      "AREA-SRC-FUTURO"
+      "AREA-SRC-FUTURO",
+      "SUP-WORKFLOW-CI-CODE"
     ],
     "colaboracion": [
       "COLLAB-01",
@@ -1424,6 +1465,8 @@
       "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-TEMPLATES",
       "UC-DIAGRAM"
     ],
@@ -1599,6 +1642,7 @@
       "SUP-MEETINGS",
       "SUP-PROMPTS",
       "SUP-WORKFLOW",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
       "UC-DIAGRAM"
@@ -1606,7 +1650,8 @@
     "documentacion": [
       "AREA-ANALISIS",
       "AREA-DISENO",
-      "AREA-SOPORTE"
+      "AREA-SOPORTE",
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "documental": [
       "SUP-UTILS-RESTRUCTURING"
@@ -1798,9 +1843,17 @@
       "RF-EVT-05",
       "RF-EVT-06"
     ],
+    "github": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
+    ],
     "glosario": [
       "DOM-GLOSARIO",
       "GLOSARIO-DEFINICIONES"
+    ],
+    "graph": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "guia": [
       "SUP-UTILS-GUIA-DEPURACION-CU"
@@ -1896,6 +1949,9 @@
     ],
     "mapa": [
       "SUP-MAPA-NODOS"
+    ],
+    "markdownlint": [
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "md": [
       "ARCH-ESTRUCTURA-CODIGO",
@@ -2113,7 +2169,8 @@
       "README"
     ],
     "prisma": [
-      "ARCH-ESTRUCTURA-CODIGO"
+      "ARCH-ESTRUCTURA-CODIGO",
+      "SUP-WORKFLOW-CI-CODE"
     ],
     "privacidad": [
       "RF-COM-07"
@@ -2368,6 +2425,8 @@
       "SUP-UTILS-GUIA-DEPURACION-CU",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW",
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES"
     ],
@@ -2401,6 +2460,9 @@
     "transicion": [
       "SEQ-01"
     ],
+    "typescript": [
+      "SUP-WORKFLOW-CI-CODE"
+    ],
     "uc": [
       "UC-DIAGRAM"
     ],
@@ -2410,6 +2472,10 @@
     ],
     "una": [
       "RF-EVT-03"
+    ],
+    "update": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "usabilidad": [
       "RNF-03"
@@ -2470,8 +2536,14 @@
     ],
     "workflow": [
       "SUP-WORKFLOW",
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "workflows": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "xx": [
       "RNF-XX-PLANTILLA"
@@ -2493,6 +2565,10 @@
       "SUP-UTILS",
       "SUP-UTILS-RESTRUCTURING",
       "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "yml": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS"
     ]
   },
   "by_type": {
@@ -2559,6 +2635,8 @@
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
       "SUP-UTILS-GUIA-DEPURACION-CU",
       "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES",
       "UC-DIAGRAM"
@@ -2652,6 +2730,12 @@
   "by_path": {
     ".": [
       "REPO"
+    ],
+    ".github/workflows/ci-code.yml": [
+      "SUP-WORKFLOW-CI-CODE"
+    ],
+    ".github/workflows/ci-docs.yml": [
+      "SUP-WORKFLOW-CI-DOCS"
     ],
     "README.md": [
       "README"
