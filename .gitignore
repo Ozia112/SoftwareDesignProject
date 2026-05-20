@@ -3,3 +3,10 @@ resultado.md
 notas.md
 __pycache__/
 *.pyc
+node_modules/
+dist/
+.env.local
+.env
+coverage/
+*.log
+.DS_Store
