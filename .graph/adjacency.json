@@ -1,0 +1,832 @@
+{
+  "REPO": {
+    "contains": [
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE",
+      "AREA-SRC-FUTURO",
+      "README"
+    ]
+  },
+  "README": {
+    "supports": [
+      "REPO",
+      "SUP-ENTREGAS"
+    ]
+  },
+  "AREA-ANALISIS": {
+    "contains": [
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF"
+    ]
+  },
+  "AREA-DISENO": {
+    "contains": [
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-DDR",
+      "DOM-SECUENCIA"
+    ]
+  },
+  "AREA-SOPORTE": {
+    "contains": [
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-SCRIPTS",
+      "SUP-UTILS",
+      "SUP-WORKFLOW"
+    ]
+  },
+  "AREA-SRC-FUTURO": {
+    "contains": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "derives_from": [
+      "DDR-02"
+    ]
+  },
+  "DOM-GLOSARIO": {
+    "contains": [
+      "GLOSARIO-DEFINICIONES"
+    ]
+  },
+  "GLOSARIO-DEFINICIONES": {
+    "governed_by": [
+      "DDR-01"
+    ]
+  },
+  "DOM-RF-COM": {
+    "contains": [
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08"
+    ]
+  },
+  "RF-COM-01": {
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "traces_to": [
+      "CU-COM-001",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-COM-02": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02"
+    ],
+    "implements_future": [
+      "SRC-ORQ-COMMERCIAL"
+    ],
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-005",
+      "CU-EVT-001"
+    ]
+  },
+  "RF-COM-03": {
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "traces_to": [
+      "CU-COM-002"
+    ]
+  },
+  "RF-COM-04": {
+    "implements_future": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-003"
+    ]
+  },
+  "RF-COM-05": {
+    "implements_future": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "traces_to": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003"
+    ]
+  },
+  "RF-COM-06": {
+    "implements_future": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-003"
+    ]
+  },
+  "RF-COM-07": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02"
+    ],
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004"
+    ]
+  },
+  "RF-COM-08": {
+    "implements_future": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "traces_to": [
+      "CU-COM-006"
+    ]
+  },
+  "DOM-RF-EVT": {
+    "contains": [
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ]
+  },
+  "RF-EVT-01": {
+    "governed_by": [
+      "DDR-01"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-EVT-02": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-EVT-03": {
+    "implements_future": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "traces_to": [
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-EVT-04": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-COM-003",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-EVT-05": {
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-COM-003",
+      "CU-EVT-003"
+    ]
+  },
+  "RF-EVT-06": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-COM-003",
+      "CU-EVT-001",
+      "CU-EVT-003"
+    ]
+  },
+  "DOM-RNF": {
+    "contains": [
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA"
+    ]
+  },
+  "RNF-01": {
+    "implements_future": [
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "RNF-02": {
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RNF-03": {
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RNF-04": {
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RNF-05": {
+    "implements_future": [
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "RNF-XX-PLANTILLA": {},
+  "DOM-CU-COM": {
+    "contains": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006"
+    ]
+  },
+  "CU-COM-001": {
+    "governed_by": [
+      "DDR-01",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-TENANT"
+    ],
+    "traces_to": [
+      "RF-COM-01",
+      "RF-COM-05"
+    ]
+  },
+  "CU-COM-002": {
+    "governed_by": [
+      "DDR-01",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "traces_to": [
+      "RF-COM-02",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-EVT-01",
+      "RF-EVT-02"
+    ]
+  },
+  "CU-COM-003": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "traces_to": [
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ]
+  },
+  "CU-COM-004": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "traces_to": [
+      "RF-COM-07"
+    ]
+  },
+  "CU-COM-005": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-COMMERCIAL"
+    ],
+    "traces_to": [
+      "RF-COM-02"
+    ]
+  },
+  "CU-COM-006": {
+    "governed_by": [
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "traces_to": [
+      "RF-COM-08"
+    ]
+  },
+  "DOM-CU-EVT": {
+    "contains": [
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "CU-EVT-001": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "RF-COM-02",
+      "RF-EVT-06"
+    ]
+  },
+  "CU-EVT-002": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "RF-EVT-03",
+      "RF-EVT-04"
+    ]
+  },
+  "CU-EVT-003": {
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "implements_future": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "traces_to": [
+      "CU-EVT-002",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ]
+  },
+  "DOM-RN-COM": {
+    "contains": [
+      "RN-COM-CATALOG"
+    ]
+  },
+  "RN-COM-CATALOG": {
+    "traces_to": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-02",
+      "RF-EVT-04"
+    ]
+  },
+  "DOM-RN-BASE": {
+    "contains": [
+      "RN-PLANTILLA",
+      "RN-README"
+    ]
+  },
+  "RN-README": {
+    "supports": [
+      "DOM-RN-COM",
+      "DOM-RN-EVT"
+    ]
+  },
+  "RN-PLANTILLA": {
+    "supports": [
+      "DOM-RN-COM",
+      "DOM-RN-EVT"
+    ]
+  },
+  "DOM-RN-EVT": {
+    "contains": [
+      "RN-EVT-CATALOG"
+    ]
+  },
+  "RN-EVT-CATALOG": {
+    "traces_to": [
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "RF-COM-02",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ]
+  },
+  "DOM-MODELOS-PROBLEMA": {
+    "contains": [
+      "BPMN-001",
+      "BPMN-INDEX",
+      "CU-PLANTILLA",
+      "UC-DIAGRAM"
+    ]
+  },
+  "BPMN-INDEX": {
+    "traces_to": [
+      "CU-COM-002"
+    ]
+  },
+  "BPMN-001": {
+    "traces_to": [
+      "BPMN-INDEX",
+      "CU-COM-002"
+    ]
+  },
+  "UC-DIAGRAM": {
+    "traces_to": [
+      "DOM-CU-COM",
+      "DOM-CU-EVT"
+    ]
+  },
+  "CU-PLANTILLA": {
+    "supports": [
+      "DOM-CU-COM",
+      "DOM-CU-EVT"
+    ]
+  },
+  "DOM-ARQUITECTURA": {
+    "contains": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ]
+  },
+  "ARCH-ESTRUCTURA-CODIGO": {
+    "derives_from": [
+      "DDR-02",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "implements_future": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "DOM-DDR": {
+    "contains": [
+      "DDR-01",
+      "DDR-02"
+    ]
+  },
+  "DDR-01": {
+    "governed_by": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "traces_to": [
+      "RF-COM-02",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ]
+  },
+  "DDR-02": {
+    "derives_from": [
+      "DDR-01",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "implements_future": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "traces_to": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "DOM-SECUENCIA": {
+    "contains": [
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX"
+    ]
+  },
+  "SEQ-INDEX": {
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "SEQ-01": {
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-004",
+      "CU-COM-005"
+    ]
+  },
+  "SEQ-02": {
+    "traces_to": [
+      "CU-COM-005",
+      "CU-EVT-003"
+    ]
+  },
+  "SEQ-03": {
+    "traces_to": [
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-003"
+    ]
+  },
+  "SEQ-04": {
+    "traces_to": [
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "DOM-COLABORACION": {
+    "contains": [
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX"
+    ]
+  },
+  "COLLAB-INDEX": {
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-005",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "COLLAB-01": {
+    "traces_to": [
+      "CU-COM-002",
+      "CU-COM-005",
+      "CU-EVT-003"
+    ]
+  },
+  "COLLAB-02": {
+    "traces_to": [
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003"
+    ]
+  },
+  "SUP-WORKFLOW": {
+    "contains": [
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES"
+    ]
+  },
+  "SUP-WORKFLOW-PIPELINE": {
+    "supports": [
+      "AREA-SOPORTE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATES": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-MEETINGS": {
+    "supports": [
+      "AREA-ANALISIS",
+      "AREA-DISENO"
+    ]
+  },
+  "SUP-ENTREGAS": {
+    "supports": [
+      "README",
+      "SUP-PROMPTS",
+      "SUP-SCRIPTS"
+    ]
+  },
+  "SUP-PROMPTS": {
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-SCRIPTS": {
+    "contains": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-SCRIPT-ACTIVITY-SUMMARY": {
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT": {
+    "supports": [
+      "SUP-ENTREGAS"
+    ]
+  },
+  "SUP-UTILS": {
+    "contains": [
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING"
+    ]
+  },
+  "SUP-UTILS-RESTRUCTURING": {
+    "supports": [
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE"
+    ]
+  },
+  "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION": {
+    "references": [
+      "DDR-02"
+    ],
+    "supports": [
+      "AREA-SRC-FUTURO"
+    ]
+  },
+  "SUP-UTILS-GUIA-DEPURACION-CU": {
+    "supports": [
+      "DOM-CU-COM",
+      "DOM-CU-EVT"
+    ]
+  },
+  "SUP-UTILS-CONTRADICCIONES-CU": {
+    "supports": [
+      "DDR-01",
+      "DOM-CU-COM",
+      "DOM-CU-EVT"
+    ]
+  },
+  "SUP-UTILS-DESAJUSTE-IMPLEMENTACION": {
+    "supports": [
+      "AREA-SRC-FUTURO",
+      "DDR-02"
+    ]
+  },
+  "SUP-MAPA-NODOS": {
+    "supports": [
+      "REPO"
+    ]
+  },
+  "SRC-ORQ-CONVERSATION": {
+    "derives_from": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "DDR-02",
+      "RNF-04"
+    ]
+  },
+  "SRC-ORQ-COMMERCIAL": {
+    "derives_from": [
+      "CU-COM-005",
+      "DDR-02",
+      "RF-COM-02"
+    ]
+  },
+  "SRC-ORQ-CONTEXT": {
+    "derives_from": [
+      "CU-COM-003",
+      "DDR-02",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ]
+  },
+  "SRC-ORQ-EVENTS": {
+    "derives_from": [
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "DDR-02"
+    ]
+  },
+  "SRC-ORQ-NOTIFICATIONS": {
+    "derives_from": [
+      "CU-COM-006",
+      "DDR-02",
+      "RF-COM-08",
+      "RF-EVT-03"
+    ]
+  },
+  "SRC-ORQ-TENANT": {
+    "derives_from": [
+      "CU-COM-001",
+      "DDR-02",
+      "RNF-01"
+    ]
+  },
+  "SRC-ORQ-TOOL-CALLS": {
+    "derives_from": [
+      "DDR-02",
+      "RNF-01",
+      "RNF-05"
+    ]
+  }
+}

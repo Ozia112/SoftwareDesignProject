@@ -7,7 +7,7 @@
 - Estado: Propuesto
 - Fecha: 2026-05-19
 - Responsable: Maximiliano Carrillo Alvarado
-- Referencias: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [Estrategia de implementación v2.0](/docs/soporte/utils/estrategia%20de%20implementacion%20chat.md)
+- Referencias: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md), [Estrategia de implementación v2.0](/utils/estrategia%20de%20implementacion%20chat.md)
 
 ---
 
@@ -149,23 +149,23 @@ Las tool calls son el **único** canal por el cual el Bot puede:
 export type ToolCallOk<T> = { ok: true; data: T };
 
 export type ToolCallErrorCode =
-	| 'VALIDATION_ERROR'
-	| 'CONSENT_REQUIRED'
-	| 'STAGE_PRECONDITION_FAILED'
-	| 'NOT_FOUND'
-	| 'CONFLICT'
-	| 'RATE_LIMITED'
-	| 'TEMPORARY_UNAVAILABLE'
-	| 'INTERNAL_ERROR';
+ | 'VALIDATION_ERROR'
+ | 'CONSENT_REQUIRED'
+ | 'STAGE_PRECONDITION_FAILED'
+ | 'NOT_FOUND'
+ | 'CONFLICT'
+ | 'RATE_LIMITED'
+ | 'TEMPORARY_UNAVAILABLE'
+ | 'INTERNAL_ERROR';
 
 export type ToolCallErr = {
-	ok: false;
-	error: {
-		code: ToolCallErrorCode;
-		message: string; // humano-legible; apto para mostrar al usuario final
-		retryable: boolean;
-		details?: Record<string, unknown>;
-	};
+ ok: false;
+ error: {
+  code: ToolCallErrorCode;
+  message: string; // humano-legible; apto para mostrar al usuario final
+  retryable: boolean;
+  details?: Record<string, unknown>;
+ };
 };
 
 export type ToolCallResult<T> = ToolCallOk<T> | ToolCallErr;
@@ -173,11 +173,11 @@ export type ToolCallResult<T> = ToolCallOk<T> | ToolCallErr;
 export type CommercialStage = 'LEAD' | 'MQL' | 'PROSPECTO' | 'SQL' | 'CIERRE';
 
 export type StageSignal =
-	| 'conversacion_iniciada'
-	| 'datos_de_contacto_completados'
-	| 'pregunta_de_inscripcion_detectada'
-	| 'confirmacion_de_pago_pendiente'
-	| 'evento_cambiado';
+ | 'conversacion_iniciada'
+ | 'datos_de_contacto_completados'
+ | 'pregunta_de_inscripcion_detectada'
+ | 'confirmacion_de_pago_pendiente'
+ | 'evento_cambiado';
 
 export type IdempotencyKey = string;
 ```
@@ -188,93 +188,93 @@ export type IdempotencyKey = string;
 // 1) Banco de contexto general (CU-COM-003)
 export type GetGeneralContextInput = { fields?: string[] };
 export type GetGeneralContextOutput = {
-	context: Record<string, unknown>;
-	updatedAt: string; // ISO-8601
+ context: Record<string, unknown>;
+ updatedAt: string; // ISO-8601
 };
 export function get_general_context(
-	input: GetGeneralContextInput,
+ input: GetGeneralContextInput,
 ): Promise<ToolCallResult<GetGeneralContextOutput>>;
 
 // 2) Banco de contexto de evento (CU-COM-003)
 export type GetEventContextInput = { eventId: string; fields?: string[] };
 export type GetEventContextOutput = {
-	eventId: string;
-	context: Record<string, unknown>;
-	updatedAt: string; // ISO-8601
+ eventId: string;
+ context: Record<string, unknown>;
+ updatedAt: string; // ISO-8601
 };
 export function get_event_context(
-	input: GetEventContextInput,
+ input: GetEventContextInput,
 ): Promise<ToolCallResult<GetEventContextOutput>>;
 
 // 3) Señal de transición comercial (CU-COM-005)
 export type EmitStageSignalInput = {
-	signal: StageSignal;
-	eventId?: string; // requerido cuando la señal depende de evento (p.ej., pregunta_de_inscripcion_detectada, evento_cambiado)
+ signal: StageSignal;
+ eventId?: string; // requerido cuando la señal depende de evento (p.ej., pregunta_de_inscripcion_detectada, evento_cambiado)
 };
 export type EmitStageSignalOutput = {
-	previousStage: CommercialStage;
-	currentStage: CommercialStage;
-	score?: number; // 0-20 (si se recalcula en el mismo paso)
+ previousStage: CommercialStage;
+ currentStage: CommercialStage;
+ score?: number; // 0-20 (si se recalcula en el mismo paso)
 };
 export function emit_stage_signal(
-	input: EmitStageSignalInput,
+ input: EmitStageSignalInput,
 ): Promise<ToolCallResult<EmitStageSignalOutput>>;
 
 // 4) Reservar cupo temporal (CU-EVT-003)
 export type ReserveQuotaInput = { eventId: string; idempotencyKey: IdempotencyKey };
 export type ReserveQuotaOutput = { reservationId: string; expiresAt: string };
 export function reserve_quota(
-	input: ReserveQuotaInput,
+ input: ReserveQuotaInput,
 ): Promise<ToolCallResult<ReserveQuotaOutput>>;
 
 // 5) Liberar cupo reservado (CU-EVT-003)
 export type ReleaseQuotaInput = { eventId: string };
 export type ReleaseQuotaOutput = { released: boolean };
 export function release_quota(
-	input: ReleaseQuotaInput,
+ input: ReleaseQuotaInput,
 ): Promise<ToolCallResult<ReleaseQuotaOutput>>;
 
 // 6) Bloquear cupo definitivo post-pago (CU-EVT-003)
 export type BlockQuotaInput = { eventId: string; idempotencyKey: IdempotencyKey };
 export type BlockQuotaOutput = { blocked: boolean };
 export function block_quota(
-	input: BlockQuotaInput,
+ input: BlockQuotaInput,
 ): Promise<ToolCallResult<BlockQuotaOutput>>;
 
 // 7) Registro en lista de espera (CU-EVT-001)
 export type RegisterWaitingListInput = { eventId: string; idempotencyKey: IdempotencyKey };
 export type RegisterWaitingListOutput = { position: number };
 export function register_waiting_list(
-	input: RegisterWaitingListInput,
+ input: RegisterWaitingListInput,
 ): Promise<ToolCallResult<RegisterWaitingListOutput>>;
 
 // 8) Solicitar escalamiento a humano (CU-COM-001)
 export type RequestHumanHandoffInput = {
-	reason:
-		| 'pago_pendiente'
-		| 'no_resuelto'
-		| 'peticion_del_usuario'
-		| 'politica'
-		| 'fallo_tecnico';
+ reason:
+  | 'pago_pendiente'
+  | 'no_resuelto'
+  | 'peticion_del_usuario'
+  | 'politica'
+  | 'fallo_tecnico';
 };
 export type RequestHumanHandoffOutput = { handoffId: string; queued: boolean };
 export function request_human_handoff(
-	input: RequestHumanHandoffInput,
+ input: RequestHumanHandoffInput,
 ): Promise<ToolCallResult<RequestHumanHandoffOutput>>;
 ```
 
 ### Semántica obligatoria (resumen)
 
 - `emit_stage_signal`
-	- El orquestador decide la transición según CU-COM-005.
-	- Si `signal` implica operación EVT (por ejemplo, intención de inscripción), el orquestador puede encadenar la operación correspondiente (p. ej., reservar cupo) pero **solo** si la etapa resultante lo permite.
+  - El orquestador decide la transición según CU-COM-005.
+  - Si `signal` implica operación EVT (por ejemplo, intención de inscripción), el orquestador puede encadenar la operación correspondiente (p. ej., reservar cupo) pero **solo** si la etapa resultante lo permite.
 - `reserve_quota`
-	- Precondición: etapa comercial resultante debe ser **PROSPECTO**.
-	- Idempotencia: el mismo `idempotencyKey` debe producir el mismo resultado (dedupe).
+  - Precondición: etapa comercial resultante debe ser **PROSPECTO**.
+  - Idempotencia: el mismo `idempotencyKey` debe producir el mismo resultado (dedupe).
 - `block_quota`
-	- Precondición: etapa comercial debe ser **SQL** (confirmación pendiente y control humano).
+  - Precondición: etapa comercial debe ser **SQL** (confirmación pendiente y control humano).
 - `register_waiting_list`
-	- Precondición: etapa comercial debe ser **PROSPECTO** y cupo no disponible.
+  - Precondición: etapa comercial debe ser **PROSPECTO** y cupo no disponible.
 
 ---
 
@@ -320,8 +320,7 @@ Se adopta el stack recomendado en la estrategia v2.0 por su alineación directa 
 ## Trazabilidad
 
 - DDR relacionado: [DDR-01](/docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md)
-- Estrategia: [Estrategia de implementación v2.0](/docs/soporte/utils/estrategia%20de%20implementacion%20chat.md)
+- Estrategia: [Estrategia de implementación v2.0](/utils/estrategia%20de%20implementacion%20chat.md)
 - CU clave:
-	- CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006
-	- CU-EVT-001, CU-EVT-002, CU-EVT-003
-
+  - CU-COM-001, CU-COM-002, CU-COM-003, CU-COM-004, CU-COM-005, CU-COM-006
+  - CU-EVT-001, CU-EVT-002, CU-EVT-003

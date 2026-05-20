@@ -1,0 +1,2928 @@
+{
+  "by_id": {
+    "REPO": {
+      "id": "REPO",
+      "type": "root",
+      "title": "SoftwareDesignProject",
+      "path": ".",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "README": {
+      "id": "README",
+      "type": "artifact",
+      "title": "README principal",
+      "path": "README.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "AREA-ANALISIS": {
+      "id": "AREA-ANALISIS",
+      "type": "area",
+      "title": "Documentacion de analisis",
+      "path": "docs/analisis",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "AREA-DISENO": {
+      "id": "AREA-DISENO",
+      "type": "area",
+      "title": "Documentacion de diseno",
+      "path": "docs/diseño",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "AREA-SOPORTE": {
+      "id": "AREA-SOPORTE",
+      "type": "area",
+      "title": "Documentacion de soporte",
+      "path": "docs/soporte",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "AREA-SRC-FUTURO": {
+      "id": "AREA-SRC-FUTURO",
+      "type": "area",
+      "title": "Codigo futuro",
+      "path": "src",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-GLOSARIO": {
+      "id": "DOM-GLOSARIO",
+      "type": "domain",
+      "title": "Glosario del dominio",
+      "path": "docs/analisis/glosario",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "GLOSARIO-DEFINICIONES": {
+      "id": "GLOSARIO-DEFINICIONES",
+      "type": "artifact",
+      "title": "Definiciones",
+      "path": "docs/analisis/glosario/Definiciones.md",
+      "status": null,
+      "tags": [
+        "analisis",
+        "vocabulario",
+        "dominio"
+      ],
+      "aliases": []
+    },
+    "DOM-RF-COM": {
+      "id": "DOM-RF-COM",
+      "type": "domain",
+      "title": "Requerimientos funcionales COM",
+      "path": "docs/analisis/requerimientos/funcionales/COM",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-01": {
+      "id": "RF-COM-01",
+      "type": "artifact",
+      "title": "Asignacion de conversaciones a Bot",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-02": {
+      "id": "RF-COM-02",
+      "type": "artifact",
+      "title": "Gestion de etapa comercial y calificacion automatica de leads",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-03": {
+      "id": "RF-COM-03",
+      "type": "artifact",
+      "title": "Captura y gestion de datos desde conversaciones multicanal",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-04": {
+      "id": "RF-COM-04",
+      "type": "artifact",
+      "title": "Listado de eventos disponibles",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-05": {
+      "id": "RF-COM-05",
+      "type": "artifact",
+      "title": "Informacion detallada de cada evento",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-06": {
+      "id": "RF-COM-06",
+      "type": "artifact",
+      "title": "Fechas de inicio y horarios disponibles",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-07": {
+      "id": "RF-COM-07",
+      "type": "artifact",
+      "title": "Informe de privacidad al usuario",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-COM-08": {
+      "id": "RF-COM-08",
+      "type": "artifact",
+      "title": "Gestion de notificaciones de reactivacion outbound",
+      "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-08 Gestión de notificaciones de reactivación outbound.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-RF-EVT": {
+      "id": "DOM-RF-EVT",
+      "type": "domain",
+      "title": "Requerimientos funcionales EVT",
+      "path": "docs/analisis/requerimientos/funcionales/EVT",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-01": {
+      "id": "RF-EVT-01",
+      "type": "artifact",
+      "title": "Verificacion de disponibilidad de cupo",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-02": {
+      "id": "RF-EVT-02",
+      "type": "artifact",
+      "title": "Reservacion de vacante durante proceso de venta",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-03": {
+      "id": "RF-EVT-03",
+      "type": "artifact",
+      "title": "Notificacion ante liberacion de cupo",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-04": {
+      "id": "RF-EVT-04",
+      "type": "artifact",
+      "title": "Bloqueo de vacantes despues de confirmacion de pago",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-05": {
+      "id": "RF-EVT-05",
+      "type": "artifact",
+      "title": "Gestion de inscripciones extemporaneas",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RF-EVT-06": {
+      "id": "RF-EVT-06",
+      "type": "artifact",
+      "title": "Gestion de lista de espera",
+      "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-RNF": {
+      "id": "DOM-RNF",
+      "type": "domain",
+      "title": "Requerimientos no funcionales",
+      "path": "docs/analisis/requerimientos/no funcionales",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RNF-01": {
+      "id": "RNF-01",
+      "type": "artifact",
+      "title": "Interaccion entre actores y base de datos",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-01 Interacción entre los actores del sistema y la base de datos.md",
+      "status": null,
+      "tags": [
+        "seguridad"
+      ],
+      "aliases": []
+    },
+    "RNF-02": {
+      "id": "RNF-02",
+      "type": "artifact",
+      "title": "Rendimiento del bot",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-02 Rendimiento del bot.md",
+      "status": null,
+      "tags": [
+        "rendimiento"
+      ],
+      "aliases": []
+    },
+    "RNF-03": {
+      "id": "RNF-03",
+      "type": "artifact",
+      "title": "Claridad de mensajes del bot",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-03 Claridad de mensajes del bot.md",
+      "status": null,
+      "tags": [
+        "usabilidad",
+        "conversacion"
+      ],
+      "aliases": []
+    },
+    "RNF-04": {
+      "id": "RNF-04",
+      "type": "artifact",
+      "title": "Continuidad de la conversacion",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-04 Continuidad de la conversación.md",
+      "status": null,
+      "tags": [
+        "continuidad",
+        "sesion"
+      ],
+      "aliases": []
+    },
+    "RNF-05": {
+      "id": "RNF-05",
+      "type": "artifact",
+      "title": "Disponibilidad del sistema",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-05 Disponibilidad del sistema.md",
+      "status": null,
+      "tags": [
+        "disponibilidad"
+      ],
+      "aliases": []
+    },
+    "RNF-XX-PLANTILLA": {
+      "id": "RNF-XX-PLANTILLA",
+      "type": "artifact",
+      "title": "Plantilla de RNF",
+      "path": "docs/analisis/requerimientos/no funcionales/RNF-XX Plantilla.md",
+      "status": null,
+      "tags": [
+        "plantilla"
+      ],
+      "aliases": []
+    },
+    "DOM-CU-COM": {
+      "id": "DOM-CU-COM",
+      "type": "domain",
+      "title": "Casos de uso COM",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-001": {
+      "id": "CU-COM-001",
+      "type": "artifact",
+      "title": "Asignacion de conversaciones bot-operador",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-002": {
+      "id": "CU-COM-002",
+      "type": "artifact",
+      "title": "Flujo de conversacion entre cliente potencial y bot",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-003": {
+      "id": "CU-COM-003",
+      "type": "artifact",
+      "title": "Gestion de bancos de contexto",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-004": {
+      "id": "CU-COM-004",
+      "type": "artifact",
+      "title": "Avisos legales y consentimiento tacito",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-005": {
+      "id": "CU-COM-005",
+      "type": "artifact",
+      "title": "Gestion de etapa comercial y calificacion automatica",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-COM-006": {
+      "id": "CU-COM-006",
+      "type": "artifact",
+      "title": "Gestion de notificaciones de reactivacion",
+      "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-CU-EVT": {
+      "id": "DOM-CU-EVT",
+      "type": "domain",
+      "title": "Casos de uso EVT",
+      "path": "docs/analisis/modelos del problema/casos de uso/EVT",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-EVT-001": {
+      "id": "CU-EVT-001",
+      "type": "artifact",
+      "title": "Registro en lista de espera",
+      "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-EVT-002": {
+      "id": "CU-EVT-002",
+      "type": "artifact",
+      "title": "Gestion de cancelacion",
+      "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "CU-EVT-003": {
+      "id": "CU-EVT-003",
+      "type": "artifact",
+      "title": "Gestion de cupos de eventos",
+      "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-RN-COM": {
+      "id": "DOM-RN-COM",
+      "type": "domain",
+      "title": "Reglas de negocio COM",
+      "path": "docs/analisis/reglas de negocio/COM",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RN-COM-CATALOG": {
+      "id": "RN-COM-CATALOG",
+      "type": "artifact",
+      "title": "Catalogo de reglas de negocio COM",
+      "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-RN-BASE": {
+      "id": "DOM-RN-BASE",
+      "type": "domain",
+      "title": "Base de reglas de negocio",
+      "path": "docs/analisis/reglas de negocio",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RN-README": {
+      "id": "RN-README",
+      "type": "artifact",
+      "title": "README de reglas de negocio",
+      "path": "docs/analisis/reglas de negocio/README.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RN-PLANTILLA": {
+      "id": "RN-PLANTILLA",
+      "type": "artifact",
+      "title": "Plantilla de regla de negocio",
+      "path": "docs/analisis/reglas de negocio/RN-Plantilla.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-RN-EVT": {
+      "id": "DOM-RN-EVT",
+      "type": "domain",
+      "title": "Reglas de negocio EVT",
+      "path": "docs/analisis/reglas de negocio/EVT",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "RN-EVT-CATALOG": {
+      "id": "RN-EVT-CATALOG",
+      "type": "artifact",
+      "title": "Catalogo de reglas de negocio EVT",
+      "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-MODELOS-PROBLEMA": {
+      "id": "DOM-MODELOS-PROBLEMA",
+      "type": "domain",
+      "title": "Modelos del problema",
+      "path": "docs/analisis/modelos del problema",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "BPMN-INDEX": {
+      "id": "BPMN-INDEX",
+      "type": "artifact",
+      "title": "Indice BPMN",
+      "path": "docs/analisis/modelos del problema/bpmn/BPMNs.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "BPMN-001": {
+      "id": "BPMN-001",
+      "type": "artifact",
+      "title": "BPMN 001",
+      "path": "docs/analisis/modelos del problema/bpmn/BPMN-001.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "UC-DIAGRAM": {
+      "id": "UC-DIAGRAM",
+      "type": "artifact",
+      "title": "Diagrama de casos de uso",
+      "path": "docs/diseño/modelos de diseño/Diagrama de casos de uso.png",
+      "status": "pendiente-mover-a-analisis",
+      "tags": [],
+      "aliases": []
+    },
+    "CU-PLANTILLA": {
+      "id": "CU-PLANTILLA",
+      "type": "artifact",
+      "title": "Plantilla de caso de uso",
+      "path": "docs/analisis/modelos del problema/casos de uso/CU-Plantilla.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-ARQUITECTURA": {
+      "id": "DOM-ARQUITECTURA",
+      "type": "domain",
+      "title": "Arquitectura de diseno",
+      "path": "docs/diseño/arquitectura",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "ARCH-ESTRUCTURA-CODIGO": {
+      "id": "ARCH-ESTRUCTURA-CODIGO",
+      "type": "artifact",
+      "title": "Estructura de codigo, stack tecnologico y justificacion",
+      "path": "docs/diseño/arquitectura/estructura-de-codigo.md",
+      "status": null,
+      "tags": [],
+      "aliases": [
+        "estructura-de-codigo",
+        "blueprint de codigo",
+        "stack tecnologico",
+        "monorepo",
+        "prisma schema"
+      ]
+    },
+    "DOM-DDR": {
+      "id": "DOM-DDR",
+      "type": "domain",
+      "title": "Decisiones de diseno",
+      "path": "docs/diseño/decisiones",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DDR-01": {
+      "id": "DDR-01",
+      "type": "artifact",
+      "title": "Alineacion de RF-COM-02 como nucleo comercial",
+      "path": "docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DDR-02": {
+      "id": "DDR-02",
+      "type": "artifact",
+      "title": "Decisiones arquitectonicas del orquestador",
+      "path": "docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-SECUENCIA": {
+      "id": "DOM-SECUENCIA",
+      "type": "domain",
+      "title": "Diagramas de secuencia",
+      "path": "docs/diseño/comportamiento/secuencia",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SEQ-INDEX": {
+      "id": "SEQ-INDEX",
+      "type": "artifact",
+      "title": "Indice de diagramas de secuencia",
+      "path": "docs/diseño/comportamiento/secuencia/diagrama-secuencia.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SEQ-01": {
+      "id": "SEQ-01",
+      "type": "artifact",
+      "title": "Captacion, consentimiento y transicion a prospecto",
+      "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-01-captacion-consentimiento-y-transicion-a-prospecto.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SEQ-02": {
+      "id": "SEQ-02",
+      "type": "artifact",
+      "title": "Inscripcion, reserva temporal SQL y confirmacion",
+      "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-02-inscripcion-reserva-temporal-sql-y-confirmacion.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SEQ-03": {
+      "id": "SEQ-03",
+      "type": "artifact",
+      "title": "Lista de espera y notificacion por liberacion de vacante",
+      "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-03-lista-de-espera-y-notificacion-por-liberacion-de-vacante.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SEQ-04": {
+      "id": "SEQ-04",
+      "type": "artifact",
+      "title": "Cancelacion pre-inicio e inscripcion extemporanea",
+      "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-04-cancelacion-pre-inicio-e-inscripcion-extemporanea.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "DOM-COLABORACION": {
+      "id": "DOM-COLABORACION",
+      "type": "domain",
+      "title": "Diagramas de colaboracion",
+      "path": "docs/diseño/comportamiento/colaboracion",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "COLLAB-INDEX": {
+      "id": "COLLAB-INDEX",
+      "type": "artifact",
+      "title": "Indice de diagramas de colaboracion",
+      "path": "docs/diseño/comportamiento/colaboracion/diagrama-colaboracion.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "COLLAB-01": {
+      "id": "COLLAB-01",
+      "type": "artifact",
+      "title": "Colaboracion principal hasta cierre ganado",
+      "path": "docs/diseño/comportamiento/colaboracion/collaboration-diagram-01-captacion-hasta-cierre-ganado.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "COLLAB-02": {
+      "id": "COLLAB-02",
+      "type": "artifact",
+      "title": "Colaboracion de excepciones",
+      "path": "docs/diseño/comportamiento/colaboracion/collaboration-diagram-02-colaboracion-de-excepciones.svg",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-WORKFLOW": {
+      "id": "SUP-WORKFLOW",
+      "type": "domain",
+      "title": "Workflow del equipo",
+      "path": "docs/soporte/workflow",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-WORKFLOW-PIPELINE": {
+      "id": "SUP-WORKFLOW-PIPELINE",
+      "type": "artifact",
+      "title": "Pipeline operativo",
+      "path": "docs/soporte/workflow/pipeline-operativo.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-WORKFLOW-TEMPLATES": {
+      "id": "SUP-WORKFLOW-TEMPLATES",
+      "type": "artifact",
+      "title": "Plantillas operativas de issues y PR",
+      "path": "docs/soporte/workflow",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-MEETINGS": {
+      "id": "SUP-MEETINGS",
+      "type": "domain",
+      "title": "Reuniones",
+      "path": "docs/soporte/meetings",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-ENTREGAS": {
+      "id": "SUP-ENTREGAS",
+      "type": "domain",
+      "title": "Entregas y bitacoras",
+      "path": "docs/soporte/entregas",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-PROMPTS": {
+      "id": "SUP-PROMPTS",
+      "type": "domain",
+      "title": "Prompts reutilizables",
+      "path": "docs/soporte/prompts",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-SCRIPTS": {
+      "id": "SUP-SCRIPTS",
+      "type": "domain",
+      "title": "Scripts de soporte",
+      "path": "utils/scripts",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-SCRIPT-ACTIVITY-SUMMARY": {
+      "id": "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "type": "artifact",
+      "title": "Generador de resumen de actividad individual",
+      "path": "utils/scripts/generate-individual-activity-summary.ps1",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT": {
+      "id": "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "type": "artifact",
+      "title": "Generador de contexto de reporte mensual",
+      "path": "utils/scripts/generate-monthly-report-context.ps1",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS": {
+      "id": "SUP-UTILS",
+      "type": "domain",
+      "title": "Utilidades y analisis auxiliares",
+      "path": "utils",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS-RESTRUCTURING": {
+      "id": "SUP-UTILS-RESTRUCTURING",
+      "type": "artifact",
+      "title": "Reestructuracion documental entre analisis y diseno",
+      "path": "utils/reestructuracion-analisis-diseno.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION": {
+      "id": "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "type": "artifact",
+      "title": "Estrategia de implementacion chat",
+      "path": "utils/estrategia de implementacion chat.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS-GUIA-DEPURACION-CU": {
+      "id": "SUP-UTILS-GUIA-DEPURACION-CU",
+      "type": "artifact",
+      "title": "Guia de depuracion de casos de uso",
+      "path": "utils/guia-depuracion-de-casos-de-uso.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS-CONTRADICCIONES-CU": {
+      "id": "SUP-UTILS-CONTRADICCIONES-CU",
+      "type": "artifact",
+      "title": "Contradicciones en casos de uso",
+      "path": "utils/contradicciones-cus.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-UTILS-DESAJUSTE-IMPLEMENTACION": {
+      "id": "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "type": "artifact",
+      "title": "Reporte de desajuste de artefactos con implementacion",
+      "path": "utils/reporte de desajuste de arterfactos con implementacion.md",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SUP-MAPA-NODOS": {
+      "id": "SUP-MAPA-NODOS",
+      "type": "domain",
+      "title": "Mapa de nodos del repositorio",
+      "path": "docs/soporte/mapa-nodos",
+      "status": null,
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-CONVERSATION": {
+      "id": "SRC-ORQ-CONVERSATION",
+      "type": "code-anchor",
+      "title": "Modulo futuro de conversacion",
+      "path": "src/conversation",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-COMMERCIAL": {
+      "id": "SRC-ORQ-COMMERCIAL",
+      "type": "code-anchor",
+      "title": "Modulo futuro comercial",
+      "path": "src/commercial",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-CONTEXT": {
+      "id": "SRC-ORQ-CONTEXT",
+      "type": "code-anchor",
+      "title": "Modulo futuro de bancos de contexto",
+      "path": "src/context-bank",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-EVENTS": {
+      "id": "SRC-ORQ-EVENTS",
+      "type": "code-anchor",
+      "title": "Modulo futuro de eventos y cupos",
+      "path": "src/events",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-NOTIFICATIONS": {
+      "id": "SRC-ORQ-NOTIFICATIONS",
+      "type": "code-anchor",
+      "title": "Modulo futuro de notificaciones",
+      "path": "src/notifications",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-TENANT": {
+      "id": "SRC-ORQ-TENANT",
+      "type": "code-anchor",
+      "title": "Modulo futuro multi-tenant",
+      "path": "src/tenant",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    },
+    "SRC-ORQ-TOOL-CALLS": {
+      "id": "SRC-ORQ-TOOL-CALLS",
+      "type": "code-anchor",
+      "title": "Contratos futuros de tool calls",
+      "path": "src/tool-calls",
+      "status": "planned",
+      "tags": [],
+      "aliases": []
+    }
+  },
+  "terms": {
+    "001": [
+      "BPMN-001",
+      "CU-COM-001",
+      "CU-EVT-001"
+    ],
+    "002": [
+      "CU-COM-002",
+      "CU-EVT-002"
+    ],
+    "003": [
+      "CU-COM-003",
+      "CU-EVT-003"
+    ],
+    "004": [
+      "CU-COM-004"
+    ],
+    "005": [
+      "CU-COM-005"
+    ],
+    "006": [
+      "CU-COM-006"
+    ],
+    "01": [
+      "COLLAB-01",
+      "DDR-01",
+      "RF-COM-01",
+      "RF-EVT-01",
+      "RNF-01",
+      "SEQ-01"
+    ],
+    "02": [
+      "COLLAB-02",
+      "DDR-01",
+      "DDR-02",
+      "RF-COM-02",
+      "RF-EVT-02",
+      "RNF-02",
+      "SEQ-02"
+    ],
+    "03": [
+      "RF-COM-03",
+      "RF-EVT-03",
+      "RNF-03",
+      "SEQ-03"
+    ],
+    "04": [
+      "RF-COM-04",
+      "RF-EVT-04",
+      "RNF-04",
+      "SEQ-04"
+    ],
+    "05": [
+      "RF-COM-05",
+      "RF-EVT-05",
+      "RNF-05"
+    ],
+    "06": [
+      "RF-COM-06",
+      "RF-EVT-06"
+    ],
+    "07": [
+      "RF-COM-07"
+    ],
+    "08": [
+      "RF-COM-08"
+    ],
+    "a": [
+      "CU-COM-001",
+      "RF-COM-01",
+      "SEQ-01",
+      "UC-DIAGRAM"
+    ],
+    "actividad": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "activity": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "actores": [
+      "RNF-01"
+    ],
+    "al": [
+      "RF-COM-07"
+    ],
+    "alineacion": [
+      "DDR-01"
+    ],
+    "analisis": [
+      "AREA-ANALISIS",
+      "BPMN-001",
+      "BPMN-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF",
+      "GLOSARIO-DEFINICIONES",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA",
+      "SUP-UTILS",
+      "SUP-UTILS-RESTRUCTURING",
+      "UC-DIAGRAM"
+    ],
+    "anchor": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "ante": [
+      "RF-EVT-03"
+    ],
+    "arch": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "area": [
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE",
+      "AREA-SRC-FUTURO"
+    ],
+    "arquitectonicas": [
+      "DDR-02"
+    ],
+    "arquitectura": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "DOM-ARQUITECTURA"
+    ],
+    "artefactos": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "arterfactos": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "artifact": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "BPMN-001",
+      "BPMN-INDEX",
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DDR-02",
+      "GLOSARIO-DEFINICIONES",
+      "README",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES",
+      "UC-DIAGRAM"
+    ],
+    "asignacion": [
+      "CU-COM-001",
+      "RF-COM-01"
+    ],
+    "automatica": [
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "auxiliares": [
+      "SUP-UTILS"
+    ],
+    "avisos": [
+      "CU-COM-004"
+    ],
+    "bancos": [
+      "CU-COM-003",
+      "SRC-ORQ-CONTEXT"
+    ],
+    "bank": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "base": [
+      "DOM-RN-BASE",
+      "RNF-01"
+    ],
+    "bitacoras": [
+      "SUP-ENTREGAS"
+    ],
+    "bloqueo": [
+      "RF-EVT-04"
+    ],
+    "blueprint": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "bot": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "RF-COM-01",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RNF-02",
+      "RNF-03"
+    ],
+    "bpmn": [
+      "BPMN-001",
+      "BPMN-INDEX"
+    ],
+    "bpmns": [
+      "BPMN-INDEX"
+    ],
+    "cada": [
+      "RF-COM-05"
+    ],
+    "calificacion": [
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "calls": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "canal": [
+      "RF-COM-01"
+    ],
+    "cancelacion": [
+      "CU-EVT-002",
+      "SEQ-04"
+    ],
+    "captacion": [
+      "COLLAB-01",
+      "SEQ-01"
+    ],
+    "captura": [
+      "RF-COM-03"
+    ],
+    "caso": [
+      "CU-PLANTILLA"
+    ],
+    "casos": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "UC-DIAGRAM"
+    ],
+    "catalog": [
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG"
+    ],
+    "catalogo": [
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG"
+    ],
+    "chat": [
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "cierre": [
+      "COLLAB-01"
+    ],
+    "claridad": [
+      "RNF-03"
+    ],
+    "cliente": [
+      "CU-COM-002"
+    ],
+    "code": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "codigo": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "AREA-SRC-FUTURO"
+    ],
+    "colaboracion": [
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "DOM-COLABORACION"
+    ],
+    "collab": [
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX"
+    ],
+    "collaboration": [
+      "COLLAB-01",
+      "COLLAB-02"
+    ],
+    "com": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "DDR-01",
+      "DOM-CU-COM",
+      "DOM-RF-COM",
+      "DOM-RN-COM",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RN-COM-CATALOG"
+    ],
+    "comercial": [
+      "CU-COM-005",
+      "DDR-01",
+      "RF-COM-02",
+      "SRC-ORQ-COMMERCIAL"
+    ],
+    "commercial": [
+      "SRC-ORQ-COMMERCIAL"
+    ],
+    "como": [
+      "DDR-01"
+    ],
+    "comportamiento": [
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "DOM-COLABORACION",
+      "DOM-SECUENCIA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX"
+    ],
+    "comunicacion": [
+      "RF-COM-01"
+    ],
+    "con": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "confirmacion": [
+      "RF-EVT-04",
+      "SEQ-02"
+    ],
+    "consentimiento": [
+      "CU-COM-004",
+      "SEQ-01"
+    ],
+    "context": [
+      "SRC-ORQ-CONTEXT",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "contexto": [
+      "CU-COM-003",
+      "SRC-ORQ-CONTEXT",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "continuidad": [
+      "RNF-04"
+    ],
+    "contradicciones": [
+      "SUP-UTILS-CONTRADICCIONES-CU"
+    ],
+    "contratos": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "conversacion": [
+      "CU-COM-002",
+      "RNF-03",
+      "RNF-04",
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "conversaciones": [
+      "CU-COM-001",
+      "RF-COM-01",
+      "RF-COM-03"
+    ],
+    "conversation": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "cu": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-GUIA-DEPURACION-CU"
+    ],
+    "cupo": [
+      "RF-EVT-01",
+      "RF-EVT-03"
+    ],
+    "cupos": [
+      "CU-EVT-003",
+      "SRC-ORQ-EVENTS"
+    ],
+    "cus": [
+      "SUP-UTILS-CONTRADICCIONES-CU"
+    ],
+    "datos": [
+      "RF-COM-03",
+      "RNF-01"
+    ],
+    "ddr": [
+      "DDR-01",
+      "DDR-02",
+      "DOM-DDR"
+    ],
+    "de": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-DDR",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-SECUENCIA",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-03",
+      "RNF-04",
+      "RNF-XX-PLANTILLA",
+      "SEQ-03",
+      "SEQ-INDEX",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TOOL-CALLS",
+      "SUP-MAPA-NODOS",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-SCRIPTS",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-WORKFLOW-TEMPLATES",
+      "UC-DIAGRAM"
+    ],
+    "debe": [
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "decisiones": [
+      "DDR-01",
+      "DDR-02",
+      "DOM-DDR"
+    ],
+    "definiciones": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "del": [
+      "BPMN-001",
+      "BPMN-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-02",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-05",
+      "SUP-MAPA-NODOS",
+      "SUP-WORKFLOW"
+    ],
+    "depuracion": [
+      "SUP-UTILS-GUIA-DEPURACION-CU"
+    ],
+    "desajuste": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "desde": [
+      "RF-COM-03"
+    ],
+    "despues": [
+      "RF-EVT-04"
+    ],
+    "detallada": [
+      "RF-COM-05"
+    ],
+    "diagram": [
+      "COLLAB-01",
+      "COLLAB-02",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "UC-DIAGRAM"
+    ],
+    "diagrama": [
+      "COLLAB-INDEX",
+      "SEQ-INDEX",
+      "UC-DIAGRAM"
+    ],
+    "diagramas": [
+      "COLLAB-INDEX",
+      "DOM-COLABORACION",
+      "DOM-SECUENCIA",
+      "SEQ-INDEX"
+    ],
+    "diseno": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "AREA-DISENO",
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "DDR-01",
+      "DDR-02",
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-DDR",
+      "DOM-SECUENCIA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX",
+      "SUP-UTILS-RESTRUCTURING",
+      "UC-DIAGRAM"
+    ],
+    "disponibilidad": [
+      "RF-EVT-01",
+      "RNF-05"
+    ],
+    "disponibles": [
+      "RF-COM-04",
+      "RF-COM-06"
+    ],
+    "docs": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE",
+      "BPMN-001",
+      "BPMN-INDEX",
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DDR-02",
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-DDR",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF",
+      "DOM-SECUENCIA",
+      "GLOSARIO-DEFINICIONES",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX",
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-WORKFLOW",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES",
+      "UC-DIAGRAM"
+    ],
+    "documentacion": [
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE"
+    ],
+    "documental": [
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "dom": [
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-DDR",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF",
+      "DOM-SECUENCIA"
+    ],
+    "domain": [
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-DDR",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF",
+      "DOM-SECUENCIA",
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-SCRIPTS",
+      "SUP-UTILS",
+      "SUP-WORKFLOW"
+    ],
+    "dominio": [
+      "DOM-GLOSARIO",
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "durante": [
+      "RF-EVT-02"
+    ],
+    "e": [
+      "SEQ-04"
+    ],
+    "el": [
+      "CU-COM-002",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "en": [
+      "CU-EVT-001",
+      "DDR-01",
+      "SUP-UTILS-CONTRADICCIONES-CU"
+    ],
+    "entre": [
+      "CU-COM-002",
+      "RNF-01",
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "entregas": [
+      "SUP-ENTREGAS"
+    ],
+    "equipo": [
+      "SUP-WORKFLOW"
+    ],
+    "espera": [
+      "CU-EVT-001",
+      "RF-EVT-06",
+      "SEQ-03"
+    ],
+    "estrategia": [
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "estructura": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "etapa": [
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "evento": [
+      "RF-COM-05"
+    ],
+    "eventos": [
+      "CU-EVT-003",
+      "RF-COM-04",
+      "SRC-ORQ-EVENTS"
+    ],
+    "events": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "evt": [
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "DOM-CU-EVT",
+      "DOM-RF-EVT",
+      "DOM-RN-EVT",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-EVT-CATALOG"
+    ],
+    "excepciones": [
+      "COLLAB-02"
+    ],
+    "extemporanea": [
+      "SEQ-04"
+    ],
+    "extemporaneas": [
+      "RF-EVT-05"
+    ],
+    "fechas": [
+      "RF-COM-06"
+    ],
+    "flujo": [
+      "CU-COM-002"
+    ],
+    "funcionales": [
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RNF",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA"
+    ],
+    "futuro": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT"
+    ],
+    "futuros": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "ganado": [
+      "COLLAB-01"
+    ],
+    "generador": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "generate": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "gestion": [
+      "CU-COM-003",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-08",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ],
+    "glosario": [
+      "DOM-GLOSARIO",
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "guia": [
+      "SUP-UTILS-GUIA-DEPURACION-CU"
+    ],
+    "hasta": [
+      "COLLAB-01"
+    ],
+    "horarios": [
+      "RF-COM-06"
+    ],
+    "humano": [
+      "CU-COM-001"
+    ],
+    "impacto": [
+      "DDR-01"
+    ],
+    "implementacion": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "index": [
+      "BPMN-INDEX",
+      "COLLAB-INDEX",
+      "SEQ-INDEX"
+    ],
+    "indice": [
+      "BPMN-INDEX",
+      "COLLAB-INDEX",
+      "SEQ-INDEX"
+    ],
+    "individual": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "informacion": [
+      "RF-COM-05"
+    ],
+    "informar": [
+      "RF-COM-06"
+    ],
+    "informe": [
+      "RF-COM-07"
+    ],
+    "inicio": [
+      "RF-COM-06",
+      "SEQ-04"
+    ],
+    "inscripcion": [
+      "SEQ-02",
+      "SEQ-04"
+    ],
+    "inscripciones": [
+      "RF-EVT-05"
+    ],
+    "interaccion": [
+      "RNF-01"
+    ],
+    "interesada": [
+      "RF-COM-03"
+    ],
+    "issues": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "justificacion": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "la": [
+      "CU-COM-002",
+      "RF-COM-03",
+      "RNF-01",
+      "RNF-04"
+    ],
+    "leads": [
+      "RF-COM-02"
+    ],
+    "legales": [
+      "CU-COM-004"
+    ],
+    "liberacion": [
+      "RF-EVT-03",
+      "SEQ-03"
+    ],
+    "lista": [
+      "CU-EVT-001",
+      "RF-EVT-06",
+      "SEQ-03"
+    ],
+    "listado": [
+      "RF-COM-04"
+    ],
+    "los": [
+      "DDR-01",
+      "RNF-01"
+    ],
+    "mapa": [
+      "SUP-MAPA-NODOS"
+    ],
+    "md": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "BPMN-INDEX",
+      "COLLAB-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DDR-02",
+      "GLOSARIO-DEFINICIONES",
+      "README",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA",
+      "SEQ-INDEX",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-PIPELINE"
+    ],
+    "meetings": [
+      "SUP-MEETINGS"
+    ],
+    "mensajes": [
+      "RNF-03"
+    ],
+    "mensual": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "modelos": [
+      "BPMN-001",
+      "BPMN-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-MODELOS-PROBLEMA",
+      "UC-DIAGRAM"
+    ],
+    "modulo": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT"
+    ],
+    "monorepo": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "monthly": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "mostrar": [
+      "RF-COM-04"
+    ],
+    "mover": [
+      "UC-DIAGRAM"
+    ],
+    "multi": [
+      "SRC-ORQ-TENANT"
+    ],
+    "multicanal": [
+      "RF-COM-03"
+    ],
+    "negocio": [
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README"
+    ],
+    "no": [
+      "DOM-RNF",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA"
+    ],
+    "nodos": [
+      "SUP-MAPA-NODOS"
+    ],
+    "notificacion": [
+      "RF-EVT-03",
+      "SEQ-03"
+    ],
+    "notificaciones": [
+      "CU-COM-006",
+      "RF-COM-08",
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "notifications": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "nucleo": [
+      "DDR-01"
+    ],
+    "operador": [
+      "CU-COM-001"
+    ],
+    "operativas": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "operativo": [
+      "SUP-WORKFLOW-PIPELINE"
+    ],
+    "orq": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "orquestador": [
+      "DDR-02"
+    ],
+    "outbound": [
+      "RF-COM-08"
+    ],
+    "pago": [
+      "RF-EVT-04"
+    ],
+    "pendiente": [
+      "UC-DIAGRAM"
+    ],
+    "persona": [
+      "RF-COM-03"
+    ],
+    "pipeline": [
+      "SUP-WORKFLOW-PIPELINE"
+    ],
+    "planned": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "plantilla": [
+      "CU-PLANTILLA",
+      "RN-PLANTILLA",
+      "RNF-XX-PLANTILLA"
+    ],
+    "plantillas": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "png": [
+      "UC-DIAGRAM"
+    ],
+    "por": [
+      "SEQ-03"
+    ],
+    "potencial": [
+      "CU-COM-002"
+    ],
+    "pr": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "pre": [
+      "SEQ-04"
+    ],
+    "presentacion": [
+      "CU-COM-004"
+    ],
+    "principal": [
+      "COLLAB-01",
+      "README"
+    ],
+    "prisma": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "privacidad": [
+      "RF-COM-07"
+    ],
+    "problema": [
+      "BPMN-001",
+      "BPMN-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-MODELOS-PROBLEMA"
+    ],
+    "proceso": [
+      "RF-EVT-02"
+    ],
+    "prompts": [
+      "SUP-PROMPTS"
+    ],
+    "proporcionar": [
+      "RF-COM-05"
+    ],
+    "prospecto": [
+      "SEQ-01"
+    ],
+    "ps1": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "reactivacion": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "readme": [
+      "README",
+      "RN-README"
+    ],
+    "reestructuracion": [
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "registro": [
+      "CU-COM-004",
+      "CU-EVT-001"
+    ],
+    "regla": [
+      "RN-PLANTILLA"
+    ],
+    "reglas": [
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README"
+    ],
+    "rendimiento": [
+      "RNF-02"
+    ],
+    "repo": [
+      "REPO"
+    ],
+    "report": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "reporte": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "repositorio": [
+      "SUP-MAPA-NODOS"
+    ],
+    "requerimientos": [
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RNF",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA"
+    ],
+    "reserva": [
+      "SEQ-02"
+    ],
+    "reservacion": [
+      "RF-EVT-02"
+    ],
+    "restructuring": [
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "resumen": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "reuniones": [
+      "SUP-MEETINGS"
+    ],
+    "reutilizables": [
+      "SUP-PROMPTS"
+    ],
+    "rf": [
+      "DDR-01",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ],
+    "rn": [
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README"
+    ],
+    "rnf": [
+      "DOM-RNF",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA"
+    ],
+    "root": [
+      "REPO"
+    ],
+    "schema": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "script": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ],
+    "scripts": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-SCRIPTS"
+    ],
+    "secuencia": [
+      "DOM-SECUENCIA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX"
+    ],
+    "seguridad": [
+      "RNF-01"
+    ],
+    "seq": [
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX"
+    ],
+    "sequence": [
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04"
+    ],
+    "sesion": [
+      "RNF-04"
+    ],
+    "sistema": [
+      "RNF-01",
+      "RNF-05"
+    ],
+    "softwaredesignproject": [
+      "REPO"
+    ],
+    "soporte": [
+      "AREA-SOPORTE",
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-SCRIPTS",
+      "SUP-WORKFLOW",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "sql": [
+      "SEQ-02"
+    ],
+    "src": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "stack": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "summary": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "sup": [
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-SCRIPTS",
+      "SUP-UTILS",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "svg": [
+      "BPMN-001",
+      "COLLAB-01",
+      "COLLAB-02",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04"
+    ],
+    "tacito": [
+      "CU-COM-004"
+    ],
+    "tecnologico": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "templates": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "temporal": [
+      "SEQ-02"
+    ],
+    "tenant": [
+      "SRC-ORQ-TENANT"
+    ],
+    "tool": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "transicion": [
+      "SEQ-01"
+    ],
+    "uc": [
+      "UC-DIAGRAM"
+    ],
+    "un": [
+      "CU-COM-001",
+      "RF-COM-01"
+    ],
+    "una": [
+      "RF-EVT-03"
+    ],
+    "usabilidad": [
+      "RNF-03"
+    ],
+    "uso": [
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "UC-DIAGRAM"
+    ],
+    "usuario": [
+      "RF-COM-07"
+    ],
+    "usuarios": [
+      "RF-EVT-03"
+    ],
+    "utilidades": [
+      "SUP-UTILS"
+    ],
+    "utils": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-SCRIPTS",
+      "SUP-UTILS",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "vacante": [
+      "RF-EVT-02",
+      "SEQ-03"
+    ],
+    "vacantes": [
+      "RF-EVT-04"
+    ],
+    "venta": [
+      "RF-EVT-02"
+    ],
+    "verificacion": [
+      "RF-EVT-01"
+    ],
+    "vocabulario": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "workflow": [
+      "SUP-WORKFLOW",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "xx": [
+      "RNF-XX-PLANTILLA"
+    ],
+    "y": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "CU-COM-002",
+      "CU-COM-004",
+      "CU-COM-005",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-06",
+      "RNF-01",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SRC-ORQ-EVENTS",
+      "SUP-ENTREGAS",
+      "SUP-UTILS",
+      "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-TEMPLATES"
+    ]
+  },
+  "by_type": {
+    "area": [
+      "AREA-ANALISIS",
+      "AREA-DISENO",
+      "AREA-SOPORTE",
+      "AREA-SRC-FUTURO"
+    ],
+    "artifact": [
+      "ARCH-ESTRUCTURA-CODIGO",
+      "BPMN-001",
+      "BPMN-INDEX",
+      "COLLAB-01",
+      "COLLAB-02",
+      "COLLAB-INDEX",
+      "CU-COM-001",
+      "CU-COM-002",
+      "CU-COM-003",
+      "CU-COM-004",
+      "CU-COM-005",
+      "CU-COM-006",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "CU-PLANTILLA",
+      "DDR-01",
+      "DDR-02",
+      "GLOSARIO-DEFINICIONES",
+      "README",
+      "RF-COM-01",
+      "RF-COM-02",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-COM-08",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06",
+      "RN-COM-CATALOG",
+      "RN-EVT-CATALOG",
+      "RN-PLANTILLA",
+      "RN-README",
+      "RNF-01",
+      "RNF-02",
+      "RNF-03",
+      "RNF-04",
+      "RNF-05",
+      "RNF-XX-PLANTILLA",
+      "SEQ-01",
+      "SEQ-02",
+      "SEQ-03",
+      "SEQ-04",
+      "SEQ-INDEX",
+      "SUP-SCRIPT-ACTIVITY-SUMMARY",
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT",
+      "SUP-UTILS-CONTRADICCIONES-CU",
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION",
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION",
+      "SUP-UTILS-GUIA-DEPURACION-CU",
+      "SUP-UTILS-RESTRUCTURING",
+      "SUP-WORKFLOW-PIPELINE",
+      "SUP-WORKFLOW-TEMPLATES",
+      "UC-DIAGRAM"
+    ],
+    "code-anchor": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "domain": [
+      "DOM-ARQUITECTURA",
+      "DOM-COLABORACION",
+      "DOM-CU-COM",
+      "DOM-CU-EVT",
+      "DOM-DDR",
+      "DOM-GLOSARIO",
+      "DOM-MODELOS-PROBLEMA",
+      "DOM-RF-COM",
+      "DOM-RF-EVT",
+      "DOM-RN-BASE",
+      "DOM-RN-COM",
+      "DOM-RN-EVT",
+      "DOM-RNF",
+      "DOM-SECUENCIA",
+      "SUP-ENTREGAS",
+      "SUP-MAPA-NODOS",
+      "SUP-MEETINGS",
+      "SUP-PROMPTS",
+      "SUP-SCRIPTS",
+      "SUP-UTILS",
+      "SUP-WORKFLOW"
+    ],
+    "root": [
+      "REPO"
+    ]
+  },
+  "by_tag": {
+    "analisis": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "continuidad": [
+      "RNF-04"
+    ],
+    "conversacion": [
+      "RNF-03"
+    ],
+    "disponibilidad": [
+      "RNF-05"
+    ],
+    "dominio": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "plantilla": [
+      "RNF-XX-PLANTILLA"
+    ],
+    "rendimiento": [
+      "RNF-02"
+    ],
+    "seguridad": [
+      "RNF-01"
+    ],
+    "sesion": [
+      "RNF-04"
+    ],
+    "usabilidad": [
+      "RNF-03"
+    ],
+    "vocabulario": [
+      "GLOSARIO-DEFINICIONES"
+    ]
+  },
+  "by_status": {
+    "pendiente-mover-a-analisis": [
+      "UC-DIAGRAM"
+    ],
+    "planned": [
+      "AREA-SRC-FUTURO",
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "by_path": {
+    ".": [
+      "REPO"
+    ],
+    "README.md": [
+      "README"
+    ],
+    "docs/analisis": [
+      "AREA-ANALISIS"
+    ],
+    "docs/analisis/glosario": [
+      "DOM-GLOSARIO"
+    ],
+    "docs/analisis/glosario/Definiciones.md": [
+      "GLOSARIO-DEFINICIONES"
+    ],
+    "docs/analisis/modelos del problema": [
+      "DOM-MODELOS-PROBLEMA"
+    ],
+    "docs/analisis/modelos del problema/bpmn/BPMN-001.svg": [
+      "BPMN-001"
+    ],
+    "docs/analisis/modelos del problema/bpmn/BPMNs.md": [
+      "BPMN-INDEX"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM": [
+      "DOM-CU-COM"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md": [
+      "CU-COM-001"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md": [
+      "CU-COM-002"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md": [
+      "CU-COM-003"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md": [
+      "CU-COM-004"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md": [
+      "CU-COM-005"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md": [
+      "CU-COM-006"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/CU-Plantilla.md": [
+      "CU-PLANTILLA"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/EVT": [
+      "DOM-CU-EVT"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md": [
+      "CU-EVT-001"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md": [
+      "CU-EVT-002"
+    ],
+    "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md": [
+      "CU-EVT-003"
+    ],
+    "docs/analisis/reglas de negocio": [
+      "DOM-RN-BASE"
+    ],
+    "docs/analisis/reglas de negocio/COM": [
+      "DOM-RN-COM"
+    ],
+    "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md": [
+      "RN-COM-CATALOG"
+    ],
+    "docs/analisis/reglas de negocio/EVT": [
+      "DOM-RN-EVT"
+    ],
+    "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md": [
+      "RN-EVT-CATALOG"
+    ],
+    "docs/analisis/reglas de negocio/README.md": [
+      "RN-README"
+    ],
+    "docs/analisis/reglas de negocio/RN-Plantilla.md": [
+      "RN-PLANTILLA"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM": [
+      "DOM-RF-COM"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md": [
+      "RF-COM-01"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md": [
+      "RF-COM-02"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md": [
+      "RF-COM-03"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md": [
+      "RF-COM-04"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md": [
+      "RF-COM-05"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md": [
+      "RF-COM-06"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md": [
+      "RF-COM-07"
+    ],
+    "docs/analisis/requerimientos/funcionales/COM/RF-COM-08 Gestión de notificaciones de reactivación outbound.md": [
+      "RF-COM-08"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT": [
+      "DOM-RF-EVT"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md": [
+      "RF-EVT-01"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md": [
+      "RF-EVT-02"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md": [
+      "RF-EVT-03"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md": [
+      "RF-EVT-04"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md": [
+      "RF-EVT-05"
+    ],
+    "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md": [
+      "RF-EVT-06"
+    ],
+    "docs/analisis/requerimientos/no funcionales": [
+      "DOM-RNF"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-01 Interacción entre los actores del sistema y la base de datos.md": [
+      "RNF-01"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-02 Rendimiento del bot.md": [
+      "RNF-02"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-03 Claridad de mensajes del bot.md": [
+      "RNF-03"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-04 Continuidad de la conversación.md": [
+      "RNF-04"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-05 Disponibilidad del sistema.md": [
+      "RNF-05"
+    ],
+    "docs/analisis/requerimientos/no funcionales/RNF-XX Plantilla.md": [
+      "RNF-XX-PLANTILLA"
+    ],
+    "docs/diseño": [
+      "AREA-DISENO"
+    ],
+    "docs/diseño/arquitectura": [
+      "DOM-ARQUITECTURA"
+    ],
+    "docs/diseño/arquitectura/estructura-de-codigo.md": [
+      "ARCH-ESTRUCTURA-CODIGO"
+    ],
+    "docs/diseño/comportamiento/colaboracion": [
+      "DOM-COLABORACION"
+    ],
+    "docs/diseño/comportamiento/colaboracion/collaboration-diagram-01-captacion-hasta-cierre-ganado.svg": [
+      "COLLAB-01"
+    ],
+    "docs/diseño/comportamiento/colaboracion/collaboration-diagram-02-colaboracion-de-excepciones.svg": [
+      "COLLAB-02"
+    ],
+    "docs/diseño/comportamiento/colaboracion/diagrama-colaboracion.md": [
+      "COLLAB-INDEX"
+    ],
+    "docs/diseño/comportamiento/secuencia": [
+      "DOM-SECUENCIA"
+    ],
+    "docs/diseño/comportamiento/secuencia/diagrama-secuencia.md": [
+      "SEQ-INDEX"
+    ],
+    "docs/diseño/comportamiento/secuencia/sequence-diagram-01-captacion-consentimiento-y-transicion-a-prospecto.svg": [
+      "SEQ-01"
+    ],
+    "docs/diseño/comportamiento/secuencia/sequence-diagram-02-inscripcion-reserva-temporal-sql-y-confirmacion.svg": [
+      "SEQ-02"
+    ],
+    "docs/diseño/comportamiento/secuencia/sequence-diagram-03-lista-de-espera-y-notificacion-por-liberacion-de-vacante.svg": [
+      "SEQ-03"
+    ],
+    "docs/diseño/comportamiento/secuencia/sequence-diagram-04-cancelacion-pre-inicio-e-inscripcion-extemporanea.svg": [
+      "SEQ-04"
+    ],
+    "docs/diseño/decisiones": [
+      "DOM-DDR"
+    ],
+    "docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md": [
+      "DDR-01"
+    ],
+    "docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md": [
+      "DDR-02"
+    ],
+    "docs/diseño/modelos de diseño/Diagrama de casos de uso.png": [
+      "UC-DIAGRAM"
+    ],
+    "docs/soporte": [
+      "AREA-SOPORTE"
+    ],
+    "docs/soporte/entregas": [
+      "SUP-ENTREGAS"
+    ],
+    "docs/soporte/mapa-nodos": [
+      "SUP-MAPA-NODOS"
+    ],
+    "docs/soporte/meetings": [
+      "SUP-MEETINGS"
+    ],
+    "docs/soporte/prompts": [
+      "SUP-PROMPTS"
+    ],
+    "docs/soporte/workflow": [
+      "SUP-WORKFLOW",
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
+    "docs/soporte/workflow/pipeline-operativo.md": [
+      "SUP-WORKFLOW-PIPELINE"
+    ],
+    "src": [
+      "AREA-SRC-FUTURO"
+    ],
+    "src/commercial": [
+      "SRC-ORQ-COMMERCIAL"
+    ],
+    "src/context-bank": [
+      "SRC-ORQ-CONTEXT"
+    ],
+    "src/conversation": [
+      "SRC-ORQ-CONVERSATION"
+    ],
+    "src/events": [
+      "SRC-ORQ-EVENTS"
+    ],
+    "src/notifications": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ],
+    "src/tenant": [
+      "SRC-ORQ-TENANT"
+    ],
+    "src/tool-calls": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "utils": [
+      "SUP-UTILS"
+    ],
+    "utils/contradicciones-cus.md": [
+      "SUP-UTILS-CONTRADICCIONES-CU"
+    ],
+    "utils/estrategia de implementacion chat.md": [
+      "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
+    ],
+    "utils/guia-depuracion-de-casos-de-uso.md": [
+      "SUP-UTILS-GUIA-DEPURACION-CU"
+    ],
+    "utils/reestructuracion-analisis-diseno.md": [
+      "SUP-UTILS-RESTRUCTURING"
+    ],
+    "utils/reporte de desajuste de arterfactos con implementacion.md": [
+      "SUP-UTILS-DESAJUSTE-IMPLEMENTACION"
+    ],
+    "utils/scripts": [
+      "SUP-SCRIPTS"
+    ],
+    "utils/scripts/generate-individual-activity-summary.ps1": [
+      "SUP-SCRIPT-ACTIVITY-SUMMARY"
+    ],
+    "utils/scripts/generate-monthly-report-context.ps1": [
+      "SUP-SCRIPT-MONTHLY-REPORT-CONTEXT"
+    ]
+  }
+}

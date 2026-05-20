@@ -1,9 +1,5 @@
-*.yml
-*.ps1
-pull_request_template.md
 .vscode
-.claude
-.github
 resultado.md
-/docs/soporte/scripts/
-/docs/soporte/utils/
+notas.md
+__pycache__/
+*.pyc
