@@ -103,6 +103,9 @@ jobs:
           pnpm dlx markdownlint-cli2
           "*.md"
           "docs/**/*.md"
+          "!**/*Plantilla*.md"
+          "!**/*plantilla*.md"
+          "!**/templates/**/*.md"
           "!docs/soporte/entregas/**/*.md"
           "!docs/soporte/prompt/**/*.md"
           "!docs/soporte/prompts/**/*.md"
