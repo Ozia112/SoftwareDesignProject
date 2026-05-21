@@ -1,26 +1,18 @@
 import { Injectable, Logger, ConflictException } from '@nestjs/common';
 import { PrismaClient, WaitingListStatus } from '@prisma/client';
-import Redis from 'ioredis';
 import { v4 as uuidv4 } from 'uuid';
 import { AuditLogService } from '../audit/audit-log.service';
 import type { RegisterWaitingListOutput } from '../dto/tool-calls.dto';
+import { createRedis } from '../common/redis.factory';
 
 // WaitingListService — lista de espera priorizada (CU-EVT-001)
 // Orden: score DESC, joinedAt ASC (FIFO como desempate)
-// Cache en Redis Sorted Set (replica el índice DB para baja latencia)
 @Injectable()
 export class WaitingListService {
   private readonly logger = new Logger(WaitingListService.name);
-  private readonly redis: Redis;
+  private readonly redis = createRedis('waitlist:');
 
-  constructor(private readonly auditLog: AuditLogService) {
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST ?? 'localhost',
-      port: parseInt(process.env.REDIS_PORT ?? '6379'),
-      password: process.env.REDIS_PASSWORD || undefined,
-      keyPrefix: 'waitlist:',
-    });
-  }
+  constructor(private readonly auditLog: AuditLogService) {}
 
   private redisKey(tenantId: string, eventId: string): string {
     return `${tenantId}:${eventId}`;

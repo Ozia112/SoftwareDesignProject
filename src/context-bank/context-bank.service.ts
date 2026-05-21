@@ -1,25 +1,17 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import Redis from 'ioredis';
 import type { GetGeneralContextOutput, GetEventContextOutput } from '../dto/tool-calls.dto';
+import { createRedis } from '../common/redis.factory';
 
 const CONTEXT_CACHE_TTL = 300;
 
 // ContextBankService — puerta única de lectura/escritura (CU-COM-003)
-// El Bot solo puede leer; escrituras ocurren por operaciones de dominio del sistema
 @Injectable()
 export class ContextBankService {
   private readonly logger = new Logger(ContextBankService.name);
-  private readonly redis: Redis;
+  private readonly redis = createRedis('ctx:');
 
-  constructor() {
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST ?? 'localhost',
-      port: parseInt(process.env.REDIS_PORT ?? '6379'),
-      password: process.env.REDIS_PASSWORD || undefined,
-      keyPrefix: 'ctx:',
-    });
-  }
+  constructor() {}
 
   async getGeneralContext(
     db: PrismaClient,

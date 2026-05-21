@@ -1,12 +1,11 @@
-import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { Injectable, Logger, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 
-// Cliente Prisma para la DB del SISTEMA (tenant_configs, tenant_credentials)
+// Prisma v6 conecta de forma lazy — $connect() explícito puede bloquearse.
+// Se omite onModuleInit: la conexión se abre en la primera query.
 @Injectable()
-export class PrismaSystemService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
-  async onModuleInit() {
-    await this.$connect();
-  }
+export class PrismaSystemService extends PrismaClient implements OnModuleDestroy {
+  private readonly logger = new Logger(PrismaSystemService.name);
 
   async onModuleDestroy() {
     await this.$disconnect();

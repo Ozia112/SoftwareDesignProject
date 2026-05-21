@@ -3,27 +3,20 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaSystemService } from './prisma-system.service';
 import { TenantCredentialService } from './tenant-credential.service';
 import type { TenantConfig } from '../dto/tenant.dto';
-import Redis from 'ioredis';
+import { createRedis } from '../common/redis.factory';
 
-const CACHE_TTL = 300; // 5 minutos
+const CACHE_TTL = 300;
 
 @Injectable()
 export class TenantConfigService {
   private readonly logger = new Logger(TenantConfigService.name);
   private readonly tenantPrismaPool = new Map<string, PrismaClient>();
-  private readonly redis: Redis;
+  private readonly redis = createRedis('tenant:config:');
 
   constructor(
     private readonly prismaSystem: PrismaSystemService,
     private readonly credentialService: TenantCredentialService,
-  ) {
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST ?? 'localhost',
-      port: parseInt(process.env.REDIS_PORT ?? '6379'),
-      password: process.env.REDIS_PASSWORD || undefined,
-      keyPrefix: 'tenant:config:',
-    });
-  }
+  ) {}
 
   async getTenantConfig(tenantId: string): Promise<TenantConfig> {
     const cacheKey = tenantId;

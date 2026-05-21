@@ -1,23 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
-import Redis from 'ioredis';
 import type { SessionMessage } from '../dto/conversation.dto';
+import { createRedis } from '../common/redis.factory';
 
-const SESSION_TTL = 1800; // 30 minutos en segundos
+const SESSION_TTL = 1800;
 
 // ConversationSessionStore — historial activo en Redis (RNF-04)
 @Injectable()
 export class ConversationSessionStore {
   private readonly logger = new Logger(ConversationSessionStore.name);
-  private readonly redis: Redis;
+  private readonly redis = createRedis('session:');
 
-  constructor() {
-    this.redis = new Redis({
-      host: process.env.REDIS_HOST ?? 'localhost',
-      port: parseInt(process.env.REDIS_PORT ?? '6379'),
-      password: process.env.REDIS_PASSWORD || undefined,
-      keyPrefix: 'session:',
-    });
-  }
+  constructor() {}
 
   private key(tenantId: string, conversationId: string): string {
     return `${tenantId}:${conversationId}`;
