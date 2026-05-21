@@ -7,7 +7,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-# Genera los tipos de Prisma antes de compilar TypeScript
 RUN DATABASE_URL="postgresql://x:x@localhost:5432/x" pnpm exec prisma generate
 RUN pnpm run build
 
@@ -17,13 +16,13 @@ WORKDIR /app
 
 RUN npm install -g pnpm@10
 
-COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
-RUN pnpm install --prod --frozen-lockfile
+COPY package.json pnpm-lock.yaml ./
+# Instala todas las deps (incluyendo prisma CLI para generate y migrate)
+RUN pnpm install --frozen-lockfile
 
 COPY --from=builder /app/dist ./dist
 COPY prisma ./prisma
 
-# Genera el cliente de Prisma en runtime (pnpm virtual store difiere del builder)
 RUN DATABASE_URL="postgresql://x:x@localhost:5432/x" pnpm exec prisma generate
 
 CMD sh -c "pnpm exec prisma migrate deploy && node dist/main"
