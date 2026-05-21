@@ -7,7 +7,6 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN DATABASE_URL="postgresql://x:x@localhost:5432/x" pnpm exec prisma generate
 RUN pnpm run build
 
 # ---- runtime ----
@@ -20,9 +19,10 @@ COPY --from=builder /app/package.json /app/pnpm-lock.yaml ./
 RUN pnpm install --prod --frozen-lockfile
 
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma ./node_modules/@prisma
 COPY prisma ./prisma
 
-# Migrar y arrancar
+# pnpm guarda el cliente de Prisma en su virtual store, no en node_modules/.prisma
+# Se genera aquí con una URL dummy — la real se inyecta en runtime vía DATABASE_URL
+RUN DATABASE_URL="postgresql://x:x@localhost:5432/x" pnpm exec prisma generate
+
 CMD sh -c "pnpm exec prisma migrate deploy && node dist/main"
