@@ -1,4 +1,5 @@
 import { Module, OnModuleInit } from '@nestjs/common';
+import { AuditModule } from '../audit/audit.module';
 import { CommercialModule } from '../commercial/commercial.module';
 import { ContextBankModule } from '../context-bank/context-bank.module';
 import { EventsModule } from '../events/events.module';
@@ -26,7 +27,7 @@ const HANDLERS = [
 ];
 
 @Module({
-  imports: [CommercialModule, ContextBankModule, EventsModule],
+  imports: [AuditModule, CommercialModule, ContextBankModule, EventsModule],
   providers: [ToolRegistry, ...HANDLERS, { provide: HandoffManager, useClass: HandoffManagerImpl }],
   exports: [ToolRegistry],
 })
