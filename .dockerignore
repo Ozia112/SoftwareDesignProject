@@ -1,0 +1,21 @@
+# Excluye todo lo que no necesita el build de Docker.
+# Sin este archivo Docker envía node_modules (~500MB) al daemon.
+
+node_modules/
+.git/
+dist/
+coverage/
+*.log
+.env
+.env.local
+demo/.env.demo
+demo/open-wa-bridge/node_modules/
+
+# Archivos de desarrollo que no van al contenedor
+.vscode/
+.claude/
+.DS_Store
+*.md
+docs/
+utils/
+scripts/
