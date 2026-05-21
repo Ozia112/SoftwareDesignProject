@@ -114,8 +114,14 @@ if [ "$READY" -eq 0 ]; then
 fi
 
 # ── 5. Seed ────────────────────────────────────────────────
+# El seed corre dentro del contenedor — no depende de node en el host
 echo -e "${YELLOW}3/4  Inyectando tenant y eventos de demo...${NC}"
-node "$REPO_ROOT/demo/seed/seed.js"
+docker exec \
+  -e CLAUDE_API_KEY="$CLAUDE_API_KEY" \
+  -e ORCHESTRATOR_URL="http://localhost:3000" \
+  -e DATABASE_URL="postgresql://app:app@postgres:5432/saas_dev" \
+  saas-demo-orchestrator \
+  node /app/demo/seed/seed.js
 echo -e "${GREEN}  ✓ Datos de demo listos${NC}"
 
 # ── 6. Resumen ─────────────────────────────────────────────

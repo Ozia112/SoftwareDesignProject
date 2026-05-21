@@ -21,6 +21,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY --from=builder /app/dist ./dist
 COPY prisma ./prisma
+COPY demo/seed/seed.js ./demo/seed/seed.js
 
 RUN DATABASE_URL="postgresql://x:x@localhost:5432/x" pnpm exec prisma generate
 
