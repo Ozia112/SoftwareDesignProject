@@ -50,6 +50,7 @@ export class TenantAdminController {
         systemPrompt: dto.systemPrompt,
       },
     });
+    await this.tenantConfigService.invalidateCache(dto.tenantId);
     return { tenantId: tenant.tenantId, name: tenant.name };
   }
 
