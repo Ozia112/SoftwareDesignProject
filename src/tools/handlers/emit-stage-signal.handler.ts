@@ -20,7 +20,7 @@ export class EmitStageSignalHandler implements IToolHandler<
   readonly schema = {
     name: 'emit_stage_signal',
     description:
-      'Emite una señal de transición comercial. El sistema ejecuta la transición según CU-COM-005.',
+      'Emite una señal de transición comercial. El sistema persiste la etapa y datos de contacto.',
     input_schema: {
       type: 'object',
       properties: {
@@ -35,10 +35,11 @@ export class EmitStageSignalHandler implements IToolHandler<
           ],
           description: 'Señal de transición comercial',
         },
-        eventId: {
-          type: 'string',
-          description: 'ID del evento (requerido para señales relacionadas a evento)',
-        },
+        eventId: { type: 'string', description: 'ID del evento cuando aplique' },
+        contactName:  { type: 'string', description: 'Nombre completo del lead' },
+        contactEmail: { type: 'string', description: 'Correo del lead' },
+        contactPhone: { type: 'string', description: 'Teléfono del lead' },
+        interestedEvent: { type: 'string', description: 'Nombre del evento de interés' },
       },
       required: ['signal'],
     },
@@ -54,6 +55,19 @@ export class EmitStageSignalHandler implements IToolHandler<
     ctx: ToolContext,
   ): Promise<ToolCallResult<EmitStageSignalOutput>> {
     try {
+      // Persistir datos de contacto si vienen en la señal
+      const contactUpdate: Record<string, string> = {};
+      if (params.contactName)  contactUpdate['name']  = params.contactName;
+      if (params.contactEmail) contactUpdate['email'] = params.contactEmail;
+      if (params.contactPhone) contactUpdate['phone'] = params.contactPhone;
+
+      if (Object.keys(contactUpdate).length > 0) {
+        await ctx.db.lead.update({
+          where: { id: ctx.leadId },
+          data: contactUpdate,
+        });
+      }
+
       const result = await this.stageService.processSignal(
         ctx.db,
         ctx.tenantId,

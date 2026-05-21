@@ -14,6 +14,9 @@ export interface RoutingResult {
   leadId: string;
   routedTo: 'bot' | 'operator';
   response?: string;
+  stage?: string;
+  score?: number;
+  toolCallsExecuted?: number;
 }
 
 // MessageRouter — recibe webhook, crea conversación, asigna bot u operador (CU-COM-001)
@@ -104,11 +107,6 @@ export class MessageRouterService {
       return { conversationId: conversation.id, leadId: lead.id, routedTo: 'operator' };
     }
 
-    // Aplicar scoring por mensaje recibido
-    await this.scoringService.applyEvent(db, msg.tenantId, lead.id, conversation.id, {
-      type: 'message_received',
-    });
-
     // Ejecutar AgentRunner
     const agentResult = await this.agentRunner.run({
       tenantId: msg.tenantId,
@@ -119,8 +117,22 @@ export class MessageRouterService {
       tenantConfig,
     });
 
-    // Si hay señal de exploit reincidente, bloquear conversación
-    if (agentResult.stage === 'BLOCKED') {
+    // Actualizar score según la etapa alcanzada
+    const scoreEventMap: Record<string, Parameters<typeof this.scoringService.applyEvent>[4]['type']> = {
+      MQL: 'contact_data_provided',
+      PROSPECTO: 'inscription_intent',
+      SQL: 'payment_confirmed',
+    };
+    const scoreEventType = agentResult.previousStage !== agentResult.stage
+      ? scoreEventMap[agentResult.stage ?? '']
+      : 'message_received';
+    const scoreResult = await this.scoringService.applyEvent(
+      db, msg.tenantId, lead.id, conversation.id,
+      { type: scoreEventType ?? 'message_received' },
+    );
+
+    if (scoreResult.exploitReincidente) {
+      await db.lead.update({ where: { id: lead.id }, data: { blockedAt: new Date() } });
       await db.conversation.update({
         where: { id: conversation.id },
         data: { status: ConvStatus.BLOCKED },
@@ -137,6 +149,7 @@ export class MessageRouterService {
         messageId: msg.messageId,
         toolCalls: agentResult.toolCallsExecuted,
         stage: agentResult.stage,
+        score: scoreResult.score,
       },
     });
 
@@ -145,6 +158,9 @@ export class MessageRouterService {
       leadId: lead.id,
       routedTo: 'bot',
       response: agentResult.response,
+      stage: agentResult.stage,
+      score: scoreResult.score,
+      toolCallsExecuted: agentResult.toolCallsExecuted,
     };
   }
 }

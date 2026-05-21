@@ -93,7 +93,7 @@ export class WebhookController {
     @Param('tenantId') tenantId: string,
     @Body() body: { channelId: string; text: string; messageId?: string },
     @Headers('x-session-id') sessionId?: string,
-  ): Promise<{ status: string; response?: string }> {
+  ): Promise<{ status: string; response?: string; stage?: string; score?: number; toolCallsExecuted?: number; leadId?: string }> {
     const msg: IncomingMessageDto = {
       tenantId,
       channelType: 'WEB',
@@ -104,6 +104,13 @@ export class WebhookController {
     };
 
     const result = await this.router.route(msg);
-    return { status: 'ok', response: result.response };
+    return {
+      status: 'ok',
+      response: result.response,
+      stage: result.stage,
+      score: result.score,
+      toolCallsExecuted: result.toolCallsExecuted,
+      leadId: result.leadId,
+    };
   }
 }

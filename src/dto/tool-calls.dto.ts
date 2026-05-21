@@ -54,6 +54,12 @@ export type GetEventContextOutput = {
 export type EmitStageSignalInput = {
   signal: StageSignal;
   eventId?: string;
+  // Datos de contacto del lead — persistidos cuando signal = datos_de_contacto_completados
+  contactName?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  // Evento de interés — persistido cuando signal = pregunta_de_inscripcion_detectada
+  interestedEvent?: string;
 };
 export type EmitStageSignalOutput = {
   previousStage: CommercialStage;

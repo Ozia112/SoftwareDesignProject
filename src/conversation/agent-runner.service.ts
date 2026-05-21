@@ -27,6 +27,7 @@ export interface AgentRunOutput {
   response: string;
   toolCallsExecuted: number;
   stage?: string;
+  previousStage?: string;
 }
 
 // AgentRunner — run loop del LLM con tool use (CU-COM-002)
@@ -182,9 +183,10 @@ export class AgentRunnerService {
     history.push(assistantMsg);
     await this.sessionStore.setHistory(tenantId, conversationId, history);
 
+    const previousStage = stage;
     const currentStage = await this.stageService.getStage(db, tenantId, leadId);
 
-    return { response: finalResponse, toolCallsExecuted, stage: currentStage };
+    return { response: finalResponse, toolCallsExecuted, stage: currentStage, previousStage };
   }
 
   private buildSystemPrompt(config: TenantConfig): string {
