@@ -116,7 +116,7 @@ fi
 # ── 5. Seed ────────────────────────────────────────────────
 # El seed corre dentro del contenedor — no depende de node en el host
 echo -e "${YELLOW}3/4  Inyectando tenant y eventos de demo...${NC}"
-docker exec \
+MSYS_NO_PATHCONV=1 docker exec \
   -e CLAUDE_API_KEY="$CLAUDE_API_KEY" \
   -e ORCHESTRATOR_URL="http://localhost:3000" \
   -e DATABASE_URL="postgresql://app:app@postgres:5432/saas_dev" \
