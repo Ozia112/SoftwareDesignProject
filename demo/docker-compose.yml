@@ -21,7 +21,7 @@ services:
       test: ['CMD-SHELL', 'pg_isready -U app -d saas_dev']
       interval: 5s
       timeout: 5s
-      retries: 10
+      retries: 15
 
   redis:
     image: redis:7-alpine
@@ -33,7 +33,7 @@ services:
       test: ['CMD', 'redis-cli', 'ping']
       interval: 5s
       timeout: 3s
-      retries: 10
+      retries: 15
 
   orchestrator:
     build:
@@ -51,20 +51,21 @@ services:
       PORT: 3000
       DATABASE_URL: postgresql://app:app@postgres:5432/saas_dev
       REDIS_HOST: redis
-      REDIS_PORT: 6379
+      REDIS_PORT: '6379'
       ENCRYPTION_MASTER_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
       JWT_SECRET: demo-jwt-secret
       THROTTLE_TTL: '60'
       THROTTLE_LIMIT: '1000'
-      OTEL_SERVICE_NAME: saas-demo
+      # OTel deshabilitado en demo — evita bloqueo por colector inexistente
+      OTEL_ENABLED: 'false'
     ports:
       - '3000:3000'
     healthcheck:
       test: ['CMD-SHELL', 'wget -qO- http://localhost:3000/api/v1/health || exit 1']
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 20s
+      retries: 15
+      start_period: 30s
 
   # open-wa bridge — conecta WhatsApp Web al orquestador
   # Requiere escanear QR con tu teléfono la primera vez
@@ -85,7 +86,8 @@ services:
       - '4000:4000'
     volumes:
       - openwa_sessions:/app/.wa-sessions
-    # Comentar este servicio si no necesitas WhatsApp real
+    profiles:
+      - whatsapp
 
   # GUI de demo — landing page estática servida por nginx
   gui:

@@ -1,4 +1,7 @@
-import './observability/tracing'; // inicializar OTel antes de cualquier import
+// OTel solo si está explícitamente habilitado — evita bloqueo en demo/Docker sin colector
+if (process.env.OTEL_ENABLED === 'true') {
+  require('./observability/tracing');
+}
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';

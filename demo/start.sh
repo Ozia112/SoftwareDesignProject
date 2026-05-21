@@ -86,19 +86,32 @@ echo -e "${GREEN}  ✓ Containers iniciados${NC}"
 cd "$REPO_ROOT"
 
 # ── 4. Esperar health ──────────────────────────────────────
-echo -e "${YELLOW}2/4  Esperando al orquestador...${NC}"
-for i in $(seq 1 30); do
+echo -e "${YELLOW}2/4  Esperando al orquestador (máx 120s)...${NC}"
+READY=0
+for i in $(seq 1 40); do
   if curl -sf http://localhost:3000/api/v1/health > /dev/null 2>&1; then
     echo -e "${GREEN}  ✓ Orquestador listo${NC}"
+    READY=1
     break
   fi
-  if [ "$i" -eq 30 ]; then
-    echo -e "${RED}  ✗ Timeout. Revisa: docker logs saas-demo-orchestrator${NC}"
-    unset CLAUDE_API_KEY
-    exit 1
-  fi
-  sleep 2
+  printf "  [%02d/40] esperando..." "$i"
+  # Mostrar últimas líneas de log en cada intento para ayudar a diagnosticar
+  LAST=$(docker logs saas-demo-orchestrator --tail 1 2>&1 | tr -d '\n')
+  [ -n "$LAST" ] && printf " %s" "$LAST"
+  echo ""
+  sleep 3
 done
+
+if [ "$READY" -eq 0 ]; then
+  echo -e "\n${RED}  ✗ Timeout — el orquestador no respondió. Últimos logs:${NC}\n"
+  docker logs saas-demo-orchestrator --tail 30 2>&1
+  echo ""
+  echo -e "${YELLOW}  Comandos de diagnóstico:${NC}"
+  echo "    docker logs saas-demo-orchestrator --tail 50"
+  echo "    docker inspect saas-demo-orchestrator | grep -A5 State"
+  unset CLAUDE_API_KEY
+  exit 1
+fi
 
 # ── 5. Seed ────────────────────────────────────────────────
 echo -e "${YELLOW}3/4  Inyectando tenant y eventos de demo...${NC}"
