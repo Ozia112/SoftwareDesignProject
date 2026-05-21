@@ -11,6 +11,8 @@ import type { SessionMessage } from '../dto/conversation.dto';
 import { v4 as uuidv4 } from 'uuid';
 
 const MAX_TURNS = 10;
+const LLM_TIMEOUT_MS = 30_000; // 30 s — Anthropic rara vez tarda más
+const MAX_HISTORY_MESSAGES = 20; // recorta historial largo para evitar tokens excesivos
 
 export interface AgentRunInput {
   tenantId: string;
@@ -46,7 +48,7 @@ export class AgentRunnerService {
       throw new Error(`No LLM API key configured for tenant ${tenantId}`);
     }
 
-    const client = new Anthropic({ apiKey: tenantConfig.llmApiKey });
+    const client = new Anthropic({ apiKey: tenantConfig.llmApiKey, timeout: LLM_TIMEOUT_MS });
 
     // Recuperar historial desde Redis
     const history = await this.sessionStore.getHistory(tenantId, conversationId);
@@ -63,8 +65,11 @@ export class AgentRunnerService {
     const stage = await this.stageService.getStage(db, tenantId, leadId);
     const tools = this.toolRegistry.getSchemasForStage(stage);
 
+    // Recortar historial largo (últimos N mensajes) para evitar tokens excesivos
+    const trimmed = history.slice(-MAX_HISTORY_MESSAGES);
+
     // Construir mensajes para Anthropic (sin timestamp, solo role/content)
-    const messages: Anthropic.MessageParam[] = history.map((m) => ({
+    const messages: Anthropic.MessageParam[] = trimmed.map((m) => ({
       role: m.role,
       content: m.content as string,
     }));
@@ -75,7 +80,9 @@ export class AgentRunnerService {
 
     // Run loop con tool use
     for (let turn = 0; turn < MAX_TURNS; turn++) {
-      const response = await client.messages.create({
+      let response: Awaited<ReturnType<typeof client.messages.create>>;
+      try {
+        response = await client.messages.create({
         model: tenantConfig.llmModel,
         system: [
           {
@@ -85,10 +92,20 @@ export class AgentRunnerService {
             cache_control: { type: 'ephemeral' } as any,
           },
         ],
-        messages,
-        tools: tools as Anthropic.Tool[],
-        max_tokens: 1024,
-      });
+          messages,
+          tools: tools as Anthropic.Tool[],
+          max_tokens: 1024,
+        });
+      } catch (err: any) {
+        const isTimeout = err?.message?.includes('timeout') || err?.status === 408;
+        const isCredits = err?.message?.includes('credit balance');
+        if (isCredits) throw err; // re-lanzar errores de billing
+        this.logger.error(`LLM error turn ${turn}: ${err?.message}`);
+        finalResponse = isTimeout
+          ? 'Lo siento, tardé demasiado en responder. ¿Puedes intentarlo de nuevo?'
+          : 'Tuve un problema técnico. Por favor intenta de nuevo en un momento.';
+        break;
+      }
 
       // Si no hay tool_use, es la respuesta final
       if (response.stop_reason === 'end_turn') {
