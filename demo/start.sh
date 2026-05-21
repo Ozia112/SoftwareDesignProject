@@ -3,8 +3,8 @@
 # demo/start.sh — arranca todo el stack de demo
 # Uso: bash demo/start.sh
 #
-# La API key se lee de demo/.env.demo (nunca del comando).
-# Copia demo/.env.demo.example → demo/.env.demo y pon tu key.
+# La API key se pide de forma interactiva (sin eco, sin historial).
+# Nunca se escribe en disco ni en variables de entorno persistentes.
 # ============================================================
 
 set -euo pipefail
@@ -13,31 +13,29 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 CYAN='\033[0;36m'
+BOLD='\033[1m'
 NC='\033[0m'
 
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-ENV_FILE="$SCRIPT_DIR/.env.demo"
-
-# ── Cargar .env.demo si existe ──────────────────────────────
-if [ -f "$ENV_FILE" ]; then
-  set -a
-  # shellcheck source=/dev/null
-  source "$ENV_FILE"
-  set +a
+# ── Pedir la key de forma segura ────────────────────────────
+# read -s: sin eco en terminal. No se almacena en historial
+# porque el comando que el usuario escribe es solo "bash demo/start.sh",
+# no la key en sí.
+if [ -z "${CLAUDE_API_KEY:-}" ]; then
+  echo -e "${BOLD}API key de Claude${NC} (empieza con sk-ant-)"
+  echo -e "${YELLOW}  La key no se muestra ni se guarda en ningún archivo.${NC}"
+  printf "  Key: "
+  read -rs CLAUDE_API_KEY
+  echo ""   # salto de línea después del input silencioso
 fi
 
-# ── Validar que la key está disponible ──────────────────────
-if [ -z "${CLAUDE_API_KEY:-}" ]; then
-  echo -e "${RED}Error: CLAUDE_API_KEY no configurada.${NC}"
-  echo ""
-  echo "  Crea el archivo demo/.env.demo con tu API key:"
-  echo "    cp demo/.env.demo.example demo/.env.demo"
-  echo "    # Edita demo/.env.demo y pon tu key de Claude"
-  echo ""
-  echo "  El archivo es local y está en .gitignore — nunca se sube al repo."
+if [ -z "$CLAUDE_API_KEY" ]; then
+  echo -e "${RED}Error: no se proporcionó ninguna key.${NC}"
   exit 1
 fi
 
+export CLAUDE_API_KEY
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR/.."
 
 echo -e "\n${CYAN}══════════════════════════════════════════════════${NC}"
@@ -86,3 +84,6 @@ echo ""
 echo -e "  Para detener todo:"
 echo -e "  ${YELLOW}cd demo && docker compose down${NC}"
 echo ""
+
+# Limpiar la variable de la sesión actual al salir
+unset CLAUDE_API_KEY

@@ -3,11 +3,8 @@ name: Smoke Test
 on:
   workflow_dispatch:
 
-# El secret CLAUDE_API_KEY debe estar configurado en:
+# CLAUDE_API_KEY debe estar en:
 # Settings → Secrets and variables → Actions → New repository secret
-
-secrets:
-  inherit
 
 jobs:
   smoke:
@@ -73,22 +70,26 @@ jobs:
         run: pnpm run build
 
       - name: Start orchestrator
-        run: node dist/main &
         env:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: node dist/main &
 
       - name: Wait for health
         run: |
           for i in $(seq 1 20); do
-            if curl -sf http://localhost:3000/api/v1/health; then
+            if curl -sf http://localhost:3000/api/v1/health > /dev/null; then
               echo "Orchestrator ready"
               break
             fi
-            sleep 2
+            if [ "$i" -eq 20 ]; then
+              echo "Timeout waiting for orchestrator"
+              exit 1
+            fi
+            sleep 3
           done
 
       - name: Seed demo data and smoke test
-        run: node demo/seed/seed.js
         env:
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
           ORCHESTRATOR_URL: http://localhost:3000
+        run: node demo/seed/seed.js
