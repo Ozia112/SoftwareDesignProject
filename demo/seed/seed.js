@@ -47,7 +47,14 @@ Eventos disponibles:
 
 Cuando el cliente pregunte por inscripción emite la señal correspondiente.
 Si no hay cupo disponible, ofrece la lista de espera.`,
-  }).catch(e => console.log('  (tenant ya existe, continuando)'));
+  }).catch(e => {
+    // Si el upsert falla por otra razón distinta a "ya existe", lo mostramos
+    if (e.message && !e.message.includes('409')) {
+      console.warn(`  ⚠ Tenant creation warning: ${e.message}`);
+    } else {
+      console.log('  (tenant ya existe, actualizando)');
+    }
+  });
 
   // ── 2. Credenciales ──────────────────────────────────────
   console.log('2/5  Guardando credenciales...');

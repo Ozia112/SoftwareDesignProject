@@ -4,7 +4,7 @@ import { TenantConfigService } from './tenant-config.service';
 import { TenantCredentialService } from './tenant-credential.service';
 import { PrismaSystemService } from './prisma-system.service';
 import type { TenantCredentialDto } from '../dto/tenant.dto';
-import { IsString, IsNotEmpty, IsIn } from 'class-validator';
+import { IsString, IsNotEmpty, IsIn, IsOptional } from 'class-validator';
 
 class SetCredentialDto implements TenantCredentialDto {
   @IsString()
@@ -20,8 +20,8 @@ class SetCredentialDto implements TenantCredentialDto {
 class CreateTenantDto {
   @IsString() @IsNotEmpty() tenantId: string;
   @IsString() @IsNotEmpty() name: string;
-  llmModel?: string;
-  systemPrompt?: string;
+  @IsString() @IsOptional() llmModel?: string;
+  @IsString() @IsOptional() systemPrompt?: string;
 }
 
 @ApiTags('Tenant Admin')
