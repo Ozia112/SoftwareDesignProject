@@ -957,7 +957,11 @@
       // ── Config ──────────────────────────────────────────────────────────
       const API = 'http://localhost:3000/api/v1';
       const TENANT = 'demo-tenant';
-      const USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
+      let USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
+
+      function newChannel() {
+        USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
+      }
 
       // ── Estado ──────────────────────────────────────────────────────────
       let state = {
@@ -1156,8 +1160,12 @@
       }
 
       function clearAll() {
+        // Nuevo channelId = nueva sesión en el backend (Redis + DB)
+        newChannel();
+        log(`Nueva sesión iniciada — channel: ${USER_CHANNEL}`, 'info');
+
         document.getElementById('chat-area').innerHTML =
-          '<div class="msg system-msg">Chat limpiado — nueva sesión</div>';
+          '<div class="msg system-msg">Nueva sesión — el bot no recuerda la conversación anterior</div>';
         document.getElementById('log-area').innerHTML =
           '<div class="log-line dim">── Terminal limpiada ─────────────────────────────────────</div>';
         document.getElementById('api-log').innerHTML = '';
