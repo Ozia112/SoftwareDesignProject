@@ -93,7 +93,7 @@ export class WebhookController {
     @Param('tenantId') tenantId: string,
     @Body() body: { channelId: string; text: string; messageId?: string },
     @Headers('x-session-id') sessionId?: string,
-  ): Promise<{ status: string; response?: string; stage?: string; score?: number; toolCallsExecuted?: number; leadId?: string }> {
+  ): Promise<{ status: string; response?: string; stage?: string; score?: number; toolCallsExecuted?: number; leadId?: string; handoffTriggered?: boolean; debugLog?: string[] }> {
     const msg: IncomingMessageDto = {
       tenantId,
       channelType: 'WEB',
@@ -111,6 +111,8 @@ export class WebhookController {
       score: result.score,
       toolCallsExecuted: result.toolCallsExecuted,
       leadId: result.leadId,
+      handoffTriggered: result.handoffTriggered,
+      debugLog: result.debugLog,
     };
   }
 }

@@ -12,6 +12,7 @@ import { AuditModule } from './audit/audit.module';
 import { ToolsModule } from './tools/tools.module';
 import { ChannelsModule } from './channels/channels.module';
 import { ObservabilityModule } from './observability/observability.module';
+import { OperatorModule } from './operator/operator.module';
 import { HealthController } from './common/health.controller';
 
 @Module({
@@ -44,6 +45,7 @@ import { HealthController } from './common/health.controller';
     ToolsModule,
     ChannelsModule,
     ObservabilityModule,
+    OperatorModule,
   ],
 })
 export class AppModule {}

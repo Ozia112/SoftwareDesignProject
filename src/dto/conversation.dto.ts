@@ -22,4 +22,5 @@ export interface SessionMessage {
   role: 'user' | 'assistant';
   content: string | unknown[];
   timestamp: string;
+  sender?: 'bot' | 'operator'; // operator messages stored with role:'assistant'
 }

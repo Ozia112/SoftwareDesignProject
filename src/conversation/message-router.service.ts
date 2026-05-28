@@ -4,10 +4,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { TenantConfigService } from '../tenant/tenant-config.service';
 import { ConsentService } from '../commercial/consent.service';
 import { ScoringService } from '../commercial/scoring.service';
+import { CommercialStageService } from '../commercial/commercial-stage.service';
 import { AgentRunnerService } from './agent-runner.service';
+import { HandoffManagerImpl } from './handoff-manager.service';
 import { AuditLogService } from '../audit/audit-log.service';
 import type { IncomingMessageDto, ConversationContextDto } from '../dto/conversation.dto';
 import type { TenantConfig } from '../dto/tenant.dto';
+
+const PAYMENT_KEYWORDS = [
+  'ya pagué', 'ya pague', 'ya deposité', 'ya deposite', 'ya transferí', 'ya transferi',
+  'ya realicé el pago', 'ya realize el pago', 'hice el pago', 'hice la transferencia',
+  'hice el deposito', 'hice el depósito', 'realicé la transferencia', 'realize la transferencia',
+  'ya hice', 'comprobante', 'ya envié', 'ya envie el comprobante',
+];
 
 export interface RoutingResult {
   conversationId: string;
@@ -17,6 +26,8 @@ export interface RoutingResult {
   stage?: string;
   score?: number;
   toolCallsExecuted?: number;
+  handoffTriggered?: boolean;
+  debugLog?: string[];
 }
 
 // MessageRouter — recibe webhook, crea conversación, asigna bot u operador (CU-COM-001)
@@ -30,7 +41,9 @@ export class MessageRouterService {
     private readonly tenantConfigService: TenantConfigService,
     private readonly consentService: ConsentService,
     private readonly scoringService: ScoringService,
+    private readonly stageService: CommercialStageService,
     private readonly agentRunner: AgentRunnerService,
+    private readonly handoffManager: HandoffManagerImpl,
     private readonly auditLog: AuditLogService,
   ) {}
 
@@ -107,29 +120,88 @@ export class MessageRouterService {
       return { conversationId: conversation.id, leadId: lead.id, routedTo: 'operator' };
     }
 
-    // Ejecutar AgentRunner
-    const agentResult = await this.agentRunner.run({
-      tenantId: msg.tenantId,
-      leadId: lead.id,
-      conversationId: conversation.id,
-      userMessage: msg.text,
-      db,
-      tenantConfig,
-    });
+    // Ejecutar AgentRunner — capturar cualquier error inesperado y escalar
+    let agentResult: Awaited<ReturnType<typeof this.agentRunner.run>>;
+    try {
+      agentResult = await this.agentRunner.run({
+        tenantId: msg.tenantId,
+        leadId: lead.id,
+        conversationId: conversation.id,
+        userMessage: msg.text,
+        db,
+        tenantConfig,
+      });
+    } catch (err: any) {
+      this.logger.error(`AgentRunner crashed: ${err?.message}\n${err?.stack}`);
+      await this.handoffManager.requestHandoff(
+        db, msg.tenantId, lead.id, conversation.id, 'fallo_tecnico',
+      );
+      return {
+        conversationId: conversation.id,
+        leadId: lead.id,
+        routedTo: 'bot',
+        response: 'Te estoy conectando con un asesor que podrá ayudarte de inmediato.',
+        handoffTriggered: true,
+        debugLog: [`❌ ERROR INTERNO: ${err?.message}`],
+      };
+    }
 
-    // Actualizar score según la etapa alcanzada
-    const scoreEventMap: Record<string, Parameters<typeof this.scoringService.applyEvent>[4]['type']> = {
+    // Si el agente detectó un error técnico, escalar a operador humano
+    if (agentResult.escalateToHuman) {
+      await this.handoffManager.requestHandoff(
+        db, msg.tenantId, lead.id, conversation.id, 'fallo_tecnico',
+      );
+    }
+
+    // Fallback: si el LLM no emitió la señal de pago pero el usuario claramente confirmó pago
+    // y el lead está en PROSPECTO (debería pasar a SQL)
+    if (
+      agentResult.stage === 'PROSPECTO' &&
+      agentResult.toolCallsExecuted === 0 &&
+      conversation.status === ConvStatus.ACTIVE
+    ) {
+      const msgLower = msg.text.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+      const isPaymentConfirmation = PAYMENT_KEYWORDS.some((kw) =>
+        msgLower.includes(kw.normalize('NFD').replace(/[̀-ͯ]/g, ''))
+      );
+      if (isPaymentConfirmation) {
+        this.logger.warn(`Payment keyword detected but LLM missed signal — forcing SQL transition for lead ${lead.id}`);
+        await this.stageService.processSignal(db, msg.tenantId, lead.id, conversation.id, 'confirmacion_de_pago_pendiente');
+        await this.handoffManager.requestHandoff(db, msg.tenantId, lead.id, conversation.id, 'pago_pendiente');
+        agentResult.stage = 'SQL';
+        agentResult.escalateToHuman = true;
+        agentResult.debugLog.push('🚨 FALLBACK SISTEMA: pago detectado por palabras clave → SQL + handoff');
+      }
+    }
+
+    // Actualizar score para TODAS las etapas intermedias alcanzadas en este turno
+    // (el lead puede saltar LEAD→MQL→PROSPECTO en un solo turno con múltiples tool calls)
+    const STAGE_ORDER = ['LEAD', 'MQL', 'PROSPECTO', 'SQL', 'CIERRE'];
+    const STAGE_SCORE_EVENT: Record<string, Parameters<typeof this.scoringService.applyEvent>[4]['type']> = {
       MQL: 'contact_data_provided',
       PROSPECTO: 'inscription_intent',
       SQL: 'payment_confirmed',
     };
-    const scoreEventType = agentResult.previousStage !== agentResult.stage
-      ? scoreEventMap[agentResult.stage ?? '']
-      : 'message_received';
-    const scoreResult = await this.scoringService.applyEvent(
-      db, msg.tenantId, lead.id, conversation.id,
-      { type: scoreEventType ?? 'message_received' },
-    );
+
+    const prevIdx = STAGE_ORDER.indexOf(agentResult.previousStage ?? 'LEAD');
+    const currIdx = STAGE_ORDER.indexOf(agentResult.stage ?? 'LEAD');
+
+    let scoreResult = { score: 0, exploitReincidente: false };
+    if (currIdx > prevIdx) {
+      // Aplicar score event por cada etapa nueva alcanzada
+      for (let i = prevIdx + 1; i <= currIdx; i++) {
+        const evType = STAGE_SCORE_EVENT[STAGE_ORDER[i]];
+        if (evType) {
+          scoreResult = await this.scoringService.applyEvent(
+            db, msg.tenantId, lead.id, conversation.id, { type: evType },
+          );
+        }
+      }
+    } else {
+      scoreResult = await this.scoringService.applyEvent(
+        db, msg.tenantId, lead.id, conversation.id, { type: 'message_received' },
+      );
+    }
 
     if (scoreResult.exploitReincidente) {
       await db.lead.update({ where: { id: lead.id }, data: { blockedAt: new Date() } });
@@ -153,6 +225,8 @@ export class MessageRouterService {
       },
     });
 
+    const handoffTriggered = agentResult.escalateToHuman || agentResult.stage === 'SQL';
+
     return {
       conversationId: conversation.id,
       leadId: lead.id,
@@ -161,6 +235,8 @@ export class MessageRouterService {
       stage: agentResult.stage,
       score: scoreResult.score,
       toolCallsExecuted: agentResult.toolCallsExecuted,
+      handoffTriggered,
+      debugLog: agentResult.debugLog,
     };
   }
 }

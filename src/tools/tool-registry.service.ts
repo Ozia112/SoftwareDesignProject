@@ -29,6 +29,8 @@ export class ToolRegistry {
         'get_general_context',
         'get_event_context',
         'emit_stage_signal',
+        'reserve_quota',
+        'register_waiting_list',
         'request_human_handoff',
       ],
       PROSPECTO: [

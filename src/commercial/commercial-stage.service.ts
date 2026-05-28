@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { PrismaClient, Stage } from '@prisma/client';
+import { PrismaClient, Stage, ConvStatus } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import { AuditLogService } from '../audit/audit-log.service';
 import type { StageSignal, CommercialStage } from '../dto/tool-calls.dto';
@@ -8,6 +8,7 @@ export interface StageTransitionResult {
   changed: boolean;
   previousStage: CommercialStage;
   currentStage: CommercialStage;
+  skippedReason?: string;
 }
 
 // Máquina de estados de etapa comercial (CU-COM-005)
@@ -53,10 +54,19 @@ export class CommercialStageService {
     const transactionId = uuidv4();
 
     if (!targetStage || targetStage === currentStage) {
+      if (targetStage !== currentStage) {
+        // Señal no válida para la etapa actual — loguear para diagnóstico
+        this.logger.warn(
+          `Signal '${signal}' ignored: not valid from stage '${currentStage}' for lead ${leadId}`,
+        );
+      }
       return {
         changed: false,
         previousStage: currentStage as CommercialStage,
         currentStage: currentStage as CommercialStage,
+        skippedReason: targetStage === undefined
+          ? `Señal '${signal}' no es válida desde la etapa '${currentStage}'. Verifica que las señales previas se hayan emitido en el orden correcto.`
+          : undefined,
       };
     }
 
@@ -76,6 +86,14 @@ export class CommercialStageService {
           transactionId,
         },
       });
+
+      // Al llegar a SQL el operador humano debe tomar el caso — marcar handoff automático
+      if (targetStage === Stage.SQL) {
+        await tx.conversation.update({
+          where: { id: conversationId },
+          data: { status: ConvStatus.HANDOFF_PENDING, updatedAt: new Date() },
+        });
+      }
     });
 
     await this.auditLog.record(db, {

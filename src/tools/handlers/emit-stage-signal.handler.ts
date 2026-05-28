@@ -50,11 +50,22 @@ export class EmitStageSignalHandler implements IToolHandler<
     private readonly scoringService: ScoringService,
   ) {}
 
+  private readonly EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
   async execute(
     params: EmitStageSignalInput,
     ctx: ToolContext,
   ): Promise<ToolCallResult<EmitStageSignalOutput>> {
     try {
+      // Validar formato de correo antes de persistir
+      if (params.contactEmail && !this.EMAIL_RE.test(params.contactEmail)) {
+        return toolCallErr(
+          'VALIDATION_ERROR' as any,
+          `Correo inválido: "${params.contactEmail}". Debe tener el formato usuario@dominio.ext (ej. juan@gmail.com). Pide al usuario que lo corrija.`,
+          false,
+        );
+      }
+
       // Persistir datos de contacto si vienen en la señal
       const contactUpdate: Record<string, string> = {};
       if (params.contactName)  contactUpdate['name']  = params.contactName;
@@ -75,6 +86,15 @@ export class EmitStageSignalHandler implements IToolHandler<
         ctx.conversationId,
         params.signal as StageSignal,
       );
+
+      // Si la señal fue ignorada (no válida para la etapa actual), informar al LLM
+      if (!result.changed && result.skippedReason) {
+        return toolCallErr(
+          'STAGE_PRECONDITION_FAILED' as any,
+          result.skippedReason,
+          false,
+        );
+      }
 
       const score = await this.scoringService.getScore(ctx.db, ctx.tenantId, ctx.leadId);
 

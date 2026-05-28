@@ -28,6 +28,8 @@ export interface AgentRunOutput {
   toolCallsExecuted: number;
   stage?: string;
   previousStage?: string;
+  escalateToHuman?: boolean;
+  debugLog: string[];
 }
 
 // AgentRunner — run loop del LLM con tool use (CU-COM-002)
@@ -49,6 +51,8 @@ export class AgentRunnerService {
       throw new Error(`No LLM API key configured for tenant ${tenantId}`);
     }
 
+    let escalateToHuman = false;
+
     const client = new Anthropic({ apiKey: tenantConfig.llmApiKey, timeout: LLM_TIMEOUT_MS });
 
     // Recuperar historial desde Redis
@@ -64,7 +68,7 @@ export class AgentRunnerService {
 
     // Obtener etapa actual para filtrar tools disponibles
     const stage = await this.stageService.getStage(db, tenantId, leadId);
-    const tools = this.toolRegistry.getSchemasForStage(stage);
+    let tools = this.toolRegistry.getSchemasForStage(stage);
 
     // Recortar historial largo (últimos N mensajes) para evitar tokens excesivos
     const trimmed = history.slice(-MAX_HISTORY_MESSAGES);
@@ -78,6 +82,7 @@ export class AgentRunnerService {
     const systemPrompt = this.buildSystemPrompt(tenantConfig);
     let toolCallsExecuted = 0;
     let finalResponse = '';
+    const debugLog: string[] = [];
 
     // Run loop con tool use
     for (let turn = 0; turn < MAX_TURNS; turn++) {
@@ -100,11 +105,18 @@ export class AgentRunnerService {
       } catch (err: any) {
         const isTimeout = err?.message?.includes('timeout') || err?.status === 408;
         const isCredits = err?.message?.includes('credit balance');
-        if (isCredits) throw err; // re-lanzar errores de billing
+        const isAuthError = err?.status === 401;
+        if (isCredits || isAuthError) throw err; // re-lanzar errores de config/billing
         this.logger.error(`LLM error turn ${turn}: ${err?.message}`);
-        finalResponse = isTimeout
-          ? 'Lo siento, tardé demasiado en responder. ¿Puedes intentarlo de nuevo?'
-          : 'Tuve un problema técnico. Por favor intenta de nuevo en un momento.';
+        if (isTimeout) {
+          debugLog.push(`❌ TIMEOUT: El LLM no respondió en ${LLM_TIMEOUT_MS / 1000}s`);
+          finalResponse = 'Lo siento, tardé demasiado en responder. ¿Puedes intentarlo de nuevo?';
+        } else {
+          debugLog.push(`❌ ERROR LLM (turn ${turn}): ${err?.message}`);
+          escalateToHuman = true;
+          debugLog.push(`🚨 ESCALACIÓN AUTOMÁTICA: fallo_tecnico`);
+          finalResponse = 'Te estoy conectando con un asesor que podrá ayudarte de inmediato.';
+        }
         break;
       }
 
@@ -127,8 +139,12 @@ export class AgentRunnerService {
           if (block.type !== 'tool_use') continue;
           toolCallsExecuted++;
 
+          const inputPreview = JSON.stringify(block.input).slice(0, 120);
+          debugLog.push(`🔧 TOOL: ${block.name}  ${inputPreview}`);
+
           const handler = this.toolRegistry.get(block.name);
           if (!handler) {
+            debugLog.push(`   ✗ Tool no encontrada: ${block.name}`);
             toolResults.push({
               type: 'tool_result',
               tool_use_id: block.id,
@@ -148,6 +164,35 @@ export class AgentRunnerService {
             db,
           });
 
+          if (result.ok) {
+            const data = result.data as Record<string, unknown> | undefined;
+            if (block.name === 'get_general_context' || block.name === 'get_event_context') {
+              const raw = data?.['context'];
+              const ctxStr = raw == null ? '' : typeof raw === 'string' ? raw : JSON.stringify(raw);
+              const preview = ctxStr.length > 120 ? ctxStr.slice(0, 120) + '…' : ctxStr || '(vacío)';
+              debugLog.push(`   📚 Banco de contexto → ${preview}`);
+            } else if (block.name === 'emit_stage_signal') {
+              const prev = data?.['previousStage'];
+              const curr = data?.['currentStage'];
+              if (prev !== curr) debugLog.push(`   🏷️  Etapa: ${prev} → ${curr}  (score: ${data?.['score'] ?? '?'})`);
+              else debugLog.push(`   🏷️  Señal procesada, etapa sin cambio: ${curr}`);
+              const sig = (block.input as Record<string, string>)['signal'];
+              if (sig === 'confirmacion_de_pago_pendiente') {
+                debugLog.push(`   🚨 ESCALACIÓN: pago_pendiente → operador humano`);
+              }
+            } else if (block.name === 'request_human_handoff') {
+              debugLog.push(`   🚨 HANDOFF solicitado: ${(block.input as Record<string, string>)['reason']}`);
+            } else if (block.name === 'reserve_quota') {
+              debugLog.push(`   📋 Cupo reservado: ${JSON.stringify(data).slice(0, 80)}`);
+            } else if (block.name === 'register_waiting_list') {
+              debugLog.push(`   📝 Lista de espera: ${JSON.stringify(data).slice(0, 80)}`);
+            } else {
+              debugLog.push(`   ✓ ${JSON.stringify(data).slice(0, 100)}`);
+            }
+          } else {
+            debugLog.push(`   ✗ Error: ${(result as any)?.error?.message ?? 'desconocido'}`);
+          }
+
           await this.auditLog.record(db, {
             tenantId,
             conversationId,
@@ -166,6 +211,10 @@ export class AgentRunnerService {
         }
 
         messages.push({ role: 'user', content: toolResults });
+
+        // Refrescar tools disponibles en caso de que la etapa haya cambiado
+        const stageNow = await this.stageService.getStage(db, tenantId, leadId);
+        tools = this.toolRegistry.getSchemasForStage(stageNow);
       }
 
       // Si llegó a max_turns sin end_turn, usar último texto disponible
@@ -186,7 +235,7 @@ export class AgentRunnerService {
     const previousStage = stage;
     const currentStage = await this.stageService.getStage(db, tenantId, leadId);
 
-    return { response: finalResponse, toolCallsExecuted, stage: currentStage, previousStage };
+    return { response: finalResponse, toolCallsExecuted, stage: currentStage, previousStage, escalateToHuman, debugLog };
   }
 
   private buildSystemPrompt(config: TenantConfig): string {

@@ -33,12 +33,12 @@ Después levanta PostgreSQL, Redis, el orquestador y la GUI, e inyecta los event
 
 ## Qué se abre
 
-| URL | Descripción |
-|-----|-------------|
-| `http://localhost:8080` | **GUI demo** — chat cliente + dashboard tenant |
-| `http://localhost:3000/api/docs` | Swagger — todos los endpoints |
-| `http://localhost:3000/api/v1/metrics` | Prometheus metrics |
-| `http://localhost:4000/qr` | QR para conectar WhatsApp (requiere open-wa activo) |
+| URL                                    | Descripción                                         |
+| -------------------------------------- | --------------------------------------------------- |
+| `http://localhost:8080`                | **GUI demo** — chat cliente + dashboard tenant      |
+| `http://localhost:3000/api/docs`       | Swagger — todos los endpoints                       |
+| `http://localhost:3000/api/v1/metrics` | Prometheus metrics                                  |
+| `http://localhost:4000/qr`             | QR para conectar WhatsApp (requiere open-wa activo) |
 
 ---
 
@@ -118,15 +118,15 @@ El test levanta PostgreSQL y Redis en CI, construye el orquestador, corre el see
 
 ## Escenarios de demo (GUI)
 
-| Botón | Flujo |
-| --- | --- |
-| **Iniciar demo** | Saludo inicial, el bot presenta los cursos disponibles |
-| **Contacto** | El lead da nombre, correo y teléfono → etapa sube a MQL |
-| **Inscripcion** | Pregunta por un curso → etapa PROSPECTO + reserva cupo |
-| **Sin cupo** | Evento lleno → se ofrece lista de espera |
-| **Confirmar pago** | Pago confirmado → etapa SQL + handoff a operador |
-| **Escalar** | Solicitud de operador humano con razón |
-| **Mensaje libre** | Escribe cualquier mensaje al bot |
+| Botón              | Flujo                                                   |
+| ------------------ | ------------------------------------------------------- |
+| **Iniciar demo**   | Saludo inicial, el bot presenta los cursos disponibles  |
+| **Contacto**       | El lead da nombre, correo y teléfono → etapa sube a MQL |
+| **Inscripcion**    | Pregunta por un curso → etapa PROSPECTO + reserva cupo  |
+| **Sin cupo**       | Evento lleno → se ofrece lista de espera                |
+| **Confirmar pago** | Pago confirmado → etapa SQL + handoff a operador        |
+| **Escalar**        | Solicitud de operador humano con razón                  |
+| **Mensaje libre**  | Escribe cualquier mensaje al bot                        |
 
 ---
 

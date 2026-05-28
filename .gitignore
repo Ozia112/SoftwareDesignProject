@@ -10,4 +10,6 @@ dist/
 demo/.env.demo
 coverage/
 *.log
-.DS_Store.claude/
+.DS_Store
+.claude/
+demo/logs/
