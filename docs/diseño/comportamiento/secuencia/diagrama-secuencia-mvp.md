@@ -32,10 +32,10 @@ autonumber
 hide footbox
 
 actor "Cliente" as Cliente
-participant "Canal de comunicación\nvida: externo" as Canal
-participant "Bot" as Bot
-participant "Sistema\nvida: app" as Sistema
-database "Sesión conversacional (Redis)\nTTL 30 min\nvida: infra" as Session
+participant "MessageRouter\nvida: externo" as Canal
+participant "AgentRunner" as Bot
+participant "Orquestador\nvida: app" as Sistema
+database "ConversationSessionStore (Redis)\nTTL 30 min\nvida: infra" as Session
 database "Base de datos (Consentimiento/Eventos)\nvida: durable" as DB
 
 note over Canal,DB
@@ -98,13 +98,13 @@ hide footbox
 
 actor "Cliente" as Cliente
 actor "Operador humano" as Operador
-participant "Canal de comunicación\nvida: externo" as Canal
-participant "Bot" as Bot
-participant "Sistema\nvida: app" as Sistema
+participant "MessageRouter\nvida: externo" as Canal
+participant "AgentRunner" as Bot
+participant "Orquestador\nvida: app" as Sistema
 database "Cache (idempotencia/sesión)\nvida: infra" as Cache
 participant "Cola/Temporizador (expiración)\nvida: infra" as Timer
 database "Base de datos (Reservas/Inscripciones)\nvida: durable" as DB
-participant "Notificaciones\nvida: app" as Notify
+participant "NotificationService\nvida: app" as Notify
 
 note over Canal,DB
 Tiempo de vida (MVP):
@@ -182,11 +182,11 @@ autonumber
 hide footbox
 
 actor "Cliente" as Cliente
-participant "Canal de comunicación\nvida: externo" as Canal
-participant "Bot" as Bot
-participant "Sistema\nvida: app" as Sistema
+participant "MessageRouter\nvida: externo" as Canal
+participant "AgentRunner" as Bot
+participant "Orquestador\nvida: app" as Sistema
 database "Base de datos (Lista de espera)\nvida: durable" as DB
-participant "Notificaciones\nvida: app" as Notify
+participant "NotificationService\nvida: app" as Notify
 
 note over Canal,DB
 Tiempo de vida (MVP):
