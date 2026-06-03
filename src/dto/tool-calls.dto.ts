@@ -29,7 +29,9 @@ export type CommercialStage = 'LEAD' | 'MQL' | 'PROSPECTO' | 'SQL' | 'CIERRE';
 
 export type StageSignal =
   | 'conversacion_iniciada'
-  | 'datos_de_contacto_completados'
+  | 'nombre_capturado'
+  | 'correo_capturado'
+  | 'numero_capturado'
   | 'pregunta_de_inscripcion_detectada'
   | 'confirmacion_de_pago_pendiente'
   | 'evento_cambiado';
@@ -65,6 +67,8 @@ export type EmitStageSignalOutput = {
   previousStage: CommercialStage;
   currentStage: CommercialStage;
   score?: number;
+  // Instrucción al LLM sobre el siguiente tool call obligatorio
+  nextAction?: string;
 };
 
 export type ReserveQuotaInput = { eventId: string; idempotencyKey: IdempotencyKey };

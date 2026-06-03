@@ -1,0 +1,108 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EventoDemo",
+  "type": "object",
+  "required": ["id", "activo", "info", "comercial", "logistica", "academico", "participantes"],
+  "properties": {
+    "id":      { "type": "string", "pattern": "^EVT-[A-Z0-9]+-[0-9]+$" },
+    "activo":  { "type": "boolean" },
+    "version": { "type": "string" },
+
+    "info": {
+      "type": "object",
+      "required": ["nombre", "descripcion", "inicio", "fin", "cupoTotal"],
+      "properties": {
+        "nombre":      { "type": "string" },
+        "descripcion": { "type": "string" },
+        "inicio":      { "type": "string", "format": "date-time" },
+        "fin":         { "type": "string", "format": "date-time" },
+        "cupoTotal":   { "type": "integer", "minimum": 1 },
+        "etiquetas":   { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "comercial": {
+      "type": "object",
+      "required": ["precio", "moneda", "metodoPago"],
+      "properties": {
+        "precio":  { "type": "number" },
+        "moneda":  { "type": "string", "enum": ["MXN", "USD"] },
+        "descuentos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["nombre", "porcentaje", "activo"],
+            "properties": {
+              "nombre":      { "type": "string" },
+              "porcentaje":  { "type": "number" },
+              "descripcion": { "type": "string" },
+              "activo":      { "type": "boolean" }
+            }
+          }
+        },
+        "metodoPago": {
+          "type": "object",
+          "required": ["banco", "cuenta", "clabe", "beneficiario", "comprobantesA"],
+          "properties": {
+            "banco":         { "type": "string" },
+            "cuenta":        { "type": "string" },
+            "clabe":         { "type": "string" },
+            "beneficiario":  { "type": "string" },
+            "comprobantesA": { "type": "string", "format": "email" }
+          }
+        },
+        "politicaReembolso": { "type": "string" }
+      }
+    },
+
+    "logistica": {
+      "type": "object",
+      "required": ["modalidad", "horario", "duracion"],
+      "properties": {
+        "modalidad":    { "type": "string", "enum": ["presencial", "online", "hibrida"] },
+        "ubicacion":    { "type": ["string", "null"] },
+        "horario":      { "type": "string" },
+        "duracion":     { "type": "string" },
+        "plataforma":   { "type": ["string", "null"] },
+        "enlaceAcceso": { "type": ["string", "null"] }
+      }
+    },
+
+    "academico": {
+      "type": "object",
+      "required": ["nivel", "requisitos", "instructor", "incluye"],
+      "properties": {
+        "nivel":      { "type": "string" },
+        "requisitos": { "type": "array", "items": { "type": "string" } },
+        "instructor": {
+          "type": "object",
+          "required": ["nombre"],
+          "properties": {
+            "nombre":       { "type": "string" },
+            "especialidad": { "type": "string" }
+          }
+        },
+        "temario": { "type": "array", "items": { "type": "string" } },
+        "incluye":  { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "participantes": {
+      "type": "array",
+      "description": "FKs de participantes confirmados. Poblado por el sistema, limpiado en reset-demo.",
+      "items": {
+        "type": "object",
+        "required": ["leadId", "reservacionId", "status", "fechaRegistro"],
+        "properties": {
+          "leadId":         { "type": "string" },
+          "reservacionId":  { "type": "string" },
+          "nombre":         { "type": ["string", "null"] },
+          "email":          { "type": ["string", "null"] },
+          "telefono":       { "type": ["string", "null"] },
+          "status":         { "type": "string", "enum": ["TEMPORARY", "CONFIRMED"] },
+          "fechaRegistro":  { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}

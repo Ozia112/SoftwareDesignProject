@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import type { SessionMessage } from '../dto/conversation.dto';
 import { createRedis } from '../common/redis.factory';
 
-const SESSION_TTL = 1800;
+const SESSION_TTL = 86400; // 24h para demo — evita perder contexto del curso en pausas largas
 
 // ConversationSessionStore — historial activo en Redis (RNF-04)
 @Injectable()

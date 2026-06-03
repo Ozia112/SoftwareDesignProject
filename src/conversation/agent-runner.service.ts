@@ -21,6 +21,9 @@ export interface AgentRunInput {
   userMessage: string;
   db: PrismaClient;
   tenantConfig: TenantConfig;
+  // true cuando el mensaje es una revisión de contexto sintética (reactivación del bot).
+  // El mensaje NO se persiste en Redis; solo la respuesta del bot queda en el historial.
+  isContextReview?: boolean;
 }
 
 export interface AgentRunOutput {
@@ -58,13 +61,16 @@ export class AgentRunnerService {
     // Recuperar historial desde Redis
     const history = await this.sessionStore.getHistory(tenantId, conversationId);
 
-    // Agregar mensaje del usuario al historial
-    const userMsg: SessionMessage = {
-      role: 'user',
-      content: userMessage,
-      timestamp: new Date().toISOString(),
-    };
-    history.push(userMsg);
+    // En modo revisión de contexto (reactivación) el mensaje sintético NO se persiste
+    // en Redis — solo se incluye en el contexto del LLM para que analice la situación.
+    if (!input.isContextReview) {
+      const userMsg: SessionMessage = {
+        role: 'user',
+        content: userMessage,
+        timestamp: new Date().toISOString(),
+      };
+      history.push(userMsg);
+    }
 
     // Obtener etapa actual para filtrar tools disponibles
     const stage = await this.stageService.getStage(db, tenantId, leadId);
@@ -78,6 +84,12 @@ export class AgentRunnerService {
       role: m.role,
       content: m.content as string,
     }));
+
+    // En modo revisión: inyectar el mensaje sintético al final del contexto del LLM
+    // sin que quede registrado en el historial de Redis como mensaje del usuario.
+    if (input.isContextReview) {
+      messages.push({ role: 'user', content: userMessage });
+    }
 
     const systemPrompt = this.buildSystemPrompt(tenantConfig);
     let toolCallsExecuted = 0;
@@ -123,6 +135,34 @@ export class AgentRunnerService {
       // Si no hay tool_use, es la respuesta final
       if (response.stop_reason === 'end_turn') {
         finalResponse = this.extractText(response.content);
+
+        // Si el LLM terminó sin texto tras haber ejecutado tool calls (respuesta vacía),
+        // hacer UN llamado de recuperación para que genere el próximo mensaje al usuario.
+        // Esto evita que el cliente quede en el limbo sin feedback visible.
+        if (!finalResponse.trim() && toolCallsExecuted > 0 && turn < MAX_TURNS - 2) {
+          debugLog.push('⚠ end_turn vacío tras tool calls — ejecutando llamado de recuperación');
+          try {
+            const recoveryMessages = [
+              ...messages,
+              { role: 'user' as const, content: '[SISTEMA] Por favor, continúa con el siguiente paso del proceso e indica al cliente qué debe hacer ahora.' },
+            ];
+            const recovery = await client.messages.create({
+              model: tenantConfig.llmModel,
+              system: [{ type: 'text' as const, text: systemPrompt, cache_control: { type: 'ephemeral' } as any }],
+              messages: recoveryMessages,
+              tools: tools as Anthropic.Tool[],
+              max_tokens: 512,
+            });
+            if (recovery.stop_reason === 'end_turn') {
+              finalResponse = this.extractText(recovery.content);
+              if (finalResponse.trim()) {
+                debugLog.push('✓ Recuperación exitosa — respuesta generada');
+              }
+            }
+          } catch (recErr: any) {
+            debugLog.push(`⚠ Recuperación falló: ${recErr?.message}`);
+          }
+        }
         break;
       }
 

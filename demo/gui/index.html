@@ -5,374 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SaaS Bot Orchestrator — Demo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --bg: #0d1117;
-        --surface: #161b22;
-        --surface2: #21262d;
-        --border: #30363d;
-        --text: #e6edf3;
-        --muted: #8b949e;
-        --accent: #58a6ff;
-        --green: #3fb950;
-        --orange: #d29922;
-        --red: #f85149;
-        --purple: #bc8cff;
-        --yellow: #e3b341;
-        --cyan: #39d0d8;
-      }
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        line-height: 1.5;
-        min-height: 100vh;
-      }
-
-      /* ── Header ── */
-      header {
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-        padding: 0 24px;
-        height: 56px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-      }
-      .logo { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
-      .logo-icon {
-        width: 28px; height: 28px;
-        background: linear-gradient(135deg, var(--accent), var(--purple));
-        border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px;
-      }
-      .badge {
-        font-size: 10px; font-weight: 600; padding: 2px 8px;
-        border-radius: 20px; text-transform: uppercase; letter-spacing: 0.05em;
-      }
-      .badge-demo { background: rgba(210,153,34,.2); color: var(--orange); border: 1px solid rgba(210,153,34,.3); }
-      .badge-alert { background: rgba(248,81,73,.2); color: var(--red); border: 1px solid rgba(248,81,73,.3); }
-      .status-bar { display: flex; align-items: center; gap: 16px; font-size: 12px; }
-      .status-dot {
-        width: 8px; height: 8px; border-radius: 50%; background: var(--muted);
-        display: inline-block; margin-right: 4px;
-      }
-      .status-dot.ok { background: var(--green); box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite; }
-      .status-dot.err { background: var(--red); }
-      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
-
-      /* ── Layout ── */
-      .main {
-        display: grid;
-        grid-template-columns: 300px 1fr 300px;
-        grid-template-rows: auto 1fr;
-        gap: 0;
-        height: calc(100vh - 56px);
-        overflow: hidden;
-      }
-
-      /* ── Scenario bar ── */
-      .scenario-bar {
-        grid-column: 1 / -1;
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-        padding: 10px 24px;
-        display: flex; align-items: center; gap: 8px; overflow-x: auto;
-      }
-      .scenario-bar span { font-size: 12px; color: var(--muted); white-space: nowrap; margin-right: 4px; }
-
-      .btn {
-        padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border);
-        background: var(--surface2); color: var(--text); font-size: 12px;
-        font-family: 'Inter', sans-serif; cursor: pointer; white-space: nowrap;
-        transition: all .15s; display: flex; align-items: center; gap: 6px;
-      }
-      .btn:hover { border-color: var(--accent); color: var(--accent); }
-      .btn.primary { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 600; }
-      .btn.primary:hover { opacity: .85; color: #000; }
-      .btn:disabled { opacity: .4; cursor: not-allowed; }
-
-      /* ── Side panels ── */
-      .panel {
-        background: var(--surface);
-        border-right: 1px solid var(--border);
-        display: flex; flex-direction: column; overflow: hidden;
-      }
-      .panel:last-child { border-right: none; border-left: 1px solid var(--border); }
-      .panel-header {
-        padding: 12px 16px; border-bottom: 1px solid var(--border);
-        display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-      }
-      .panel-title {
-        font-size: 11px; font-weight: 600; text-transform: uppercase;
-        letter-spacing: .08em; color: var(--muted); display: flex; align-items: center; gap: 6px;
-      }
-      .panel-body { flex: 1; overflow-y: auto; padding: 12px; }
-      .panel-body::-webkit-scrollbar { width: 4px; }
-      .panel-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-      /* ── Center with tabs ── */
-      .center { display: flex; flex-direction: column; overflow: hidden; }
-
-      .tab-nav {
-        display: flex; gap: 0; border-bottom: 1px solid var(--border);
-        background: var(--surface); flex-shrink: 0;
-      }
-      .tab-btn {
-        padding: 10px 20px; font-size: 13px; font-weight: 500;
-        border: none; border-bottom: 2px solid transparent;
-        background: transparent; color: var(--muted);
-        cursor: pointer; transition: all .15s; font-family: 'Inter', sans-serif;
-        display: flex; align-items: center; gap: 6px;
-      }
-      .tab-btn:hover { color: var(--text); }
-      .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
-      .tab-badge {
-        background: var(--red); color: #fff; font-size: 10px; font-weight: 700;
-        padding: 1px 6px; border-radius: 10px; min-width: 18px; text-align: center;
-      }
-
-      .tab-content { display: none; flex: 1; flex-direction: column; overflow: hidden; }
-      .tab-content.active { display: flex; }
-
-      /* ── Chat tab ── */
-      .chat-header {
-        padding: 12px 16px; border-bottom: 1px solid var(--border);
-        background: var(--surface); display: flex; align-items: center; gap: 10px; flex-shrink: 0;
-      }
-      .avatar {
-        width: 32px; height: 32px; border-radius: 50%;
-        background: linear-gradient(135deg, var(--green), var(--cyan));
-        display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0;
-      }
-      .chat-identity strong { display: block; font-size: 13px; }
-      .chat-identity small { font-size: 11px; color: var(--green); }
-      .wa-badge { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
-
-      .chat-area {
-        flex: 1; overflow-y: auto; padding: 16px;
-        display: flex; flex-direction: column; gap: 8px; background: var(--bg);
-      }
-      .chat-area::-webkit-scrollbar { width: 4px; }
-      .chat-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-      .msg {
-        max-width: 72%; padding: 10px 14px; border-radius: 12px;
-        font-size: 13px; line-height: 1.5; position: relative; animation: fadeIn .2s ease;
-      }
-      @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
-      .msg.user { background: var(--accent); color: #000; align-self: flex-end; border-bottom-right-radius: 4px; }
-      .msg.bot {
-        background: var(--surface2); color: var(--text); align-self: flex-start;
-        border-bottom-left-radius: 4px; border: 1px solid var(--border);
-      }
-      .msg.system-msg {
-        background: rgba(88,166,255,.1); color: var(--accent); align-self: center;
-        border: 1px solid rgba(88,166,255,.2); font-size: 11px; padding: 6px 12px; border-radius: 20px;
-      }
-      .msg.escalated-msg {
-        background: rgba(248,81,73,.1); color: var(--red); align-self: center;
-        border: 1px solid rgba(248,81,73,.2); font-size: 11px; padding: 6px 12px; border-radius: 20px;
-      }
-      .msg-meta { font-size: 10px; color: rgba(0,0,0,.5); margin-top: 4px; text-align: right; }
-      .msg.bot .msg-meta { color: var(--muted); text-align: left; }
-
-      .chat-input {
-        padding: 12px 16px; border-top: 1px solid var(--border);
-        background: var(--surface); display: flex; gap: 8px;
-      }
-      .chat-input input {
-        flex: 1; background: var(--surface2); border: 1px solid var(--border);
-        border-radius: 8px; padding: 8px 14px; color: var(--text);
-        font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color .15s;
-      }
-      .chat-input input:focus { border-color: var(--accent); }
-      .chat-input input::placeholder { color: var(--muted); }
-
-      /* mini log inside chat tab */
-      .log-area {
-        height: 150px; background: #010409; border-top: 1px solid var(--border);
-        overflow-y: auto; padding: 8px 12px;
-        font-family: 'JetBrains Mono', monospace; font-size: 11px; flex-shrink: 0;
-      }
-      .log-area::-webkit-scrollbar { width: 4px; }
-      .log-area::-webkit-scrollbar-thumb { background: var(--border); }
-
-      /* ── Logs tab ── */
-      .log-tab-area {
-        flex: 1; background: #010409; overflow-y: auto; padding: 12px 16px;
-        font-family: 'JetBrains Mono', monospace; font-size: 12px;
-      }
-      .log-tab-area::-webkit-scrollbar { width: 4px; }
-      .log-tab-area::-webkit-scrollbar-thumb { background: var(--border); }
-
-      .log-line { line-height: 1.7; white-space: pre-wrap; word-break: break-all; }
-      .log-line.info  { color: var(--cyan); }
-      .log-line.success { color: var(--green); }
-      .log-line.error { color: var(--red); }
-      .log-line.warn  { color: var(--yellow); }
-      .log-line.dim   { color: var(--muted); }
-
-      /* ── Typing indicator ── */
-      .typing {
-        display: flex; align-items: center; gap: 4px; padding: 10px 14px;
-        background: var(--surface2); border-radius: 12px; border-bottom-left-radius: 4px;
-        align-self: flex-start; border: 1px solid var(--border); display: none;
-      }
-      .typing.visible { display: flex; }
-      .typing span {
-        width: 6px; height: 6px; border-radius: 50%; background: var(--muted);
-        animation: bounce 1.2s infinite;
-      }
-      .typing span:nth-child(2) { animation-delay: .2s; }
-      .typing span:nth-child(3) { animation-delay: .4s; }
-      @keyframes bounce {
-        0%,80%,100%{transform:scale(.8);opacity:.5}
-        40%{transform:scale(1.2);opacity:1}
-      }
-
-      /* ── Operator tab ── */
-      .op-tab { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
-      .op-tab::-webkit-scrollbar { width: 4px; }
-      .op-tab::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-      .op-stats {
-        display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-      }
-      .stat-card {
-        background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px;
-      }
-      .stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
-      .stat-value { font-size: 24px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-      .stat-value.green { color: var(--green); }
-      .stat-value.red   { color: var(--red); }
-      .stat-value.accent { color: var(--accent); }
-      .stat-value.purple { color: var(--purple); }
-
-      .op-section-title {
-        font-size: 11px; font-weight: 600; text-transform: uppercase;
-        letter-spacing: .08em; color: var(--muted); margin-bottom: 8px;
-        padding-bottom: 4px; border-bottom: 1px solid var(--border);
-        display: flex; align-items: center; justify-content: space-between;
-      }
-
-      .conv-row {
-        background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-        padding: 12px; margin-bottom: 6px; display: flex; align-items: center; gap: 12px;
-        transition: border-color .15s;
-      }
-      .conv-row:hover { border-color: var(--accent); }
-      .conv-row.needs-human { border-left: 3px solid var(--red); }
-      .conv-info { flex: 1; min-width: 0; }
-      .conv-name { font-size: 13px; font-weight: 600; }
-      .conv-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; }
-      .conv-badges { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-
-      .tag {
-        display: inline-flex; align-items: center; gap: 4px;
-        font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500;
-      }
-      .tag-green  { background: rgba(63,185,80,.15); color: var(--green); }
-      .tag-yellow { background: rgba(227,179,65,.15); color: var(--yellow); }
-      .tag-red    { background: rgba(248,81,73,.15); color: var(--red); }
-      .tag-blue   { background: rgba(88,166,255,.15); color: var(--accent); }
-      .tag-purple { background: rgba(188,140,255,.15); color: var(--purple); }
-
-      .evt-card {
-        background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-        padding: 12px; margin-bottom: 6px;
-      }
-      .evt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-      .evt-name   { font-size: 13px; font-weight: 600; }
-      .evt-quota  { font-size: 11px; color: var(--muted); display: flex; gap: 12px; margin-bottom: 6px; }
-      .quota-bar  { height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
-      .quota-fill { height: 100%; border-radius: 3px; transition: width .5s ease; }
-      .quota-fill.ok   { background: var(--green); }
-      .quota-fill.warn { background: var(--yellow); }
-      .quota-fill.full { background: var(--red); }
-
-      .wl-row {
-        display: flex; align-items: center; gap: 8px; padding: 8px 0;
-        border-bottom: 1px solid var(--border); font-size: 12px;
-      }
-      .wl-row:last-child { border-bottom: none; }
-      .wl-pos {
-        width: 24px; height: 24px; border-radius: 50%; background: var(--surface);
-        border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-        font-size: 10px; font-weight: 700; color: var(--muted); flex-shrink: 0;
-      }
-
-      /* ── Left panel ── */
-      .stage-track { display: flex; flex-direction: column; gap: 4px; margin-bottom: 16px; }
-      .stage-item {
-        display: flex; align-items: center; gap: 8px; padding: 8px 10px;
-        border-radius: 6px; border: 1px solid transparent; transition: all .2s; font-size: 12px;
-      }
-      .stage-item.active { background: rgba(63,185,80,.1); border-color: rgba(63,185,80,.3); color: var(--green); }
-      .stage-item.done   { color: var(--muted); text-decoration: line-through; }
-      .stage-item.pending { color: var(--muted); }
-      .stage-icon {
-        width: 20px; height: 20px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0;
-        background: var(--surface2); border: 1px solid var(--border);
-      }
-      .stage-item.active .stage-icon { background: var(--green); border-color: var(--green); color: #000; }
-      .stage-item.done   .stage-icon { background: var(--border); }
-
-      .metric-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
-      .metric-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
-      .metric-value { font-size: 22px; font-weight: 700; font-family: 'JetBrains Mono', monospace; }
-      .metric-value.green  { color: var(--green); }
-      .metric-value.accent { color: var(--accent); }
-      .metric-value.purple { color: var(--purple); }
-      .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-
-      .section-label {
-        font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em;
-        color: var(--muted); padding: 8px 0 4px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
-      }
-      .config-row {
-        display: flex; align-items: center; justify-content: space-between;
-        padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12px;
-      }
-      .config-row:last-child { border-bottom: none; }
-      .config-key { color: var(--muted); }
-      .config-val {
-        font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent);
-        max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-      }
-
-      /* ── Right panel: events ── */
-      .event-card {
-        background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-        padding: 12px; margin-bottom: 8px; cursor: pointer; transition: border-color .15s;
-      }
-      .event-card:hover    { border-color: var(--accent); }
-      .event-card.selected { border-color: var(--accent); background: rgba(88,166,255,.08); }
-      .event-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-      .event-meta { font-size: 11px; color: var(--muted); display: flex; flex-direction: column; gap: 2px; }
-
-      .quota-bar-sm { height: 4px; background: var(--surface); border-radius: 2px; margin-top: 8px; overflow: hidden; }
-      .quota-fill-sm { height: 100%; background: var(--green); border-radius: 2px; transition: width .5s ease; }
-
-      .empty-state { text-align: center; color: var(--muted); font-size: 12px; padding: 32px 0; }
-
-      @media (max-width: 900px) {
-        .main { grid-template-columns: 1fr; }
-        .panel:first-child, .panel:last-child { display: none; }
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
 
   <body>
+    <!-- ══ Header ══════════════════════════════════════════════════════════ -->
     <header>
       <div class="logo">
         <div class="logo-icon">🤖</div>
@@ -389,7 +27,7 @@
     </header>
 
     <div class="main">
-      <!-- ── Scenario bar ── -->
+      <!-- ══ Barra de escenarios ════════════════════════════════════════════ -->
       <div class="scenario-bar">
         <span>Simular clic en anuncio:</span>
         <button class="btn primary" onclick="startFromAd('excel')">📊 Excel Avanzado</button>
@@ -402,55 +40,99 @@
         </div>
       </div>
 
-      <!-- ── Left panel: Tenant dashboard ── -->
+      <!-- ══ Panel izquierdo: Tenant dashboard ══════════════════════════════ -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">🏢 Tenant</div>
           <span class="badge badge-demo">Academia Digital MX</span>
         </div>
         <div class="panel-body">
+
           <div class="section-label">Etapa comercial del lead</div>
           <div class="stage-track" id="stage-track">
             <div class="stage-item pending" id="s-LEAD">
               <div class="stage-icon">1</div>
-              <div><div>LEAD</div><div style="font-size:10px;color:var(--muted)">Conversación iniciada</div></div>
+              <div>
+                <div>LEAD</div>
+                <div style="font-size:10px;color:var(--muted)">Conversación iniciada</div>
+              </div>
             </div>
             <div class="stage-item pending" id="s-MQL">
               <div class="stage-icon">2</div>
-              <div><div>MQL</div><div style="font-size:10px;color:var(--muted)">Datos de contacto</div></div>
+              <div>
+                <div>MQL</div>
+                <div style="font-size:10px;color:var(--muted)">Datos de contacto</div>
+              </div>
             </div>
             <div class="stage-item pending" id="s-PROSPECTO">
               <div class="stage-icon">3</div>
-              <div><div>PROSPECTO</div><div style="font-size:10px;color:var(--muted)">Interés en inscripción</div></div>
+              <div>
+                <div>PROSPECTO</div>
+                <div style="font-size:10px;color:var(--muted)">Interés en inscripción</div>
+              </div>
             </div>
             <div class="stage-item pending" id="s-SQL">
               <div class="stage-icon">4</div>
-              <div><div>SQL</div><div style="font-size:10px;color:var(--muted)">Pago pendiente</div></div>
+              <div>
+                <div>SQL</div>
+                <div style="font-size:10px;color:var(--muted)">Pago pendiente</div>
+              </div>
             </div>
             <div class="stage-item pending" id="s-CIERRE">
               <div class="stage-icon">5</div>
-              <div><div>CIERRE</div><div style="font-size:10px;color:var(--muted)">Ganado / Perdido</div></div>
+              <div>
+                <div>CIERRE</div>
+                <div style="font-size:10px;color:var(--muted)">Ganado / Perdido</div>
+              </div>
             </div>
           </div>
 
           <div class="section-label">Métricas de sesión</div>
           <div class="metrics-grid">
-            <div class="metric-card"><div class="metric-label">Puntuación</div><div class="metric-value green" id="m-score">0</div></div>
-            <div class="metric-card"><div class="metric-label">Tool calls</div><div class="metric-value accent" id="m-tools">0</div></div>
-            <div class="metric-card"><div class="metric-label">Mensajes</div><div class="metric-value purple" id="m-msgs">0</div></div>
-            <div class="metric-card"><div class="metric-label">Turnos</div><div class="metric-value" id="m-turns">0</div></div>
+            <div class="metric-card">
+              <div class="metric-label">Puntuación</div>
+              <div class="metric-value green" id="m-score">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Tool calls</div>
+              <div class="metric-value accent" id="m-tools">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Mensajes</div>
+              <div class="metric-value purple" id="m-msgs">0</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">Turnos</div>
+              <div class="metric-value" id="m-turns">0</div>
+            </div>
           </div>
 
           <div class="section-label">Configuración del tenant</div>
-          <div class="config-row"><span class="config-key">Tenant ID</span><span class="config-val">demo-tenant</span></div>
-          <div class="config-row"><span class="config-key">Modelo LLM</span><span class="config-val" id="cfg-model">claude-haiku-4-5</span></div>
-          <div class="config-row"><span class="config-key">Canal activo</span><span class="config-val">WEB</span></div>
-          <div class="config-row"><span class="config-key">Lead ID</span><span class="config-val" id="cfg-leadid">–</span></div>
-          <div class="config-row"><span class="config-key">Conversación</span><span class="config-val" id="cfg-convid">–</span></div>
+          <div class="config-row">
+            <span class="config-key">Tenant ID</span>
+            <span class="config-val">demo-tenant</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Modelo LLM</span>
+            <span class="config-val" id="cfg-model">claude-haiku-4-5</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Canal activo</span>
+            <span class="config-val">WEB</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Lead ID</span>
+            <span class="config-val" id="cfg-leadid">–</span>
+          </div>
+          <div class="config-row">
+            <span class="config-key">Conversación</span>
+            <span class="config-val" id="cfg-convid">–</span>
+          </div>
+
         </div>
       </div>
 
-      <!-- ── Center: tabs ── -->
+      <!-- ══ Centro: tabs ═══════════════════════════════════════════════════ -->
       <div class="center">
         <div class="tab-nav">
           <button class="tab-btn active" onclick="switchTab('chat')" id="tab-btn-chat">
@@ -485,34 +167,40 @@
               onkeydown="if(event.key==='Enter') sendMsg()" />
             <button class="btn primary" onclick="sendMsg()">Enviar →</button>
           </div>
-          <div class="log-area" id="log-area">
-            <div class="log-line dim">── Terminal ─────────────────────────────────────────────</div>
-          </div>
         </div>
 
         <!-- ── Operator tab ── -->
         <div id="tab-operator" class="tab-content" style="flex-direction:row;overflow:hidden">
-          <!-- Left: stats + conversations + events -->
+          <!-- Lista de conversaciones escaladas -->
           <div style="width:380px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)">
-            <!-- Stats bar -->
             <div style="padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0">
               <div class="op-stats" style="grid-template-columns:repeat(4,1fr)">
-                <div class="stat-card" style="padding:8px"><div class="stat-label">Leads</div><div class="stat-value accent" style="font-size:18px" id="op-totalLeads">–</div></div>
-                <div class="stat-card" style="padding:8px"><div class="stat-label">Activas</div><div class="stat-value green" style="font-size:18px" id="op-activeConvs">–</div></div>
-                <div class="stat-card" style="padding:8px"><div class="stat-label">Escalar</div><div class="stat-value red" style="font-size:18px" id="op-pendingHandoff">–</div></div>
-                <div class="stat-card" style="padding:8px;cursor:pointer" onclick="refreshOperator()" title="Actualizar"><div class="stat-label">↻</div><div class="stat-value" style="font-size:14px;color:var(--muted)">OK</div></div>
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Leads</div>
+                  <div class="stat-value accent" style="font-size:18px" id="op-totalLeads">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Activas</div>
+                  <div class="stat-value green" style="font-size:18px" id="op-activeConvs">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Escalar</div>
+                  <div class="stat-value red" style="font-size:18px" id="op-pendingHandoff">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px;cursor:pointer" onclick="refreshOperator()" title="Actualizar">
+                  <div class="stat-label">↻</div>
+                  <div class="stat-value" style="font-size:14px;color:var(--muted)">OK</div>
+                </div>
               </div>
             </div>
-            <!-- Conversations list -->
             <div style="flex:1;overflow-y:auto;padding:10px">
-              <div class="op-section-title" style="margin-bottom:8px">Conversaciones</div>
+              <div class="op-section-title" style="margin-bottom:8px">Conversaciones sin evento</div>
               <div id="op-conversations"><div class="empty-state">Cargando...</div></div>
               <div class="op-section-title" style="margin-top:16px;margin-bottom:8px">Eventos y cupos</div>
               <div id="op-events"><div class="empty-state">Cargando...</div></div>
             </div>
           </div>
-
-          <!-- Right: conversation detail + messaging -->
+          <!-- Detalle de conversación -->
           <div style="flex:1;display:flex;flex-direction:column;overflow:hidden" id="op-detail">
             <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-direction:column;gap:8px">
               <div style="font-size:32px">🧑‍💼</div>
@@ -522,23 +210,36 @@
         </div>
 
         <!-- ── Logs tab ── -->
-        <div id="tab-logs" class="tab-content">
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
-            <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">🖥️ System log</span>
-            <button class="btn" style="padding:3px 10px;font-size:11px" onclick="clearLogs()">Limpiar logs</button>
+        <div id="tab-logs" class="tab-content" style="flex-direction:row">
+          <!-- Terminal -->
+          <div style="flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
+              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">🖥️ Terminal</span>
+              <button class="btn" style="padding:2px 8px;font-size:10px" onclick="clearLogs()">Limpiar</button>
+            </div>
+            <div class="log-tab-area" id="log-tab-area">
+              <div class="log-line dim">── System log ──────────────────────</div>
+            </div>
           </div>
-          <div class="log-tab-area" id="log-tab-area">
-            <div class="log-line dim">── System log ──────────────────────────────────────────</div>
+          <!-- API Calls detalladas -->
+          <div style="width:340px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden">
+            <div style="padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
+              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">🔌 API Calls</span>
+            </div>
+            <div id="api-calls-log" style="flex:1;overflow-y:auto;padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;background:#010409;display:flex;flex-direction:column;gap:6px">
+              <div style="color:var(--muted)">── esperando llamadas ──</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- ── Right panel: Events ── -->
+      <!-- ══ Panel derecho: Eventos + Sesiones activas ══════════════════════ -->
       <div class="panel">
         <div class="panel-header">
           <div class="panel-title">📅 Eventos del tenant</div>
         </div>
         <div class="panel-body">
+
           <div class="section-label">Cursos disponibles</div>
 
           <div class="event-card" id="evt-EXCEL-01" onclick="selectEvent('EVT-EXCEL-01')">
@@ -551,7 +252,7 @@
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
               <span class="tag tag-green" id="qt-EXCEL-01">✓ 20 cupos</span>
             </div>
-            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-EXCEL-01" style="width:100%"></div></div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-EXCEL-01" style="width:0%"></div></div>
           </div>
 
           <div class="event-card" id="evt-PBI-01" onclick="selectEvent('EVT-PBI-01')">
@@ -564,7 +265,7 @@
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
               <span class="tag tag-green" id="qt-PBI-01">✓ 30 cupos</span>
             </div>
-            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-PBI-01" style="width:100%"></div></div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-PBI-01" style="width:0%"></div></div>
           </div>
 
           <div class="event-card" id="evt-CONT-01" onclick="selectEvent('EVT-CONT-01')">
@@ -577,607 +278,26 @@
             <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
               <span class="tag tag-yellow" id="qt-CONT-01">⚡ 15 cupos</span>
             </div>
-            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-CONT-01" style="width:100%"></div></div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-CONT-01" style="width:0%"></div></div>
           </div>
 
-          <div class="section-label" style="margin-top:16px">API · últimas llamadas</div>
-          <div id="api-log" style="font-family:'JetBrains Mono',monospace;font-size:11px;display:flex;flex-direction:column;gap:4px"></div>
+          <!-- Fix B3: lista de sesiones activas en el right panel -->
+          <div class="section-label" style="margin-top:16px">Sesiones activas</div>
+          <div id="session-list">
+            <div style="color:var(--muted);font-size:11px;padding:4px 0">Sin sesiones — inicia un escenario</div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <script>
-      // ── Config ───────────────────────────────────────────────────────────
-      const API    = 'http://localhost:3000/api/v1';
-      const TENANT = 'demo-tenant';
-      let USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
-
-      function newChannel() {
-        USER_CHANNEL = 'demo-gui-user-' + Math.random().toString(36).slice(2, 8);
-      }
-
-      // ── Estado ───────────────────────────────────────────────────────────
-      let state = {
-        stage: null, score: 0, toolCalls: 0, messages: 0,
-        turns: 0, leadId: null, convId: null,
-      };
-
-      // ── Tabs ─────────────────────────────────────────────────────────────
-      function switchTab(name) {
-        ['chat', 'operator', 'logs'].forEach(t => {
-          document.getElementById(`tab-${t}`).classList.toggle('active', t === name);
-          document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === name);
-        });
-        if (name === 'operator') refreshOperator();
-      }
-
-      // ── Logging ──────────────────────────────────────────────────────────
-      function now() {
-        return new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      }
-
-      function log(msg, type = 'dim') {
-        const line = document.createElement('div');
-        line.className = `log-line ${type}`;
-        line.textContent = `[${now()}] ${msg}`;
-
-        // Write to mini log (chat tab)
-        const mini = document.getElementById('log-area');
-        mini.appendChild(line.cloneNode(true));
-        mini.scrollTop = mini.scrollHeight;
-
-        // Write to full log (logs tab)
-        const full = document.getElementById('log-tab-area');
-        full.appendChild(line);
-        full.scrollTop = full.scrollHeight;
-      }
-
-      function clearLogs() {
-        document.getElementById('log-area').innerHTML =
-          '<div class="log-line dim">── Terminal limpiada ────────────────────────────────────</div>';
-        document.getElementById('log-tab-area').innerHTML =
-          '<div class="log-line dim">── Log limpiado ─────────────────────────────────────────</div>';
-      }
-
-      function apiLog(method, path, status) {
-        const el = document.getElementById('api-log');
-        const row = document.createElement('div');
-        const color = status >= 200 && status < 300 ? '#3fb950' : '#f85149';
-        row.innerHTML = `<span style="color:${color}">${status}</span> <span style="color:#8b949e">${method}</span> <span style="color:#58a6ff;word-break:break-all">${path}</span>`;
-        el.prepend(row);
-        if (el.children.length > 8) el.lastChild.remove();
-      }
-
-      // ── Chat helpers ─────────────────────────────────────────────────────
-      function addMsg(text, role, meta = '') {
-        const area = document.getElementById('chat-area');
-        const div = document.createElement('div');
-        div.className = `msg ${role}`;
-        div.innerHTML = `${text}${meta ? `<div class="msg-meta">${meta}</div>` : ''}`;
-        area.appendChild(div);
-        area.scrollTop = area.scrollHeight;
-      }
-
-      function setTyping(visible) {
-        document.getElementById('typing').classList.toggle('visible', visible);
-        if (visible) document.getElementById('chat-area').scrollTop = 99999;
-      }
-
-      function updateStage(stage) {
-        if (!stage || stage === state.stage) return;
-        const stages = ['LEAD', 'MQL', 'PROSPECTO', 'SQL', 'CIERRE'];
-        const idx = stages.indexOf(stage);
-        stages.forEach((s, i) => {
-          const el = document.getElementById(`s-${s}`);
-          if (!el) return;
-          el.className = 'stage-item ' + (i < idx ? 'done' : i === idx ? 'active' : 'pending');
-        });
-        log(`Etapa → ${stage}`, 'success');
-        state.stage = stage;
-      }
-
-      function updateMetrics() {
-        document.getElementById('m-score').textContent  = state.score;
-        document.getElementById('m-tools').textContent  = state.toolCalls;
-        document.getElementById('m-msgs').textContent   = state.messages;
-        document.getElementById('m-turns').textContent  = state.turns;
-        document.getElementById('cfg-leadid').textContent = state.leadId ? state.leadId.slice(0, 12) + '…' : '–';
-        document.getElementById('cfg-convid').textContent = state.convId  ? state.convId.slice(0, 12)  + '…' : '–';
-      }
-
-      function selectEvent(id) {
-        document.querySelectorAll('.event-card').forEach(c => c.classList.remove('selected'));
-        const key = id.replace('EVT-', '');
-        document.getElementById(`evt-${key}`)?.classList.add('selected');
-        log(`Evento seleccionado: ${id}`, 'info');
-      }
-
-      // ── Send message ─────────────────────────────────────────────────────
-      async function sendMessage(text) {
-        setTyping(true);
-        state.messages++;
-        state.turns++;
-        updateMetrics();
-
-        const body = {
-          channelId: USER_CHANNEL,
-          text,
-          messageId: `gui-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        };
-        log(`→ "${text.slice(0, 60)}"`, 'info');
-
-        try {
-          const res = await fetch(`${API}/${TENANT}/messages`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(body),
-          });
-          apiLog('POST', `/${TENANT}/messages`, res.status);
-          const data = await res.json();
-          setTyping(false);
-
-          if (data.response) {
-            addMsg(data.response, 'bot', `Ana · ${now()}`);
-          }
-
-          // Volcar debug log del backend al panel de logs
-          if (data.debugLog?.length) {
-            for (const entry of data.debugLog) {
-              const type = entry.startsWith('❌') ? 'error'
-                : entry.startsWith('🚨') ? 'warn'
-                : entry.startsWith('🔧') ? 'info'
-                : entry.startsWith('   ') ? 'dim'
-                : 'success';
-              log(entry, type);
-            }
-          } else {
-            log(`← Bot respondió (tools: ${data.toolCallsExecuted ?? 0})`, 'success');
-          }
-
-          if (data.stage) updateStage(data.stage);
-          if (data.score !== undefined) state.score = data.score;
-          if (data.toolCallsExecuted) state.toolCalls += data.toolCallsExecuted;
-          if (data.leadId) state.leadId = data.leadId;
-          if (data.conversationId) state.convId = data.conversationId;
-          updateMetrics();
-
-          // Aviso de traspaso a operador humano
-          if (data.handoffTriggered) {
-            addMsg('🧑‍💼 Tu caso ha sido asignado a un asesor humano que se pondrá en contacto contigo.', 'escalated-msg');
-            refreshHandoffBadge();
-            refreshSidebarEvents();
-          }
-        } catch (err) {
-          setTyping(false);
-          log(`❌ Error de red: ${err.message}`, 'error');
-          addMsg('⚠️ Error conectando al servidor. ¿Está corriendo el orquestador?', 'system-msg');
-        }
-      }
-
-      // ── Ad entry points ───────────────────────────────────────────────────
-      const AD_MESSAGES = {
-        excel:     'Hola, vi el anuncio del Curso Excel Avanzado y me gustaría inscribirme',
-        powerbi:   'Hola, vi el anuncio del Taller Power BI y quiero conocer más detalles para inscribirme',
-        diplomado: 'Hola, vi el anuncio del Diplomado de Contabilidad Digital y estoy interesado en inscribirme',
-      };
-
-      async function startFromAd(course) {
-        clearAll();
-        const msg = AD_MESSAGES[course];
-        if (!msg) return;
-        switchTab('chat');
-        addMsg(`🎯 Clic en anuncio: ${course}`, 'system-msg');
-        await delay(400);
-        addMsg(msg, 'user', `Tú · ${now()}`);
-        await sendMessage(msg);
-      }
-
-      async function resetDemo() {
-        if (!confirm('¿Eliminar TODOS los leads, conversaciones y reservas? Los eventos y credenciales se conservan.')) return;
-        try {
-          const res = await fetch(`${API.replace('/v1', '')}/v1/admin/reset-demo`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tenantId: TENANT }),
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(JSON.stringify(data));
-          log(`✅ Reset demo: ${JSON.stringify(data.deleted)}`, 'success');
-          clearAll();
-          refreshSidebarEvents();
-          refreshHandoffBadge();
-        } catch (err) {
-          log(`❌ Reset demo error: ${err.message}`, 'error');
-        }
-      }
-
-      async function sendMsg() {
-        const input = document.getElementById('msg-input');
-        const text = input.value.trim();
-        if (!text) return;
-        input.value = '';
-        addMsg(text, 'user', `Tú · ${now()}`);
-        await sendMessage(text);
-      }
-
-      function clearAll() {
-        newChannel();
-        log(`Nueva sesión — channel: ${USER_CHANNEL}`, 'info');
-        document.getElementById('chat-area').innerHTML =
-          '<div class="msg system-msg">Nueva sesión — el bot no recuerda la conversación anterior</div>';
-        document.getElementById('api-log').innerHTML = '';
-        state = { stage: null, score: 0, toolCalls: 0, messages: 0, turns: 0, leadId: null, convId: null };
-        ['LEAD','MQL','PROSPECTO','SQL','CIERRE'].forEach(s => {
-          const el = document.getElementById(`s-${s}`);
-          if (el) el.className = 'stage-item pending';
-        });
-        updateMetrics();
-      }
-
-      const delay = ms => new Promise(r => setTimeout(r, ms));
-
-      // ── Operator panel ────────────────────────────────────────────────────
-      let selectedConv = null;
-      let expandedEvent = null;
-
-      async function refreshOperator() {
-        await Promise.all([loadOpStats(), loadOpConversations(), loadOpEvents()]);
-      }
-
-      async function refreshHandoffBadge() {
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/stats`);
-          if (!res.ok) return;
-          const data = await res.json();
-          const badge = document.getElementById('handoff-badge');
-          if (data.pendingHandoff > 0) {
-            badge.textContent = data.pendingHandoff;
-            badge.style.display = 'inline-block';
-          } else {
-            badge.style.display = 'none';
-          }
-        } catch {}
-      }
-
-      async function loadOpStats() {
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/stats`);
-          if (!res.ok) return;
-          const data = await res.json();
-          document.getElementById('op-totalLeads').textContent     = data.totalLeads ?? '–';
-          document.getElementById('op-activeConvs').textContent    = data.activeConversations ?? '–';
-          document.getElementById('op-pendingHandoff').textContent = data.pendingHandoff ?? '–';
-          const badge = document.getElementById('handoff-badge');
-          if (data.pendingHandoff > 0) {
-            badge.textContent = data.pendingHandoff;
-            badge.style.display = 'inline-block';
-          } else {
-            badge.style.display = 'none';
-          }
-        } catch (err) {
-          log(`Operator stats error: ${err.message}`, 'warn');
-        }
-      }
-
-      async function loadOpConversations() {
-        const container = document.getElementById('op-conversations');
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/conversations`);
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const groups = await res.json(); // [{eventId, eventName, conversations:[]}]
-
-          const totalEsc = groups.reduce((s, g) => s + g.conversations.length, 0);
-          if (!totalEsc) {
-            container.innerHTML = '<div class="empty-state">Sin escalaciones pendientes</div>';
-            return;
-          }
-
-          const stageColor = { LEAD:'blue', MQL:'blue', PROSPECTO:'purple', SQL:'yellow', CIERRE:'green' };
-          container.innerHTML = groups.map(group => {
-            const convRows = group.conversations.map(c => {
-              const color = stageColor[c.lead?.stage] ?? 'blue';
-              const sel = selectedConv?.id === c.id ? 'border-color:var(--accent);background:rgba(88,166,255,.05);' : '';
-              const statusLabel = c.status === 'WITH_OPERATOR' ? '🟢' : '🔴';
-              return `
-                <div class="conv-row needs-human" style="${sel}cursor:pointer;margin-left:0" onclick="openConvDetail(${JSON.stringify(c).replace(/"/g, '&quot;')})">
-                  <div class="conv-info">
-                    <div class="conv-name">${statusLabel} ${c.lead?.name || '(sin nombre)'}</div>
-                    <div class="conv-sub">${c.lead?.email || c.lead?.phone || '–'} · ${formatDate(c.updatedAt)}</div>
-                  </div>
-                  <div class="conv-badges">
-                    <span class="tag tag-${color}">${c.lead?.stage || 'LEAD'}</span>
-                    <span class="tag tag-green">★${c.lead?.score ?? 0}</span>
-                  </div>
-                </div>`;
-            }).join('');
-
-            return `
-              <div style="margin-bottom:10px">
-                <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:${group.eventId ? 'var(--accent)' : 'var(--muted)'};padding:4px 0;margin-bottom:4px;border-bottom:1px solid var(--border)">
-                  ${group.eventId ? '📅 ' : '❓ '}${group.eventName}
-                  <span style="color:var(--muted);font-weight:400">(${group.conversations.length})</span>
-                </div>
-                ${convRows}
-              </div>`;
-          }).join('');
-        } catch (err) {
-          container.innerHTML = `<div class="empty-state" style="color:var(--red)">Error: ${err.message}</div>`;
-        }
-      }
-
-      async function openConvDetail(conv) {
-        selectedConv = conv;
-        const panel = document.getElementById('op-detail');
-        const lead = conv.lead || {};
-        const esc = conv.needsHuman;
-
-        panel.innerHTML = `
-          <!-- Lead info -->
-          <div style="padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--surface)">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-              <div>
-                <div style="font-size:15px;font-weight:700">${lead.name || '(sin nombre)'}</div>
-                <div style="font-size:12px;color:var(--muted);margin-top:2px">
-                  ${lead.email || '–'} · ${lead.phone || '–'}
-                </div>
-              </div>
-              <div style="display:flex;gap:6px;align-items:center">
-                ${esc ? '<span class="tag tag-red">🚨 Escalar</span>' : ''}
-                <span class="tag tag-${stageTagColor(lead.stage)}">${lead.stage || 'LEAD'}</span>
-                <span class="tag tag-green">★ ${lead.score ?? 0}</span>
-              </div>
-            </div>
-            ${esc || lead.stage === 'SQL' ? `
-            <div style="display:flex;gap:8px">
-              <button class="btn primary" style="flex:1;justify-content:center;background:var(--green);border-color:var(--green)"
-                onclick="closeConv('${conv.id}','GANADO')">✓ Ganado</button>
-              <button class="btn" style="flex:1;justify-content:center;color:var(--red);border-color:var(--red)"
-                onclick="closeConv('${conv.id}','PERDIDO')">✗ Perdido</button>
-            </div>` : ''}
-          </div>
-
-          <!-- Chat history -->
-          <div id="op-chat-history" style="flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:6px;background:var(--bg)">
-            <div style="text-align:center;color:var(--muted);font-size:12px">Cargando historial...</div>
-          </div>
-
-          <!-- Operator message input -->
-          <div style="padding:10px 12px;border-top:1px solid var(--border);background:var(--surface);display:flex;gap:8px;flex-shrink:0">
-            <input id="op-msg-input" type="text" placeholder="Escribe un mensaje como operador..."
-              style="flex:1;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-family:Inter,sans-serif;font-size:13px;outline:none"
-              onkeydown="if(event.key==='Enter') sendOpMessage('${conv.id}')" />
-            <button class="btn primary" onclick="sendOpMessage('${conv.id}')">Enviar</button>
-          </div>`;
-
-        await loadConvHistory(conv.id);
-        await loadOpConversations(); // refresh to highlight selected
-      }
-
-      function stageTagColor(stage) {
-        return { LEAD:'blue', MQL:'blue', PROSPECTO:'purple', SQL:'yellow', CIERRE:'green' }[stage] ?? 'blue';
-      }
-
-      async function loadConvHistory(convId) {
-        const container = document.getElementById('op-chat-history');
-        if (!container) return;
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/conversations/${convId}/messages`);
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const msgs = await res.json();
-          if (!msgs.length) {
-            container.innerHTML = '<div style="text-align:center;color:var(--muted);font-size:12px;padding:20px">Sin mensajes en sesión activa</div>';
-            return;
-          }
-          container.innerHTML = msgs.map(m => {
-            const isUser = m.role === 'user';
-            const isOp   = m.sender === 'operator';
-            const align  = isUser ? 'flex-end' : 'flex-start';
-            const bg     = isUser ? 'var(--accent)' : isOp ? 'rgba(188,140,255,.2)' : 'var(--surface2)';
-            const color  = isUser ? '#000' : 'var(--text)';
-            const border = isOp ? '1px solid rgba(188,140,255,.4)' : isUser ? 'none' : '1px solid var(--border)';
-            const label  = isUser ? '' : isOp ? '<span style="font-size:10px;color:var(--purple);display:block;margin-bottom:2px">🧑‍💼 Operador</span>' : '<span style="font-size:10px;color:var(--green);display:block;margin-bottom:2px">🤖 Bot</span>';
-            const t = new Date(m.timestamp).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
-            return `<div style="display:flex;flex-direction:column;align-items:${align}">
-              ${label}
-              <div style="max-width:80%;padding:8px 12px;border-radius:10px;font-size:13px;background:${bg};color:${color};border:${border}">
-                ${m.content}
-                <div style="font-size:10px;opacity:.6;margin-top:3px;text-align:${isUser?'right':'left'}">${t}</div>
-              </div>
-            </div>`;
-          }).join('');
-          container.scrollTop = container.scrollHeight;
-        } catch (err) {
-          if (container) container.innerHTML = `<div style="color:var(--red);font-size:12px;padding:12px">Error: ${err.message}</div>`;
-        }
-      }
-
-      async function sendOpMessage(convId) {
-        const input = document.getElementById('op-msg-input');
-        if (!input) return;
-        const text = input.value.trim();
-        if (!text) return;
-        input.value = '';
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/conversations/${convId}/message`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text, operatorId: 'demo-operator' }),
-          });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          log(`Operador → conv ${convId.slice(0,8)}: "${text.slice(0,40)}"`, 'info');
-          await loadConvHistory(convId);
-        } catch (err) {
-          log(`Error enviando mensaje de operador: ${err.message}`, 'error');
-        }
-      }
-
-      async function closeConv(convId, outcome) {
-        if (!confirm(`¿Cerrar conversación como ${outcome}?`)) return;
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/conversations/${convId}/close`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ outcome, operatorId: 'demo-operator' }),
-          });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          log(`Conversación ${convId.slice(0,8)} cerrada como ${outcome}`, 'success');
-          selectedConv = null;
-          document.getElementById('op-detail').innerHTML = `
-            <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-direction:column;gap:8px">
-              <div style="font-size:32px">${outcome === 'GANADO' ? '🏆' : '📋'}</div>
-              <div style="font-size:13px">Conversación cerrada como <strong style="color:${outcome==='GANADO'?'var(--green)':'var(--red)'}">${outcome}</strong></div>
-            </div>`;
-          await refreshOperator();
-        } catch (err) {
-          log(`Error cerrando conversación: ${err.message}`, 'error');
-        }
-      }
-
-      async function loadOpEvents() {
-        const container = document.getElementById('op-events');
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/events`);
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const list = await res.json();
-
-          if (!list.length) {
-            container.innerHTML = '<div class="empty-state">Sin eventos</div>';
-            return;
-          }
-
-          container.innerHTML = list.map(e => {
-            const pct = e.quota?.occupancyPct ?? 0;
-            const fillClass = pct >= 90 ? 'full' : pct >= 60 ? 'warn' : 'ok';
-            const tagClass  = pct >= 90 ? 'tag-red' : pct >= 60 ? 'tag-yellow' : 'tag-green';
-            const tagText   = pct >= 90 ? '🔴 Lleno' : pct >= 60 ? '⚡ Limitado' : '✓ Libre';
-            const isExpanded = expandedEvent === e.id;
-            return `
-              <div class="evt-card">
-                <div class="evt-header">
-                  <div class="evt-name" style="font-size:12px">${e.name}</div>
-                  <span class="tag ${tagClass}" style="font-size:10px">${tagText}</span>
-                </div>
-                <div class="evt-quota" style="font-size:10px">
-                  <span>Tot:<b>${e.quota?.total??0}</b></span>
-                  <span>Res:<b>${e.quota?.reserved??0}</b></span>
-                  <span>Conf:<b>${e.quota?.confirmed??0}</b></span>
-                  <span style="color:var(--green)">Libre:<b>${e.quota?.available??0}</b></span>
-                </div>
-                <div class="quota-bar"><div class="quota-fill ${fillClass}" style="width:${pct}%"></div></div>
-                <button class="btn" style="margin-top:6px;padding:2px 8px;font-size:10px;width:100%;justify-content:center"
-                  onclick="toggleWaitlist('${e.id}')">${isExpanded ? '▲ Ocultar' : '▼ Lista espera'}</button>
-                <div id="wl-${e.id}" style="display:${isExpanded?'block':'none'};margin-top:4px"></div>
-              </div>`;
-          }).join('');
-
-          if (expandedEvent) loadWaitlist(expandedEvent);
-        } catch (err) {
-          container.innerHTML = `<div class="empty-state" style="color:var(--red)">Error: ${err.message}</div>`;
-        }
-      }
-
-      async function toggleWaitlist(eventId) {
-        expandedEvent = expandedEvent === eventId ? null : eventId;
-        await loadOpEvents();
-      }
-
-      async function loadWaitlist(eventId) {
-        const container = document.getElementById(`wl-${eventId}`);
-        if (!container) return;
-        container.innerHTML = '<div style="color:var(--muted);font-size:10px;padding:4px 0">Cargando...</div>';
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/events/${eventId}/waitlist`);
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const list = await res.json();
-          if (!list.length) {
-            container.innerHTML = '<div style="color:var(--muted);font-size:10px;padding:4px 0">Lista vacía</div>';
-            return;
-          }
-          container.innerHTML = list.map(e => `
-            <div class="wl-row" style="font-size:11px">
-              <div class="wl-pos" style="font-size:9px">${e.position}</div>
-              <div style="flex:1;min-width:0">
-                <div style="font-weight:600">${e.leadName || '–'}</div>
-                <div style="color:var(--muted);font-size:10px">${e.leadEmail || '–'}</div>
-              </div>
-              <div style="display:flex;gap:4px">
-                <span class="tag tag-green" style="font-size:9px">★${e.score??0}</span>
-                <span class="tag tag-blue" style="font-size:9px">${e.status}</span>
-              </div>
-            </div>`).join('');
-        } catch (err) {
-          container.innerHTML = `<div style="color:var(--red);font-size:10px;padding:4px 0">Error: ${err.message}</div>`;
-        }
-      }
-
-      function formatDate(iso) {
-        if (!iso) return '–';
-        return new Date(iso).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-      }
-
-      // ── Sidebar events refresh ───────────────────────────────────────────
-      async function refreshSidebarEvents() {
-        try {
-          const res = await fetch(`${API}/${TENANT}/operator/events`);
-          if (!res.ok) return;
-          const events = await res.json();
-          for (const e of events) {
-            const key = e.id.replace('EVT-', '');
-            const qtEl = document.getElementById(`qt-${key}`);
-            const qfEl = document.getElementById(`qf-${key}`);
-            if (!qtEl || !qfEl) continue;
-            const pct = e.quota?.occupancyPct ?? 0;
-            const avail = e.quota?.available ?? 0;
-            if (pct >= 90) {
-              qtEl.className = 'tag tag-red';
-              qtEl.textContent = `🔴 ${avail} cupos`;
-            } else if (pct >= 60) {
-              qtEl.className = 'tag tag-yellow';
-              qtEl.textContent = `⚡ ${avail} cupos`;
-            } else {
-              qtEl.className = 'tag tag-green';
-              qtEl.textContent = `✓ ${avail} cupos`;
-            }
-            // fill = occupancy pct; bar shows how full it is
-            qfEl.style.width = pct + '%';
-            qfEl.style.background = pct >= 90 ? 'var(--red)' : pct >= 60 ? 'var(--yellow)' : 'var(--green)';
-          }
-        } catch {}
-      }
-
-      // ── Health polling ────────────────────────────────────────────────────
-      async function checkHealth() {
-        try {
-          const res = await fetch(`${API}/health`, { signal: AbortSignal.timeout(2000) });
-          const ok = res.ok;
-          document.getElementById('dot-orch').className = 'status-dot ' + (ok ? 'ok' : 'err');
-          document.getElementById('dot-pg').className   = 'status-dot ' + (ok ? 'ok' : 'err');
-          document.getElementById('dot-redis').className = 'status-dot ok';
-        } catch {
-          document.getElementById('dot-orch').className = 'status-dot err';
-          document.getElementById('dot-pg').className   = 'status-dot err';
-        }
-        try {
-          const res = await fetch('http://localhost:4000/health', { signal: AbortSignal.timeout(1000) });
-          document.getElementById('dot-wa').className = 'status-dot ' + (res.ok ? 'ok' : 'err');
-        } catch {
-          document.getElementById('dot-wa').className = 'status-dot err';
-        }
-      }
-
-      // ── Init ─────────────────────────────────────────────────────────────
-      checkHealth();
-      setInterval(checkHealth, 5000);
-      setInterval(refreshHandoffBadge, 10000);
-      setInterval(refreshSidebarEvents, 30000); // actualizar cupos sidebar cada 30s
-      setInterval(updateClock, 1000);
-      updateClock();
-      refreshSidebarEvents(); // carga inicial de cupos reales
-      log('GUI demo cargada · conectando al orquestador...', 'info');
-
-      function updateClock() {
-        document.getElementById('clock').textContent = new Date().toLocaleTimeString('es-MX');
-      }
-    </script>
+    <!-- ══ Scripts (orden de dependencias) ═══════════════════════════════════ -->
+    <script src="js/config.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/polling.js"></script>
+    <script src="js/sessions.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/operator.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>

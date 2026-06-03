@@ -16,9 +16,14 @@ export interface StageTransitionResult {
 const TRANSITIONS: Partial<Record<Stage, Partial<Record<StageSignal, Stage>>>> = {
   LEAD: {
     conversacion_iniciada: Stage.LEAD, // confirma Lead, sin avance
-    datos_de_contacto_completados: Stage.MQL,
+    nombre_capturado: Stage.MQL,
+    correo_capturado: Stage.MQL,
+    numero_capturado: Stage.MQL,
   },
   MQL: {
+    nombre_capturado: Stage.MQL,
+    correo_capturado: Stage.MQL,
+    numero_capturado: Stage.MQL,
     pregunta_de_inscripcion_detectada: Stage.PROSPECTO,
     evento_cambiado: Stage.MQL,
   },

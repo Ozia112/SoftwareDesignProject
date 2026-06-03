@@ -1,0 +1,70 @@
+{
+  "$schema": "../schema.evento.json",
+  "version": "1.0.0",
+  "id": "EVT-EXCEL-01",
+  "activo": true,
+
+  "info": {
+    "nombre": "Curso Excel Avanzado",
+    "descripcion": "Domina tablas dinámicas, macros, Power Query y fórmulas avanzadas. Certificado incluido.",
+    "inicio": "2026-06-15T09:00:00-06:00",
+    "fin":    "2026-06-15T18:00:00-06:00",
+    "cupoTotal": 20,
+    "etiquetas": ["excel", "ofimática", "productividad", "microsoft"]
+  },
+
+  "comercial": {
+    "precio": 2800,
+    "moneda": "MXN",
+    "descuentos": [
+      {
+        "nombre": "Pago anticipado",
+        "porcentaje": 10,
+        "descripcion": "10% de descuento pagando antes del 1 jun 2026",
+        "activo": false
+      }
+    ],
+    "metodoPago": {
+      "banco": "BBVA",
+      "cuenta": "0123 4567 8901",
+      "clabe": "012345678901234567",
+      "beneficiario": "Academia Digital MX",
+      "comprobantesA": "pagos@academiadigital.mx"
+    },
+    "politicaReembolso": "Sin reembolso después de 48h antes del evento"
+  },
+
+  "logistica": {
+    "modalidad": "presencial",
+    "ubicacion": "Av. Insurgentes Sur 1216, CDMX",
+    "horario": "Domingo 9am–6pm",
+    "duracion": "8 horas",
+    "plataforma": null,
+    "enlaceAcceso": null
+  },
+
+  "academico": {
+    "nivel": "Intermedio-Avanzado",
+    "requisitos": [
+      "Conocimiento básico-intermedio de Excel"
+    ],
+    "instructor": {
+      "nombre": "Ing. Mario López Sánchez",
+      "especialidad": "Microsoft Excel y Power Platform"
+    },
+    "temario": [
+      "Tablas dinámicas avanzadas",
+      "Power Query y transformación de datos",
+      "Macros y VBA básico",
+      "Fórmulas matriciales y funciones de búsqueda",
+      "Formato condicional y validación de datos"
+    ],
+    "incluye": [
+      "Material digital descargable",
+      "Certificado de participación",
+      "Acceso a grabación por 30 días"
+    ]
+  },
+
+  "participantes": []
+}
