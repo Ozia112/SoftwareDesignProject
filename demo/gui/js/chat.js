@@ -6,42 +6,18 @@ const AD_MESSAGES = {
 };
 
 // ── Parser del debugLog del servidor ─────────────────────────────────────────
-// Convierte las líneas con emojis del AgentRunner al formato estructurado del terminal.
-// Reglas: TOOL (qué llamó), ETAPA (cuando hubo transición), ERROR (fallos).
-// Los "sin cambio" se omiten — están implícitos en la ausencia de ETAPA.
+// Usado como fallback cuando SSE no está conectado (primer mensaje de la sesión).
+// Para parsear el nombre del tool usa computeToolDetail de polling.js.
 function parseServerDebugLog(debugLog, ch) {
-  let currentTool = null;
-
   for (const raw of debugLog) {
     // ── Tool call ───────────────────────────────────────────────────────
     if (raw.startsWith('🔧 TOOL:')) {
       const m = raw.match(/🔧 TOOL:\s+(\S+)\s+(.*)/);
       if (!m) continue;
-      currentTool = m[1];
-      let detail = currentTool;
-      try {
-        const p = JSON.parse(m[2].trim());
-        if (currentTool === 'emit_stage_signal') {
-          detail = `emit_stage_signal · signal=${p.signal}`;
-          if (p.contactName)     detail += ` · name="${p.contactName}"`;
-          if (p.contactEmail)    detail += ` · email=${p.contactEmail}`;
-          if (p.contactPhone)    detail += ` · phone=${p.contactPhone}`;
-          if (p.interestedEvent) detail += ` · curso="${p.interestedEvent}"`;
-        } else if (currentTool === 'reserve_quota' || currentTool === 'block_quota' || currentTool === 'release_quota') {
-          detail = `${currentTool} · event=${p.eventId ?? '?'}`;
-        } else if (currentTool === 'request_human_handoff') {
-          detail = `request_human_handoff · reason=${p.reason}`;
-        } else if (currentTool === 'get_event_context') {
-          detail = `get_event_context · event=${p.eventId}`;
-        } else if (currentTool === 'get_general_context') {
-          detail = 'get_general_context';
-        } else if (currentTool === 'register_waiting_list') {
-          detail = `register_waiting_list · event=${p.eventId ?? '?'}`;
-        } else {
-          detail = `${currentTool} · ${m[2].trim().slice(0, 80)}`;
-        }
-      } catch { detail = `${currentTool} · ${m[2].trim().slice(0, 80)}`; }
-      logStructured('TOOL', detail, ch);
+      const toolName = m[1];
+      let input = {};
+      try { input = JSON.parse(m[2].trim()); } catch {}
+      logStructured('TOOL', computeToolDetail(toolName, input), ch);
 
     // ── Transición de etapa ─────────────────────────────────────────────
     } else if (raw.includes('🏷️') && raw.includes('→')) {
@@ -96,11 +72,13 @@ async function sendMessage(text) {
   setTyping(true);
   state.turns++;
 
-  const ch = USER_CHANNEL;   // canal activo al momento del envío
+  const ch    = USER_CHANNEL;   // canal activo al momento del envío
+  const msgId = `gui-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  sentByThisTab.add(msgId);    // dedup: este tab ya registrará el API call localmente
   const body = {
     channelId: ch,
     text,
-    messageId: `gui-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    messageId: msgId,
   };
 
   logStructured('API→', `POST /${TENANT}/messages · "${text.replace(/\n/g,' ↵ ').slice(0,70)}"`, ch);
@@ -123,10 +101,13 @@ async function sendMessage(text) {
       }
     }
 
-    // Parsear debugLog del servidor (tool calls, etapas, errores)
-    if (data.debugLog?.length) {
+    // debugLog como fallback: si SSE aún no está conectado (primer mensaje de la sesión),
+    // parsear localmente. En mensajes posteriores los eventos llegan por SSE.
+    if (data.debugLog?.length && !sseConnected) {
       parseServerDebugLog(data.debugLog, ch);
     }
+    // El apiLog del POST siempre se registra en el tab que envía el mensaje.
+    // El otro tab lo recibe por SSE (caso api_call en handleSSEEvent).
 
     // Persistencia en archivo para análisis
     const cid = state.convId || data.conversationId;
@@ -155,6 +136,8 @@ async function sendMessage(text) {
     if (data.conversationId) {
       state.convId = data.conversationId;
       addOrUpdateSession(ch, data.conversationId, currentScenarioLabel, data.stage, state.score);
+      // Abrir SSE para recibir eventos en tiempo real (y cross-tab) a partir del 2do mensaje
+      subscribeToSSE(data.conversationId);
     }
     if (data.handoffTriggered && state.convId) {
       const si = sessions.findIndex(s => s.channelId === ch);
@@ -217,12 +200,14 @@ function clearAll() {
   if (state.convId) flushSessionLog(state.convId);
   stopOperatorPolling();
   stopDetailPolling();
+  unsubscribeSSE();
   clearTimeout(flushTimer);
   clearTimeout(typingInactivityTimer);
   pendingMessages = [];
   userState = 'reading';
   currentScenarioLabel = 'Chat manual';
   newChannel();
+  logsChannelId = USER_CHANNEL;  // el nuevo canal pasa a ser el canal de logs
   // Renderizar terminal y API calls vacíos para el nuevo canal
   renderTerminalForSession(USER_CHANNEL);
   renderApiCallsForSession(USER_CHANNEL);
@@ -255,10 +240,14 @@ async function resetDemo() {
     sessions = [];
     activeSessionIdx = -1;
     Object.keys(chatHistories).forEach(k => delete chatHistories[k]);
-    // Limpiar todos los buffers de API calls (reset completo)
+    // Limpiar todos los buffers en memoria y en localStorage
     Object.keys(apiCallBuffers).forEach(k => delete apiCallBuffers[k]);
+    Object.keys(terminalBuffers).forEach(k => delete terminalBuffers[k]);
+    saveSessionsToStorage();   // persiste array vacío → otras pestañas ven reset
+    clearLogsFromStorage();    // borra logs del localStorage
     renderApiCallsForSession(USER_CHANNEL);
     renderSessionList();
+    updateLogsSessionSelector();
     // Limpiar el panel del operador
     selectedConv = null;
     stopDetailPolling();

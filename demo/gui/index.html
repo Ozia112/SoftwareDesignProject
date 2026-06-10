@@ -40,98 +40,9 @@
         </div>
       </div>
 
-      <!-- ══ Panel izquierdo: Tenant dashboard ══════════════════════════════ -->
-      <div class="panel">
-        <div class="panel-header">
-          <div class="panel-title">🏢 Tenant</div>
-          <span class="badge badge-demo">Academia Digital MX</span>
-        </div>
-        <div class="panel-body">
+      <!-- Panel izquierdo externo eliminado — contenido movido dentro de #tab-chat -->
 
-          <div class="section-label">Etapa comercial del lead</div>
-          <div class="stage-track" id="stage-track">
-            <div class="stage-item pending" id="s-LEAD">
-              <div class="stage-icon">1</div>
-              <div>
-                <div>LEAD</div>
-                <div style="font-size:10px;color:var(--muted)">Conversación iniciada</div>
-              </div>
-            </div>
-            <div class="stage-item pending" id="s-MQL">
-              <div class="stage-icon">2</div>
-              <div>
-                <div>MQL</div>
-                <div style="font-size:10px;color:var(--muted)">Datos de contacto</div>
-              </div>
-            </div>
-            <div class="stage-item pending" id="s-PROSPECTO">
-              <div class="stage-icon">3</div>
-              <div>
-                <div>PROSPECTO</div>
-                <div style="font-size:10px;color:var(--muted)">Interés en inscripción</div>
-              </div>
-            </div>
-            <div class="stage-item pending" id="s-SQL">
-              <div class="stage-icon">4</div>
-              <div>
-                <div>SQL</div>
-                <div style="font-size:10px;color:var(--muted)">Pago pendiente</div>
-              </div>
-            </div>
-            <div class="stage-item pending" id="s-CIERRE">
-              <div class="stage-icon">5</div>
-              <div>
-                <div>CIERRE</div>
-                <div style="font-size:10px;color:var(--muted)">Ganado / Perdido</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="section-label">Métricas de sesión</div>
-          <div class="metrics-grid">
-            <div class="metric-card">
-              <div class="metric-label">Puntuación</div>
-              <div class="metric-value green" id="m-score">0</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Tool calls</div>
-              <div class="metric-value accent" id="m-tools">0</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Mensajes</div>
-              <div class="metric-value purple" id="m-msgs">0</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Turnos</div>
-              <div class="metric-value" id="m-turns">0</div>
-            </div>
-          </div>
-
-          <div class="section-label">Configuración del tenant</div>
-          <div class="config-row">
-            <span class="config-key">Tenant ID</span>
-            <span class="config-val">demo-tenant</span>
-          </div>
-          <div class="config-row">
-            <span class="config-key">Modelo LLM</span>
-            <span class="config-val" id="cfg-model">claude-haiku-4-5</span>
-          </div>
-          <div class="config-row">
-            <span class="config-key">Canal activo</span>
-            <span class="config-val">WEB</span>
-          </div>
-          <div class="config-row">
-            <span class="config-key">Lead ID</span>
-            <span class="config-val" id="cfg-leadid">–</span>
-          </div>
-          <div class="config-row">
-            <span class="config-key">Conversación</span>
-            <span class="config-val" id="cfg-convid">–</span>
-          </div>
-
-        </div>
-      </div>
-
+      <div class="content-row">
       <!-- ══ Centro: tabs ═══════════════════════════════════════════════════ -->
       <div class="center">
         <div class="tab-nav">
@@ -148,24 +59,123 @@
         </div>
 
         <!-- ── Chat tab ── -->
-        <div id="tab-chat" class="tab-content active">
-          <div class="chat-header">
-            <div class="avatar">A</div>
-            <div class="chat-identity">
-              <strong>Ana — Academia Digital MX</strong>
-              <small>● en línea</small>
+        <div id="tab-chat" class="tab-content active" style="flex-direction:row;overflow:hidden">
+          <!-- Columna izquierda: Tenant dashboard (autocontenida, como en tab-operator) -->
+          <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)">
+            <div class="panel-header">
+              <div class="panel-title">🏢 Tenant</div>
+              <span class="badge badge-demo">Academia Digital MX</span>
             </div>
-            <div class="wa-badge"><span style="font-size:18px">📱</span> Canal: Web Chat</div>
+            <div class="panel-body">
+
+              <div class="section-label">Etapa comercial del lead</div>
+              <div class="stage-track" id="stage-track">
+                <div class="stage-item pending" id="s-LEAD">
+                  <div class="stage-icon">1</div>
+                  <div>
+                    <div>LEAD</div>
+                    <div style="font-size:10px;color:var(--muted)">Conversación iniciada</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-MQL">
+                  <div class="stage-icon">2</div>
+                  <div>
+                    <div>MQL</div>
+                    <div style="font-size:10px;color:var(--muted)">Datos de contacto</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-PROSPECTO">
+                  <div class="stage-icon">3</div>
+                  <div>
+                    <div>PROSPECTO</div>
+                    <div style="font-size:10px;color:var(--muted)">Interés en inscripción</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-SQL">
+                  <div class="stage-icon">4</div>
+                  <div>
+                    <div>SQL</div>
+                    <div style="font-size:10px;color:var(--muted)">Pago pendiente</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-CIERRE">
+                  <div class="stage-icon">5</div>
+                  <div>
+                    <div>CIERRE</div>
+                    <div style="font-size:10px;color:var(--muted)">Ganado / Perdido</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">Métricas de sesión</div>
+              <div class="metrics-grid">
+                <div class="metric-card">
+                  <div class="metric-label">Puntuación</div>
+                  <div class="metric-value green" id="m-score">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Tool calls</div>
+                  <div class="metric-value accent" id="m-tools">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Mensajes</div>
+                  <div class="metric-value purple" id="m-msgs">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Turnos</div>
+                  <div class="metric-value" id="m-turns">0</div>
+                </div>
+              </div>
+
+              <div class="section-label">Configuración del tenant</div>
+              <div class="config-row">
+                <span class="config-key">Tenant ID</span>
+                <span class="config-val">demo-tenant</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Modelo LLM</span>
+                <span class="config-val" id="cfg-model">claude-haiku-4-5</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Canal activo</span>
+                <span class="config-val">WEB</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Lead ID</span>
+                <span class="config-val" id="cfg-leadid">–</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Conversación</span>
+                <span class="config-val" id="cfg-convid">–</span>
+              </div>
+
+              <div class="section-label" style="margin-top:16px">Sesiones activas</div>
+              <div id="session-list">
+                <div style="color:var(--muted);font-size:11px;padding:4px 0">Sin sesiones — inicia un escenario</div>
+              </div>
+
+            </div>
           </div>
-          <div class="chat-area" id="chat-area">
-            <div class="msg system-msg">Demo iniciado — escribe un mensaje o usa los escenarios arriba</div>
-          </div>
-          <div class="typing" id="typing"><span></span><span></span><span></span></div>
-          <div class="chat-input">
-            <input type="text" id="msg-input"
-              placeholder="Escribe un mensaje como cliente..."
-              onkeydown="if(event.key==='Enter') sendMsg()" />
-            <button class="btn primary" onclick="sendMsg()">Enviar →</button>
+          <!-- Columna derecha: Chat -->
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <div class="chat-header">
+              <div class="avatar">A</div>
+              <div class="chat-identity">
+                <strong>Ana — Academia Digital MX</strong>
+                <small>● en línea</small>
+              </div>
+              <div class="wa-badge"><span style="font-size:18px">📱</span> Canal: Web Chat</div>
+            </div>
+            <div class="chat-area" id="chat-area">
+              <div class="msg system-msg">Demo iniciado — escribe un mensaje o usa los escenarios arriba</div>
+            </div>
+            <div class="typing" id="typing"><span></span><span></span><span></span></div>
+            <div class="chat-input">
+              <input type="text" id="msg-input"
+                placeholder="Escribe un mensaje como cliente..."
+                onkeydown="if(event.key==='Enter') sendMsg()" />
+              <button class="btn primary" onclick="sendMsg()">Enviar →</button>
+            </div>
           </div>
         </div>
 
@@ -213,9 +223,17 @@
         <div id="tab-logs" class="tab-content" style="flex-direction:row">
           <!-- Terminal -->
           <div style="flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden">
-            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
-              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">🖥️ Terminal</span>
-              <button class="btn" style="padding:2px 8px;font-size:10px" onclick="clearLogs()">Limpiar</button>
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
+              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex-shrink:0">🖥️ Terminal</span>
+              <select id="logs-session-select" onchange="switchLogsSession(this.value)"
+                title="Seleccionar sesión a mostrar en los logs"
+                style="flex:1;min-width:0;font-size:10px;font-family:'JetBrains Mono',monospace;
+                       background:var(--surface2);color:var(--text);border:1px solid var(--border);
+                       border-radius:4px;padding:2px 6px;cursor:pointer;overflow:hidden;
+                       text-overflow:ellipsis">
+                <option value="">Sin sesiones</option>
+              </select>
+              <button class="btn" style="padding:2px 8px;font-size:10px;flex-shrink:0" onclick="clearLogs()">Limpiar</button>
             </div>
             <div class="log-tab-area" id="log-tab-area">
               <div class="log-line dim">── System log ──────────────────────</div>
@@ -281,23 +299,19 @@
             <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-CONT-01" style="width:0%"></div></div>
           </div>
 
-          <!-- Fix B3: lista de sesiones activas en el right panel -->
-          <div class="section-label" style="margin-top:16px">Sesiones activas</div>
-          <div id="session-list">
-            <div style="color:var(--muted);font-size:11px;padding:4px 0">Sin sesiones — inicia un escenario</div>
-          </div>
 
         </div>
       </div>
+      </div> <!-- /content-row -->
     </div>
 
     <!-- ══ Scripts (orden de dependencias) ═══════════════════════════════════ -->
-    <script src="js/config.js"></script>
-    <script src="js/ui.js"></script>
-    <script src="js/polling.js"></script>
-    <script src="js/sessions.js"></script>
-    <script src="js/chat.js"></script>
-    <script src="js/operator.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/config.js?v=20260609d"></script>
+    <script src="js/ui.js?v=20260609d"></script>
+    <script src="js/polling.js?v=20260609d"></script>
+    <script src="js/sessions.js?v=20260609d"></script>
+    <script src="js/chat.js?v=20260609d"></script>
+    <script src="js/operator.js?v=20260609d"></script>
+    <script src="js/app.js?v=20260609d"></script>
   </body>
 </html>

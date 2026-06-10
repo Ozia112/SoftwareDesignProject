@@ -19,6 +19,14 @@ function addOrUpdateSession(channelId, convId, label, stage, score) {
     });
     activeSessionIdx = sessions.length - 1;
   }
+  saveSessionsToStorage();
+  // Si el tab de Logs no tiene selección manual, seguir al canal activo
+  if (logsChannelId === null) {
+    logsChannelId = channelId;
+    updateLogsSessionSelector();
+  } else {
+    updateLogsSessionSelector(); // solo actualizar items del dropdown sin cambiar selección
+  }
   renderSessionList();
 }
 
@@ -32,6 +40,10 @@ async function selectSession(idx) {
   const s = sessions[idx];
   activeSessionIdx = idx;
   USER_CHANNEL  = s.channelId;
+  // Auto-sync: el tab de Logs sigue a la sesión activa del chat
+  logsChannelId = s.channelId;
+  try { localStorage.setItem(LS_LOGS_CH_KEY, s.channelId); } catch {}
+  updateLogsSessionSelector();
   // Mostrar solo los logs de esta sesión en el terminal
   renderTerminalForSession(s.channelId);
   renderApiCallsForSession(s.channelId);
@@ -44,9 +56,110 @@ async function selectSession(idx) {
   state.stage = null;           // forzar re-render del panel de etapas
   updateStage(targetStage);
   document.getElementById('chat-area').innerHTML = '';
-  if (s.convId) await loadChatHistory(s.convId, s.channelId);
+  if (s.convId) {
+    await loadChatHistory(s.convId, s.channelId);
+    subscribeToSSE(s.convId);
+  }
   if (s.hasOperator) startOperatorPolling(s.convId);
+  saveSessionsToStorage();
   renderSessionList();
+}
+
+// ── Sincronización cross-tab: escuchar cambios de localStorage ────────────────
+// Reacciona a cambios de sesiones, logs y API calls emitidos por otras pestañas.
+window.addEventListener('storage', (e) => {
+  // ── Sesiones: fusionar sin cambiar sesión activa de este tab ──────────────
+  if (e.key === LS_SESSIONS_KEY && e.newValue) {
+    try {
+      const incoming = JSON.parse(e.newValue);
+      if (!Array.isArray(incoming)) return;
+      for (const s of incoming) {
+        const local = sessions.findIndex(x => x.channelId === s.channelId);
+        if (local < 0) sessions.push(s);
+        else sessions[local] = { ...sessions[local], ...s };
+      }
+      if (activeSessionIdx >= sessions.length) activeSessionIdx = sessions.length - 1;
+      // Si este tab aún no tiene canal (abrió antes de que existiera alguna sesión),
+      // heredar la primera sesión disponible y renderizar con datos ya en buffer.
+      if (!USER_CHANNEL && sessions.length > 0) {
+        const s = sessions[0];
+        activeSessionIdx = 0;
+        USER_CHANNEL  = s.channelId;
+        state.convId  = s.convId  ?? null;
+        state.stage   = s.stage   ?? null;
+        state.score   = s.score   ?? 0;
+        logsChannelId = s.channelId;
+        try { localStorage.setItem(LS_LOGS_CH_KEY, s.channelId); } catch {}
+        updateStage(s.stage);
+        updateMetrics();
+        renderTerminalForSession(s.channelId);
+        renderApiCallsForSession(s.channelId);
+        if (state.convId) subscribeToSSE(state.convId);
+      }
+      renderSessionList();
+      updateLogsSessionSelector();
+    } catch {}
+  }
+
+  // ── Terminal logs: actualizar buffers y re-renderizar si está visible ─────
+  if (e.key === LS_LOGS_KEY && e.newValue) {
+    try {
+      const incoming = JSON.parse(e.newValue);
+      Object.assign(terminalBuffers, incoming);
+      const showCh = logsChannelId ?? USER_CHANNEL ?? sessions[0]?.channelId;
+      if (showCh) renderTerminalForSession(showCh);
+    } catch {}
+  }
+
+  // ── API calls: igual que terminal ─────────────────────────────────────────
+  if (e.key === LS_APICALLS_KEY && e.newValue) {
+    try {
+      const incoming = JSON.parse(e.newValue);
+      Object.assign(apiCallBuffers, incoming);
+      const showCh = logsChannelId ?? USER_CHANNEL ?? sessions[0]?.channelId;
+      if (showCh) renderApiCallsForSession(showCh);
+    } catch {}
+  }
+});
+
+// ── Validar sesiones contra el backend al cargar ─────────────────────────────
+// Descarta sesiones que ya no existen en la BD (ej: después de reiniciar Docker).
+// Se ejecuta una sola vez al inicio, sin bloquear la UI.
+async function validateSessionsAfterLoad() {
+  if (sessions.length === 0) return;
+  const valid = [];
+  for (const s of sessions) {
+    if (!s.convId) { valid.push(s); continue; }
+    try {
+      const res = await fetch(
+        `${API}/${TENANT}/operator/conversations/${s.convId}/messages`,
+        { signal: AbortSignal.timeout(3000) },
+      );
+      if (res.ok) valid.push(s);
+      // 404 o 5xx → conversación no existe → descartar silenciosamente
+    } catch {
+      valid.push(s); // error de red → conservar (optimista)
+    }
+  }
+  if (valid.length !== sessions.length) {
+    sessions = valid;
+    if (activeSessionIdx >= sessions.length) activeSessionIdx = sessions.length > 0 ? 0 : -1;
+    if (activeSessionIdx >= 0 && sessions[activeSessionIdx]) {
+      const s = sessions[activeSessionIdx];
+      USER_CHANNEL = s.channelId;
+      state.convId = s.convId ?? null;
+      state.stage  = s.stage  ?? null;
+      state.score  = s.score  ?? 0;
+    } else {
+      USER_CHANNEL = null;
+      state.convId = null;
+    }
+    saveSessionsToStorage();
+    clearLogsFromStorage();
+    renderSessionList();
+    updateMetrics();
+    logStructured('SISTEMA', `${sessions.length === 0 ? 'sesiones descartadas (backend reiniciado)' : `${sessions.length} sesión(es) válidas`}`, USER_CHANNEL);
+  }
 }
 
 // ── Cargar historial de una conversación en el chat tab ───────────────────────

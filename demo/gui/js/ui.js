@@ -57,9 +57,11 @@ function logStructured(actor, detail, channelId) {
   const key = channelId ?? '__system__';
   if (!terminalBuffers[key]) terminalBuffers[key] = [];
   terminalBuffers[key].push({ line, type });
+  scheduleSaveLogs();
 
-  // Renderizar solo si es la sesión activa o no hay sesión aún
-  if (!channelId || channelId === USER_CHANNEL) {
+  // Renderizar si el evento pertenece al canal que el tab de Logs está mostrando
+  const logsChannel = logsChannelId ?? USER_CHANNEL;
+  if (!channelId || channelId === logsChannel) {
     appendTerminalLine(line, type);
   }
 }
@@ -86,6 +88,7 @@ function clearLogs() {
   if (apiCallBuffers[key]) apiCallBuffers[key] = [];
   const ac = document.getElementById('api-calls-log');
   if (ac) ac.innerHTML = '<div style="color:var(--muted)">── sin llamadas para esta sesión ──</div>';
+  scheduleSaveLogs();
 }
 
 // Construye un elemento DOM de API call a partir de datos estructurados
@@ -114,9 +117,11 @@ function apiLog(method, url, status, reqBody, resBody, channelId) {
   if (!apiCallBuffers[ch]) apiCallBuffers[ch] = [];
   apiCallBuffers[ch].unshift(item);              // más reciente primero
   if (apiCallBuffers[ch].length > 20) apiCallBuffers[ch].pop();
+  scheduleSaveLogs();
 
-  // Solo renderizar si este canal es el activo
-  if (!channelId || channelId === USER_CHANNEL) {
+  // Solo renderizar si este canal es el que muestra el tab de Logs
+  const logsChannelForApi = logsChannelId ?? USER_CHANNEL;
+  if (!channelId || channelId === logsChannelForApi) {
     const el = document.getElementById('api-calls-log');
     if (!el) return;
     el.prepend(buildApiCallEntry(item));
@@ -226,6 +231,7 @@ function switchTab(name) {
     document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === name);
   });
   if (name === 'operator') refreshOperator();
+  try { localStorage.setItem(LS_ACTIVE_TAB_KEY, name); } catch {}
 }
 
 // ── Logging por sesión (persistencia a archivo) ───────────────────────────────
@@ -286,4 +292,33 @@ async function downloadSessionLog(convId) {
   } catch (err) {
     logStructured('ERROR', `descarga log: ${err.message}`, USER_CHANNEL);
   }
+}
+
+// ── Selector de sesión en el tab de Logs ──────────────────────────────────────
+
+// Cambia qué sesión muestra el tab de Logs (puede diferir del chat activo).
+function switchLogsSession(channelId) {
+  if (!channelId) return;
+  logsChannelId = channelId;
+  try { localStorage.setItem(LS_LOGS_CH_KEY, channelId); } catch {}
+  renderTerminalForSession(channelId);
+  renderApiCallsForSession(channelId);
+  updateLogsSessionSelector();
+}
+
+// Actualiza el <select> con la lista de sesiones actuales.
+// Se llama desde addOrUpdateSession, selectSession y app.js init.
+function updateLogsSessionSelector() {
+  const sel = document.getElementById('logs-session-select');
+  if (!sel) return;
+  const current = logsChannelId ?? USER_CHANNEL;
+  if (!sessions.length) {
+    sel.innerHTML = '<option value="">Sin sesiones</option>';
+    return;
+  }
+  sel.innerHTML = sessions.map(s => {
+    const label = `${s.label ?? 'Sesión'} · ${s.stage ?? 'LEAD'} · ★${s.score ?? 0}`;
+    const selected = s.channelId === current ? 'selected' : '';
+    return `<option value="${s.channelId}" ${selected}>${label}</option>`;
+  }).join('');
 }

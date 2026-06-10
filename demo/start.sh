@@ -36,7 +36,7 @@ export CLAUDE_API_KEY
 # ── 1. Validar la key contra la API de Anthropic ───────────
 echo -e "\n${YELLOW}Validando API key...${NC}"
 HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-  --max-time 8 \
+  --max-time 16 \
   -H "x-api-key: $CLAUDE_API_KEY" \
   -H "anthropic-version: 2023-06-01" \
   "https://api.anthropic.com/v1/models" 2>/dev/null || echo "000")
