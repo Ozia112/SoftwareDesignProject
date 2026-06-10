@@ -25,6 +25,11 @@
     "type": "contains"
   },
   {
+    "from": "REPO",
+    "to": "AREA-DEMO",
+    "type": "contains"
+  },
+  {
     "from": "README",
     "to": "REPO",
     "type": "supports"
@@ -85,6 +90,11 @@
     "type": "contains"
   },
   {
+    "from": "AREA-ANALISIS",
+    "to": "DOM-CAPABILITIES",
+    "type": "contains"
+  },
+  {
     "from": "AREA-DISENO",
     "to": "DOM-ARQUITECTURA",
     "type": "contains"
@@ -137,6 +147,11 @@
   {
     "from": "AREA-SOPORTE",
     "to": "SUP-MAPA-NODOS",
+    "type": "contains"
+  },
+  {
+    "from": "AREA-DEMO",
+    "to": "DEMO-EVT-CONT-01",
     "type": "contains"
   },
   {
@@ -231,33 +246,8 @@
   },
   {
     "from": "RF-COM-01",
-    "to": "CU-COM-001",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-01",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-01",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-02",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-02",
-    "to": "CU-COM-005",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-02",
-    "to": "CU-EVT-001",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-02",
@@ -272,82 +262,27 @@
   {
     "from": "RF-COM-02",
     "to": "SRC-ORQ-COMMERCIAL",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-03",
-    "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-03",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-04",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-04",
-    "to": "CU-COM-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-04",
     "to": "SRC-ORQ-CONTEXT",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-05",
-    "to": "CU-COM-001",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-05",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-05",
-    "to": "CU-COM-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-05",
     "to": "SRC-ORQ-CONTEXT",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-06",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-06",
-    "to": "CU-COM-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-06",
     "to": "SRC-ORQ-CONTEXT",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-07",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-07",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-COM-07",
-    "to": "CU-COM-004",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-07",
@@ -362,17 +297,12 @@
   {
     "from": "RF-COM-07",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-COM-08",
-    "to": "CU-COM-006",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-COM-08",
     "to": "SRC-ORQ-NOTIFICATIONS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-RF-EVT",
@@ -406,48 +336,13 @@
   },
   {
     "from": "RF-EVT-01",
-    "to": "CU-COM-001",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-01",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-01",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-01",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-01",
     "to": "DDR-01",
     "type": "governed_by"
   },
   {
     "from": "RF-EVT-01",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-EVT-02",
-    "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-02",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-02",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-02",
@@ -462,42 +357,17 @@
   {
     "from": "RF-EVT-02",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-EVT-03",
-    "to": "CU-EVT-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-03",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-03",
     "to": "SRC-ORQ-NOTIFICATIONS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-03",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-EVT-04",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-04",
-    "to": "CU-EVT-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-04",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-04",
@@ -512,37 +382,12 @@
   {
     "from": "RF-EVT-04",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-EVT-05",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-05",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-05",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
-  },
-  {
-    "from": "RF-EVT-06",
-    "to": "CU-COM-003",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-06",
-    "to": "CU-EVT-001",
-    "type": "traces_to"
-  },
-  {
-    "from": "RF-EVT-06",
-    "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "planned_in"
   },
   {
     "from": "RF-EVT-06",
@@ -557,7 +402,7 @@
   {
     "from": "RF-EVT-06",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-RNF",
@@ -592,32 +437,32 @@
   {
     "from": "RNF-01",
     "to": "SRC-ORQ-TOOL-CALLS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RNF-01",
     "to": "SRC-ORQ-TENANT",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RNF-02",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RNF-03",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RNF-04",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "RNF-05",
     "to": "SRC-ORQ-TOOL-CALLS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-CU-COM",
@@ -652,12 +497,12 @@
   {
     "from": "CU-COM-001",
     "to": "RF-COM-01",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-001",
     "to": "RF-COM-05",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-001",
@@ -672,47 +517,47 @@
   {
     "from": "CU-COM-001",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-001",
     "to": "SRC-ORQ-TENANT",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-COM-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-COM-04",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-COM-05",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-COM-06",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-COM-07",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-EVT-01",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
     "to": "RF-EVT-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-002",
@@ -727,52 +572,52 @@
   {
     "from": "CU-COM-002",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-COM-04",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-COM-05",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-COM-06",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-COM-07",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-EVT-01",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-EVT-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-EVT-04",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-EVT-05",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
     "to": "RF-EVT-06",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-003",
@@ -792,12 +637,12 @@
   {
     "from": "CU-COM-003",
     "to": "SRC-ORQ-CONTEXT",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-004",
     "to": "RF-COM-07",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-004",
@@ -817,12 +662,12 @@
   {
     "from": "CU-COM-004",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-005",
     "to": "RF-COM-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-005",
@@ -842,12 +687,12 @@
   {
     "from": "CU-COM-005",
     "to": "SRC-ORQ-COMMERCIAL",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-COM-006",
     "to": "RF-COM-08",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-COM-006",
@@ -862,7 +707,7 @@
   {
     "from": "CU-COM-006",
     "to": "SRC-ORQ-NOTIFICATIONS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-CU-EVT",
@@ -882,12 +727,12 @@
   {
     "from": "CU-EVT-001",
     "to": "RF-COM-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-001",
     "to": "RF-EVT-06",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-001",
@@ -907,17 +752,17 @@
   {
     "from": "CU-EVT-001",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-EVT-002",
     "to": "RF-EVT-03",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-002",
     "to": "RF-EVT-04",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-002",
@@ -937,42 +782,37 @@
   {
     "from": "CU-EVT-002",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-01",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-02",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-03",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-04",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-05",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
     "to": "RF-EVT-06",
-    "type": "traces_to"
-  },
-  {
-    "from": "CU-EVT-003",
-    "to": "CU-EVT-002",
-    "type": "traces_to"
+    "type": "satisfies"
   },
   {
     "from": "CU-EVT-003",
@@ -992,11 +832,161 @@
   {
     "from": "CU-EVT-003",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
+    "type": "planned_in"
+  },
+  {
+    "from": "CU-EVT-003",
+    "to": "CU-EVT-002",
+    "type": "references"
   },
   {
     "from": "DOM-RN-COM",
     "to": "RN-COM-CATALOG",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ESC-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ESC-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ESC-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONV-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONV-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONV-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONV-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-05",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-CONT-06",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-PRIV-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-PRIV-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-PRIV-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-05",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-06",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-ETAPA-07",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-05",
+    "type": "contains"
+  },
+  {
+    "from": "RN-COM-CATALOG",
+    "to": "RN-COM-REACT-06",
     "type": "contains"
   },
   {
@@ -1073,6 +1063,641 @@
     "from": "RN-COM-CATALOG",
     "to": "RF-EVT-04",
     "type": "traces_to"
+  },
+  {
+    "from": "RN-COM-ESC-01",
+    "to": "CU-COM-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-01",
+    "to": "RF-COM-01",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-01",
+    "to": "CAP-COM-HANDOFF",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-01",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ESC-02",
+    "to": "CU-COM-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-02",
+    "to": "RF-COM-01",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-02",
+    "to": "CAP-COM-HANDOFF",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-02",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ESC-03",
+    "to": "CU-COM-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-03",
+    "to": "RF-COM-01",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-03",
+    "to": "CAP-COM-HANDOFF",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ESC-03",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONV-01",
+    "to": "CU-COM-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-01",
+    "to": "RF-COM-07",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-01",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONV-02",
+    "to": "CU-COM-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-02",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-02",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-02",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONV-03",
+    "to": "CU-COM-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-03",
+    "to": "RF-COM-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-03",
+    "to": "RF-COM-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-03",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-03",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "CU-COM-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "RF-EVT-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONV-04",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "RF-COM-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "RF-COM-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-01",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "RF-COM-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "RF-COM-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-02",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "RF-COM-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "RF-COM-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-03",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "RF-COM-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "RF-COM-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-04",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-05",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-05",
+    "to": "RF-COM-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-05",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-05",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "CU-COM-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "RF-EVT-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "RF-EVT-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-CONT-06",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-PRIV-01",
+    "to": "CU-COM-004",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-01",
+    "to": "RF-COM-07",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-01",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-PRIV-02",
+    "to": "CU-COM-004",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-02",
+    "to": "RF-COM-07",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-02",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-PRIV-03",
+    "to": "CU-COM-004",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-03",
+    "to": "RF-COM-07",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-PRIV-03",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-01",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-01",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-01",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-01",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-02",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-02",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-02",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-02",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-03",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-03",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-03",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-03",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-04",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-04",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-04",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-04",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-05",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-05",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-05",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-05",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-06",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-06",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-06",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-06",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "CU-COM-005",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "CAP-COM-HANDOFF",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-ETAPA-07",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-01",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-01",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-01",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-02",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-02",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-02",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-03",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-03",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-03",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-03",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-04",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-04",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-04",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-04",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-04",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-05",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-05",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-05",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-05",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-COM-REACT-06",
+    "to": "CU-COM-006",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-06",
+    "to": "RF-COM-08",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-COM-REACT-06",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
   },
   {
     "from": "DOM-RN-BASE",
@@ -1111,6 +1736,61 @@
   },
   {
     "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-LE-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-LE-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-LE-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CAN-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CAN-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CAN-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CAN-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CUPO-01",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CUPO-02",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CUPO-03",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
+    "to": "RN-EVT-CUPO-04",
+    "type": "contains"
+  },
+  {
+    "from": "RN-EVT-CATALOG",
     "to": "CU-EVT-001",
     "type": "traces_to"
   },
@@ -1160,6 +1840,291 @@
     "type": "traces_to"
   },
   {
+    "from": "RN-EVT-LE-01",
+    "to": "CU-EVT-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-01",
+    "to": "RF-EVT-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-01",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-01",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "CU-EVT-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "RF-COM-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "RF-EVT-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-LE-02",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-LE-03",
+    "to": "CU-EVT-001",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-03",
+    "to": "RF-EVT-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-03",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-LE-03",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-LE-03",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-01",
+    "to": "CU-EVT-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-01",
+    "to": "RF-EVT-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-01",
+    "to": "CAP-EVT-CANCELLATION",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-01",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "CU-EVT-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "RF-EVT-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "CAP-EVT-CANCELLATION",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-02",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-03",
+    "to": "CU-EVT-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-03",
+    "to": "RF-EVT-04",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-03",
+    "to": "CAP-EVT-CANCELLATION",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-03",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-03",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "CU-EVT-002",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "RF-EVT-03",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "CAP-EVT-CANCELLATION",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CAN-04",
+    "to": "SRC-ORQ-NOTIFICATIONS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-01",
+    "to": "CU-EVT-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-01",
+    "to": "RF-EVT-01",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-01",
+    "to": "RF-EVT-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-01",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-01",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-02",
+    "to": "CU-EVT-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-02",
+    "to": "RF-EVT-02",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-02",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-02",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-02",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-03",
+    "to": "CU-EVT-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-03",
+    "to": "RF-EVT-05",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-03",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-03",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "CU-EVT-003",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "RF-EVT-06",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "CAP-EVT-QUOTA",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "applies_to"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "RN-EVT-CUPO-04",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
     "from": "DOM-MODELOS-PROBLEMA",
     "to": "BPMN-INDEX",
     "type": "contains"
@@ -1182,27 +2147,27 @@
   {
     "from": "BPMN-INDEX",
     "to": "CU-COM-002",
-    "type": "traces_to"
-  },
-  {
-    "from": "BPMN-001",
-    "to": "BPMN-INDEX",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "BPMN-001",
     "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "models"
+  },
+  {
+    "from": "BPMN-001",
+    "to": "BPMN-INDEX",
+    "type": "references"
   },
   {
     "from": "UC-DIAGRAM",
     "to": "DOM-CU-COM",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "UC-DIAGRAM",
     "to": "DOM-CU-EVT",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "CU-PLANTILLA",
@@ -1232,42 +2197,42 @@
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "AREA-SRC-FUTURO",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-CONVERSATION",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-COMMERCIAL",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-CONTEXT",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-EVENTS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-NOTIFICATIONS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-TENANT",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "ARCH-ESTRUCTURA-CODIGO",
     "to": "SRC-ORQ-TOOL-CALLS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-DDR",
@@ -1397,12 +2362,12 @@
   {
     "from": "DDR-02",
     "to": "AREA-SRC-FUTURO",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DDR-02",
     "to": "SRC-ORQ-TOOL-CALLS",
-    "type": "implements_future"
+    "type": "planned_in"
   },
   {
     "from": "DOM-SECUENCIA",
@@ -1432,82 +2397,82 @@
   {
     "from": "SEQ-INDEX",
     "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-INDEX",
     "to": "CU-COM-004",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-INDEX",
     "to": "CU-COM-005",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-INDEX",
     "to": "CU-EVT-001",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-INDEX",
     "to": "CU-EVT-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-INDEX",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-01",
     "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-01",
     "to": "CU-COM-004",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-01",
     "to": "CU-COM-005",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-02",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-02",
     "to": "CU-COM-005",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-03",
     "to": "CU-EVT-001",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-03",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-03",
     "to": "CU-COM-006",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-04",
     "to": "CU-EVT-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SEQ-04",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "DOM-COLABORACION",
@@ -1527,57 +2492,57 @@
   {
     "from": "COLLAB-INDEX",
     "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-INDEX",
     "to": "CU-COM-005",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-INDEX",
     "to": "CU-EVT-001",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-INDEX",
     "to": "CU-EVT-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-INDEX",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-01",
     "to": "CU-COM-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-01",
     "to": "CU-COM-005",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-01",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-02",
     "to": "CU-EVT-001",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-02",
     "to": "CU-EVT-002",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "COLLAB-02",
     "to": "CU-EVT-003",
-    "type": "traces_to"
+    "type": "models"
   },
   {
     "from": "SUP-WORKFLOW",
@@ -1587,6 +2552,16 @@
   {
     "from": "SUP-WORKFLOW",
     "to": "SUP-WORKFLOW-TEMPLATES",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW",
+    "to": "SUP-WORKFLOW-ISSUES-TEMPLATES",
     "type": "contains"
   },
   {
@@ -1601,11 +2576,96 @@
   },
   {
     "from": "SUP-WORKFLOW-PIPELINE",
+    "to": "SUP-WORKFLOW-TEMPLATES",
+    "type": "modeled_by"
+  },
+  {
+    "from": "SUP-WORKFLOW-PIPELINE",
     "to": "AREA-SOPORTE",
     "type": "supports"
   },
   {
     "from": "SUP-WORKFLOW-TEMPLATES",
+    "to": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATES",
+    "to": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATES",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-COMMIT-MESSAGE",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-PR-GUIDE",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-COMMIT-MESSAGE",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-PR-GUIDE",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-MILESTONE",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-PSD",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-SPRINT",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "to": "SUP-WORKFLOW-TEMPLATE-WEEKLY",
+    "type": "contains"
+  },
+  {
+    "from": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-MILESTONE",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-PSD",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-SPRINT",
+    "to": "SUP-WORKFLOW-PIPELINE",
+    "type": "supports"
+  },
+  {
+    "from": "SUP-WORKFLOW-TEMPLATE-WEEKLY",
     "to": "SUP-WORKFLOW-PIPELINE",
     "type": "supports"
   },
@@ -1785,6 +2845,471 @@
     "type": "supports"
   },
   {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "CAP-EVT-QUOTA",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "CAP-ORQ-TOOL-CALLS",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "CU-EVT-003",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "CU-COM-003",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "exercises"
+  },
+  {
+    "from": "DEMO-EVT-CONT-01",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "exercises"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-EVT-QUOTA",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-EVT-WAITLIST",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-EVT-CANCELLATION",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-COM-CONTEXT-BANK",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-COM-HANDOFF",
+    "type": "contains"
+  },
+  {
+    "from": "DOM-CAPABILITIES",
+    "to": "CAP-ORQ-TOOL-CALLS",
+    "type": "contains"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "CU-EVT-003",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "RF-EVT-01",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "RF-EVT-02",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "RF-EVT-04",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "RF-EVT-05",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "SEQ-02",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "COLLAB-01",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-EVT-QUOTA",
+    "to": "DEMO-EVT-CONT-01",
+    "type": "validated_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "CU-EVT-001",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "RF-EVT-03",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "RF-EVT-06",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "SEQ-03",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "COLLAB-02",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-EVT-WAITLIST",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "CU-EVT-002",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "RF-EVT-03",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "RF-EVT-04",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "RN-EVT-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "SEQ-04",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "COLLAB-02",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "SRC-ORQ-EVENTS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-EVT-CANCELLATION",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "CU-COM-005",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "RF-COM-02",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "SEQ-01",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "COLLAB-01",
+    "type": "modeled_by"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "SRC-ORQ-COMMERCIAL",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-COMMERCIAL-STAGE",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "CU-COM-003",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-COM-03",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-COM-04",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-COM-05",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-COM-06",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-COM-07",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-EVT-01",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-EVT-02",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-EVT-04",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-EVT-05",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RF-EVT-06",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "SRC-ORQ-CONTEXT",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-CONTEXT-BANK",
+    "to": "DEMO-EVT-CONT-01",
+    "type": "validated_by"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "CU-COM-001",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "RF-COM-01",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "RF-COM-05",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "RN-COM-CATALOG",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "DDR-01",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "DDR-02",
+    "type": "governed_by"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "SRC-ORQ-CONVERSATION",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "SRC-ORQ-TENANT",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-COM-HANDOFF",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "DDR-02",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "RNF-01",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "RNF-05",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "CU-COM-003",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "CU-COM-005",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "CU-EVT-001",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "CU-EVT-002",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "CU-EVT-003",
+    "type": "covers"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "SRC-ORQ-TOOL-CALLS",
+    "type": "planned_in"
+  },
+  {
+    "from": "CAP-ORQ-TOOL-CALLS",
+    "to": "DEMO-EVT-CONT-01",
+    "type": "validated_by"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
+    "type": "derives_from"
+  },
+  {
     "from": "SRC-ORQ-CONVERSATION",
     "to": "DDR-02",
     "type": "derives_from"
@@ -1801,7 +3326,42 @@
   },
   {
     "from": "SRC-ORQ-CONVERSATION",
+    "to": "CU-COM-004",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RF-COM-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RF-COM-03",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RF-COM-07",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RNF-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
+    "to": "RNF-03",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONVERSATION",
     "to": "RNF-04",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-COMMERCIAL",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
     "type": "derives_from"
   },
   {
@@ -1817,6 +3377,11 @@
   {
     "from": "SRC-ORQ-COMMERCIAL",
     "to": "RF-COM-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-CONTEXT",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
     "type": "derives_from"
   },
   {
@@ -1846,6 +3411,11 @@
   },
   {
     "from": "SRC-ORQ-EVENTS",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
     "to": "DDR-02",
     "type": "derives_from"
   },
@@ -1862,6 +3432,41 @@
   {
     "from": "SRC-ORQ-EVENTS",
     "to": "CU-EVT-003",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-02",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-03",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-04",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-05",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-EVENTS",
+    "to": "RF-EVT-06",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-NOTIFICATIONS",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
     "type": "derives_from"
   },
   {
@@ -1886,6 +3491,11 @@
   },
   {
     "from": "SRC-ORQ-TENANT",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TENANT",
     "to": "DDR-02",
     "type": "derives_from"
   },
@@ -1897,6 +3507,11 @@
   {
     "from": "SRC-ORQ-TENANT",
     "to": "RNF-01",
+    "type": "derives_from"
+  },
+  {
+    "from": "SRC-ORQ-TOOL-CALLS",
+    "to": "ARCH-ESTRUCTURA-CODIGO",
     "type": "derives_from"
   },
   {
