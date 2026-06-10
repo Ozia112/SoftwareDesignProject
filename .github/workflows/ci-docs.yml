@@ -80,6 +80,9 @@ jobs:
             exit 1
           fi
 
+      - name: Check documentation graph coverage
+        run: python scripts/check_doc_coverage.py --strict-core
+
   markdown:
     name: Markdown lint
     runs-on: ubuntu-latest

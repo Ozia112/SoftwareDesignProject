@@ -93,21 +93,37 @@ If `.graph/` is missing or stale, regenerate it with `python build-graph.py --pr
 
 Use `search_index.json` to resolve:
 
-- IDs
-- titles
-- tags
-- aliases
-- paths
-- node types
-- statuses
+- `terms`: free-text lookup over IDs, titles, statuses, alias text, faceted tag values (`capability:*`, `domain:*`, `quality:*`), `services`, and `tool_calls`
+- `by_type`: nodes grouped by node type (`capability`, `business-rule`, `use-case`, etc.)
+- `by_tag`: nodes grouped by full tag (`area:soporte`, `kind:capability`, `capability:quota`, ...)
+- `by_status`, `by_path`: nodes grouped by status or declared path
+- `by_service`: NestJS service name to owning `SRC-ORQ-*` node (e.g. `QuotaService` -> `SRC-ORQ-EVENTS`)
+- `by_tool_call`: tool call name to owning `SRC-ORQ-*` node (e.g. `release_quota` -> `SRC-ORQ-EVENTS`)
 
 Examples:
 
-- "waitlist"
-- "quota reservation"
-- "commercial flow"
-- "handoff"
-- "tool calls"
+- "waitlist" -> matches `CAP-EVT-WAITLIST`, `CU-EVT-001`, `RF-EVT-03`, `RF-EVT-06`, `RN-EVT-LE-*`, `SEQ-03`, `SRC-ORQ-EVENTS`
+- "quota reservation" -> `CAP-EVT-QUOTA`
+- "commercial flow" -> `CAP-COM-COMMERCIAL-STAGE`
+- "handoff" -> `CAP-COM-HANDOFF`
+- "QuotaService" via `by_service` -> `SRC-ORQ-EVENTS`
+- "release_quota" via `by_tool_call` -> `SRC-ORQ-EVENTS`
+
+---
+
+### Capability-First Navigation (CAP-*)
+
+For fuzzy or business-shaped questions ("reserva de cupo", "lead scoring", "context bank"), resolve a `CAP-*` node under `DOM-CAPABILITIES` first instead of guessing a `RF-*`/`CU-*`/`RN-*` ID directly. Each `CAP-*` node consolidates one capability via:
+
+- `covers`: the `CU-*`/`RF-*` it groups
+- `governed_by`: the `RN-*`/`DDR-*` constraints
+- `modeled_by`: the `SEQ-*`/`COLLAB-*` diagrams
+- `planned_in`: the `SRC-ORQ-*` future anchors
+- `validated_by`: demo fixtures (e.g. `DEMO-EVT-CONT-01`)
+
+Available capabilities: `CAP-EVT-QUOTA`, `CAP-EVT-WAITLIST`, `CAP-EVT-CANCELLATION`, `CAP-COM-COMMERCIAL-STAGE`, `CAP-COM-CONTEXT-BANK`, `CAP-COM-HANDOFF`, `CAP-ORQ-TOOL-CALLS`.
+
+This turns one fuzzy query into one node lookup plus one adjacency expansion, instead of several speculative searches across RF/CU/RN/DDR.
 
 ---
 
@@ -120,17 +136,25 @@ adjacency.json
 reverse_adjacency.json
 ```
 
-to expand:
+to expand relations. The canonical definition of each relation lives in the `relation_vocabulary` block at the top of `docs/soporte/mapa-nodos/nodos-docs.yaml`. Pick the relation that matches the task instead of expanding everything:
 
-- traces_to
-- governed_by
-- derives_from
-- implements_future
-- supports
-- references
-- contains
+| Relation | Use when you need... | Reverse |
+| --- | --- | --- |
+| `contains` | child nodes of an area/domain | `contained_by` |
+| `satisfies` | which `RF-*` a `CU-*` fulfills | `satisfied_by` |
+| `covers` | the RF/CU a `CAP-*` consolidates | `covered_by` |
+| `applies_to` | which `CU-*`/`CAP-*`/anchors a business rule constrains | `has_rule` |
+| `governed_by` | the rules/decisions that constrain a node | `governs` |
+| `models` / `modeled_by` | the diagram for a use case/capability, or what a diagram represents | `modeled_by` / `models` |
+| `derives_from` | the primary source a document derives from | `derived_by` |
+| `planned_in` | the future `SRC-ORQ-*` module/service that will implement this | `plans` |
+| `implements_future` | legacy alias for `planned_in`/`derives_from` (prefer those) | `implemented_by_future` |
+| `validated_by` / `exercises` | demo fixtures that exercise a capability, or what a fixture exercises | `validates` / `exercised_by` |
+| `supports` | supporting/auxiliary docs (READMEs, templates) | `supported_by` |
+| `references` | loose contextual relation | `referenced_by` |
+| `traces_to` | generic trace; prefer a more specific relation above when one exists | `traced_from` |
 
-without opening files.
+Expand relations without opening files.
 
 ---
 
@@ -150,12 +174,25 @@ Only open documentation files after:
 
 Main repository areas:
 
-| Area            | Purpose                                 |
-| --------------- | --------------------------------------- |
-| AREA-ANALISIS   | Requirements, business rules, use cases |
-| AREA-DISENO     | Architecture, behavior, orchestration   |
-| AREA-SOPORTE    | Workflow, prompts, scripts, utilities   |
-| AREA-SRC-FUTURO | Future implementation anchors           |
+| Area            | Purpose                                              |
+| --------------- | ---------------------------------------------------- |
+| AREA-ANALISIS   | Requirements, business rules, use cases, CAP-* index |
+| AREA-DISENO     | Architecture, behavior, orchestration                |
+| AREA-SOPORTE    | Workflow, prompts, scripts, utilities                |
+| AREA-SRC-FUTURO | Future implementation anchors                        |
+| AREA-DEMO       | Demo data and fixtures (DEMO-EVT-CONT-01)            |
+
+---
+
+## Documentation Coverage Check
+
+Run the following before adding or moving documentation under `docs/analisis` or `docs/diseño`:
+
+```txt
+python scripts/check_doc_coverage.py --strict-core
+```
+
+This reports markdown files that lack a dedicated node (`path:` exact match) in `nodos-docs.yaml`. Files under `docs/analisis/**` and `docs/diseño/**` MUST have their own node; `ci-docs.yml` enforces this. Files elsewhere (e.g. `docs/soporte/**`) are reported informationally and do not fail CI.
 
 ---
 
