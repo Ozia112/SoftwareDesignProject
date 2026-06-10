@@ -6,6 +6,7 @@ import { ToolRegistry } from '../tools/tool-registry.service';
 import { CommercialStageService } from '../commercial/commercial-stage.service';
 import { AuditLogService } from '../audit/audit-log.service';
 import { TenantConfigService } from '../tenant/tenant-config.service';
+import { ConversationEventBusService } from './conversation-events.service';
 import type { TenantConfig } from '../dto/tenant.dto';
 import type { SessionMessage } from '../dto/conversation.dto';
 import { v4 as uuidv4 } from 'uuid';
@@ -45,6 +46,7 @@ export class AgentRunnerService {
     private readonly toolRegistry: ToolRegistry,
     private readonly stageService: CommercialStageService,
     private readonly auditLog: AuditLogService,
+    private readonly eventBus: ConversationEventBusService,
   ) {}
 
   async run(input: AgentRunInput): Promise<AgentRunOutput> {
@@ -121,12 +123,17 @@ export class AgentRunnerService {
         if (isCredits || isAuthError) throw err; // re-lanzar errores de config/billing
         this.logger.error(`LLM error turn ${turn}: ${err?.message}`);
         if (isTimeout) {
-          debugLog.push(`❌ TIMEOUT: El LLM no respondió en ${LLM_TIMEOUT_MS / 1000}s`);
+          const msg = `TIMEOUT: El LLM no respondió en ${LLM_TIMEOUT_MS / 1000}s`;
+          debugLog.push(`❌ ${msg}`);
+          this.eventBus.emit(conversationId, { type: 'error', data: { message: msg }, ts: new Date().toISOString() });
           finalResponse = 'Lo siento, tardé demasiado en responder. ¿Puedes intentarlo de nuevo?';
         } else {
-          debugLog.push(`❌ ERROR LLM (turn ${turn}): ${err?.message}`);
+          const msg = `ERROR LLM (turn ${turn}): ${err?.message}`;
+          debugLog.push(`❌ ${msg}`);
+          this.eventBus.emit(conversationId, { type: 'error', data: { message: msg }, ts: new Date().toISOString() });
           escalateToHuman = true;
           debugLog.push(`🚨 ESCALACIÓN AUTOMÁTICA: fallo_tecnico`);
+          this.eventBus.emit(conversationId, { type: 'escalation', data: { reason: 'fallo_tecnico' }, ts: new Date().toISOString() });
           finalResponse = 'Te estoy conectando con un asesor que podrá ayudarte de inmediato.';
         }
         break;
@@ -181,6 +188,11 @@ export class AgentRunnerService {
 
           const inputPreview = JSON.stringify(block.input).slice(0, 120);
           debugLog.push(`🔧 TOOL: ${block.name}  ${inputPreview}`);
+          this.eventBus.emit(conversationId, {
+            type: 'tool_call',
+            data: { name: block.name, input: block.input as Record<string, unknown> },
+            ts: new Date().toISOString(),
+          });
 
           const handler = this.toolRegistry.get(block.name);
           if (!handler) {
@@ -214,14 +226,33 @@ export class AgentRunnerService {
             } else if (block.name === 'emit_stage_signal') {
               const prev = data?.['previousStage'];
               const curr = data?.['currentStage'];
-              if (prev !== curr) debugLog.push(`   🏷️  Etapa: ${prev} → ${curr}  (score: ${data?.['score'] ?? '?'})`);
-              else debugLog.push(`   🏷️  Señal procesada, etapa sin cambio: ${curr}`);
+              if (prev !== curr) {
+                debugLog.push(`   🏷️  Etapa: ${prev} → ${curr}  (score: ${data?.['score'] ?? '?'})`);
+                this.eventBus.emit(conversationId, {
+                  type: 'stage_change',
+                  data: { from: prev, to: curr, score: data?.['score'] ?? null },
+                  ts: new Date().toISOString(),
+                });
+              } else {
+                debugLog.push(`   🏷️  Señal procesada, etapa sin cambio: ${curr}`);
+              }
               const sig = (block.input as Record<string, string>)['signal'];
               if (sig === 'confirmacion_de_pago_pendiente') {
                 debugLog.push(`   🚨 ESCALACIÓN: pago_pendiente → operador humano`);
+                this.eventBus.emit(conversationId, {
+                  type: 'escalation',
+                  data: { reason: 'pago_pendiente → operador humano' },
+                  ts: new Date().toISOString(),
+                });
               }
             } else if (block.name === 'request_human_handoff') {
-              debugLog.push(`   🚨 HANDOFF solicitado: ${(block.input as Record<string, string>)['reason']}`);
+              const reason = (block.input as Record<string, string>)['reason'];
+              debugLog.push(`   🚨 HANDOFF solicitado: ${reason}`);
+              this.eventBus.emit(conversationId, {
+                type: 'escalation',
+                data: { reason },
+                ts: new Date().toISOString(),
+              });
             } else if (block.name === 'reserve_quota') {
               debugLog.push(`   📋 Cupo reservado: ${JSON.stringify(data).slice(0, 80)}`);
             } else if (block.name === 'register_waiting_list') {
@@ -274,6 +305,14 @@ export class AgentRunnerService {
 
     const previousStage = stage;
     const currentStage = await this.stageService.getStage(db, tenantId, leadId);
+
+    if (finalResponse.trim()) {
+      this.eventBus.emit(conversationId, {
+        type: 'bot_message',
+        data: { text: finalResponse, stage: currentStage },
+        ts: new Date().toISOString(),
+      });
+    }
 
     return { response: finalResponse, toolCallsExecuted, stage: currentStage, previousStage, escalateToHuman, debugLog };
   }

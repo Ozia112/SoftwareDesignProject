@@ -1,13 +1,18 @@
-import { Controller, Post, Get, Body, Param, Headers, Query, Res, HttpCode } from '@nestjs/common';
+import { Controller, Post, Get, Sse, Body, Param, Headers, Query, Res, HttpCode, MessageEvent } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Observable } from 'rxjs';
 import { Response } from 'express';
 import { MessageRouterService } from '../conversation/message-router.service';
+import { ConversationEventBusService } from '../conversation/conversation-events.service';
 import type { IncomingMessageDto } from '../dto/conversation.dto';
 
 @ApiTags('Webhooks')
 @Controller(':tenantId')
 export class WebhookController {
-  constructor(private readonly router: MessageRouterService) {}
+  constructor(
+    private readonly router: MessageRouterService,
+    private readonly eventBus: ConversationEventBusService,
+  ) {}
 
   // --- WhatsApp (Meta Cloud API) ---
 
@@ -86,6 +91,14 @@ export class WebhookController {
 
   // --- Web (HTTP polling) ---
 
+  @Sse('conversations/:convId/events')
+  @ApiOperation({ summary: 'SSE stream de eventos de conversación en tiempo real' })
+  streamConvEvents(
+    @Param('convId') convId: string,
+  ): Observable<MessageEvent> {
+    return this.eventBus.getStream(convId);
+  }
+
   @Post('messages')
   @HttpCode(200)
   @ApiOperation({ summary: 'Web channel message' })
@@ -104,6 +117,27 @@ export class WebhookController {
     };
 
     const result = await this.router.route(msg);
+
+    if (result.conversationId) {
+      this.eventBus.emit(result.conversationId, {
+        type: 'api_call',
+        data: {
+          messageId: body.messageId,
+          method: 'POST',
+          url: `/${tenantId}/messages`,
+          status: 200,
+          req: { channelId: body.channelId, text: (body.text ?? '').slice(0, 80) },
+          res: {
+            routedTo: result.routedTo,
+            stage: result.stage ?? null,
+            score: result.score ?? null,
+            tools: result.toolCallsExecuted ?? 0,
+          },
+        },
+        ts: new Date().toISOString(),
+      });
+    }
+
     return {
       status: 'ok',
       conversationId: result.conversationId,

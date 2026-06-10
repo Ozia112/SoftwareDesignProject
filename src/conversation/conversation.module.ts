@@ -3,6 +3,7 @@ import { ConversationSessionStore } from './session-store.service';
 import { AgentRunnerService } from './agent-runner.service';
 import { MessageRouterService } from './message-router.service';
 import { HandoffManagerImpl } from './handoff-manager.service';
+import { ConversationEventBusService } from './conversation-events.service';
 import { TenantContextMiddleware } from '../tenant/tenant-context.middleware';
 import { CommercialModule } from '../commercial/commercial.module';
 import { ToolsModule } from '../tools/tools.module';
@@ -15,8 +16,9 @@ import { AuditModule } from '../audit/audit.module';
     AgentRunnerService,
     MessageRouterService,
     HandoffManagerImpl,
+    ConversationEventBusService,
   ],
-  exports: [ConversationSessionStore, AgentRunnerService, MessageRouterService, HandoffManagerImpl],
+  exports: [ConversationSessionStore, AgentRunnerService, MessageRouterService, HandoffManagerImpl, ConversationEventBusService],
 })
 export class ConversationModule {
   configure(consumer: MiddlewareConsumer) {
