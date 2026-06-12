@@ -158,6 +158,28 @@ Expand relations without opening files.
 
 ---
 
+### Lookup Discipline: Resolve Before You Search
+
+Most "find file X" or "is there related material Y" questions resolve in 1-2 `.graph/*.json` lookups — no `Grep`/`Glob` needed. Concrete patterns:
+
+1. **Known ID -> exact path via `by_id`.** Don't grep the repo for the ID or its title.
+   - Need the file for `RNF-04`? -> `by_id["RNF-04"].path` returns the exact path with correct accents in one call. `Grep -r "RNF-04"` instead returns 16+ files, including `.graph/*.json` itself, which then need filtering.
+   - Guessing a filename, getting a `Read` error, then `Glob`-ing to find the real name = 2 wasted calls. `by_id` skips both.
+
+2. **"Is X related to/supported by something else?" -> one relation hop, not text search.**
+   - "Is there a misalignment report tied to DDR-02?" -> `reverse_adjacency["DDR-02"].supported_by` -> `SUP-UTILS-DESAJUSTE-IMPLEMENTACION`. No grep needed.
+   - "What does CAP-EVT-WAITLIST cover/depend on?" -> read `covers` / `governed_by` / `modeled_by` directly from the `CAP-EVT-WAITLIST` node.
+
+3. **Code questions -> facets, not a `src/` scan.**
+   - "Where is `reserve_quota` implemented?" -> `by_tool_call["reserve_quota"]` -> `SRC-ORQ-EVENTS` -> open that node's related files. Don't `Glob src/**/*.ts` or `Grep -r "reserve_quota"`.
+   - "Where does `QuotaService` live?" -> `by_service["QuotaService"]` -> `SRC-ORQ-EVENTS`.
+
+4. **Windows path extraction caveat.** Paths with accents (ó, ñ, é) in `.graph/*.json` are correct UTF-8 on disk. Piping them through `python`/Bash on Windows to print can render them as `�` (U+FFFD) in the *console output* — a display artifact, not file corruption. Never copy a mangled path from console output into `Read`/`Edit`/`Write`. Use `Grep`/`Read` directly on `.graph/nodes.json` (or the canonical YAML) to get the path verbatim.
+
+Rule of thumb: if a task needs more than 2 `.graph/*.json` lookups before opening a document, re-check `by_id` / `by_tag` / `by_service` / `by_tool_call` / adjacency first — broad `Grep`/`Glob` should be the exception, not the default.
+
+---
+
 ## File Opening Policy
 
 Do NOT open large amounts of documentation blindly.
