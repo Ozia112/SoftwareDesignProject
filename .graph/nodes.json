@@ -888,6 +888,41 @@
     "tool_calls": []
   },
   {
+    "id": "SUP-WORKFLOW-CI-CODE",
+    "type": "artifact",
+    "title": "Workflow CI de codigo",
+    "path": ".github/workflows/ci-code.yml",
+    "status": null,
+    "purpose": null,
+    "tags": [],
+    "aliases": [
+      "ci-code",
+      "github actions",
+      "typescript ci",
+      "prisma ci",
+      "graph update"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-CI-DOCS",
+    "type": "artifact",
+    "title": "Workflow CI de documentacion",
+    "path": ".github/workflows/ci-docs.yml",
+    "status": null,
+    "purpose": null,
+    "tags": [],
+    "aliases": [
+      "ci-docs",
+      "github actions",
+      "markdownlint",
+      "graph update"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
     "id": "SUP-MEETINGS",
     "type": "domain",
     "title": "Reuniones",

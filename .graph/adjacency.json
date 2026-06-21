@@ -676,6 +676,8 @@
   },
   "SUP-WORKFLOW": {
     "contains": [
+      "SUP-WORKFLOW-CI-CODE",
+      "SUP-WORKFLOW-CI-DOCS",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES"
     ]
@@ -687,6 +689,20 @@
   },
   "SUP-WORKFLOW-TEMPLATES": {
     "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-CI-CODE": {
+    "supports": [
+      "AREA-SRC-FUTURO",
+      "SUP-MAPA-NODOS",
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-CI-DOCS": {
+    "supports": [
+      "AREA-SOPORTE",
+      "SUP-MAPA-NODOS",
       "SUP-WORKFLOW-PIPELINE"
     ]
   },

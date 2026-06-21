@@ -534,7 +534,11 @@ nodes:
     type: domain
     title: Workflow del equipo
     path: docs/soporte/workflow
-    contains: [SUP-WORKFLOW-PIPELINE, SUP-WORKFLOW-TEMPLATES]
+    contains:
+      - SUP-WORKFLOW-PIPELINE
+      - SUP-WORKFLOW-TEMPLATES
+      - SUP-WORKFLOW-CI-CODE
+      - SUP-WORKFLOW-CI-DOCS
 
   - id: SUP-WORKFLOW-PIPELINE
     type: artifact
@@ -547,6 +551,20 @@ nodes:
     title: Plantillas operativas de issues y PR
     path: docs/soporte/workflow
     supports: [SUP-WORKFLOW-PIPELINE]
+
+  - id: SUP-WORKFLOW-CI-CODE
+    type: artifact
+    title: Workflow CI de codigo
+    path: .github/workflows/ci-code.yml
+    aliases: [ci-code, github actions, typescript ci, prisma ci, graph update]
+    supports: [SUP-WORKFLOW-PIPELINE, SUP-MAPA-NODOS, AREA-SRC-FUTURO]
+
+  - id: SUP-WORKFLOW-CI-DOCS
+    type: artifact
+    title: Workflow CI de documentacion
+    path: .github/workflows/ci-docs.yml
+    aliases: [ci-docs, github actions, markdownlint, graph update]
+    supports: [SUP-WORKFLOW-PIPELINE, SUP-MAPA-NODOS, AREA-SOPORTE]
 
   - id: SUP-MEETINGS
     type: domain
