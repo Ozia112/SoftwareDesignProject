@@ -1,0 +1,95 @@
+name: Smoke Test
+
+on:
+  workflow_dispatch:
+
+# CLAUDE_API_KEY debe estar en:
+# Settings → Secrets and variables → Actions → New repository secret
+
+jobs:
+  smoke:
+    name: Smoke test con bot real
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: saas_dev
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: app
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U app -d saas_dev"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+
+    env:
+      DATABASE_URL: postgresql://app:app@localhost:5432/saas_dev
+      REDIS_HOST: localhost
+      REDIS_PORT: "6379"
+      ENCRYPTION_MASTER_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      JWT_SECRET: smoke-jwt-secret
+      THROTTLE_TTL: "60"
+      THROTTLE_LIMIT: "1000"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: pnpm exec prisma generate
+
+      - name: Run migrations
+        run: pnpm exec prisma migrate deploy
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Start orchestrator
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: node dist/main &
+
+      - name: Wait for health
+        run: |
+          for i in $(seq 1 20); do
+            if curl -sf http://localhost:3000/api/v1/health > /dev/null; then
+              echo "Orchestrator ready"
+              break
+            fi
+            if [ "$i" -eq 20 ]; then
+              echo "Timeout waiting for orchestrator"
+              exit 1
+            fi
+            sleep 3
+          done
+
+      - name: Seed demo data and smoke test
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          ORCHESTRATOR_URL: http://localhost:3000
+        run: node demo/seed/seed.js

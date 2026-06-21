@@ -2,6 +2,7 @@
   "REPO": {
     "contains": [
       "AREA-ANALISIS",
+      "AREA-DEMO",
       "AREA-DISENO",
       "AREA-SOPORTE",
       "AREA-SRC-FUTURO",
@@ -16,6 +17,7 @@
   },
   "AREA-ANALISIS": {
     "contains": [
+      "DOM-CAPABILITIES",
       "DOM-CU-COM",
       "DOM-CU-EVT",
       "DOM-GLOSARIO",
@@ -45,6 +47,11 @@
       "SUP-SCRIPTS",
       "SUP-UTILS",
       "SUP-WORKFLOW"
+    ]
+  },
+  "AREA-DEMO": {
+    "contains": [
+      "DEMO-EVT-CONT-01"
     ]
   },
   "AREA-SRC-FUTURO": {
@@ -84,12 +91,8 @@
     ]
   },
   "RF-COM-01": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
-    ],
-    "traces_to": [
-      "CU-COM-001",
-      "CU-EVT-003"
     ]
   },
   "RF-COM-02": {
@@ -97,49 +100,28 @@
       "DDR-01",
       "DDR-02"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-COMMERCIAL"
-    ],
-    "traces_to": [
-      "CU-COM-002",
-      "CU-COM-005",
-      "CU-EVT-001"
     ]
   },
   "RF-COM-03": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
-    ],
-    "traces_to": [
-      "CU-COM-002"
     ]
   },
   "RF-COM-04": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONTEXT"
-    ],
-    "traces_to": [
-      "CU-COM-002",
-      "CU-COM-003"
     ]
   },
   "RF-COM-05": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONTEXT"
-    ],
-    "traces_to": [
-      "CU-COM-001",
-      "CU-COM-002",
-      "CU-COM-003"
     ]
   },
   "RF-COM-06": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONTEXT"
-    ],
-    "traces_to": [
-      "CU-COM-002",
-      "CU-COM-003"
     ]
   },
   "RF-COM-07": {
@@ -147,21 +129,13 @@
       "DDR-01",
       "DDR-02"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
-    ],
-    "traces_to": [
-      "CU-COM-002",
-      "CU-COM-003",
-      "CU-COM-004"
     ]
   },
   "RF-COM-08": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-NOTIFICATIONS"
-    ],
-    "traces_to": [
-      "CU-COM-006"
     ]
   },
   "DOM-RF-EVT": {
@@ -178,14 +152,8 @@
     "governed_by": [
       "DDR-01"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
-    ],
-    "traces_to": [
-      "CU-COM-001",
-      "CU-COM-002",
-      "CU-COM-003",
-      "CU-EVT-003"
     ]
   },
   "RF-EVT-02": {
@@ -193,23 +161,14 @@
       "DDR-01",
       "DDR-02"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
-    ],
-    "traces_to": [
-      "CU-COM-002",
-      "CU-COM-003",
-      "CU-EVT-003"
     ]
   },
   "RF-EVT-03": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS",
       "SRC-ORQ-NOTIFICATIONS"
-    ],
-    "traces_to": [
-      "CU-EVT-002",
-      "CU-EVT-003"
     ]
   },
   "RF-EVT-04": {
@@ -217,22 +176,13 @@
       "DDR-01",
       "DDR-02"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
-    ],
-    "traces_to": [
-      "CU-COM-003",
-      "CU-EVT-002",
-      "CU-EVT-003"
     ]
   },
   "RF-EVT-05": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
-    ],
-    "traces_to": [
-      "CU-COM-003",
-      "CU-EVT-003"
     ]
   },
   "RF-EVT-06": {
@@ -240,13 +190,8 @@
       "DDR-01",
       "DDR-02"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
-    ],
-    "traces_to": [
-      "CU-COM-003",
-      "CU-EVT-001",
-      "CU-EVT-003"
     ]
   },
   "DOM-RNF": {
@@ -260,28 +205,28 @@
     ]
   },
   "RNF-01": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-TENANT",
       "SRC-ORQ-TOOL-CALLS"
     ]
   },
   "RNF-02": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
     ]
   },
   "RNF-03": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
     ]
   },
   "RNF-04": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
     ]
   },
   "RNF-05": {
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-TOOL-CALLS"
     ]
   },
@@ -301,11 +246,11 @@
       "DDR-01",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION",
       "SRC-ORQ-TENANT"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-01",
       "RF-COM-05"
     ]
@@ -315,10 +260,10 @@
       "DDR-01",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-02",
       "RF-COM-04",
       "RF-COM-05",
@@ -334,10 +279,10 @@
       "DDR-02",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONTEXT"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-04",
       "RF-COM-05",
       "RF-COM-06",
@@ -355,10 +300,10 @@
       "DDR-02",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-CONVERSATION"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-07"
     ]
   },
@@ -368,10 +313,10 @@
       "DDR-02",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-COMMERCIAL"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-02"
     ]
   },
@@ -380,10 +325,10 @@
       "DDR-02",
       "RN-COM-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-NOTIFICATIONS"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-08"
     ]
   },
@@ -400,10 +345,10 @@
       "DDR-02",
       "RN-EVT-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-COM-02",
       "RF-EVT-06"
     ]
@@ -414,10 +359,10 @@
       "DDR-02",
       "RN-EVT-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
     ],
-    "traces_to": [
+    "satisfies": [
       "RF-EVT-03",
       "RF-EVT-04"
     ]
@@ -428,11 +373,13 @@
       "DDR-02",
       "RN-EVT-CATALOG"
     ],
-    "implements_future": [
+    "planned_in": [
       "SRC-ORQ-EVENTS"
     ],
-    "traces_to": [
-      "CU-EVT-002",
+    "references": [
+      "CU-EVT-002"
+    ],
+    "satisfies": [
       "RF-EVT-01",
       "RF-EVT-02",
       "RF-EVT-03",
@@ -447,6 +394,37 @@
     ]
   },
   "RN-COM-CATALOG": {
+    "contains": [
+      "RN-COM-CONT-01",
+      "RN-COM-CONT-02",
+      "RN-COM-CONT-03",
+      "RN-COM-CONT-04",
+      "RN-COM-CONT-05",
+      "RN-COM-CONT-06",
+      "RN-COM-CONV-01",
+      "RN-COM-CONV-02",
+      "RN-COM-CONV-03",
+      "RN-COM-CONV-04",
+      "RN-COM-ESC-01",
+      "RN-COM-ESC-02",
+      "RN-COM-ESC-03",
+      "RN-COM-ETAPA-01",
+      "RN-COM-ETAPA-02",
+      "RN-COM-ETAPA-03",
+      "RN-COM-ETAPA-04",
+      "RN-COM-ETAPA-05",
+      "RN-COM-ETAPA-06",
+      "RN-COM-ETAPA-07",
+      "RN-COM-PRIV-01",
+      "RN-COM-PRIV-02",
+      "RN-COM-PRIV-03",
+      "RN-COM-REACT-01",
+      "RN-COM-REACT-02",
+      "RN-COM-REACT-03",
+      "RN-COM-REACT-04",
+      "RN-COM-REACT-05",
+      "RN-COM-REACT-06"
+    ],
     "traces_to": [
       "CU-COM-001",
       "CU-COM-002",
@@ -463,6 +441,307 @@
       "RF-COM-08",
       "RF-EVT-02",
       "RF-EVT-04"
+    ]
+  },
+  "RN-COM-ESC-01": {
+    "applies_to": [
+      "CAP-COM-HANDOFF",
+      "CU-COM-001",
+      "RF-COM-01"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-ESC-02": {
+    "applies_to": [
+      "CAP-COM-HANDOFF",
+      "CU-COM-001",
+      "RF-COM-01"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-ESC-03": {
+    "applies_to": [
+      "CAP-COM-HANDOFF",
+      "CU-COM-001",
+      "RF-COM-01"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-CONV-01": {
+    "applies_to": [
+      "CU-COM-002",
+      "RF-COM-07"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-CONV-02": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-002",
+      "RF-COM-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONV-03": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-002",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONV-04": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CAP-EVT-QUOTA",
+      "CU-COM-002",
+      "RF-COM-02",
+      "RF-EVT-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-COM-CONT-01": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-003",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONT-02": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-003",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONT-03": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-003",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONT-04": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-003",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONT-05": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CU-COM-003",
+      "RF-COM-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT"
+    ]
+  },
+  "RN-COM-CONT-06": {
+    "applies_to": [
+      "CAP-COM-CONTEXT-BANK",
+      "CAP-EVT-QUOTA",
+      "CU-COM-003",
+      "RF-EVT-02",
+      "RF-EVT-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-COM-PRIV-01": {
+    "applies_to": [
+      "CU-COM-004",
+      "RF-COM-07"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-PRIV-02": {
+    "applies_to": [
+      "CU-COM-004",
+      "RF-COM-07"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-PRIV-03": {
+    "applies_to": [
+      "CU-COM-004",
+      "RF-COM-07"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-ETAPA-01": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-02": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-03": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-04": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-05": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-06": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL"
+    ]
+  },
+  "RN-COM-ETAPA-07": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CAP-COM-HANDOFF",
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-CONVERSATION"
+    ]
+  },
+  "RN-COM-REACT-01": {
+    "applies_to": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-COM-REACT-02": {
+    "applies_to": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-COM-REACT-03": {
+    "applies_to": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-COM-REACT-04": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-COM-REACT-05": {
+    "applies_to": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-COM-REACT-06": {
+    "applies_to": [
+      "CU-COM-006",
+      "RF-COM-08"
+    ],
+    "planned_in": [
+      "SRC-ORQ-NOTIFICATIONS"
     ]
   },
   "DOM-RN-BASE": {
@@ -489,6 +768,19 @@
     ]
   },
   "RN-EVT-CATALOG": {
+    "contains": [
+      "RN-EVT-CAN-01",
+      "RN-EVT-CAN-02",
+      "RN-EVT-CAN-03",
+      "RN-EVT-CAN-04",
+      "RN-EVT-CUPO-01",
+      "RN-EVT-CUPO-02",
+      "RN-EVT-CUPO-03",
+      "RN-EVT-CUPO-04",
+      "RN-EVT-LE-01",
+      "RN-EVT-LE-02",
+      "RN-EVT-LE-03"
+    ],
     "traces_to": [
       "CU-EVT-001",
       "CU-EVT-002",
@@ -502,6 +794,129 @@
       "RF-EVT-06"
     ]
   },
+  "RN-EVT-LE-01": {
+    "applies_to": [
+      "CAP-EVT-WAITLIST",
+      "CU-EVT-001",
+      "RF-EVT-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-LE-02": {
+    "applies_to": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CAP-EVT-WAITLIST",
+      "CU-EVT-001",
+      "RF-COM-02",
+      "RF-EVT-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-LE-03": {
+    "applies_to": [
+      "CAP-EVT-WAITLIST",
+      "CU-EVT-001",
+      "RF-EVT-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-CAN-01": {
+    "applies_to": [
+      "CAP-EVT-CANCELLATION",
+      "CU-EVT-002",
+      "RF-EVT-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-CAN-02": {
+    "applies_to": [
+      "CAP-EVT-CANCELLATION",
+      "CAP-EVT-QUOTA",
+      "CU-EVT-002",
+      "RF-EVT-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "RN-EVT-CAN-03": {
+    "applies_to": [
+      "CAP-EVT-CANCELLATION",
+      "CAP-EVT-QUOTA",
+      "CU-EVT-002",
+      "RF-EVT-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-CAN-04": {
+    "applies_to": [
+      "CAP-EVT-CANCELLATION",
+      "CAP-EVT-WAITLIST",
+      "CU-EVT-002",
+      "RF-EVT-03"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-NOTIFICATIONS"
+    ]
+  },
+  "RN-EVT-CUPO-01": {
+    "applies_to": [
+      "CAP-EVT-QUOTA",
+      "CU-EVT-003",
+      "RF-EVT-01",
+      "RF-EVT-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-CUPO-02": {
+    "applies_to": [
+      "CAP-EVT-QUOTA",
+      "CU-EVT-003",
+      "RF-EVT-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "RN-EVT-CUPO-03": {
+    "applies_to": [
+      "CAP-EVT-QUOTA",
+      "CU-EVT-003",
+      "RF-EVT-05"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "RN-EVT-CUPO-04": {
+    "applies_to": [
+      "CAP-EVT-QUOTA",
+      "CAP-EVT-WAITLIST",
+      "CU-EVT-003",
+      "RF-EVT-06"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
   "DOM-MODELOS-PROBLEMA": {
     "contains": [
       "BPMN-001",
@@ -511,18 +926,20 @@
     ]
   },
   "BPMN-INDEX": {
-    "traces_to": [
+    "models": [
       "CU-COM-002"
     ]
   },
   "BPMN-001": {
-    "traces_to": [
-      "BPMN-INDEX",
+    "models": [
       "CU-COM-002"
+    ],
+    "references": [
+      "BPMN-INDEX"
     ]
   },
   "UC-DIAGRAM": {
-    "traces_to": [
+    "models": [
       "DOM-CU-COM",
       "DOM-CU-EVT"
     ]
@@ -543,7 +960,7 @@
       "DDR-02",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
     ],
-    "implements_future": [
+    "planned_in": [
       "AREA-SRC-FUTURO",
       "SRC-ORQ-COMMERCIAL",
       "SRC-ORQ-CONTEXT",
@@ -583,7 +1000,7 @@
       "DDR-01",
       "SUP-UTILS-ESTRATEGIA-IMPLEMENTACION"
     ],
-    "implements_future": [
+    "planned_in": [
       "AREA-SRC-FUTURO",
       "SRC-ORQ-TOOL-CALLS"
     ],
@@ -609,7 +1026,7 @@
     ]
   },
   "SEQ-INDEX": {
-    "traces_to": [
+    "models": [
       "CU-COM-002",
       "CU-COM-004",
       "CU-COM-005",
@@ -619,27 +1036,27 @@
     ]
   },
   "SEQ-01": {
-    "traces_to": [
+    "models": [
       "CU-COM-002",
       "CU-COM-004",
       "CU-COM-005"
     ]
   },
   "SEQ-02": {
-    "traces_to": [
+    "models": [
       "CU-COM-005",
       "CU-EVT-003"
     ]
   },
   "SEQ-03": {
-    "traces_to": [
+    "models": [
       "CU-COM-006",
       "CU-EVT-001",
       "CU-EVT-003"
     ]
   },
   "SEQ-04": {
-    "traces_to": [
+    "models": [
       "CU-EVT-002",
       "CU-EVT-003"
     ]
@@ -652,7 +1069,7 @@
     ]
   },
   "COLLAB-INDEX": {
-    "traces_to": [
+    "models": [
       "CU-COM-002",
       "CU-COM-005",
       "CU-EVT-001",
@@ -661,14 +1078,14 @@
     ]
   },
   "COLLAB-01": {
-    "traces_to": [
+    "models": [
       "CU-COM-002",
       "CU-COM-005",
       "CU-EVT-003"
     ]
   },
   "COLLAB-02": {
-    "traces_to": [
+    "models": [
       "CU-EVT-001",
       "CU-EVT-002",
       "CU-EVT-003"
@@ -678,16 +1095,75 @@
     "contains": [
       "SUP-WORKFLOW-CI-CODE",
       "SUP-WORKFLOW-CI-DOCS",
+      "SUP-WORKFLOW-ISSUES-TEMPLATES",
+      "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
       "SUP-WORKFLOW-PIPELINE",
       "SUP-WORKFLOW-TEMPLATES"
     ]
   },
   "SUP-WORKFLOW-PIPELINE": {
+    "modeled_by": [
+      "SUP-WORKFLOW-TEMPLATES"
+    ],
     "supports": [
       "AREA-SOPORTE"
     ]
   },
   "SUP-WORKFLOW-TEMPLATES": {
+    "contains": [
+      "SUP-WORKFLOW-ISSUES-TEMPLATES",
+      "SUP-WORKFLOW-OPERATIVE-TEMPLATES"
+    ],
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-OPERATIVE-TEMPLATES": {
+    "contains": [
+      "SUP-WORKFLOW-TEMPLATE-COMMIT-MESSAGE",
+      "SUP-WORKFLOW-TEMPLATE-PR-GUIDE"
+    ],
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-COMMIT-MESSAGE": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-PR-GUIDE": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-ISSUES-TEMPLATES": {
+    "contains": [
+      "SUP-WORKFLOW-TEMPLATE-MILESTONE",
+      "SUP-WORKFLOW-TEMPLATE-PSD",
+      "SUP-WORKFLOW-TEMPLATE-SPRINT",
+      "SUP-WORKFLOW-TEMPLATE-WEEKLY"
+    ],
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-MILESTONE": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-PSD": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-SPRINT": {
+    "supports": [
+      "SUP-WORKFLOW-PIPELINE"
+    ]
+  },
+  "SUP-WORKFLOW-TEMPLATE-WEEKLY": {
     "supports": [
       "SUP-WORKFLOW-PIPELINE"
     ]
@@ -791,16 +1267,192 @@
       "REPO"
     ]
   },
+  "DEMO-EVT-CONT-01": {
+    "exercises": [
+      "CAP-COM-CONTEXT-BANK",
+      "CAP-EVT-QUOTA",
+      "CAP-ORQ-TOOL-CALLS",
+      "CU-COM-003",
+      "CU-EVT-003",
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-EVENTS"
+    ]
+  },
+  "DOM-CAPABILITIES": {
+    "contains": [
+      "CAP-COM-COMMERCIAL-STAGE",
+      "CAP-COM-CONTEXT-BANK",
+      "CAP-COM-HANDOFF",
+      "CAP-EVT-CANCELLATION",
+      "CAP-EVT-QUOTA",
+      "CAP-EVT-WAITLIST",
+      "CAP-ORQ-TOOL-CALLS"
+    ]
+  },
+  "CAP-EVT-QUOTA": {
+    "covers": [
+      "CU-EVT-003",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-04",
+      "RF-EVT-05"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "modeled_by": [
+      "COLLAB-01",
+      "SEQ-02"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "validated_by": [
+      "DEMO-EVT-CONT-01"
+    ]
+  },
+  "CAP-EVT-WAITLIST": {
+    "covers": [
+      "CU-EVT-001",
+      "RF-EVT-03",
+      "RF-EVT-06"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "modeled_by": [
+      "COLLAB-02",
+      "SEQ-03"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "CAP-EVT-CANCELLATION": {
+    "covers": [
+      "CU-EVT-002",
+      "RF-EVT-03",
+      "RF-EVT-04"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-EVT-CATALOG"
+    ],
+    "modeled_by": [
+      "COLLAB-02",
+      "SEQ-04"
+    ],
+    "planned_in": [
+      "SRC-ORQ-EVENTS",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "CAP-COM-COMMERCIAL-STAGE": {
+    "covers": [
+      "CU-COM-005",
+      "RF-COM-02"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "modeled_by": [
+      "COLLAB-01",
+      "SEQ-01"
+    ],
+    "planned_in": [
+      "SRC-ORQ-COMMERCIAL",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "CAP-COM-CONTEXT-BANK": {
+    "covers": [
+      "CU-COM-003",
+      "RF-COM-03",
+      "RF-COM-04",
+      "RF-COM-05",
+      "RF-COM-06",
+      "RF-COM-07",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONTEXT",
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "validated_by": [
+      "DEMO-EVT-CONT-01"
+    ]
+  },
+  "CAP-COM-HANDOFF": {
+    "covers": [
+      "CU-COM-001",
+      "RF-COM-01",
+      "RF-COM-05"
+    ],
+    "governed_by": [
+      "DDR-01",
+      "DDR-02",
+      "RN-COM-CATALOG"
+    ],
+    "planned_in": [
+      "SRC-ORQ-CONVERSATION",
+      "SRC-ORQ-TENANT",
+      "SRC-ORQ-TOOL-CALLS"
+    ]
+  },
+  "CAP-ORQ-TOOL-CALLS": {
+    "covers": [
+      "CU-COM-003",
+      "CU-COM-005",
+      "CU-EVT-001",
+      "CU-EVT-002",
+      "CU-EVT-003",
+      "DDR-02",
+      "RNF-01",
+      "RNF-05"
+    ],
+    "planned_in": [
+      "SRC-ORQ-TOOL-CALLS"
+    ],
+    "validated_by": [
+      "DEMO-EVT-CONT-01"
+    ]
+  },
   "SRC-ORQ-CONVERSATION": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-001",
       "CU-COM-002",
+      "CU-COM-004",
       "DDR-02",
+      "RF-COM-01",
+      "RF-COM-03",
+      "RF-COM-07",
+      "RNF-02",
+      "RNF-03",
       "RNF-04"
     ]
   },
   "SRC-ORQ-COMMERCIAL": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-005",
       "DDR-02",
       "RF-COM-02"
@@ -808,6 +1460,7 @@
   },
   "SRC-ORQ-CONTEXT": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-003",
       "DDR-02",
       "RF-COM-04",
@@ -817,14 +1470,22 @@
   },
   "SRC-ORQ-EVENTS": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-EVT-001",
       "CU-EVT-002",
       "CU-EVT-003",
-      "DDR-02"
+      "DDR-02",
+      "RF-EVT-01",
+      "RF-EVT-02",
+      "RF-EVT-03",
+      "RF-EVT-04",
+      "RF-EVT-05",
+      "RF-EVT-06"
     ]
   },
   "SRC-ORQ-NOTIFICATIONS": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-006",
       "DDR-02",
       "RF-COM-08",
@@ -833,6 +1494,7 @@
   },
   "SRC-ORQ-TENANT": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "CU-COM-001",
       "DDR-02",
       "RNF-01"
@@ -840,6 +1502,7 @@
   },
   "SRC-ORQ-TOOL-CALLS": {
     "derives_from": [
+      "ARCH-ESTRUCTURA-CODIGO",
       "DDR-02",
       "RNF-01",
       "RNF-05"

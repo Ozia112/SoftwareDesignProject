@@ -18,8 +18,17 @@
     "path": "README.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "kind:readme",
+      "area:root"
+    ],
+    "aliases": [
+      "readme principal",
+      "repository readme",
+      "overview",
+      "introduccion",
+      "introducción"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -30,8 +39,18 @@
     "path": "docs/analisis",
     "status": null,
     "purpose": "Problema, necesidades, reglas, requerimientos, casos de uso y modelos del dominio.",
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:documentation-area"
+    ],
+    "aliases": [
+      "analisis",
+      "análisis",
+      "requirements",
+      "requerimientos",
+      "reglas de negocio",
+      "casos de uso"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -42,8 +61,18 @@
     "path": "docs/diseño",
     "status": null,
     "purpose": "Solucion tecnica, decisiones y comportamiento entre componentes.",
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:documentation-area"
+    ],
+    "aliases": [
+      "diseno",
+      "diseño",
+      "design",
+      "arquitectura",
+      "decisiones",
+      "comportamiento"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -54,8 +83,42 @@
     "path": "docs/soporte",
     "status": null,
     "purpose": "Operacion del equipo, evidencia, prompts, scripts y utilidades.",
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:documentation-area"
+    ],
+    "aliases": [
+      "soporte",
+      "workflow",
+      "prompts",
+      "scripts",
+      "utilidades",
+      "entregas"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "AREA-DEMO",
+    "type": "area",
+    "title": "Datos demo y fixtures",
+    "path": "demo",
+    "status": null,
+    "purpose": "Archivos de demostracion y datos de ejemplo para validar escenarios del dominio.",
+    "tags": [
+      "area:demo",
+      "kind:demo-area",
+      "capability:fixtures",
+      "capability:validation"
+    ],
+    "aliases": [
+      "demo",
+      "fixtures",
+      "datos demo",
+      "datos de ejemplo",
+      "sample data",
+      "validation data"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -66,8 +129,22 @@
     "path": "src",
     "status": "planned",
     "purpose": "Ancla reservada para implementacion del orquestador y contratos de tool calls.",
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-area",
+      "status:planned",
+      "capability:orchestrator",
+      "capability:tool-calls"
+    ],
+    "aliases": [
+      "codigo futuro",
+      "código futuro",
+      "src",
+      "implementacion",
+      "implementación",
+      "orchestrator implementation",
+      "domain services"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -106,8 +183,16 @@
     "path": "docs/analisis/requerimientos/funcionales/COM",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:requirement-domain"
+    ],
+    "aliases": [
+      "requerimientos funcionales com",
+      "functional requirements com",
+      "requisitos comerciales"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -118,8 +203,20 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-01 Asignación de conversaciones de un canal de comunicación a Bot.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:conversation-routing",
+      "capability:bot-assignment"
+    ],
+    "aliases": [
+      "asignacion a bot",
+      "bot assignment",
+      "canal de comunicacion",
+      "message routing",
+      "conversation routing"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -130,8 +227,22 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-02 Gestión de etapa comercial y calificación automática de leads.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:commercial-stage",
+      "capability:scoring",
+      "capability:lead-qualification"
+    ],
+    "aliases": [
+      "lead scoring",
+      "score",
+      "calificacion de leads",
+      "calificación de leads",
+      "etapa comercial",
+      "commercial stage"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -142,8 +253,20 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-03 Captura y gestión de datos de la persona interesada desde conversaciones multicanal.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:data-capture",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "captura de datos",
+      "datos de persona interesada",
+      "multicanal",
+      "lead data",
+      "conversation data"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -154,8 +277,20 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-04 El Bot debe mostrar el listado de eventos disponibles.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:event-listing",
+      "capability:event-discovery"
+    ],
+    "aliases": [
+      "listado de eventos",
+      "eventos disponibles",
+      "available events",
+      "catalogo de eventos",
+      "event listing"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -166,8 +301,20 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-05 El Bot debe proporcionar información detallada de cada evento.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:event-detail",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "detalle de evento",
+      "informacion de evento",
+      "event details",
+      "programa del evento",
+      "descripcion de evento"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -178,8 +325,20 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-06 El Bot debe informar fechas de inicio y horarios disponibles.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:event-schedule",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "fechas de inicio",
+      "horarios disponibles",
+      "event schedule",
+      "calendario de eventos",
+      "disponibilidad horaria"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -190,8 +349,21 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-07 Informe de privacidad al usuario.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:privacy",
+      "capability:consent"
+    ],
+    "aliases": [
+      "privacidad",
+      "privacy notice",
+      "aviso de privacidad",
+      "legal notice",
+      "consentimiento",
+      "datos personales"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -202,8 +374,22 @@
     "path": "docs/analisis/requerimientos/funcionales/COM/RF-COM-08 Gestión de notificaciones de reactivación outbound.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:rf",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:outbound"
+    ],
+    "aliases": [
+      "reactivacion outbound",
+      "reactivación outbound",
+      "outbound notification",
+      "notificaciones",
+      "anti spam",
+      "notification service"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -214,8 +400,16 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:requirement-domain"
+    ],
+    "aliases": [
+      "requerimientos funcionales evt",
+      "functional requirements evt",
+      "requisitos de eventos"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -226,8 +420,20 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-01 Verificacion de disponibilidad de cupo.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:quota",
+      "capability:availability"
+    ],
+    "aliases": [
+      "disponibilidad de cupo",
+      "verificar cupo",
+      "quota availability",
+      "available quota",
+      "cupos disponibles"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -238,8 +444,21 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-02 Reservacion de vacante durante proceso de venta.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:reservation",
+      "capability:quota"
+    ],
+    "aliases": [
+      "reservacion de vacante",
+      "reservación de vacante",
+      "reserva temporal",
+      "reserve quota",
+      "quota reservation",
+      "proceso de venta"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -250,8 +469,22 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-03 Notificacion de usuarios ante una liberacion de cupo.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:notification",
+      "capability:quota-release",
+      "capability:waitlist"
+    ],
+    "aliases": [
+      "liberacion de cupo",
+      "liberación de cupo",
+      "cupo liberado",
+      "release quota",
+      "waitlist notification",
+      "notificar vacante"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -262,8 +495,22 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-04 Bloqueo de vacantes despues de confirmacion de pago.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:quota",
+      "capability:payment-confirmation",
+      "capability:quota-blocking"
+    ],
+    "aliases": [
+      "bloqueo de vacante",
+      "bloqueo de cupo",
+      "confirmacion de pago",
+      "confirmación de pago",
+      "block quota",
+      "payment confirmation"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -274,8 +521,20 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-05 Gestion de inscripciones extemporaneas.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:late-registration",
+      "capability:reservation"
+    ],
+    "aliases": [
+      "inscripcion extemporanea",
+      "inscripción extemporánea",
+      "late registration",
+      "registro tardio",
+      "registro tardío"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -286,8 +545,21 @@
     "path": "docs/analisis/requerimientos/funcionales/EVT/RF-EVT-06 Gestion de lista de espera.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:rf",
+      "capability:waitlist",
+      "capability:prioritization"
+    ],
+    "aliases": [
+      "lista de espera",
+      "waitlist",
+      "waiting list",
+      "prioridad",
+      "fifo",
+      "waiting list service"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -298,8 +570,16 @@
     "path": "docs/analisis/requerimientos/no funcionales",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:non-functional-requirement-domain"
+    ],
+    "aliases": [
+      "requerimientos no funcionales",
+      "rnf",
+      "non functional requirements",
+      "quality attributes"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -311,9 +591,21 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "seguridad"
+      "area:analisis",
+      "kind:rnf",
+      "quality:security",
+      "capability:data-access",
+      "capability:tool-calls",
+      "capability:tenant"
     ],
-    "aliases": [],
+    "aliases": [
+      "seguridad",
+      "security",
+      "base de datos",
+      "database access",
+      "actores del sistema",
+      "acceso a datos"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -325,9 +617,20 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "rendimiento"
+      "area:analisis",
+      "kind:rnf",
+      "quality:performance",
+      "capability:bot-loop",
+      "capability:conversation-flow"
     ],
-    "aliases": [],
+    "aliases": [
+      "rendimiento",
+      "performance",
+      "bot performance",
+      "latencia",
+      "response time",
+      "tiempo de respuesta"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -339,10 +642,20 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "usabilidad",
-      "conversacion"
+      "area:analisis",
+      "kind:rnf",
+      "quality:usability",
+      "quality:clarity",
+      "capability:conversation-flow"
     ],
-    "aliases": [],
+    "aliases": [
+      "claridad",
+      "usabilidad",
+      "mensajes del bot",
+      "message clarity",
+      "bot messages",
+      "conversacion clara"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -354,10 +667,20 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "continuidad",
-      "sesion"
+      "area:analisis",
+      "kind:rnf",
+      "quality:continuity",
+      "capability:session",
+      "capability:conversation-flow"
     ],
-    "aliases": [],
+    "aliases": [
+      "continuidad",
+      "sesion",
+      "sesión",
+      "session continuity",
+      "conversation continuity",
+      "conversation session"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -369,9 +692,18 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "disponibilidad"
+      "area:analisis",
+      "kind:rnf",
+      "quality:availability",
+      "capability:tool-calls"
     ],
-    "aliases": [],
+    "aliases": [
+      "disponibilidad",
+      "availability",
+      "system availability",
+      "uptime",
+      "resiliencia"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -383,9 +715,15 @@
     "status": null,
     "purpose": null,
     "tags": [
-      "plantilla"
+      "area:analisis",
+      "kind:template",
+      "kind:rnf"
     ],
-    "aliases": [],
+    "aliases": [
+      "plantilla rnf",
+      "template rnf",
+      "non functional requirement template"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -396,8 +734,16 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:use-case-domain"
+    ],
+    "aliases": [
+      "casos de uso com",
+      "use cases com",
+      "flujo comercial"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -408,8 +754,22 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-001 Asignación de conversaciones de un bot a un operador humano.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:handoff",
+      "capability:conversation-routing",
+      "capability:tenant"
+    ],
+    "aliases": [
+      "handoff",
+      "human handoff",
+      "operador humano",
+      "asignacion bot operador",
+      "routing",
+      "message router"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -420,8 +780,22 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-002 Flujo de la conversación entre el Cliente potencial y el Bot.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:conversation-flow",
+      "capability:bot-loop",
+      "capability:event-discovery"
+    ],
+    "aliases": [
+      "agent runner",
+      "bot loop",
+      "flujo conversacional",
+      "cliente potencial",
+      "conversacion multicanal",
+      "event discovery"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -432,8 +806,21 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-003 Gestion de bancos de contexto.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:context-bank",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "context bank",
+      "banco de contexto",
+      "bancos de contexto",
+      "general context",
+      "event context",
+      "contexto de evento"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -444,8 +831,21 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-004 Presentación de avisos legales y registro de consentimiento tácito.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:consent",
+      "capability:privacy"
+    ],
+    "aliases": [
+      "consentimiento",
+      "consentimiento tacito",
+      "aviso legal",
+      "privacy notice",
+      "legal notice",
+      "privacidad"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -456,8 +856,22 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-005 Calificación automática y gestión de etapa comercial.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:commercial-stage",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "lead scoring",
+      "score",
+      "calificacion",
+      "calificación",
+      "etapa comercial",
+      "commercial stage",
+      "stage signal"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -468,8 +882,21 @@
     "path": "docs/analisis/modelos del problema/casos de uso/COM/CU-COM-006 Gestión de notificaciones de reactivación.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:cu",
+      "capability:notification",
+      "capability:reactivation"
+    ],
+    "aliases": [
+      "notificaciones",
+      "reactivacion",
+      "reactivación",
+      "outbound",
+      "notification service",
+      "anti spam"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -480,8 +907,16 @@
     "path": "docs/analisis/modelos del problema/casos de uso/EVT",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:use-case-domain"
+    ],
+    "aliases": [
+      "casos de uso evt",
+      "use cases evt",
+      "gestion de eventos"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -492,8 +927,21 @@
     "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-001 Registro en lista de espera.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:cu",
+      "capability:waitlist",
+      "capability:prioritization"
+    ],
+    "aliases": [
+      "waitlist",
+      "waiting list",
+      "lista de espera",
+      "prioridad",
+      "fifo",
+      "waiting list service"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -504,8 +952,21 @@
     "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-002 Gestión de cancelación.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:cu",
+      "capability:cancellation",
+      "capability:quota-release"
+    ],
+    "aliases": [
+      "cancelacion",
+      "cancelación",
+      "cancellation",
+      "release quota",
+      "liberacion de cupo",
+      "cancellation service"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -516,8 +977,25 @@
     "path": "docs/analisis/modelos del problema/casos de uso/EVT/CU-EVT-003 Gestión de cupos de eventos.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:cu",
+      "capability:quota",
+      "capability:reservation",
+      "capability:capacity"
+    ],
+    "aliases": [
+      "quota",
+      "capacity",
+      "cupo",
+      "cupos",
+      "vacante",
+      "reserva",
+      "bloqueo de cupo",
+      "reserve quota",
+      "quota service"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -528,8 +1006,16 @@
     "path": "docs/analisis/reglas de negocio/COM",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule-domain"
+    ],
+    "aliases": [
+      "reglas de negocio com",
+      "business rules com",
+      "reglas comerciales"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -540,10 +1026,840 @@
     "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule-catalog",
+      "capability:commercial-stage",
+      "capability:consent",
+      "capability:notification"
+    ],
+    "aliases": [
+      "catalogo rn com",
+      "catálogo rn com",
+      "reglas comerciales",
+      "commercial rules",
+      "reglas de consentimiento",
+      "reglas de reactivacion"
+    ],
     "services": [],
     "tool_calls": []
+  },
+  {
+    "id": "RN-COM-ESC-01",
+    "type": "business-rule",
+    "title": "Conversacion trazable durante transicion bot-operador",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:handoff",
+      "capability:conversation-routing",
+      "capability:audit-log"
+    ],
+    "aliases": [
+      "conversacion trazable",
+      "transición bot operador",
+      "transicion bot operador",
+      "handoff trazable",
+      "audit trail"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ESC-01 - Conversacion trazable durante transicion bot-operador",
+      "section_anchor": "rn-com-esc-01"
+    }
+  },
+  {
+    "id": "RN-COM-ESC-02",
+    "type": "business-rule",
+    "title": "Operadores disponibles para conversaciones escaladas",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:handoff",
+      "capability:conversation-routing"
+    ],
+    "aliases": [
+      "operadores disponibles",
+      "conversación escalada",
+      "conversacion escalada",
+      "human handoff",
+      "operador humano"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ESC-02 - Operadores disponibles para conversaciones escaladas",
+      "section_anchor": "rn-com-esc-02"
+    }
+  },
+  {
+    "id": "RN-COM-ESC-03",
+    "type": "business-rule",
+    "title": "Registro de asignacion y reasignacion para auditoria",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:handoff",
+      "capability:audit-log"
+    ],
+    "aliases": [
+      "registro de asignacion",
+      "reasignacion",
+      "auditoria",
+      "audit log",
+      "assignment audit"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ESC-03 - Registro de asignacion y reasignacion para auditoria",
+      "section_anchor": "rn-com-esc-03"
+    }
+  },
+  {
+    "id": "RN-COM-CONV-01",
+    "type": "business-rule",
+    "title": "Sin continuidad despues de avisos legales no se procesan datos personales",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:consent",
+      "capability:privacy",
+      "capability:data-capture"
+    ],
+    "aliases": [
+      "avisos legales",
+      "datos personales",
+      "consentimiento",
+      "no procesar datos",
+      "privacy notice"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONV-01 - Sin continuidad despues de avisos legales no se procesan datos personales",
+      "section_anchor": "rn-com-conv-01"
+    }
+  },
+  {
+    "id": "RN-COM-CONV-02",
+    "type": "business-rule",
+    "title": "Eventos disponibles desde fuente oficial",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:event-listing",
+      "capability:event-discovery",
+      "capability:context-bank"
+    ],
+    "aliases": [
+      "eventos disponibles",
+      "fuente oficial",
+      "listado de eventos",
+      "available events",
+      "official source"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONV-02 - Eventos disponibles desde fuente oficial",
+      "section_anchor": "rn-com-conv-02"
+    }
+  },
+  {
+    "id": "RN-COM-CONV-03",
+    "type": "business-rule",
+    "title": "Informacion detallada del evento desde contexto oficial",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:event-detail",
+      "capability:event-context",
+      "capability:context-bank"
+    ],
+    "aliases": [
+      "detalle de evento",
+      "contexto del evento",
+      "informacion oficial",
+      "event details",
+      "event context"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONV-03 - Informacion detallada del evento desde contexto oficial",
+      "section_anchor": "rn-com-conv-03"
+    }
+  },
+  {
+    "id": "RN-COM-CONV-04",
+    "type": "business-rule",
+    "title": "Una inscripcion o reserva activa por evento a la vez",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:reservation",
+      "capability:quota",
+      "capability:commercial-stage"
+    ],
+    "aliases": [
+      "reserva activa",
+      "una reserva por evento",
+      "cambiar de evento",
+      "liberar reserva previa",
+      "active reservation"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONV-04 - Una inscripcion o reserva activa por evento a la vez",
+      "section_anchor": "rn-com-conv-04"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-01",
+    "type": "business-rule",
+    "title": "Bancos de contexto como fuente unica de verdad",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:context-bank"
+    ],
+    "aliases": [
+      "fuente unica de verdad",
+      "fuente única de verdad",
+      "context bank",
+      "banco de contexto",
+      "source of truth"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-01 - Bancos de contexto como fuente unica de verdad",
+      "section_anchor": "rn-com-cont-01"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-02",
+    "type": "business-rule",
+    "title": "Administradores autorizados configuran contexto de evento",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:context-bank",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "administradores autorizados",
+      "configurar banco de contexto",
+      "contexto de evento",
+      "event context admin"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-02 - Administradores autorizados configuran contexto de evento",
+      "section_anchor": "rn-com-cont-02"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-03",
+    "type": "business-rule",
+    "title": "Contexto de evento activo para entrega al Bot",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:context-bank",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "contexto activo",
+      "banco de contexto activo",
+      "entrega al bot",
+      "active event context"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-03 - Contexto de evento activo para entrega al Bot",
+      "section_anchor": "rn-com-cont-03"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-04",
+    "type": "business-rule",
+    "title": "Entrega completa o parcial de bancos de contexto",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:context-bank"
+    ],
+    "aliases": [
+      "contexto completo",
+      "contexto parcial",
+      "bancos de contexto parciales",
+      "partial context"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-04 - Entrega completa o parcial de bancos de contexto",
+      "section_anchor": "rn-com-cont-04"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-05",
+    "type": "business-rule",
+    "title": "Contexto general filtra eventos por estado solicitado",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:context-bank",
+      "capability:event-listing"
+    ],
+    "aliases": [
+      "contexto general",
+      "estado solicitado",
+      "filtrar eventos",
+      "general context",
+      "event status"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-05 - Contexto general filtra eventos por estado solicitado",
+      "section_anchor": "rn-com-cont-05"
+    }
+  },
+  {
+    "id": "RN-COM-CONT-06",
+    "type": "business-rule",
+    "title": "Escritura de disponibilidad de cupo solo por procesos autorizados",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:quota",
+      "capability:reservation",
+      "capability:payment-confirmation"
+    ],
+    "aliases": [
+      "escritura de disponibilidad",
+      "disponibilidad de cupo",
+      "procesos autorizados",
+      "intervencion manual",
+      "quota write"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-CONT-06 - Escritura de disponibilidad de cupo solo por procesos autorizados",
+      "section_anchor": "rn-com-cont-06"
+    }
+  },
+  {
+    "id": "RN-COM-PRIV-01",
+    "type": "business-rule",
+    "title": "No guardar contacto antes de interaccion valida",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:privacy",
+      "capability:consent",
+      "capability:data-capture"
+    ],
+    "aliases": [
+      "informacion de contacto",
+      "interacción valida",
+      "no guardar contacto",
+      "datos personales"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-PRIV-01 - No guardar contacto antes de interaccion valida",
+      "section_anchor": "rn-com-priv-01"
+    }
+  },
+  {
+    "id": "RN-COM-PRIV-02",
+    "type": "business-rule",
+    "title": "Consentimiento registrado para auditoria",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:privacy",
+      "capability:consent",
+      "capability:audit-log"
+    ],
+    "aliases": [
+      "consentimiento registrado",
+      "auditoria de consentimiento",
+      "consent audit",
+      "registro de consentimiento"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-PRIV-02 - Consentimiento registrado para auditoria",
+      "section_anchor": "rn-com-priv-02"
+    }
+  },
+  {
+    "id": "RN-COM-PRIV-03",
+    "type": "business-rule",
+    "title": "Avisos y terminos antes de capturar datos personales",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:privacy",
+      "capability:consent",
+      "capability:data-capture"
+    ],
+    "aliases": [
+      "avisos antes de capturar datos",
+      "terminos",
+      "términos",
+      "datos personales",
+      "privacy notice"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-PRIV-03 - Avisos y terminos antes de capturar datos personales",
+      "section_anchor": "rn-com-priv-03"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-01",
+    "type": "business-rule",
+    "title": "Calificacion independiente de etapa comercial",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:commercial-stage",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "calificacion independiente",
+      "calificación independiente",
+      "etapa comercial",
+      "scoring no avanza etapa"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-01 - Calificacion independiente de etapa comercial",
+      "section_anchor": "rn-com-etapa-01"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-02",
+    "type": "business-rule",
+    "title": "Una etapa comercial activa por persona interesada",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:commercial-stage"
+    ],
+    "aliases": [
+      "etapa comercial activa",
+      "una etapa activa",
+      "persona interesada",
+      "active commercial stage"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-02 - Una etapa comercial activa por persona interesada",
+      "section_anchor": "rn-com-etapa-02"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-03",
+    "type": "business-rule",
+    "title": "Avance de etapa basado en criterios observables",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:commercial-stage",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "avance de etapa",
+      "criterios observables",
+      "conversacion",
+      "stage transition",
+      "observable criteria"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-03 - Avance de etapa basado en criterios observables",
+      "section_anchor": "rn-com-etapa-03"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-04",
+    "type": "business-rule",
+    "title": "Calificacion minima 0 y maxima 20",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "score 0 20",
+      "calificacion minima",
+      "calificación máxima",
+      "rango de score",
+      "lead score range"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-04 - Calificacion minima 0 y maxima 20",
+      "section_anchor": "rn-com-etapa-04"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-05",
+    "type": "business-rule",
+    "title": "Recalculo de calificacion durante la conversacion",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:scoring",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "recalculo de calificacion",
+      "recálculo de calificación",
+      "score recalculation",
+      "interacciones relevantes"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-05 - Recalculo de calificacion durante la conversacion",
+      "section_anchor": "rn-com-etapa-05"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-06",
+    "type": "business-rule",
+    "title": "Reduccion de etapa solo ante cambio de evento en Prospecto",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:commercial-stage",
+      "capability:event-discovery"
+    ],
+    "aliases": [
+      "reduccion de etapa",
+      "reducción de etapa",
+      "cambio de evento",
+      "prospecto",
+      "stage downgrade"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-06 - Reduccion de etapa solo ante cambio de evento en Prospecto",
+      "section_anchor": "rn-com-etapa-06"
+    }
+  },
+  {
+    "id": "RN-COM-ETAPA-07",
+    "type": "business-rule",
+    "title": "Conversacion bloqueada por abuso requiere intervencion humana",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:commercial-stage",
+      "capability:handoff",
+      "capability:abuse-prevention"
+    ],
+    "aliases": [
+      "abuso reincidente",
+      "conversacion bloqueada",
+      "intervención humana",
+      "intervencion humana",
+      "abuse prevention"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-ETAPA-07 - Conversacion bloqueada por abuso requiere intervencion humana",
+      "section_anchor": "rn-com-etapa-07"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-01",
+    "type": "business-rule",
+    "title": "Reactivacion solo a clientes elegibles con consentimiento",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:consent"
+    ],
+    "aliases": [
+      "clientes elegibles",
+      "consentimiento registrado",
+      "notificaciones de reactivacion",
+      "reactivation eligibility"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-01 - Reactivacion solo a clientes elegibles con consentimiento",
+      "section_anchor": "rn-com-react-01"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-02",
+    "type": "business-rule",
+    "title": "Anti-spam para notificaciones del mismo evento",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:anti-spam"
+    ],
+    "aliases": [
+      "anti spam",
+      "anti-spam",
+      "periodo anti spam",
+      "notificacion mismo evento",
+      "outbound spam"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-02 - Anti-spam para notificaciones del mismo evento",
+      "section_anchor": "rn-com-react-02"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-03",
+    "type": "business-rule",
+    "title": "Notificacion no inicia flujo comercial sin respuesta",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:commercial-stage"
+    ],
+    "aliases": [
+      "notificacion no inicia flujo",
+      "respuesta del cliente",
+      "flujo comercial",
+      "outbound response"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-03 - Notificacion no inicia flujo comercial sin respuesta",
+      "section_anchor": "rn-com-react-03"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-04",
+    "type": "business-rule",
+    "title": "Reactivacion no modifica etapas ni calificaciones",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:commercial-stage",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "no modifica etapas",
+      "no modifica calificaciones",
+      "desuscripcion",
+      "unsubscribe",
+      "reactivacion sin scoring"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-04 - Reactivacion no modifica etapas ni calificaciones",
+      "section_anchor": "rn-com-react-04"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-05",
+    "type": "business-rule",
+    "title": "Criterios de evento relacionado antes de notificar",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "evento relacionado",
+      "criterios de notificacion",
+      "activar notificacion",
+      "related event"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-05 - Criterios de evento relacionado antes de notificar",
+      "section_anchor": "rn-com-react-05"
+    }
+  },
+  {
+    "id": "RN-COM-REACT-06",
+    "type": "business-rule",
+    "title": "Cliente desuscrito no recibe nuevas notificaciones",
+    "path": "docs/analisis/reglas de negocio/COM/catalogo-rn-com.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:com",
+      "kind:business-rule",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:unsubscribe"
+    ],
+    "aliases": [
+      "cliente desuscrito",
+      "desuscripcion activa",
+      "unsubscribe",
+      "opt out",
+      "no recibir notificaciones"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-COM-REACT-06 - Cliente desuscrito no recibe nuevas notificaciones",
+      "section_anchor": "rn-com-react-06"
+    }
   },
   {
     "id": "DOM-RN-BASE",
@@ -552,8 +1868,15 @@
     "path": "docs/analisis/reglas de negocio",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:business-rule-domain"
+    ],
+    "aliases": [
+      "base de reglas de negocio",
+      "business rules base",
+      "reglas de negocio"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -564,8 +1887,15 @@
     "path": "docs/analisis/reglas de negocio/README.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:business-rule-guide"
+    ],
+    "aliases": [
+      "readme reglas de negocio",
+      "business rules readme",
+      "guia de reglas"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -576,8 +1906,16 @@
     "path": "docs/analisis/reglas de negocio/RN-Plantilla.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:template",
+      "kind:business-rule"
+    ],
+    "aliases": [
+      "plantilla rn",
+      "plantilla regla de negocio",
+      "business rule template"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -588,8 +1926,16 @@
     "path": "docs/analisis/reglas de negocio/EVT",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule-domain"
+    ],
+    "aliases": [
+      "reglas de negocio evt",
+      "business rules evt",
+      "reglas de eventos"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -600,10 +1946,336 @@
     "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule-catalog",
+      "capability:quota",
+      "capability:waitlist",
+      "capability:cancellation",
+      "capability:reservation"
+    ],
+    "aliases": [
+      "catalogo rn evt",
+      "catálogo rn evt",
+      "reglas de eventos",
+      "event rules",
+      "reglas de cupos",
+      "reglas de lista de espera"
+    ],
     "services": [],
     "tool_calls": []
+  },
+  {
+    "id": "RN-EVT-LE-01",
+    "type": "business-rule",
+    "title": "Registro unico en lista de espera por evento",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:waitlist",
+      "capability:deduplication"
+    ],
+    "aliases": [
+      "registro unico lista de espera",
+      "registro único lista de espera",
+      "no duplicar waitlist",
+      "waiting list duplicate",
+      "mismo evento"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-LE-01 - Registro unico en lista de espera por evento",
+      "section_anchor": "rn-evt-le-01"
+    }
+  },
+  {
+    "id": "RN-EVT-LE-02",
+    "type": "business-rule",
+    "title": "Orden de lista de espera por calificacion y FIFO como desempate",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:waitlist",
+      "capability:prioritization",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "orden lista de espera",
+      "calificacion y fifo",
+      "calificación y fifo",
+      "fifo desempate",
+      "waitlist priority"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-LE-02 - Orden de lista de espera por calificacion y FIFO como desempate",
+      "section_anchor": "rn-evt-le-02"
+    }
+  },
+  {
+    "id": "RN-EVT-LE-03",
+    "type": "business-rule",
+    "title": "Lista de espera requiere datos minimos de contacto",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:waitlist",
+      "capability:data-capture"
+    ],
+    "aliases": [
+      "datos minimos de contacto",
+      "datos mínimos de contacto",
+      "contacto para waitlist",
+      "waiting list contact"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-LE-03 - Lista de espera requiere datos minimos de contacto",
+      "section_anchor": "rn-evt-le-03"
+    }
+  },
+  {
+    "id": "RN-EVT-CAN-01",
+    "type": "business-rule",
+    "title": "Cancelaciones solo antes del inicio del evento",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:cancellation"
+    ],
+    "aliases": [
+      "cancelacion antes del inicio",
+      "cancelación antes del inicio",
+      "pre inicio",
+      "cancellation window",
+      "event start"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CAN-01 - Cancelaciones solo antes del inicio del evento",
+      "section_anchor": "rn-evt-can-01"
+    }
+  },
+  {
+    "id": "RN-EVT-CAN-02",
+    "type": "business-rule",
+    "title": "Cancelacion valida libera inmediatamente la vacante",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:cancellation",
+      "capability:quota-release"
+    ],
+    "aliases": [
+      "cancelacion valida",
+      "cancelación valida",
+      "libera vacante",
+      "release quota",
+      "liberar cupo"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CAN-02 - Cancelacion valida libera inmediatamente la vacante",
+      "section_anchor": "rn-evt-can-02"
+    }
+  },
+  {
+    "id": "RN-EVT-CAN-03",
+    "type": "business-rule",
+    "title": "Actualizacion de cupo tras cancelacion preserva aforo y evita sobreventa",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:cancellation",
+      "capability:quota",
+      "capability:capacity"
+    ],
+    "aliases": [
+      "consistencia de aforo",
+      "evitar sobreventa",
+      "actualizacion de cupo",
+      "actualización de cupo",
+      "overselling"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CAN-03 - Actualizacion de cupo tras cancelacion preserva aforo y evita sobreventa",
+      "section_anchor": "rn-evt-can-03"
+    }
+  },
+  {
+    "id": "RN-EVT-CAN-04",
+    "type": "business-rule",
+    "title": "Notificaciones por cancelacion respetan anti-spam vigente",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:cancellation",
+      "capability:notification",
+      "capability:anti-spam"
+    ],
+    "aliases": [
+      "notificaciones por cancelacion",
+      "anti spam vigente",
+      "anti-spam cancelacion",
+      "cancellation notification"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CAN-04 - Notificaciones por cancelacion respetan anti-spam vigente",
+      "section_anchor": "rn-evt-can-04"
+    }
+  },
+  {
+    "id": "RN-EVT-CUPO-01",
+    "type": "business-rule",
+    "title": "Sin sobreinscripcion cuando el cupo esta lleno",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:quota",
+      "capability:capacity",
+      "capability:reservation"
+    ],
+    "aliases": [
+      "no sobreinscripcion",
+      "no sobreinscripción",
+      "cupo lleno",
+      "evitar sobreventa",
+      "overbooking"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CUPO-01 - Sin sobreinscripcion cuando el cupo esta lleno",
+      "section_anchor": "rn-evt-cupo-01"
+    }
+  },
+  {
+    "id": "RN-EVT-CUPO-02",
+    "type": "business-rule",
+    "title": "Liberacion de vacante temporal si no se confirma pago",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:reservation",
+      "capability:quota-release",
+      "capability:payment-confirmation"
+    ],
+    "aliases": [
+      "vacante temporal",
+      "expiracion de reserva",
+      "expiración de reserva",
+      "pago no confirmado",
+      "release reservation"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CUPO-02 - Liberacion de vacante temporal si no se confirma pago",
+      "section_anchor": "rn-evt-cupo-02"
+    }
+  },
+  {
+    "id": "RN-EVT-CUPO-03",
+    "type": "business-rule",
+    "title": "Inscripciones extemporaneas segun politica vigente del evento",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:late-registration",
+      "capability:reservation"
+    ],
+    "aliases": [
+      "inscripciones extemporaneas",
+      "inscripciones extemporáneas",
+      "late registration",
+      "politica vigente",
+      "política vigente"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CUPO-03 - Inscripciones extemporaneas segun politica vigente del evento",
+      "section_anchor": "rn-evt-cupo-03"
+    }
+  },
+  {
+    "id": "RN-EVT-CUPO-04",
+    "type": "business-rule",
+    "title": "Persona elegible queda registrada en lista de espera segun politica del evento",
+    "path": "docs/analisis/reglas de negocio/EVT/catalogo-rn-evt.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "domain:evt",
+      "kind:business-rule",
+      "capability:waitlist",
+      "capability:quota",
+      "capability:prioritization"
+    ],
+    "aliases": [
+      "persona elegible",
+      "registrar en lista de espera",
+      "politica del evento",
+      "política del evento",
+      "eligible waitlist"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "heading": "RN-EVT-CUPO-04 - Persona elegible queda registrada en lista de espera segun politica del evento",
+      "section_anchor": "rn-evt-cupo-04"
+    }
   },
   {
     "id": "DOM-MODELOS-PROBLEMA",
@@ -612,8 +2284,16 @@
     "path": "docs/analisis/modelos del problema",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:problem-model-domain"
+    ],
+    "aliases": [
+      "modelos del problema",
+      "problem models",
+      "bpmn",
+      "casos de uso"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -624,8 +2304,17 @@
     "path": "docs/analisis/modelos del problema/bpmn/BPMNs.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:bpmn-index",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "indice bpmn",
+      "índice bpmn",
+      "bpmn index",
+      "modelos bpmn"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -636,8 +2325,17 @@
     "path": "docs/analisis/modelos del problema/bpmn/BPMN-001.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:bpmn",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "bpmn 001",
+      "bpmn conversacion",
+      "proceso conversacional",
+      "conversation process"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -648,8 +2346,17 @@
     "path": "docs/diseño/modelos de diseño/Diagrama de casos de uso.png",
     "status": "pendiente-mover-a-analisis",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:use-case-diagram",
+      "status:pending-move"
+    ],
+    "aliases": [
+      "diagrama de casos de uso",
+      "use case diagram",
+      "uc diagram",
+      "actores y casos de uso"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -660,8 +2367,16 @@
     "path": "docs/analisis/modelos del problema/casos de uso/CU-Plantilla.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:analisis",
+      "kind:template",
+      "kind:cu"
+    ],
+    "aliases": [
+      "plantilla cu",
+      "plantilla caso de uso",
+      "use case template"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -672,8 +2387,16 @@
     "path": "docs/diseño/arquitectura",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:architecture-domain"
+    ],
+    "aliases": [
+      "arquitectura",
+      "arquitectura de diseño",
+      "architecture",
+      "diseño tecnico"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -684,7 +2407,12 @@
     "path": "docs/diseño/arquitectura/estructura-de-codigo.md",
     "status": null,
     "purpose": null,
-    "tags": [],
+    "tags": [
+      "area:diseno",
+      "kind:architecture",
+      "capability:code-structure",
+      "capability:orchestrator"
+    ],
     "aliases": [
       "estructura-de-codigo",
       "blueprint de codigo",
@@ -702,8 +2430,16 @@
     "path": "docs/diseño/decisiones",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:decision-domain"
+    ],
+    "aliases": [
+      "decisiones de diseno",
+      "decisiones de diseño",
+      "design decisions",
+      "ddr"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -714,8 +2450,22 @@
     "path": "docs/diseño/decisiones/DDR-01-impacto-de-rf-com-02-en-los-casos-de-uso.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:decision",
+      "domain:com",
+      "domain:evt",
+      "capability:commercial-stage",
+      "capability:scoring"
+    ],
+    "aliases": [
+      "nucleo comercial",
+      "núcleo comercial",
+      "impacto rf-com-02",
+      "etapa comercial",
+      "scoring",
+      "alineacion comercial"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -726,8 +2476,21 @@
     "path": "docs/diseño/decisiones/DDR-02-decisiones-arquitectonicas-del-orquestador.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:decision",
+      "capability:orchestrator",
+      "capability:tool-calls",
+      "capability:domain-services"
+    ],
+    "aliases": [
+      "orquestador",
+      "orchestrator",
+      "tool calls",
+      "domain services",
+      "servicios de dominio",
+      "bot emite señales"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -738,8 +2501,17 @@
     "path": "docs/diseño/comportamiento/secuencia",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence-domain",
+      "capability:behavior"
+    ],
+    "aliases": [
+      "diagramas de secuencia",
+      "sequence diagrams",
+      "comportamiento",
+      "flujos secuenciales"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -750,8 +2522,17 @@
     "path": "docs/diseño/comportamiento/secuencia/diagrama-secuencia.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence-index",
+      "capability:behavior"
+    ],
+    "aliases": [
+      "indice secuencia",
+      "índice secuencia",
+      "sequence index",
+      "indice de diagramas"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -762,8 +2543,21 @@
     "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-01-captacion-consentimiento-y-transicion-a-prospecto.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence",
+      "capability:consent",
+      "capability:commercial-stage",
+      "capability:conversation-flow"
+    ],
+    "aliases": [
+      "captacion",
+      "captación",
+      "consentimiento",
+      "transicion a prospecto",
+      "transición a prospecto",
+      "prospecto"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -774,8 +2568,22 @@
     "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-02-inscripcion-reserva-temporal-sql-y-confirmacion.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence",
+      "capability:reservation",
+      "capability:quota",
+      "capability:payment-confirmation"
+    ],
+    "aliases": [
+      "inscripcion",
+      "inscripción",
+      "reserva temporal",
+      "sql",
+      "confirmacion",
+      "confirmación",
+      "reserve quota"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -786,8 +2594,20 @@
     "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-03-lista-de-espera-y-notificacion-por-liberacion-de-vacante.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence",
+      "capability:waitlist",
+      "capability:notification",
+      "capability:quota-release"
+    ],
+    "aliases": [
+      "lista de espera",
+      "waitlist",
+      "notificacion por liberacion",
+      "liberacion de vacante",
+      "release quota"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -798,8 +2618,20 @@
     "path": "docs/diseño/comportamiento/secuencia/sequence-diagram-04-cancelacion-pre-inicio-e-inscripcion-extemporanea.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:sequence",
+      "capability:cancellation",
+      "capability:late-registration",
+      "capability:quota-release"
+    ],
+    "aliases": [
+      "cancelacion pre inicio",
+      "cancelación pre inicio",
+      "inscripcion extemporanea",
+      "late registration",
+      "cancellation"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -810,8 +2642,17 @@
     "path": "docs/diseño/comportamiento/colaboracion",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:collaboration-domain",
+      "capability:behavior"
+    ],
+    "aliases": [
+      "diagramas de colaboracion",
+      "diagramas de colaboración",
+      "collaboration diagrams",
+      "interacciones"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -822,8 +2663,17 @@
     "path": "docs/diseño/comportamiento/colaboracion/diagrama-colaboracion.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:collaboration-index",
+      "capability:behavior"
+    ],
+    "aliases": [
+      "indice colaboracion",
+      "índice colaboración",
+      "collaboration index",
+      "indice de colaboracion"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -834,8 +2684,20 @@
     "path": "docs/diseño/comportamiento/colaboracion/collaboration-diagram-01-captacion-hasta-cierre-ganado.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:collaboration",
+      "capability:commercial-stage",
+      "capability:conversation-flow",
+      "capability:quota"
+    ],
+    "aliases": [
+      "colaboracion principal",
+      "cierre ganado",
+      "captacion hasta cierre",
+      "won deal",
+      "cierre comercial"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -846,8 +2708,20 @@
     "path": "docs/diseño/comportamiento/colaboracion/collaboration-diagram-02-colaboracion-de-excepciones.svg",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:diseno",
+      "kind:collaboration",
+      "capability:waitlist",
+      "capability:cancellation",
+      "capability:quota"
+    ],
+    "aliases": [
+      "colaboracion de excepciones",
+      "colaboración de excepciones",
+      "exception flow",
+      "excepciones",
+      "waitlist cancellation"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -858,8 +2732,16 @@
     "path": "docs/soporte/workflow",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:workflow-domain"
+    ],
+    "aliases": [
+      "workflow del equipo",
+      "team workflow",
+      "proceso operativo",
+      "flujo de trabajo"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -870,20 +2752,226 @@
     "path": "docs/soporte/workflow/pipeline-operativo.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:workflow",
+      "capability:pipeline"
+    ],
+    "aliases": [
+      "pipeline operativo",
+      "operational pipeline",
+      "flujo operativo",
+      "proceso de trabajo",
+      "issues commits prs ramas"
+    ],
     "services": [],
     "tool_calls": []
   },
   {
     "id": "SUP-WORKFLOW-TEMPLATES",
-    "type": "artifact",
-    "title": "Plantillas operativas de issues y PR",
+    "type": "domain",
+    "title": "Plantillas textuales del workflow",
     "path": "docs/soporte/workflow",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:template-domain",
+      "capability:workflow",
+      "capability:issue-authoring",
+      "capability:pr-authoring"
+    ],
+    "aliases": [
+      "plantillas textuales",
+      "plantillas operativas",
+      "issue templates",
+      "pr templates",
+      "pull request templates",
+      "commit templates"
+    ],
+    "services": [],
+    "tool_calls": [],
+    "metadata": {
+      "locator_type": "virtual-group",
+      "defined_in": "docs/soporte/mapa-nodos/nodos-docs.yaml"
+    }
+  },
+  {
+    "id": "SUP-WORKFLOW-OPERATIVE-TEMPLATES",
+    "type": "domain",
+    "title": "Plantillas operativas de commits y PR",
+    "path": "docs/soporte/workflow/operative_templates",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template-domain",
+      "capability:commit-authoring",
+      "capability:pr-authoring"
+    ],
+    "aliases": [
+      "operative templates",
+      "plantillas operativas",
+      "commit guide",
+      "pull request guide",
+      "pr guide"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-COMMIT-MESSAGE",
+    "type": "artifact",
+    "title": "Guia de mensajes de commit",
+    "path": "docs/soporte/workflow/operative_templates/commit_message_guide.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:commit-authoring"
+    ],
+    "aliases": [
+      "commit message guide",
+      "guia de commits",
+      "guía de commits",
+      "mensajes de commit",
+      "commit template"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-PR-GUIDE",
+    "type": "artifact",
+    "title": "Guia de plantilla de pull request",
+    "path": "docs/soporte/workflow/operative_templates/guide_pull_request_template.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:pr-authoring"
+    ],
+    "aliases": [
+      "pull request template",
+      "pr template",
+      "guia de pr",
+      "guía de pr",
+      "pull request guide"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-ISSUES-TEMPLATES",
+    "type": "domain",
+    "title": "Plantillas de issues y planeacion",
+    "path": "docs/soporte/workflow/issues_templates",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template-domain",
+      "capability:issue-authoring",
+      "capability:planning"
+    ],
+    "aliases": [
+      "issues templates",
+      "plantillas de issues",
+      "milestone template",
+      "sprint template",
+      "weekly template",
+      "psd template"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-MILESTONE",
+    "type": "artifact",
+    "title": "Plantilla de milestone",
+    "path": "docs/soporte/workflow/issues_templates/milestone_template.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:issue-authoring",
+      "capability:planning"
+    ],
+    "aliases": [
+      "milestone template",
+      "plantilla milestone",
+      "hito",
+      "planeacion de hito"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-PSD",
+    "type": "artifact",
+    "title": "Plantilla PSD",
+    "path": "docs/soporte/workflow/issues_templates/psd_template.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:issue-authoring",
+      "capability:planning"
+    ],
+    "aliases": [
+      "psd template",
+      "plantilla psd",
+      "issue psd",
+      "product specification"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-SPRINT",
+    "type": "artifact",
+    "title": "Plantilla de sprint",
+    "path": "docs/soporte/workflow/issues_templates/sprint_template.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:issue-authoring",
+      "capability:sprint-planning"
+    ],
+    "aliases": [
+      "sprint template",
+      "plantilla sprint",
+      "planeacion sprint",
+      "sprint planning"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "SUP-WORKFLOW-TEMPLATE-WEEKLY",
+    "type": "artifact",
+    "title": "Plantilla semanal",
+    "path": "docs/soporte/workflow/issues_templates/weekly_template.md",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:soporte",
+      "kind:template",
+      "capability:issue-authoring",
+      "capability:weekly-report"
+    ],
+    "aliases": [
+      "weekly template",
+      "plantilla semanal",
+      "reporte semanal",
+      "weekly report"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -894,7 +2982,12 @@
     "path": ".github/workflows/ci-code.yml",
     "status": null,
     "purpose": null,
-    "tags": [],
+    "tags": [
+      "area:soporte",
+      "kind:ci-workflow",
+      "capability:code-ci",
+      "capability:graph-validation"
+    ],
     "aliases": [
       "ci-code",
       "github actions",
@@ -912,7 +3005,12 @@
     "path": ".github/workflows/ci-docs.yml",
     "status": null,
     "purpose": null,
-    "tags": [],
+    "tags": [
+      "area:soporte",
+      "kind:ci-workflow",
+      "capability:docs-ci",
+      "capability:graph-validation"
+    ],
     "aliases": [
       "ci-docs",
       "github actions",
@@ -929,8 +3027,16 @@
     "path": "docs/soporte/meetings",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:meetings-domain"
+    ],
+    "aliases": [
+      "reuniones",
+      "meetings",
+      "minutas",
+      "sesiones de trabajo"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -941,8 +3047,17 @@
     "path": "docs/soporte/entregas",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:deliverables-domain"
+    ],
+    "aliases": [
+      "entregas",
+      "bitacoras",
+      "bitácoras",
+      "deliverables",
+      "reportes"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -953,8 +3068,16 @@
     "path": "docs/soporte/prompts",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:prompts-domain"
+    ],
+    "aliases": [
+      "prompts",
+      "prompts reutilizables",
+      "reusable prompts",
+      "instrucciones para agentes"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -965,8 +3088,16 @@
     "path": "utils/scripts",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:scripts-domain"
+    ],
+    "aliases": [
+      "scripts de soporte",
+      "support scripts",
+      "automatizaciones",
+      "report scripts"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -977,8 +3108,17 @@
     "path": "utils/scripts/generate-individual-activity-summary.ps1",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:script",
+      "capability:activity-summary"
+    ],
+    "aliases": [
+      "activity summary",
+      "resumen de actividad",
+      "generador de resumen",
+      "actividad individual"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -989,8 +3129,17 @@
     "path": "utils/scripts/generate-monthly-report-context.ps1",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:script",
+      "capability:monthly-report"
+    ],
+    "aliases": [
+      "monthly report context",
+      "reporte mensual",
+      "contexto de reporte",
+      "monthly report"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1001,8 +3150,17 @@
     "path": "utils",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:utils-domain"
+    ],
+    "aliases": [
+      "utils",
+      "utilidades",
+      "analisis auxiliares",
+      "análisis auxiliares",
+      "herramientas de soporte"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1013,8 +3171,17 @@
     "path": "utils/reestructuracion-analisis-diseno.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:analysis-report",
+      "capability:documentation-structure"
+    ],
+    "aliases": [
+      "reestructuracion documental",
+      "reestructuración documental",
+      "estructura documental",
+      "analisis diseno soporte"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1025,8 +3192,17 @@
     "path": "utils/estrategia de implementacion chat.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:implementation-strategy",
+      "capability:orchestrator"
+    ],
+    "aliases": [
+      "estrategia de implementacion",
+      "estrategia de implementación",
+      "implementation strategy",
+      "chat implementation"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1037,8 +3213,18 @@
     "path": "utils/guia-depuracion-de-casos-de-uso.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:guide",
+      "kind:cu",
+      "capability:use-case-quality"
+    ],
+    "aliases": [
+      "guia depuracion cu",
+      "guía depuración cu",
+      "depuracion de casos de uso",
+      "use case cleanup"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1049,8 +3235,18 @@
     "path": "utils/contradicciones-cus.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:analysis-report",
+      "kind:cu",
+      "capability:use-case-quality"
+    ],
+    "aliases": [
+      "contradicciones cu",
+      "contradicciones casos de uso",
+      "inconsistencias cu",
+      "use case contradictions"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1061,8 +3257,18 @@
     "path": "utils/reporte de desajuste de arterfactos con implementacion.md",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:analysis-report",
+      "capability:implementation-gap",
+      "capability:orchestrator"
+    ],
+    "aliases": [
+      "desajuste implementacion",
+      "desajuste implementación",
+      "implementation gap",
+      "reporte de desajuste"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1073,8 +3279,255 @@
     "path": "docs/soporte/mapa-nodos",
     "status": null,
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:soporte",
+      "kind:graph-domain",
+      "capability:repo-graph",
+      "capability:agent-navigation"
+    ],
+    "aliases": [
+      "mapa de nodos",
+      "repo graph",
+      "repository graph",
+      "graph rag",
+      "graphrag",
+      "navegacion de agentes"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "DEMO-EVT-CONT-01",
+    "type": "artifact",
+    "title": "Contexto demo de evento EVT-CONT-01",
+    "path": "demo/eventos/EVT-CONT-01.json",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:demo",
+      "domain:evt",
+      "kind:fixture",
+      "capability:event-context",
+      "capability:quota",
+      "capability:reservation",
+      "capability:validation"
+    ],
+    "aliases": [
+      "evt-cont-01",
+      "evento demo",
+      "contexto demo evento",
+      "fixture evento",
+      "event context fixture",
+      "demo eventos",
+      "quota fixture"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "DOM-CAPABILITIES",
+    "type": "domain",
+    "title": "Capacidades de navegacion del dominio",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "area:analisis",
+      "kind:capability-domain",
+      "capability:agent-navigation"
+    ],
+    "aliases": [
+      "capacidades",
+      "capabilities",
+      "mapa de capacidades",
+      "capability map",
+      "navegacion por capacidades"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-EVT-QUOTA",
+    "type": "capability",
+    "title": "Gestion de cupos y reservas",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:evt",
+      "kind:capability",
+      "capability:quota",
+      "capability:reservation",
+      "capability:capacity"
+    ],
+    "aliases": [
+      "quota",
+      "cupo",
+      "cupos",
+      "vacante",
+      "reserva",
+      "reserve quota",
+      "block quota",
+      "disponibilidad de cupo",
+      "quota availability"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-EVT-WAITLIST",
+    "type": "capability",
+    "title": "Gestion de lista de espera",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:evt",
+      "kind:capability",
+      "capability:waitlist",
+      "capability:prioritization",
+      "capability:notification"
+    ],
+    "aliases": [
+      "waitlist",
+      "waiting list",
+      "lista de espera",
+      "prioridad",
+      "fifo",
+      "register waiting list",
+      "waitlist notification"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-EVT-CANCELLATION",
+    "type": "capability",
+    "title": "Gestion de cancelaciones y liberacion de cupo",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:evt",
+      "kind:capability",
+      "capability:cancellation",
+      "capability:quota-release"
+    ],
+    "aliases": [
+      "cancelacion",
+      "cancelación",
+      "cancellation",
+      "release quota",
+      "liberacion de cupo",
+      "liberación de cupo",
+      "cancelacion pre inicio"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-COM-COMMERCIAL-STAGE",
+    "type": "capability",
+    "title": "Gestion de etapa comercial y scoring",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:com",
+      "kind:capability",
+      "capability:commercial-stage",
+      "capability:scoring",
+      "capability:lead-qualification"
+    ],
+    "aliases": [
+      "commercial stage",
+      "etapa comercial",
+      "lead scoring",
+      "score",
+      "scoring",
+      "emit stage signal",
+      "stage signal"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-COM-CONTEXT-BANK",
+    "type": "capability",
+    "title": "Gestion de bancos de contexto",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:com",
+      "kind:capability",
+      "capability:context-bank",
+      "capability:event-context",
+      "capability:data-capture"
+    ],
+    "aliases": [
+      "context bank",
+      "banco de contexto",
+      "bancos de contexto",
+      "general context",
+      "event context",
+      "get general context",
+      "get event context"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-COM-HANDOFF",
+    "type": "capability",
+    "title": "Asignacion y handoff bot-operador",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "domain:com",
+      "kind:capability",
+      "capability:handoff",
+      "capability:conversation-routing",
+      "capability:tenant"
+    ],
+    "aliases": [
+      "handoff",
+      "human handoff",
+      "request human handoff",
+      "operador humano",
+      "asignacion bot operador",
+      "message routing"
+    ],
+    "services": [],
+    "tool_calls": []
+  },
+  {
+    "id": "CAP-ORQ-TOOL-CALLS",
+    "type": "capability",
+    "title": "Contratos y operaciones de tool calls",
+    "path": "docs/soporte/mapa-nodos/nodos-docs.yaml",
+    "status": null,
+    "purpose": null,
+    "tags": [
+      "kind:capability",
+      "capability:tool-calls",
+      "capability:orchestrator",
+      "capability:domain-services"
+    ],
+    "aliases": [
+      "tool calls",
+      "function calls",
+      "tool contracts",
+      "get_general_context",
+      "get_event_context",
+      "emit_stage_signal",
+      "reserve_quota",
+      "release_quota",
+      "block_quota",
+      "register_waiting_list",
+      "request_human_handoff"
+    ],
     "services": [],
     "tool_calls": []
   },
@@ -1085,8 +3538,26 @@
     "path": "src/conversation",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "capability:conversation-flow",
+      "capability:conversation-routing",
+      "capability:handoff",
+      "capability:audit-log",
+      "capability:session"
+    ],
+    "aliases": [
+      "conversation module",
+      "modulo conversacion",
+      "módulo conversación",
+      "message router",
+      "agent runner",
+      "handoff manager",
+      "audit log",
+      "session store"
+    ],
     "services": [
       "MessageRouter",
       "AgentRunner",
@@ -1103,8 +3574,24 @@
     "path": "src/commercial",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "domain:com",
+      "capability:commercial-stage",
+      "capability:scoring",
+      "capability:lead-qualification"
+    ],
+    "aliases": [
+      "commercial module",
+      "modulo comercial",
+      "módulo comercial",
+      "commercial stage service",
+      "scoring service",
+      "lead scoring",
+      "stage signals"
+    ],
     "services": [
       "CommercialStageService",
       "ScoringService"
@@ -1118,8 +3605,23 @@
     "path": "src/context-bank",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "domain:com",
+      "capability:context-bank",
+      "capability:event-context"
+    ],
+    "aliases": [
+      "context module",
+      "context bank module",
+      "modulo contexto",
+      "módulo contexto",
+      "context bank service",
+      "general context",
+      "event context"
+    ],
     "services": [
       "ContextBankService"
     ],
@@ -1132,8 +3634,26 @@
     "path": "src/events",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "domain:evt",
+      "capability:quota",
+      "capability:reservation",
+      "capability:waitlist",
+      "capability:cancellation"
+    ],
+    "aliases": [
+      "events module",
+      "modulo eventos",
+      "módulo eventos",
+      "quota service",
+      "waiting list service",
+      "cancellation service",
+      "cupos",
+      "reservas"
+    ],
     "services": [
       "QuotaService",
       "WaitingListService",
@@ -1148,8 +3668,22 @@
     "path": "src/notifications",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "capability:notification",
+      "capability:reactivation",
+      "capability:outbound"
+    ],
+    "aliases": [
+      "notifications module",
+      "modulo notificaciones",
+      "módulo notificaciones",
+      "notification service",
+      "outbound notification",
+      "reactivacion"
+    ],
     "services": [
       "NotificationService"
     ],
@@ -1162,8 +3696,23 @@
     "path": "src/tenant",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "capability:tenant",
+      "capability:configuration",
+      "capability:credentials"
+    ],
+    "aliases": [
+      "tenant module",
+      "modulo tenant",
+      "módulo tenant",
+      "tenant config service",
+      "tenant configuration",
+      "credenciales",
+      "multi tenant"
+    ],
     "services": [
       "TenantConfigService"
     ],
@@ -1176,8 +3725,30 @@
     "path": "src/tool-calls",
     "status": "planned",
     "purpose": null,
-    "tags": [],
-    "aliases": [],
+    "tags": [
+      "area:src-futuro",
+      "kind:code-anchor",
+      "status:planned",
+      "capability:tool-calls",
+      "capability:context-bank",
+      "capability:commercial-stage",
+      "capability:quota",
+      "capability:waitlist",
+      "capability:handoff"
+    ],
+    "aliases": [
+      "tool calls",
+      "function calls",
+      "tool contracts",
+      "get general context",
+      "get event context",
+      "emit stage signal",
+      "reserve quota",
+      "release quota",
+      "block quota",
+      "register waiting list",
+      "request human handoff"
+    ],
     "services": [],
     "tool_calls": [
       "get_general_context",

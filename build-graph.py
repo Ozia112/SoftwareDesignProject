@@ -16,10 +16,18 @@ from typing import Any
 RELATION_FIELDS = (
     "contains",
     "traces_to",
+    "satisfies",
+    "covers",
+    "applies_to",
     "governed_by",
+    "models",
+    "modeled_by",
     "derives_from",
     "implements_future",
+    "planned_in",
     "supports",
+    "validated_by",
+    "exercises",
     "references",
 )
 
@@ -28,11 +36,49 @@ DEFAULT_YAML_PATH = "docs/soporte/mapa-nodos/nodos-docs.yaml"
 REVERSE_RELATION_NAMES = {
     "contains": "contained_by",
     "traces_to": "traced_from",
+    "satisfies": "satisfied_by",
+    "covers": "covered_by",
+    "applies_to": "has_rule",
     "governed_by": "governs",
+    "models": "modeled_by",
+    "modeled_by": "models",
     "derives_from": "derived_by",
     "implements_future": "implemented_by_future",
+    "planned_in": "plans",
     "supports": "supported_by",
+    "validated_by": "validates",
+    "exercises": "exercised_by",
     "references": "referenced_by",
+}
+
+SEARCH_STOPWORDS = {
+    "a",
+    "anchor",
+    "area",
+    "artifact",
+    "business",
+    "capability",
+    "code",
+    "de",
+    "del",
+    "docs",
+    "domain",
+    "el",
+    "en",
+    "kind",
+    "la",
+    "las",
+    "los",
+    "md",
+    "o",
+    "para",
+    "por",
+    "png",
+    "root",
+    "rule",
+    "status",
+    "svg",
+    "y",
 }
 
 CORE_NODE_FIELDS = {
@@ -271,13 +317,27 @@ def strip_accents(text: str) -> str:
     return "".join(char for char in normalized if not unicodedata.combining(char))
 
 
-def tokenize(value: Any) -> set[str]:
+def tokenize(value: Any, *, filter_stopwords: bool = True) -> set[str]:
     """Tokenize text in lowercase without accents."""
     if value is None:
         return set()
 
     text = strip_accents(str(value).lower())
-    return {token for token in re.split(r"[^a-z0-9]+", text) if token}
+    tokens = {token for token in re.split(r"[^a-z0-9]+", text) if token}
+    if not filter_stopwords:
+        return tokens
+    return {token for token in tokens if token not in SEARCH_STOPWORDS}
+
+
+def searchable_tag_value(tag: str) -> str | None:
+    """Return the meaningful portion of a faceted tag for text search."""
+    if ":" not in tag:
+        return None
+
+    prefix, value = tag.split(":", 1)
+    if prefix in {"capability", "domain", "quality"}:
+        return value
+    return None
 
 
 def node_summary(node: dict[str, Any]) -> dict[str, Any]:
@@ -301,18 +361,30 @@ def build_search_index(nodes: list[dict[str, Any]]) -> dict[str, Any]:
     by_tag: dict[str, set[str]] = defaultdict(set)
     by_status: dict[str, set[str]] = defaultdict(set)
     by_path: dict[str, set[str]] = defaultdict(set)
+    by_service: dict[str, set[str]] = defaultdict(set)
+    by_tool_call: dict[str, set[str]] = defaultdict(set)
 
     for node in nodes:
         node_id = node["id"]
         text_values: list[Any] = [
             node_id,
             node.get("title"),
-            node.get("path"),
-            node.get("type"),
             node.get("status"),
         ]
-        text_values.extend(node.get("tags", []))
+        text_values.extend(
+            value
+            for value in (searchable_tag_value(tag) for tag in node.get("tags", []))
+            if value
+        )
         text_values.extend(node.get("aliases", []))
+        text_values.extend(node.get("services", []))
+        text_values.extend(node.get("tool_calls", []))
+
+        for service in node.get("services", []):
+            by_service[service].add(node_id)
+        
+        for tool_call in node.get("tool_calls", []):
+            by_tool_call[tool_call].add(node_id)
 
         for value in text_values:
             for token in tokenize(value):
@@ -340,6 +412,8 @@ def build_search_index(nodes: list[dict[str, Any]]) -> dict[str, Any]:
         "by_tag": {key: sorted(ids) for key, ids in sorted(by_tag.items())},
         "by_status": {key: sorted(ids) for key, ids in sorted(by_status.items())},
         "by_path": {key: sorted(ids) for key, ids in sorted(by_path.items())},
+        "by_service": {key: sorted(ids) for key, ids in sorted(by_service.items())},
+        "by_tool_call": {key: sorted(ids) for key, ids in sorted(by_tool_call.items())}
     }
 
 

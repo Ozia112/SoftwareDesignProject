@@ -1,0 +1,60 @@
+{
+  "$schema": "../schema.evento.json",
+  "version": "1.0.0",
+  "id": "EVT-PBI-01",
+  "activo": true,
+
+  "info": {
+    "nombre": "Taller Power BI",
+    "descripcion": "Construye dashboards interactivos y conecta múltiples fuentes de datos.",
+    "inicio": "2026-06-20T10:00:00-06:00",
+    "fin":    "2026-06-20T14:00:00-06:00",
+    "cupoTotal": 30,
+    "etiquetas": ["power bi", "business intelligence", "datos", "microsoft", "visualización"]
+  },
+
+  "comercial": {
+    "precio": 1500,
+    "moneda": "MXN",
+    "descuentos": [],
+    "metodoPago": {
+      "banco": "BBVA",
+      "cuenta": "0123 4567 8901",
+      "clabe": "012345678901234567",
+      "beneficiario": "Academia Digital MX",
+      "comprobantesA": "pagos@academiadigital.mx"
+    },
+    "politicaReembolso": "Sin reembolso después de 48h antes del evento"
+  },
+
+  "logistica": {
+    "modalidad": "online",
+    "ubicacion": null,
+    "horario": "Sábado 10am–2pm",
+    "duracion": "4 horas",
+    "plataforma": "Zoom",
+    "enlaceAcceso": null
+  },
+
+  "academico": {
+    "nivel": "Principiante",
+    "requisitos": [],
+    "instructor": {
+      "nombre": "Lic. Sandra Ruiz",
+      "especialidad": "Business Intelligence y visualización de datos"
+    },
+    "temario": [
+      "Conexión a fuentes de datos (Excel, SQL, web)",
+      "Modelado de datos y relaciones",
+      "Visualizaciones interactivas y gráficos",
+      "Medidas DAX básicas",
+      "Publicación y colaboración en Power BI Service"
+    ],
+    "incluye": [
+      "Grabación permanente del taller",
+      "Archivos de práctica y datasets"
+    ]
+  },
+
+  "participantes": []
+}

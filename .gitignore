@@ -3,3 +3,14 @@ resultado.md
 notas.md
 __pycache__/
 *.pyc
+node_modules/
+dist/
+.env.local
+.env
+demo/.env.demo
+coverage/
+*.log
+.DS_Store
+.claude/
+demo/logs/sessions/*.txt
+demo/logs/*.log

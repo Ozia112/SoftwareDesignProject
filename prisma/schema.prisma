@@ -1,0 +1,244 @@
+// Prisma schema — instalable en la DB del tenant
+// Ejecutar: npx prisma migrate dev --name init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// Enums
+// ============================================================
+
+enum Stage {
+  LEAD
+  MQL
+  PROSPECTO
+  SQL
+  CIERRE
+}
+
+enum CierreResult {
+  GANADO
+  PERDIDO
+}
+
+enum ConvStatus {
+  ACTIVE
+  HANDOFF_PENDING
+  WITH_OPERATOR
+  CLOSED
+  BLOCKED
+}
+
+enum ReservationStatus {
+  TEMPORARY
+  CONFIRMED
+  RELEASED
+  EXPIRED
+}
+
+enum WaitingListStatus {
+  WAITING
+  NOTIFIED
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum AuditActor {
+  BOT
+  SYSTEM
+  OPERATOR
+  ADMIN
+}
+
+enum ChannelType {
+  WHATSAPP
+  TELEGRAM
+  WEB
+}
+
+// ============================================================
+// Tenant (base de datos del sistema, no del tenant individual)
+// Estos modelos viven en la DB del sistema y referencian al tenant.
+// La DB del tenant contiene Lead, Conversation, etc.
+// ============================================================
+
+// Lead — cliente potencial que inicia conversación
+model Lead {
+  id             String    @id @default(cuid())
+  tenantId       String
+  channelId      String
+  channelType    ChannelType
+  name           String?
+  phone          String?
+  email          String?
+  currentStage   Stage     @default(LEAD)
+  cierreResult   CierreResult?
+  score          Int       @default(0)
+  consentAt      DateTime?
+  blockedAt      DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  conversations  Conversation[]
+  reservations   Reservation[]
+  waitingEntries WaitingListEntry[]
+  stageHistory   StageHistory[]
+
+  @@index([tenantId, channelId])
+  @@index([tenantId, currentStage])
+}
+
+// Conversation — sesión de conversación entre lead y bot/operador
+model Conversation {
+  id          String     @id @default(cuid())
+  leadId      String
+  tenantId    String
+  status      ConvStatus @default(ACTIVE)
+  assignedTo  String?    // operatorId o null (bot)
+  channel     ChannelType
+  createdAt   DateTime   @default(now())
+  closedAt    DateTime?
+  updatedAt   DateTime   @updatedAt
+
+  lead        Lead       @relation(fields: [leadId], references: [id])
+  auditLogs   AuditLog[]
+
+  @@index([tenantId, status])
+  @@index([leadId])
+}
+
+// Reservation — reserva de cupo (temporal o definitiva)
+model Reservation {
+  id              String            @id @default(cuid())
+  leadId          String
+  eventId         String
+  tenantId        String
+  status          ReservationStatus @default(TEMPORARY)
+  idempotencyKey  String            @unique
+  expiresAt       DateTime?
+  confirmedAt     DateTime?
+  releasedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  lead            Lead              @relation(fields: [leadId], references: [id])
+
+  @@index([tenantId, eventId, status])
+  @@index([leadId, eventId])
+}
+
+// WaitingListEntry — entrada en lista de espera
+model WaitingListEntry {
+  id        String            @id @default(cuid())
+  leadId    String
+  eventId   String
+  tenantId  String
+  score     Int
+  status    WaitingListStatus @default(WAITING)
+  joinedAt  DateTime          @default(now())
+  notifiedAt DateTime?
+  expiresAt  DateTime?
+  updatedAt  DateTime         @updatedAt
+
+  lead      Lead              @relation(fields: [leadId], references: [id])
+
+  @@unique([leadId, eventId])
+  @@index([eventId, score, joinedAt])  // orden: score DESC, joinedAt ASC
+  @@index([tenantId, eventId, status])
+}
+
+// StageHistory — historial de transiciones comerciales
+model StageHistory {
+  id             String   @id @default(cuid())
+  leadId         String
+  tenantId       String
+  fromStage      Stage?
+  toStage        Stage
+  signal         String
+  transactionId  String
+  createdAt      DateTime @default(now())
+
+  lead           Lead     @relation(fields: [leadId], references: [id])
+
+  @@index([leadId])
+  @@index([tenantId, createdAt])
+}
+
+// AuditLog — append-only, trazabilidad de operaciones
+model AuditLog {
+  id              String     @id @default(cuid())
+  tenantId        String
+  conversationId  String
+  transactionId   String
+  actor           AuditActor
+  action          String
+  payload         Json?
+  createdAt       DateTime   @default(now())
+
+  conversation    Conversation @relation(fields: [conversationId], references: [id])
+
+  @@index([tenantId, createdAt])
+  @@index([conversationId])
+  @@index([transactionId])
+}
+
+// Event — evento o curso al que el lead puede inscribirse
+model Event {
+  id             String   @id @default(cuid())
+  tenantId       String
+  name           String
+  description    String?
+  startDate      DateTime?
+  endDate        DateTime?
+  totalQuota     Int      @default(0)
+  reservedQuota  Int      @default(0)
+  confirmedQuota Int      @default(0)
+  isActive       Boolean  @default(true)
+  contextData    Json?    // banco de contexto del evento
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([tenantId, isActive])
+}
+
+// TenantConfig — almacenada en DB del SISTEMA (no del tenant)
+// tenantId apunta a un negocio cliente
+model TenantConfig {
+  id              String   @id @default(cuid())
+  tenantId        String   @unique
+  name            String
+  llmModel        String   @default("claude-haiku-4-5-20251001")
+  systemPrompt    String?  @db.Text
+  isActive        Boolean  @default(true)
+  planType        String   @default("basic")
+  maxRequestsMin  Int      @default(100)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  credentials     TenantCredential[]
+}
+
+// TenantCredential — credenciales cifradas del tenant
+model TenantCredential {
+  id             String   @id @default(cuid())
+  tenantId       String
+  credentialType String   // llm_api_key | whatsapp_token | telegram_token | db_url
+  encryptedValue String   @db.Text
+  isActive       Boolean  @default(true)
+  rotatedAt      DateTime?
+  expiresAt      DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tenantConfig   TenantConfig @relation(fields: [tenantId], references: [tenantId])
+
+  @@unique([tenantId, credentialType])
+  @@index([tenantId])
+}

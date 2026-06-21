@@ -1,0 +1,68 @@
+{
+  "$schema": "../schema.evento.json",
+  "version": "1.0.0",
+  "id": "EVT-CONT-01",
+  "activo": true,
+
+  "info": {
+    "nombre": "Diplomado Contabilidad Digital",
+    "descripcion": "Contabilidad electronica, facturacion CFDI 4.0, declaraciones fiscales y herramientas digitales.",
+    "inicio": "2026-07-01T08:00:00-06:00",
+    "fin":    "2026-09-30T20:00:00-06:00",
+    "cupoTotal": 1,
+    "etiquetas": ["contabilidad", "fiscal", "CFDI", "diplomado", "SAT"]
+  },
+
+  "comercial": {
+    "precio": 8500,
+    "moneda": "MXN",
+    "descuentos": [
+      {
+        "nombre": "Beca para desempleados",
+        "porcentaje": 15,
+        "descripcion": "15% de descuento acreditando situacion de desempleo",
+        "activo": true
+      }
+    ],
+    "metodoPago": {
+      "banco": "BBVA",
+      "cuenta": "0123 4567 8901",
+      "clabe": "012345678901234567",
+      "beneficiario": "Academia Digital MX",
+      "comprobantesA": "pagos@academiadigital.mx"
+    },
+    "politicaReembolso": "Reembolso del 50% si se cancela antes de 7 dias del inicio"
+  },
+
+  "logistica": {
+    "modalidad": "hibrida",
+    "ubicacion": "Sede por confirmar, CDMX",
+    "horario": "Martes y Jueves 7pm-9pm + Sabados 9am-12pm",
+    "duracion": "3 meses (120 horas)",
+    "plataforma": "Google Meet",
+    "enlaceAcceso": null
+  },
+
+  "academico": {
+    "nivel": "Basico a Avanzado",
+    "requisitos": [],
+    "instructor": {
+      "nombre": "CP. Ana Beltran Dominguez",
+      "especialidad": "Contabilidad fiscal y facturacion electronica"
+    },
+    "temario": [
+      "Contabilidad electronica SAT (catalogos, polizas, balanzas)",
+      "Facturacion CFDI 4.0 y complementos",
+      "Declaraciones de ISR e IVA",
+      "Nomina digital e IMSS",
+      "Herramientas digitales: ContPAQi, Aspel, SAP basico"
+    ],
+    "incluye": [
+      "Certificado con validez fiscal (DC-3)",
+      "Asesoria 1:1 mensual con el instructor",
+      "Acceso vitalicio a la plataforma de materiales",
+      "Actualizaciones de contenido por 1 anio"
+    ]
+  },
+  "participantes": []
+}

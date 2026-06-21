@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SaaS Bot Orchestrator — Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <!-- ══ Header ══════════════════════════════════════════════════════════ -->
+    <header>
+      <div class="logo">
+        <div class="logo-icon">🤖</div>
+        SaaS Bot Orchestrator
+        <span class="badge badge-demo">Demo</span>
+      </div>
+      <div class="status-bar">
+        <span><span class="status-dot" id="dot-orch"></span>Orquestador</span>
+        <span><span class="status-dot" id="dot-pg"></span>PostgreSQL</span>
+        <span><span class="status-dot" id="dot-redis"></span>Redis</span>
+        <span><span class="status-dot" id="dot-wa"></span>WhatsApp</span>
+        <span id="clock" style="color:var(--muted);font-size:12px"></span>
+      </div>
+    </header>
+
+    <div class="main">
+      <!-- ══ Barra de escenarios ════════════════════════════════════════════ -->
+      <div class="scenario-bar">
+        <span>Simular clic en anuncio:</span>
+        <button class="btn primary" onclick="startFromAd('excel')">📊 Excel Avanzado</button>
+        <button class="btn primary" onclick="startFromAd('powerbi')">📈 Taller Power BI</button>
+        <button class="btn primary" onclick="startFromAd('diplomado')">🎓 Diplomado Contabilidad</button>
+        <div style="margin-left:auto;display:flex;gap:8px">
+          <button class="btn" onclick="clearAll()">🗑 Nueva sesión</button>
+          <button class="btn" onclick="resetDemo()" style="color:var(--red);border-color:rgba(248,81,73,.4)">⚠ Reset demo</button>
+          <a href="http://localhost:3000/api/docs" target="_blank" class="btn">📖 Swagger</a>
+        </div>
+      </div>
+
+      <!-- Panel izquierdo externo eliminado — contenido movido dentro de #tab-chat -->
+
+      <div class="content-row">
+      <!-- ══ Centro: tabs ═══════════════════════════════════════════════════ -->
+      <div class="center">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="switchTab('chat')" id="tab-btn-chat">
+            💬 Chat Cliente
+          </button>
+          <button class="tab-btn" onclick="switchTab('operator')" id="tab-btn-operator">
+            🧑‍💼 Vista Operador
+            <span class="tab-badge" id="handoff-badge" style="display:none">0</span>
+          </button>
+          <button class="tab-btn" onclick="switchTab('logs')" id="tab-btn-logs">
+            🖥️ Logs
+          </button>
+        </div>
+
+        <!-- ── Chat tab ── -->
+        <div id="tab-chat" class="tab-content active" style="flex-direction:row;overflow:hidden">
+          <!-- Columna izquierda: Tenant dashboard (autocontenida, como en tab-operator) -->
+          <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)">
+            <div class="panel-header">
+              <div class="panel-title">🏢 Tenant</div>
+              <span class="badge badge-demo">Academia Digital MX</span>
+            </div>
+            <div class="panel-body">
+
+              <div class="section-label">Etapa comercial del lead</div>
+              <div class="stage-track" id="stage-track">
+                <div class="stage-item pending" id="s-LEAD">
+                  <div class="stage-icon">1</div>
+                  <div>
+                    <div>LEAD</div>
+                    <div style="font-size:10px;color:var(--muted)">Conversación iniciada</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-MQL">
+                  <div class="stage-icon">2</div>
+                  <div>
+                    <div>MQL</div>
+                    <div style="font-size:10px;color:var(--muted)">Datos de contacto</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-PROSPECTO">
+                  <div class="stage-icon">3</div>
+                  <div>
+                    <div>PROSPECTO</div>
+                    <div style="font-size:10px;color:var(--muted)">Interés en inscripción</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-SQL">
+                  <div class="stage-icon">4</div>
+                  <div>
+                    <div>SQL</div>
+                    <div style="font-size:10px;color:var(--muted)">Pago pendiente</div>
+                  </div>
+                </div>
+                <div class="stage-item pending" id="s-CIERRE">
+                  <div class="stage-icon">5</div>
+                  <div>
+                    <div>CIERRE</div>
+                    <div style="font-size:10px;color:var(--muted)">Ganado / Perdido</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">Métricas de sesión</div>
+              <div class="metrics-grid">
+                <div class="metric-card">
+                  <div class="metric-label">Puntuación</div>
+                  <div class="metric-value green" id="m-score">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Tool calls</div>
+                  <div class="metric-value accent" id="m-tools">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Mensajes</div>
+                  <div class="metric-value purple" id="m-msgs">0</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-label">Turnos</div>
+                  <div class="metric-value" id="m-turns">0</div>
+                </div>
+              </div>
+
+              <div class="section-label">Configuración del tenant</div>
+              <div class="config-row">
+                <span class="config-key">Tenant ID</span>
+                <span class="config-val">demo-tenant</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Modelo LLM</span>
+                <span class="config-val" id="cfg-model">claude-haiku-4-5</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Canal activo</span>
+                <span class="config-val">WEB</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Lead ID</span>
+                <span class="config-val" id="cfg-leadid">–</span>
+              </div>
+              <div class="config-row">
+                <span class="config-key">Conversación</span>
+                <span class="config-val" id="cfg-convid">–</span>
+              </div>
+
+              <div class="section-label" style="margin-top:16px">Sesiones activas</div>
+              <div id="session-list">
+                <div style="color:var(--muted);font-size:11px;padding:4px 0">Sin sesiones — inicia un escenario</div>
+              </div>
+
+            </div>
+          </div>
+          <!-- Columna derecha: Chat -->
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+            <div class="chat-header">
+              <div class="avatar">A</div>
+              <div class="chat-identity">
+                <strong>Ana — Academia Digital MX</strong>
+                <small>● en línea</small>
+              </div>
+              <div class="wa-badge"><span style="font-size:18px">📱</span> Canal: Web Chat</div>
+            </div>
+            <div class="chat-area" id="chat-area">
+              <div class="msg system-msg">Demo iniciado — escribe un mensaje o usa los escenarios arriba</div>
+            </div>
+            <div class="typing" id="typing"><span></span><span></span><span></span></div>
+            <div class="chat-input">
+              <input type="text" id="msg-input"
+                placeholder="Escribe un mensaje como cliente..."
+                onkeydown="if(event.key==='Enter') sendMsg()" />
+              <button class="btn primary" onclick="sendMsg()">Enviar →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Operator tab ── -->
+        <div id="tab-operator" class="tab-content" style="flex-direction:row;overflow:hidden">
+          <!-- Lista de conversaciones escaladas -->
+          <div style="width:380px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)">
+            <div style="padding:10px 12px;border-bottom:1px solid var(--border);flex-shrink:0">
+              <div class="op-stats" style="grid-template-columns:repeat(4,1fr)">
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Leads</div>
+                  <div class="stat-value accent" style="font-size:18px" id="op-totalLeads">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Activas</div>
+                  <div class="stat-value green" style="font-size:18px" id="op-activeConvs">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px">
+                  <div class="stat-label">Escalar</div>
+                  <div class="stat-value red" style="font-size:18px" id="op-pendingHandoff">–</div>
+                </div>
+                <div class="stat-card" style="padding:8px;cursor:pointer" onclick="refreshOperator()" title="Actualizar">
+                  <div class="stat-label">↻</div>
+                  <div class="stat-value" style="font-size:14px;color:var(--muted)">OK</div>
+                </div>
+              </div>
+            </div>
+            <div style="flex:1;overflow-y:auto;padding:10px">
+              <div class="op-section-title" style="margin-bottom:8px">Conversaciones sin evento</div>
+              <div id="op-conversations"><div class="empty-state">Cargando...</div></div>
+              <div class="op-section-title" style="margin-top:16px;margin-bottom:8px">Eventos y cupos</div>
+              <div id="op-events"><div class="empty-state">Cargando...</div></div>
+            </div>
+          </div>
+          <!-- Detalle de conversación -->
+          <div style="flex:1;display:flex;flex-direction:column;overflow:hidden" id="op-detail">
+            <div style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-direction:column;gap:8px">
+              <div style="font-size:32px">🧑‍💼</div>
+              <div style="font-size:13px">Selecciona una conversación para ver el detalle</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Logs tab ── -->
+        <div id="tab-logs" class="tab-content" style="flex-direction:row">
+          <!-- Terminal -->
+          <div style="flex:1;display:flex;flex-direction:column;border-right:1px solid var(--border);overflow:hidden">
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
+              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);flex-shrink:0">🖥️ Terminal</span>
+              <select id="logs-session-select" onchange="switchLogsSession(this.value)"
+                title="Seleccionar sesión a mostrar en los logs"
+                style="flex:1;min-width:0;font-size:10px;font-family:'JetBrains Mono',monospace;
+                       background:var(--surface2);color:var(--text);border:1px solid var(--border);
+                       border-radius:4px;padding:2px 6px;cursor:pointer;overflow:hidden;
+                       text-overflow:ellipsis">
+                <option value="">Sin sesiones</option>
+              </select>
+              <button class="btn" style="padding:2px 8px;font-size:10px;flex-shrink:0" onclick="clearLogs()">Limpiar</button>
+            </div>
+            <div class="log-tab-area" id="log-tab-area">
+              <div class="log-line dim">── System log ──────────────────────</div>
+            </div>
+          </div>
+          <!-- API Calls detalladas -->
+          <div style="width:340px;flex-shrink:0;display:flex;flex-direction:column;overflow:hidden">
+            <div style="padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0">
+              <span style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">🔌 API Calls</span>
+            </div>
+            <div id="api-calls-log" style="flex:1;overflow-y:auto;padding:8px;font-family:'JetBrains Mono',monospace;font-size:10px;background:#010409;display:flex;flex-direction:column;gap:6px">
+              <div style="color:var(--muted)">── esperando llamadas ──</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ Panel derecho: Eventos + Sesiones activas ══════════════════════ -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-title">📅 Eventos del tenant</div>
+        </div>
+        <div class="panel-body">
+
+          <div class="section-label">Cursos disponibles</div>
+
+          <div class="event-card" id="evt-EXCEL-01" onclick="selectEvent('EVT-EXCEL-01')">
+            <div class="event-name">Curso Excel Avanzado</div>
+            <div class="event-meta">
+              <span>📅 15 Jun 2026 · 9am–6pm</span>
+              <span>📍 Presencial · CDMX</span>
+              <span>💲 $2,800 MXN</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+              <span class="tag tag-green" id="qt-EXCEL-01">✓ 20 cupos</span>
+            </div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-EXCEL-01" style="width:0%"></div></div>
+          </div>
+
+          <div class="event-card" id="evt-PBI-01" onclick="selectEvent('EVT-PBI-01')">
+            <div class="event-name">Taller Power BI</div>
+            <div class="event-meta">
+              <span>📅 20 Jun 2026 · 10am–2pm</span>
+              <span>💻 Online (Zoom)</span>
+              <span>💲 $1,500 MXN</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+              <span class="tag tag-green" id="qt-PBI-01">✓ 30 cupos</span>
+            </div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-PBI-01" style="width:0%"></div></div>
+          </div>
+
+          <div class="event-card" id="evt-CONT-01" onclick="selectEvent('EVT-CONT-01')">
+            <div class="event-name">Diplomado Contabilidad Digital</div>
+            <div class="event-meta">
+              <span>📅 1 Jul – 30 Sep 2026</span>
+              <span>🔄 Híbrido · Mar/Jue/Sáb</span>
+              <span>💲 $8,500 MXN</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px">
+              <span class="tag tag-yellow" id="qt-CONT-01">⚡ 15 cupos</span>
+            </div>
+            <div class="quota-bar-sm"><div class="quota-fill-sm" id="qf-CONT-01" style="width:0%"></div></div>
+          </div>
+
+
+        </div>
+      </div>
+      </div> <!-- /content-row -->
+    </div>
+
+    <!-- ══ Scripts (orden de dependencias) ═══════════════════════════════════ -->
+    <script src="js/config.js?v=20260609d"></script>
+    <script src="js/ui.js?v=20260609d"></script>
+    <script src="js/polling.js?v=20260609d"></script>
+    <script src="js/sessions.js?v=20260609d"></script>
+    <script src="js/chat.js?v=20260609d"></script>
+    <script src="js/operator.js?v=20260609d"></script>
+    <script src="js/app.js?v=20260609d"></script>
+  </body>
+</html>

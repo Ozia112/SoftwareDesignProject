@@ -1,6 +1,8 @@
 # Claude Repository Instructions
 
-Read `AGENTS.md` first. The sections `Repository Agent Search Policy`, `GitHub Metadata Policy` and `Claude Code Architecture Context` are mandatory for Claude Code.
+Read `AGENTS.md` first. The sections `Repository Agent Search Policy`, `GitHub Metadata Policy`, `Claude Code Architecture Context`, and — within `Graph Query Strategy` — **`Lookup Discipline: Resolve Before You Search`** are mandatory for Claude Code.
+
+Claude Code tends to reach for broad `Grep`/`Glob` more readily than other agents in this repo. Before any repo-wide search, run the `by_id` / `by_tag` / `by_service` / `by_tool_call` / `adjacency` / `reverse_adjacency` lookups from `Lookup Discipline` — most questions resolve in 1-2 lookups without opening or scanning files.
 
 This repository uses graph-first retrieval and design-aligned implementation.
 
