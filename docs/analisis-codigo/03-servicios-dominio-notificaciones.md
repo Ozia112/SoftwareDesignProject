@@ -64,7 +64,7 @@
 - El `MetricsService` (`src/observability/metrics.service.ts`) expone métricas Prometheus en un `Registry` propio. Las métricas definidas son:
 
 | Nombre | Tipo | Qué mide |
-|---|---|---|
+| --- | --- | --- |
 | `bot_conversations_started_total` | Counter | Conversaciones iniciadas por tenant |
 | `bot_conversations_transferred_total` | Counter | Transfers a operador (con razón) |
 | `bot_conversations_closed_total` | Counter | Conversaciones cerradas |

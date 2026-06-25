@@ -139,7 +139,7 @@
 
 ## Flujo end-to-end del mensaje
 
-```
+```txt
 Canal (WhatsApp/Telegram/Web)
   └─ WebhookController.parse → IncomingMessageDto
       └─ MessageRouterService.route
