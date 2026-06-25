@@ -1,4 +1,5 @@
 .vscode
+.claude/
 resultado.md
 notas.md
 __pycache__/
